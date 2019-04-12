@@ -6,8 +6,8 @@ This is the github page hosting the SmartBucks Android App Project. This project
 
 ## App Description
 
-This App will eventually be able to help its user spend their resources in a wise and efficient way and allow him to take control of his spending habits. The following functions are going to be supported:
-* Allowing the user to define the category/item names/services that he spend a specific amount of money
+This App will eventually be able to help its user spend their resources in a wise and efficient way and allow them to take control of their spending habits. The following functions are going to be supported:
+* Allowing the user to define the category/item names/services that he spend a specific amount of money to
 * Given the user's income that has been specified, there will be a real-time update of the money balance
 * Observing money-spending history and review statistics about their personal consumer behaviour
 
