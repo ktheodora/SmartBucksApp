@@ -13,7 +13,7 @@ This App will eventually be able to help its user spend their resources in a wis
 
 ## Current Version
 
-*Current Project Version not available yet
+*Current Project Version not available yet*
 
 ## Github Page Links
 
