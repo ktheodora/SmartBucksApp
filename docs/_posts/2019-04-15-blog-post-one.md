@@ -30,10 +30,9 @@ will not only help him bolster his academic career but also allow him to make ne
 with the current generation.
 
   *Complementary Skills*:
-
-  * Commendable Communication and Presentation skills
-  * Satisfactory skills in Java
-  * Willingness to learn.
+    * Commendable Communication and Presentation skills
+    * Satisfactory skills in Java
+    * Willingness to learn.
 
   The skill sets will help the team to successfully present the task achieved. The programming skills will allow the team to distribute the task and perform the project efficiently. The high enthusiasm will add up to the moral of the team.
 
@@ -46,12 +45,12 @@ Currently he is pursuing Masters in Digital Engineering from Otto-Von-Guericke U
 He is a creative enthusiast, wants to expand his knowledge so as to impact lives in a meaningful way. He believes that working in the Project for the ISEE lecture and developing an 
 Android Application will help him know more about the nuances of the software development. 
 
-  *Complementary Skills*:
-  
-    * Team Player, Team Management
-    * Professionalism 
-    * Good communication skills
-    * Responsible conduct of Research
+  *Complementary Skills*:  
+   * Team Player, Leadership skills
+   * Professionalism   
+   * Good communication skills
+   * Responsible conduct of Research
+
 
   These skills will help to understand the problems in the project and come up with a solution in a professional manner. 
 
@@ -65,7 +64,6 @@ Technology and Intelligent Systems. Moreover, after graduation she wishes to pur
 course not only will provide her important knowledge for the industry, but also improve her technical writing and team cooperation skills.
 
   *Complementary Skills*:
-  
     * Many lines of Java code on her portfolio
     * Team spirit and good cooperation skills
     * Simple Graphics skills
@@ -81,7 +79,6 @@ He is from New Delhi (National Capital), India. He has a 3-year professional exp
 Live Servers and working on both Windows and Linux platform.
 
   *Complementary Skills*:
-  
     * Professionalism and vast knowledge in the area of Web Administration, gained from his working experience
     * Satisfactory skills in Java
     * Team Player, likes to cooperate
