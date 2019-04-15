@@ -30,9 +30,10 @@ will not only help him bolster his academic career but also allow him to make ne
 with the current generation.
 
   *Complementary Skills*:
-    * Commendable Communication and Presentation skills
-    * Satisfactory skills in Java
-    * Willingness to learn.
+  
+   * Commendable Communication and Presentation skills
+   * Satisfactory skills in Java
+   * Willingness to learn.
 
   The skill sets will help the team to successfully present the task achieved. The programming skills will allow the team to distribute the task and perform the project efficiently. The high enthusiasm will add up to the moral of the team.
 
@@ -46,6 +47,7 @@ He is a creative enthusiast, wants to expand his knowledge so as to impact lives
 Android Application will help him know more about the nuances of the software development. 
 
   *Complementary Skills*:  
+  
    * Team Player, Leadership skills
    * Professionalism   
    * Good communication skills
@@ -64,9 +66,10 @@ Technology and Intelligent Systems. Moreover, after graduation she wishes to pur
 course not only will provide her important knowledge for the industry, but also improve her technical writing and team cooperation skills.
 
   *Complementary Skills*:
-    * Many lines of Java code on her portfolio
-    * Team spirit and good cooperation skills
-    * Simple Graphics skills
+  
+   * Many lines of Java code on her portfolio
+   * Team spirit and good cooperation skills
+   * Simple Graphics skills
 
 Her skills will help boost the team's goal-oriented mindset, as she will be examining the coding part and trying to provide a more experienced 
 opinion about the project workflow.
@@ -79,9 +82,10 @@ He is from New Delhi (National Capital), India. He has a 3-year professional exp
 Live Servers and working on both Windows and Linux platform.
 
   *Complementary Skills*:
-    * Professionalism and vast knowledge in the area of Web Administration, gained from his working experience
-    * Satisfactory skills in Java
-    * Team Player, likes to cooperate
+  
+   * Professionalism and vast knowledge in the area of Web Administration, gained from his working experience
+   * Satisfactory skills in Java
+   * Team Player, likes to cooperate
 
 Since he has professional experience he was part of a huge team where he used to perform specialized tasks within a given framework of time.
 Pawan's professional skills might come in help for us as the project requires Java Knowledge and he is habitual of working in a flexible
