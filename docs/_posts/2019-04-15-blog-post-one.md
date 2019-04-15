@@ -20,6 +20,9 @@ about factors and decisions we took for our project's organisation (communicatio
 ![Members Icon](https://cdn3.iconfinder.com/data/icons/seo-and-marketing-3-11/512/135-512.png)
 
 * ***Raj Rajeshwari Prasad***
+
+![Raj pic](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/Raj.jpg)
+
 Completed a BSc of Mechanical Engineering in 2015 from Sharda university, India. Also worked as a Product Development Engineer for 3 Years in an Indian Company. Currently he is pursuing Masters in Digital Engineering from Otto-Von-Guericke University, Germany. 
 He is a technology enthusiast and wants to expand his boundaries so as to achieve greater milestones. 
 He believes that working in the Project for Introduction to Software Engineering for Engineers and developing an Android Application 
@@ -35,6 +38,9 @@ with the current generation.
   The skill sets will help the team to successfully present the task achieved. The programming skills will allow the team to distribute the task and perform the project efficiently. The high enthusiasm will add up to the moral of the team.
 
 * ***Venkatesh Murugadas***
+
+![Venkatesh Pic](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/venkatesh.png)
+
 Completed a BSc of Electrical Engineering in 2017 from Anna University, India. Has gained professional experience during his previous 1-year employment as an Electrical Engineer.
 Currently he is pursuing Masters in Digital Engineering from Otto-Von-Guericke University, Germany. 
 He is a creative enthusiast, wants to expand his knowledge so as to impact lives in a meaningful way. He believes that working in the Project for the ISEE lecture and developing an 
@@ -50,6 +56,9 @@ Android Application will help him know more about the nuances of the software de
   These skills will help to understand the problems in the project and come up with a solution in a professional manner. 
 
 * ***Theodora Paraskevi Kyriakou***
+
+![Dora Pic](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/IMG_20181121_160351.jpg)
+
 Currently pursuing a 4-year BSc in Informatics, offered from University of Piraeus, Greece, this year she is an exchange student in the 
 Faculty of Informatics of OVGU Magdeburg. The module of ISEE and Android Development is obligatory as part of her degree's focus on Software
 Technology and Intelligent Systems. Moreover, after graduation she wishes to pursue a carreer as a Software Engineer, and believes that this
@@ -65,6 +74,9 @@ Her skills will help boost the team's goal-oriented mindset, as she will be exam
 opinion about the project workflow.
 
 * ***Pawan Kumar***
+
+![Pawan Pic](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/Pawan.png)
+
 He is from New Delhi (National Capital), India. He has a 3-year professional experience as Websphere and Weblogic Administrator, handling
 Live Servers and working on both Windows and Linux platform.
 
