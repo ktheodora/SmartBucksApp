@@ -132,3 +132,14 @@ In the end, *“Team work always accomplishes the dream work”*!
 
 
 
+(Icons taken directly from resource links:
+* https://cdn0.iconfinder.com/data/icons/business-and-finance-vol-1/48/10-512.png
+* https://cdn3.iconfinder.com/data/icons/seo-and-marketing-3-11/512/135-512.png
+* http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/money-icon.png
+* https://cdn0.iconfinder.com/data/icons/business-management-8/64/company_team_icon_teamwork_work_network_management_corporate_organization_hierarchy-512.png ,
+App icon created from us.)
+
+
+
+
+
