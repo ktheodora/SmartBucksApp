@@ -33,9 +33,8 @@ Section 3:
 Section 4:
 
 Agenda 
-
-  -Discuss the basic working app with Dr.Sandro
-  -Questions on the features that has to be integrated. 
-  -Material design of the app. 
+    -Discuss the basic working app with Dr.Sandro
+    -Questions on the features that has to be integrated. 
+    -Material design of the app. 
 
 
