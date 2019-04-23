@@ -4,7 +4,7 @@
 Each team will get access to its own repository, used to share all project-related information with your team mates but also to create and host you Software Engineering Blog.
 This is a brief guideline, how to do this (NOTE: it refers to external web pages for more information on *how to do* particular steps).
 
-Since your project already contains a predefined set of files for github pages (in the `/docs` folder), you only have to do the following steps
+Since your project already contains a predefined set of files for Github pages (in the `/docs` folder), you only have to do the following steps
 
 1. Navigate to your repository
 2. Go to the settings of your repository.
