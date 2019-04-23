@@ -16,7 +16,7 @@ For more information, see the [Github Help](https://help.github.com/categories/g
 
 ## Make you page Blog-Ready
 
-So far, a page exists, but it looks rather plain and not suitable for hosting Blog posts. Here is how you get there very easily:
+So far, a page exists, but it looks rather plain and not suitable for hosting Blog posts. Here is how you get there very easily :
 
 1. In the `_config.yml` file of your project (in the `\docs` folder), change the line `baseurl: isee2018` to `baseurl: <project-name>` where project name means the name of your github repository/project.
 
