@@ -4,7 +4,7 @@
 Each team will get access to its own repository, used to share all project-related information with your team mates but also to create and host you Software Engineering Blog.
 This is a brief guideline, how to do this (NOTE: it refers to external web pages for more information on *how to do* particular steps).
 
-Since your project already contains a predefined set of files for github pages (in the `/docs` folder), you only have to do the following steps
+Since your project already contains a predefined set of files for Github pages (in the `/docs` folder), you only have to do the following steps
 
 1. Navigate to your repository
 2. Go to the settings of your repository.
@@ -16,7 +16,7 @@ For more information, see the [Github Help](https://help.github.com/categories/g
 
 ## Make you page Blog-Ready
 
-So far, a page exists, but it looks rather plain and not suitable for hosting Blog posts. Here is how you get there very easily:
+So far, a page exists, but it looks rather plain and not suitable for hosting Blog posts. Here is how you get there very easily :
 
 1. In the `_config.yml` file of your project (in the `\docs` folder), change the line `baseurl: isee2018` to `baseurl: <project-name>` where project name means the name of your github repository/project.
 
