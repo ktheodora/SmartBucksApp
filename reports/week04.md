@@ -4,7 +4,7 @@
 
 ## Section 1 : 
 - The ***features*** required for the basic working app was discussed with TA. 
-- The ***material design *** of the application was discussed. 
+- The ***material design*** of the application was discussed. 
 
 ## Section 2 : 
 ### Team Progress :  
