@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="#90A4AE"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="textPersonName"
+            android:text="@string/smartbucks"
+            android:textSize="50sp"
+            android:autofillHints=""
+            android:labelFor="@id/appName"/>
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/SmartBucks"
+            android:contentDescription="@string/todo" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/SsignUpButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:textSize="25sp"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
