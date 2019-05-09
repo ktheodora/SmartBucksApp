@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <color name="colorPrimary">#1ABC9C</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="bg">#1ABC9C</color>
+    <color name="titleColor">#1ABC9C</color>
+    </style>
+
+</resources>

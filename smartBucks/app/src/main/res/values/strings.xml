@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">smartBucks</string>
+    <string name="smartbucks">SmartBucks</string>
+    <string name="signup">SignUp</string>
+    <string name="exit">Exit</string>
+    <string name="login">Cont.</string>
+    <string name="user_name">User Name</string>
+    <string name="phone_nr">Phone Nr.</string>
+    <string name="password">Password</string>
+    <string name="monthly_inc">Monthly Inc. $</string>
+    <string name="insurance">Insurance</string>
+    <string name="bills">Bills</string>
+    <string name="rent">Rent</string>
+    <string name="stable_exp">Stable Exp. $</string>
+    <string name="cont">Cont.</string>
+</resources>
