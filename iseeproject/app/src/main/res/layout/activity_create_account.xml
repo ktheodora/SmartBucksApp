@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".createAccount">
 
     <EditText
         android:id="@+id/appName"
@@ -15,7 +16,7 @@
         android:layout_marginBottom="670dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="SmartBucks"
+        android:text="@string/smartbucks"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="640dp"
-        android:contentDescription="todo"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -50,8 +51,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="184dp"
         android:layout_marginBottom="62dp"
-        android:text="Finish"
-        android:textSize="30dp"
+        android:text="@string/finish"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -63,142 +64,107 @@
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="19dp"
-        android:text="Username"
+        android:layout_marginTop="155dp"
+        android:text="@string/username"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upInc"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/psWord"
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="15dp"
-        android:text="Password"
+        android:layout_marginTop="215dp"
+        android:text="@string/password"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upInc"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/upInc"
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginBottom="23dp"
-        android:text="Monthly Inc,$"
+        android:layout_marginTop="275dp"
+        android:text="@string/monthly_inc"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upExp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/upExp"
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="11dp"
-        android:text="Monthly Exp,$"
+        android:layout_marginTop="340dp"
+        android:text="@string/stable_exp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upRent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/upRent"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="7dp"
-        android:text="Rent"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="408dp"
+        android:text="@string/rent"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upBills"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/upBills"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="7dp"
-        android:text="Bills"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="475dp"
+        android:text="@string/bills"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upIns"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/upIns"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="450dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="129dp"
-        android:text="Insurance"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="27dp"
+        android:text="@string/insurance"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toBottomOf="@+id/upBills" />
 
     <EditText
         android:id="@+id/entUsName"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="11dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="479dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="alphabets"
+        android:hint="@string/alphabets"
         android:inputType="textPersonName"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toEndOf="@+id/usName"
-        app:layout_constraintTop_toBottomOf="@+id/appName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/createAccount" />
 
     <EditText
         android:id="@+id/entPsWord"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="415dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="numeric"
+        android:hint="@string/numeric"
         android:inputType="textPersonName"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/psWord"
-        app:layout_constraintTop_toBottomOf="@+id/entUsName"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toBottomOf="@+id/entUsName" />
 
     <EditText
         android:id="@+id/entInc"
@@ -207,107 +173,94 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="363dp"
         android:ems="10"
-        android:hint="$ 0.00"
+        android:hint="@string/_0_00"
         android:inputType="numberDecimal"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/upInc"
-        app:layout_constraintTop_toBottomOf="@+id/entPsWord"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintTop_toBottomOf="@+id/entPsWord" />
 
     <EditText
         android:id="@+id/sumExp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="363dp"
         android:ems="10"
-        android:hint="rent + bills + ins"
+        android:hint="@string/rent_bills_ins"
         android:inputType="numberDecimal"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/upInc"
-        app:layout_constraintTop_toBottomOf="@+id/entPsWord"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintTop_toBottomOf="@+id/entInc" />
 
     <EditText
         android:id="@+id/entRent"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="363dp"
         android:ems="10"
-        android:hint="$ 0.00"
+        android:hint="@string/_0_00"
         android:inputType="numberDecimal"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/upInc"
-        app:layout_constraintTop_toBottomOf="@+id/entPsWord"
-        app:layout_constraintVertical_bias="0.006" />
+        app:layout_constraintTop_toBottomOf="@+id/sumExp" />
 
     <EditText
         android:id="@+id/entBills"
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="49dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="363dp"
         android:ems="10"
-        android:hint="$ 0.00"
+        android:hint="@string/_0_00"
         android:inputType="numberDecimal"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/upInc"
-        app:layout_constraintTop_toBottomOf="@+id/entPsWord"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintTop_toBottomOf="@+id/entRent" />
 
     <EditText
         android:id="@+id/entIns"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="363dp"
         android:ems="10"
-        android:hint="$ 0.00"
+        android:hint="@string/_0_00"
         android:inputType="numberDecimal"
         android:textSize="23sp"
-        app:layout_constraintBottom_toTopOf="@+id/finButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/upInc"
-        app:layout_constraintTop_toBottomOf="@+id/entPsWord"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toBottomOf="@+id/entBills" />
 
     <TextView
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="1dp"
-        android:text="Create Account"
-        android:textSize="30dp"
+        android:text="@string/create_account"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/usName"
         app:layout_constraintEnd_toStartOf="@+id/entUsName"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
-
+        app:layout_constraintTop_toBottomOf="@+id/appName"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void validate(String userName, String userPassword)
     {
-        if( (userName.equals("Admin")) && (userPassword.equals("1234")) )
+        if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
         {   //Switching from one Activity to another
-            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            Intent intent = new Intent(MainActivity.this, createAccount.class);
             startActivity(intent);
 
         }

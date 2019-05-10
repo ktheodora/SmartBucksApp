@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">iseeproject</string>
+    <string name="finish">Finish</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="monthly_inc">Monthly Inc,$</string>
+    <string name="todo">todo</string>
+    <string name="monthly_exp">Monthly Exp,$</string>
+    <string name="rent">Rent</string>
+    <string name="bills">Bills</string>
+    <string name="insurance">Insurance</string>
+    <string name="alphabets">alphabets</string>
+    <string name="numeric">numeric</string>
+    <string name="rent_bills_ins">rent + bills + ins</string>
+    <string name="create_account">Create Account</string>
+    <string name="signup">signup</string>
+    <string name="exit">exit</string>
+    <string name="welcome">Welcome</string>
+    <string name="x">X</string>
+    <string name="ok">Ok</string>
+    <string name="_0">0</string>
+    <string name="_9">9</string>
+    <string name="dot">.</string>
+    <string name="_8">8</string>
+    <string name="_7">7</string>
+    <string name="_6">6</string>
+    <string name="_5">5</string>
+    <string name="_4">4</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
+    <string name="smartbucks">SmartBucks</string>
+    <string name="_12345_00">12345.00</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="_1">1</string>
+    <string name="login">Login</string>
+    <string name="extra_inc">Extra Inc, $</string>
+    <string name="_0_00">$ 0.00</string>
+    <string name="update_inc">Update Inc, $</string>
+    <string name="update_exp">Update Exp,$</string>
+    <string name="update">Update</string>
+    <string name="update_details">Update Details</string>
+    <string name="title_activity_signup">Signup</string>
+    <string name="title_activity_num_pad">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="stable_exp">Stable Exp, $</string>
 </resources>
