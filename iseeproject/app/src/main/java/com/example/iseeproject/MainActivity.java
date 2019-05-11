@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
         {   //Switching from one Activity to another
-            Intent intent = new Intent(MainActivity.this, createAccount.class);
+            Intent intent = new Intent(MainActivity.this, enterExpenses.class);
             startActivity(intent);
 
         }
