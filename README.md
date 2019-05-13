@@ -18,7 +18,7 @@ This App will eventually be able to help its user spend their resources in a wis
 ## Github Page Links
 
 * Main Project Github Page: https://github.com/DBSE-teaching/isee2019-SmartBucks
-* Blog Posts Github Page: https://github.com/DBSE-teaching/isee2019-SmartBucks/tree/master/docs/blog
+* Blog Posts Github Page: https://dbse-teaching.github.io/isee2019-SmartBucks/
 
 ## Project Members
 
