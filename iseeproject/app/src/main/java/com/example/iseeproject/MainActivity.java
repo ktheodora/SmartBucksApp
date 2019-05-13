@@ -2,6 +2,7 @@ package com.example.iseeproject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaRouter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView info;
     private Button   login;
     private int counter = 3;
+    private Button signup;
 
 
     @SuppressLint("SetTextI18n")
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.etPassword);
         info = (TextView) findViewById(R.id.tvinfo);
         login = (Button)findViewById(R.id.btnLogin);
+        signup = (Button)findViewById(R.id.btnSignup);
+
 
         info.setText("No Of Attempts Remaining : 3");
         //method will  be working when button is clicked
@@ -41,14 +45,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                route();
+            }
+        });
+
+
+
     }
 
     private void validate(String userName, String userPassword)
     {
         if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
         {   //Switching from one Activity to another
-            Intent intent = new Intent(MainActivity.this, enterExpenses.class);
-            startActivity(intent);
+            Intent intent1 = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent1);
 
         }
 
@@ -64,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void route()
+    {
+        Intent intent = new Intent(MainActivity.this, createAccount.class);
+        startActivity(intent);
+    }
+
+
+
+
 }
 
 
