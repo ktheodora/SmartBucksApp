@@ -18,13 +18,13 @@ public class HomePage extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    route();
+                    routed();
                 }
             });
 
     }
 
-    private void route()
+    private void routed()
     {
         Intent intent = new Intent(HomePage.this,updateDetail.class);
         startActivity(intent);

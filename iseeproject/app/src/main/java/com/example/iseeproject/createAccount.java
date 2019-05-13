@@ -20,12 +20,12 @@ public class createAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                route();
+                routed();
             }
         });
     }
 
-    private void route(){
+    private void routed(){
         Intent intent = new Intent(createAccount.this , MainActivity.class);
         startActivity(intent);
     }

@@ -17,12 +17,13 @@ public class updateDetail extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update();
+
+                updated();
             }
         });
     }
 
-        private void update()
+        private void updated()
         {
             Intent intent2 = new Intent(updateDetail.this , HomePage.class);
             startActivity(intent2);
