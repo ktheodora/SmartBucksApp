@@ -24,13 +24,13 @@ With the above mentioned Workflow the basic prototype has been developed.
  
  ![LoginActivity](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/Login.jpeg)
  
-**The Signup / Login Activity**
+**The Signup / Login Activity**<br/>
 The above activity lets a new user to sign up or a registered user to log in using his credentials.
 
 ## Create Account Activity 
  
  ![create account](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/CreateAccount.jpeg)
-**The Account Creation activity** 
+**The Account Creation activity** <br/>
 
   This activity is used to enter the basic details of the user such as the username, PIN for protection, the monthly income and the stable expenses which will not vary for every month. 
 
@@ -38,21 +38,21 @@ The above activity lets a new user to sign up or a registered user to log in usi
 
 ![home screen](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/HomeScreen.jpeg)
 
-**The Home Page** 
+**The Home Screen** <br/>
 This activity is where the user will be able to view the total expenses and the savings which is nothing but the remaining amount present in the income source. 
 
 ## Enter Expenses Activity 
 
 ![enter expenses activity](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/EnterExpenses.jpeg)
 
-**Enter Expenses Activity** 
+**Enter Expenses Activity** <br/>
 
 When the user clicks the Enter Expenses button in the Home Screen, they will be redirected to this activity where the user will be able to enter the expenses that we spent either of these categories.
 
 ## Enter Amount Activity
 
 ![numoad activity](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/NumPad.jpeg)
-**Enter Amount Activity**
+**Enter Amount Activity**<br/>
 
 This activity is popped up whenever the user clicks a text field to enter the amount. This is mainly used to facilitate the ease of users with typing without any constraints.
 
@@ -60,7 +60,7 @@ This activity is popped up whenever the user clicks a text field to enter the am
  
  ![editdetails activity](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/EditDetails.jpeg)
  
-**Edit Activity**
+**Edit Details Activity**<br/>
 
 This activity is used to update the details of income and the stable expenses whenever they change.
 
