@@ -22,7 +22,7 @@ With the above mentioned Workflow the basic prototype has been developed.
 
 ##  Login Activity
  
- ![Deadline image]({{site.baseurl}}/images/Login.jpeg "Application Logo"){:height="50%" width="100%"}
+ ![Deadline image]({{site.baseurl}}/images/Login.jpeg "Application Logo")
  
 **The Signup / Login Activity**<br/>
 The above activity lets a new user to sign up or a registered user to log in using his credentials.
