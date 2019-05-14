@@ -13,7 +13,7 @@ This App will eventually be able to help its user spend their resources in a wis
 
 ## Current Version
 
-**Basic prototype version of the SmartBucks application is downloable at the given link:**
+**Basic prototype version of the SmartBucks application is downloable at the given link:**<br/>
 ***SmartBucks_v0 :*** 
 https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/Releases/SmartBucks_v0.apk
 
