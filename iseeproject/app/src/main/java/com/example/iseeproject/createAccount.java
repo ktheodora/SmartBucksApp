@@ -34,19 +34,19 @@ public class createAccount extends AppCompatActivity {
         String pwd_str = UserName.getText().toString();
 
         Income   = (EditText)findViewById(R.id.entInc);
-        String inc_str = UserName.getInt().toString();
+        int inc_str = Integer.parseInt(UserName.getInt().toString());
 
         SumExp   = (EditText)findViewById(R.id.sumExp);
-        String sum_str = UserName.getInt().toString();
+        int sum_str = Integer.parseInt(UserName.getInt().toString());
 
         Rent  = (EditText)findViewById(R.id.entRent);
-        String rent_str = UserName.getInt().toString();
+        int rent_str = Integer.parseInt(UserName.getInt().toString());
 
         Bills   = (EditText)findViewById(R.id.entBills);
-        String bill_str = UserName.getInt().toString();
+        int bill_str = Integer.parseInt(UserName.getInt().toString());
 
         Insurance   = (EditText)findViewById(R.id.entIns);
-        String ins_str = UserName.getInt().toString();
+        int ins_str = Integer.parseInt(UserName.getInt().toString());
 
 
         // Start NewActivity.class

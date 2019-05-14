@@ -27,13 +27,21 @@ public class HomePage extends AppCompatActivity {
         int Bills =0;
         int Insurance =0;
         if(b != null)
-            value = b.getText("usr_str");
-            Rent = b.getInt("Rent");
-            Bills = b.getInt("Bills");
-        Insurwnce = b.getInt("Insurance");
+            usr = b.getText("usr_str");
+            Income = b.getInt("inc_str")
+            SumExp = b.getInt("sum_str");
+            Rent = b.getInt("rent_str");
+            Bills = b.getInt("bill_str");
+            Insurance = b.getInt("ins_str");
 
+        int TotalExp = SumExp + Rent + Bills + Insurance;
         mText = (TextView)findViewById(R.id.TotalExpenses);
-        mText.setText((Rent + Bills + Insurance).toString())
+        mText.setText(TotalExp.toString());
+
+        mmText = (TextView)findViewById(R.id.Savings);
+        mmText.setText((Income - TotalExp).toString())
+
+
 
     }
 
