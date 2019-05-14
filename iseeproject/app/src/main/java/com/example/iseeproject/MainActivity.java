@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
         {   //Switching from one Activity to another
             Intent intent1 = new Intent(MainActivity.this, HomePage.class);
+            Bundle b = new Bundle();
+            b.putInt("usr_str", userName); //Your id
+
+            myIntent.putExtras(b);
             startActivity(intent1);
 
         }
