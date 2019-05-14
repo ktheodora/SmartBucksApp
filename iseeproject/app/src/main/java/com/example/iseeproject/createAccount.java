@@ -34,27 +34,27 @@ public class createAccount extends AppCompatActivity {
         String pwd_str = UserName.getText().toString();
 
         Income   = (EditText)findViewById(R.id.entInc);
-        String inc_str = UserName.getText().toString();
+        String inc_str = UserName.getInt().toString();
 
         SumExp   = (EditText)findViewById(R.id.sumExp);
-        String sum_str = UserName.getText().toString();
+        String sum_str = UserName.getInt().toString();
 
         Rent  = (EditText)findViewById(R.id.entRent);
-        String rent_str = UserName.getText().toString();
+        String rent_str = UserName.getInt().toString();
 
         Bills   = (EditText)findViewById(R.id.entBills);
-        String bill_str = UserName.getText().toString();
+        String bill_str = UserName.getInt().toString();
 
         Insurance   = (EditText)findViewById(R.id.entIns);
-        String ins_str = UserName.getText().toString();
+        String ins_str = UserName.getInt().toString();
 
 
         // Start NewActivity.class
         Intent myIntent = new Intent(MainActivity.this,
                 HomePage.class);
         Bundle b = new Bundle();
-        b.putInt("usr_str", usr_str); //Your id
-        b.putInt("pwd_str", pwd_str); //Your id
+        b.putText("usr_str", usr_str); //Your id
+        b.putText("pwd_str", pwd_str); //Your id
         b.putInt("inc_str", inc_str); //Your id
         b.putInt("sum_str", sum_str); //Your id
         b.putInt("rent_str", rent_str); //Your id
@@ -63,6 +63,5 @@ public class createAccount extends AppCompatActivity {
         myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
         finish();
-        startActivity(myIntent);
     }
 }

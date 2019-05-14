@@ -17,10 +17,23 @@ public class HomePage extends AppCompatActivity {
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     routed();
                 }
             });
+
+        Bundle b = getIntent().getExtras();
+        String usr = 0; // or other values
+        int Rent =0;
+        int Bills =0;
+        int Insurance =0;
+        if(b != null)
+            value = b.getText("usr_str");
+            Rent = b.getInt("Rent");
+            Bills = b.getInt("Bills");
+        Insurwnce = b.getInt("Insurance");
+
+        mText = (TextView)findViewById(R.id.TotalExpenses);
+        mText.setText((Rent + Bills + Insurance).toString())
 
     }
 
