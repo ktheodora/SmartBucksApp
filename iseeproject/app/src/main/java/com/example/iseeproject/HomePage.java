@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HomePage extends AppCompatActivity {
         private Button edit;
@@ -22,24 +23,26 @@ public class HomePage extends AppCompatActivity {
             });
 
         Bundle b = getIntent().getExtras();
-        String usr = 0; // or other values
+        String usr = ""; // or other values
+        int Income = 0;
         int Rent =0;
+        int SumExp = 0;
         int Bills =0;
         int Insurance =0;
         if(b != null)
-            usr = b.getText("usr_str");
-            Income = b.getInt("inc_str")
+            usr = b.getString("usr_str");
+            Income = b.getInt("inc_str");
             SumExp = b.getInt("sum_str");
             Rent = b.getInt("rent_str");
             Bills = b.getInt("bill_str");
             Insurance = b.getInt("ins_str");
 
         int TotalExp = SumExp + Rent + Bills + Insurance;
-        mText = (TextView)findViewById(R.id.TotalExpenses);
-        mText.setText(TotalExp.toString());
+        TextView mText = (TextView)findViewById(R.id.TotalExpenses);
+        mText.setText(String.valueOf(SumExp));
 
-        mmText = (TextView)findViewById(R.id.Savings);
-        mmText.setText((Income - TotalExp).toString())
+        TextView mmText = (TextView)findViewById(R.id.Savings);
+        mmText.setText(String.valueOf(Income - SumExp));
 
 
 

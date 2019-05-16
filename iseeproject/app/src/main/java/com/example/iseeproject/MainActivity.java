@@ -62,9 +62,8 @@ public class MainActivity extends AppCompatActivity {
         {   //Switching from one Activity to another
             Intent intent1 = new Intent(MainActivity.this, HomePage.class);
             Bundle b = new Bundle();
-            b.putInt("usr_str", userName); //Your id
-
-            myIntent.putExtras(b);
+            b.putString("usr_str", userName); //Your id
+            intent1.putExtras(b);
             startActivity(intent1);
 
         }

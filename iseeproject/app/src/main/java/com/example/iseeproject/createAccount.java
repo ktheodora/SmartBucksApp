@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class createAccount extends AppCompatActivity {
 
     private Button finish;
+
+    private EditText UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +33,35 @@ public class createAccount extends AppCompatActivity {
         UserName   = (EditText)findViewById(R.id.entUsName);
         String usr_str = UserName.getText().toString();
 
-        Password  = (EditText)findViewById(R.id.entPsWord);
+        EditText Password  = (EditText)findViewById(R.id.entPsWord);
         String pwd_str = UserName.getText().toString();
 
-        Income   = (EditText)findViewById(R.id.entInc);
-        int inc_str = Integer.parseInt(UserName.getInt().toString());
+        EditText Income   = (EditText)findViewById(R.id.entInc);
+        int inc_str = Integer.parseInt(Income.getText().toString());
 
-        SumExp   = (EditText)findViewById(R.id.sumExp);
-        int sum_str = Integer.parseInt(UserName.getInt().toString());
+        EditText SumExp   = (EditText)findViewById(R.id.sumExp);
+        int sum_str = Integer.parseInt(SumExp.getText().toString());
 
-        Rent  = (EditText)findViewById(R.id.entRent);
-        int rent_str = Integer.parseInt(UserName.getInt().toString());
+        EditText Rent  = (EditText)findViewById(R.id.entRent);
+        int rent_str = Integer.parseInt(Rent.getText().toString());
 
-        Bills   = (EditText)findViewById(R.id.entBills);
-        int bill_str = Integer.parseInt(UserName.getInt().toString());
+        EditText Bills   = (EditText)findViewById(R.id.entBills);
+        int bill_str = Integer.parseInt(Bills.getText().toString());
 
-        Insurance   = (EditText)findViewById(R.id.entIns);
-        int ins_str = Integer.parseInt(UserName.getInt().toString());
+        EditText Insurance   = (EditText)findViewById(R.id.entIns);
+        int ins_str = Integer.parseInt(Insurance.getText().toString());
 
 
         // Start NewActivity.class
-        Intent myIntent = new Intent(MainActivity.this,
+        Intent myIntent = new Intent(createAccount.this,
                 HomePage.class);
         Bundle b = new Bundle();
-        b.putText("usr_str", usr_str); //Your id
-        b.putText("pwd_str", pwd_str); //Your id
+        b.putString("usr_str", usr_str); //Your id
+        b.putString("pwd_str", pwd_str); //Your id
         b.putInt("inc_str", inc_str); //Your id
         b.putInt("sum_str", sum_str); //Your id
         b.putInt("rent_str", rent_str); //Your id
-        b.putInt("bills_str", bills_str); //Your id
+        b.putInt("bills_str", bill_str); //Your id
         b.putInt("ins_str", ins_str); //Your id
         myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
