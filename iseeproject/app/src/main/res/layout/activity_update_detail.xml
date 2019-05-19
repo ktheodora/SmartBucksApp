@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/appName"
         android:layout_width="280dp"
         android:layout_height="75dp"
@@ -43,7 +43,6 @@
         android:layout_marginEnd="182dp"
         android:layout_marginBottom="670dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/smartbucks"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,20 +85,6 @@
         app:layout_constraintStart_toEndOf="@+id/upInc"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/sumExp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="@string/rent_bills_ins"
-        android:inputType="numberDecimal"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/upExp"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/entRent"
@@ -163,20 +148,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/upExp"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/update_exp"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/upRent"
-        app:layout_constraintEnd_toStartOf="@+id/sumExp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upInc" />
 
     <TextView
         android:id="@+id/upRent"

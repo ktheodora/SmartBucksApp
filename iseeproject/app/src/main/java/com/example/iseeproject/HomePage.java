@@ -9,49 +9,55 @@ import android.widget.TextView;
 
 public class HomePage extends AppCompatActivity {
         private Button edit;
+    private Button enterExpenses;
+    String usr = ""; // or other values
+    int Income = 0;
+    int Rent =0;
+    int Bills =0;
+    int Insurance =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-            edit =(Button)findViewById(R.id.edbtn);
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    routed();
-                }
-            });
 
         Bundle b = getIntent().getExtras();
-        String usr = ""; // or other values
-        int Income = 0;
-        int Rent =0;
-        int SumExp = 0;
-        int Bills =0;
-        int Insurance =0;
-        if(b != null)
+        if(b != null) {
             usr = b.getString("usr_str");
-            Income = b.getInt("inc_str");
-            SumExp = b.getInt("sum_str");
-            Rent = b.getInt("rent_str");
-            Bills = b.getInt("bill_str");
-            Insurance = b.getInt("ins_str");
-
-        int TotalExp = SumExp + Rent + Bills + Insurance;
+            Income = b.getInt("income");
+            Rent = b.getInt("rent");
+            Bills = b.getInt("bills");
+            Insurance = b.getInt("ins");
+        }
         TextView mText = (TextView)findViewById(R.id.TotalExpenses);
-        mText.setText(String.valueOf(SumExp));
+        int stableexp = Rent + Bills + Insurance;
+        mText.setText(String.valueOf(stableexp));
 
         TextView mmText = (TextView)findViewById(R.id.Savings);
-        mmText.setText(String.valueOf(Income - SumExp));
+        mmText.setText(String.valueOf(Income - stableexp));
 
+        edit =(Button)findViewById(R.id.edbtn);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                routed();
+            }
+        });
 
+        enterExpenses = (Button)findViewById(R.id.expButton);
 
     }
 
     private void routed()
     {
-        Intent intent = new Intent(HomePage.this,updateDetail.class);
-        startActivity(intent);
+        Intent myIntent = new Intent(HomePage.this,updateDetail.class);
+        Bundle b = new Bundle();
+        b.putInt("income", Income);
+        b.putInt("rent", Rent);
+        b.putInt("bills", Bills);
+        b.putInt("ins", Insurance);
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
 
     }
 }

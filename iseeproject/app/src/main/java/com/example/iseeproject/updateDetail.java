@@ -9,56 +9,67 @@ import android.widget.EditText;
 
 public class updateDetail extends AppCompatActivity {
         private Button update;
+    int Income = 0;
+    int Rent =0;
+    int Bills =0;
+    int Insurance =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_detail);
 
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            Income = b.getInt("income");
+            Rent = b.getInt("rent");
+            Bills = b.getInt("bills");
+            Insurance = b.getInt("ins");
+        }
+
         update=(Button)findViewById(R.id.updtbtn);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                updated();
+                updated(Income, Rent, Bills, Insurance);
             }
         });
     }
 
-        private void updated()
+        private void updated(int Income,  int Rent, int Bills, int Insurance)
         {
-            EditText UserName   = (EditText)findViewById(R.id.entUsName);
-            String usr_str = UserName.getText().toString();
 
-            EditText Password  = (EditText)findViewById(R.id.entPsWord);
-            String pwd_str = UserName.getText().toString();
+            EditText IncomeView   = (EditText)findViewById(R.id.entInc);
+            //Only if value of view changes we update it, orelse we pass the initial again
+            if (IncomeView.getText().toString() != "") {
+                Income = Integer.parseInt(IncomeView.getText().toString());
+            }
 
-            EditText Income   = (EditText)findViewById(R.id.entInc);
-            String inc_str = UserName.getText().toString();
+            EditText RentView  = (EditText)findViewById(R.id.entRent);
+            if (RentView.getText().toString() != "") {
+                Rent = Integer.parseInt(RentView.getText().toString());
+            }
 
-            EditText SumExp   = (EditText)findViewById(R.id.sumExp);
-            String sum_str = UserName.getText().toString();
+            EditText BillsView   = (EditText)findViewById(R.id.entBills);
+            if (BillsView.getText().toString() != "") {
+                Bills = Integer.parseInt(BillsView.getText().toString());
+            }
 
-            EditText Rent  = (EditText)findViewById(R.id.entRent);
-            String rent_str = UserName.getText().toString();
+            EditText InsuranceView   = (EditText)findViewById(R.id.entIns);
+            if (InsuranceView.getText().toString() != "") {
+                Insurance = Integer.parseInt(InsuranceView.getText().toString());
+            }
 
-            EditText Bills   = (EditText)findViewById(R.id.entBills);
-            String bill_str = UserName.getText().toString();
-
-            EditText Insurance   = (EditText)findViewById(R.id.entIns);
-            String ins_str = UserName.getText().toString();
-
+            int stableexp = Rent + Bills + Insurance ;
 
             // Start NewActivity.class
             Intent myIntent = new Intent(updateDetail.this,
                     HomePage.class);
             Bundle b = new Bundle();
-            b.putString("usr_str", usr_str); //Your id
-            b.putString("pwd_str", pwd_str); //Your id
-            b.putString("inc_str", inc_str); //Your id
-            b.putString("sum_str", sum_str); //Your id
-            b.putString("rent_str", rent_str); //Your id
-            b.putString("bills_str", bill_str); //Your id
-            b.putString("ins_str", ins_str); //Your id
+            b.putInt("income", Income);
+            b.putInt("rent", Rent);
+            b.putInt("bills", Bills);
+            b.putInt("stableexp", stableexp);
+            b.putInt("ins", Insurance);
             myIntent.putExtras(b); //Put your id to your next Intent
             startActivity(myIntent);
             finish();

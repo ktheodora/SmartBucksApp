@@ -12,12 +12,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText Name;
-    private EditText Password;
-    private TextView info;
-    private Button   login;
-    private int counter = 3;
-    private Button signup;
 
 
     @SuppressLint("SetTextI18n")
@@ -26,67 +20,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button login = (Button)findViewById(R.id.btnLogin);
+        Button signup = (Button)findViewById(R.id.btnSignup);
 
-        Name = (EditText)findViewById(R.id.etName);
-        Password = (EditText)findViewById(R.id.etPassword);
-        info = (TextView) findViewById(R.id.tvinfo);
-        login = (Button)findViewById(R.id.btnLogin);
-        signup = (Button)findViewById(R.id.btnSignup);
-
-
-        info.setText("No Of Attempts Remaining : 3");
         //method will  be working when button is clicked
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SINCE NAME IS EDIT TEXT USER WILL  get whatever is entered through getText and
-                // then it is converted to String same done for password
-                validate(Name.getText().toString(),Password.getText().toString() );
+               routelogin();
             }
         });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                route();
+                routesignup();
             }
         });
 
 
-
     }
 
-    private void validate(String userName, String userPassword)
+    private void routelogin()
     {
-        if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
-        {   //Switching from one Activity to another
-            Intent intent1 = new Intent(MainActivity.this, HomePage.class);
-            Bundle b = new Bundle();
-            b.putString("usr_str", userName); //Your id
-            intent1.putExtras(b);
-            startActivity(intent1);
-
-        }
-
-        else{
-            counter-=1;
-            String temp = "No of attempts is : ";
-            temp += Integer.toString(counter);
-            info.setText(temp);
-
-            if(counter == 0)
-            {
-                login.setEnabled(false); //Disabling the button
-            }
-        }
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
-    private void route()
+    private void routesignup()
     {
         Intent intent = new Intent(MainActivity.this, createAccount.class);
         startActivity(intent);
     }
-
 
 
 
