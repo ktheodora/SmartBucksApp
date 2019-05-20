@@ -13,7 +13,7 @@ public class numPad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_num_pad);
 
-        Button button = (Button) findViewById(R.id.button4);
+        Button button = (Button) findViewById(R.id.okayBtn);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {

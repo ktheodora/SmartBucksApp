@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".numPad">
     <Button
-        android:id="@+id/okay"
+        android:id="@+id/okayBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

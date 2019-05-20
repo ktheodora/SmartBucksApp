@@ -15,6 +15,8 @@ public class HomePage extends AppCompatActivity {
     int Rent =0;
     int Bills =0;
     int Insurance =0;
+    int extra_exp = 0;
+    String famous_cat = "Not Defined";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +30,24 @@ public class HomePage extends AppCompatActivity {
             Rent = b.getInt("rent");
             Bills = b.getInt("bills");
             Insurance = b.getInt("ins");
+            if (b.containsKey("extra_exp")) {
+                extra_exp = b.getInt("extra_exp");
+            }
+            if (!(b.getString("famous_cat ") == null)) {
+                famous_cat = b.getString("famous_cat");
+            }
+
         }
         TextView mText = (TextView)findViewById(R.id.TotalExpenses);
-        int stableexp = Rent + Bills + Insurance;
-        mText.setText(String.valueOf(stableexp));
+        int totalexp = Rent + Bills + Insurance + extra_exp;
+        mText.setText(String.valueOf(totalexp));
 
         TextView mmText = (TextView)findViewById(R.id.Savings);
-        mmText.setText(String.valueOf(Income - stableexp));
+        mmText.setText(String.valueOf(Income - totalexp));
+
+        TextView mmmText = (TextView)findViewById(R.id.FamousCategText);
+        mmText.setText(famous_cat);
+
 
         edit =(Button)findViewById(R.id.edbtn);
         edit.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +58,12 @@ public class HomePage extends AppCompatActivity {
         });
 
         enterExpenses = (Button)findViewById(R.id.expButton);
-
+        enterExpenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                routed2();
+            }
+        });
     }
 
     private void routed()
@@ -57,6 +75,19 @@ public class HomePage extends AppCompatActivity {
         b.putInt("bills", Bills);
         b.putInt("ins", Insurance);
         myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+
+    }
+
+    private void routed2()
+    {
+        Intent myIntent = new Intent(HomePage.this,enterExpenses.class);
+        Bundle b = new Bundle();
+        b.putInt("income", Income);
+        b.putInt("rent", Rent);
+        b.putInt("bills", Bills);
+        b.putInt("ins", Insurance);
+        b.putString("famous_cat",famous_cat);
         startActivity(myIntent);
 
     }
