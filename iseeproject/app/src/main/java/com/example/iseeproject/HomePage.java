@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity {
             if (b.containsKey("extra_exp")) {
                 extra_exp = b.getInt("extra_exp");
             }
-            if (!(b.getString("famous_cat ") == null)) {
+            if (b.containsKey("famous_cat")) {
                 famous_cat = b.getString("famous_cat");
             }
 
@@ -46,7 +46,7 @@ public class HomePage extends AppCompatActivity {
         mmText.setText(String.valueOf(Income - totalexp));
 
         TextView mmmText = (TextView)findViewById(R.id.FamousCategText);
-        mmText.setText(famous_cat);
+        mmmText.setText(famous_cat);
 
 
         edit =(Button)findViewById(R.id.edbtn);
@@ -62,6 +62,15 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 routed2();
+            }
+        });
+
+        enterExpenses = (Button)findViewById(R.id.logoutBtn);
+        enterExpenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(HomePage.this,MainActivity.class);
+                startActivity(myIntent);
             }
         });
     }
@@ -88,6 +97,7 @@ public class HomePage extends AppCompatActivity {
         b.putInt("bills", Bills);
         b.putInt("ins", Insurance);
         b.putString("famous_cat",famous_cat);
+        myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
 
     }

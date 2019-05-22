@@ -37,7 +37,6 @@ public class updateDetail extends AppCompatActivity {
 
         private void updated(int Income,  int Rent, int Bills, int Insurance)
         {
-
             EditText IncomeView   = (EditText)findViewById(R.id.entInc);
             //Only if value of view changes we update it, orelse we pass the initial again
             if (IncomeView.getText().toString() != "") {
