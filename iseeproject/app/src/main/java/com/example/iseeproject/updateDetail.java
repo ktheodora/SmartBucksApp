@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class updateDetail extends AppCompatActivity {
         private Button update;
@@ -65,19 +66,25 @@ public class updateDetail extends AppCompatActivity {
                 extra_inc = Integer.parseInt(ExtraIncView.getText().toString());
             }
 
-
-            // Start NewActivity.class
-            Intent myIntent = new Intent(updateDetail.this,
-                    HomePage.class);
-            Bundle b = new Bundle();
-            b.putInt("income", (Income + extra_inc));
-            b.putInt("rent", Rent);
-            b.putInt("bills", Bills);
-            b.putInt("ins", Insurance);
-            myIntent.putExtras(b); //Put your id to your next Intent
-            startActivity(myIntent);
-            finish();
-            startActivity(myIntent);
+            if ((Income + extra_inc) <= Rent + Bills + Insurance ) {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Total income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else {
+                // Start NewActivity.class
+                Intent myIntent = new Intent(updateDetail.this,
+                        HomePage.class);
+                Bundle b = new Bundle();
+                b.putInt("income", (Income + extra_inc));
+                b.putInt("rent", Rent);
+                b.putInt("bills", Bills);
+                b.putInt("ins", Insurance);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+                finish();
+                startActivity(myIntent);
+            }
 
         }
 }
