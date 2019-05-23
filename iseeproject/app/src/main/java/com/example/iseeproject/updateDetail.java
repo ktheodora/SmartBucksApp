@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,35 +40,39 @@ public class updateDetail extends AppCompatActivity {
         {
             EditText IncomeView   = (EditText)findViewById(R.id.entInc);
             //Only if value of view changes we update it, orelse we pass the initial again
-            if (IncomeView.getText().toString() != "") {
+            if (!TextUtils.isEmpty(IncomeView.getText())) {
                 Income = Integer.parseInt(IncomeView.getText().toString());
             }
 
             EditText RentView  = (EditText)findViewById(R.id.entRent);
-            if (RentView.getText().toString() != "") {
+            if (!TextUtils.isEmpty(RentView.getText())) {
                 Rent = Integer.parseInt(RentView.getText().toString());
             }
 
             EditText BillsView   = (EditText)findViewById(R.id.entBills);
-            if (BillsView.getText().toString() != "") {
+            if (!TextUtils.isEmpty(BillsView.getText())){
                 Bills = Integer.parseInt(BillsView.getText().toString());
             }
 
             EditText InsuranceView   = (EditText)findViewById(R.id.entIns);
-            if (InsuranceView.getText().toString() != "") {
+            if (!TextUtils.isEmpty(InsuranceView.getText())) {
                 Insurance = Integer.parseInt(InsuranceView.getText().toString());
             }
 
-            int stableexp = Rent + Bills + Insurance ;
+            int extra_inc = 0;
+            EditText ExtraIncView   = (EditText)findViewById(R.id.entExtraInc);
+            if (!TextUtils.isEmpty(ExtraIncView.getText())) {
+                extra_inc = Integer.parseInt(ExtraIncView.getText().toString());
+            }
+
 
             // Start NewActivity.class
             Intent myIntent = new Intent(updateDetail.this,
                     HomePage.class);
             Bundle b = new Bundle();
-            b.putInt("income", Income);
+            b.putInt("income", (Income + extra_inc));
             b.putInt("rent", Rent);
             b.putInt("bills", Bills);
-            b.putInt("stableexp", stableexp);
             b.putInt("ins", Insurance);
             myIntent.putExtras(b); //Put your id to your next Intent
             startActivity(myIntent);
