@@ -7,7 +7,7 @@
     tools:context=".updateDetail">
 
     <EditText
-        android:id="@+id/entIExtraInc"
+        android:id="@+id/entExtraInc"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
