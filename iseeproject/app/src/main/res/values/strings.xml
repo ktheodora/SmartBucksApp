@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<resources>
-    <string name="app_name">iseeproject</string>
-    <string name="smartbucks">iseeproject</string>
-</resources>
-=======
 <resources>
     <string name="app_name">iseeproject</string>
     <string name="finish">Finish</string>
@@ -66,4 +60,4 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 </resources>
->>>>>>> master
+
