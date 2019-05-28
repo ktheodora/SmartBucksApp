@@ -1,8 +1,11 @@
 package com.example.iseeproject;
 
+import java.util.List;
+
 public class User {
     private String username, name, surname, password_raw;
     private double income, rent, bills, insurance;
+    private String paymentMethod;
 
     public User (String Username,String Password_raw, String Name,String Surname, double Income, double Rent, double Bills, double Insurance) {
         this.username = Username;
@@ -27,6 +30,11 @@ public class User {
     }
     public String getPwd() {
         return password_raw;
+    }
+
+    public void setPaymentMethod(String Paymentmethod)
+    {
+            this.paymentMethod  = Paymentmethod;
     }
 
     public void setName(String Name) {

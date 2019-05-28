@@ -7,9 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class HomePage extends AppCompatActivity {
-        private Button edit;
+      //  private Button edit;
     private Button enterExpenses;
+    private Button logout;
+    DBHandler peopleDB;
     String usr = ""; // or other values
     int Income = 0;
     int Rent =0;
@@ -23,10 +27,14 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        peopleDB = new DBHandler(this);
+
+
+
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            usr = b.getString("usr_str");
-            Income = b.getInt("income");
+           usr = b.getString("usr_str");
+           /* Income = b.getInt("income");
             Rent = b.getInt("rent");
             Bills = b.getInt("bills");
             Insurance = b.getInt("ins");
@@ -35,12 +43,46 @@ public class HomePage extends AppCompatActivity {
             }
             if (b.containsKey("famous_cat")) {
                 famous_cat = b.getString("famous_cat");
-            }
+            }*/
 
         }
-        TextView mText = (TextView)findViewById(R.id.TotalExpenses);
-        int totalexp = Rent + Bills + Insurance + extra_exp;
-        mText.setText(String.valueOf(totalexp));
+
+        User userr = peopleDB.getUser(usr);
+
+        double extra_exp ;
+
+
+        //TODO Seperate function for calculating extra expenses
+        List<Expenses> exp = peopleDB.getAllExpenses(userr);
+        int foodcount, leiscount, medcount, billscount;
+        int totalexpamount;
+
+        //Function
+         /*
+            public double calculate()
+        {
+            for each(expense :exp){
+            extra_exp += expense.getPrice();
+
+            if (expense.getCategory() == "Food") {
+                foodcount += expense.getPrice();
+            } else if (expense.getCategory() == "Leisure") {
+                leiscount += expense.getPrice();
+            }
+            totalexpamount += expense.getPrice();
+        }
+
+            double food perc = (foodcount / totalexpamount) * 100;
+            ProgressView pg (ProgressView)findViewById(R.id.ProgViewFood);
+            pg.set
+
+
+        }
+        */
+
+        TextView MText = (TextView)findViewById(R.id.TotalExpenses);
+        int totalexp = userr.getRent() + userr.getBills() + userr.getInsurance() + extra_exp;
+        MText.setText(String.valueOf(totalexp));
 
         TextView mmText = (TextView)findViewById(R.id.Savings);
         mmText.setText(String.valueOf(Income - totalexp));
@@ -49,11 +91,11 @@ public class HomePage extends AppCompatActivity {
         mmmText.setText(famous_cat);
 
 
-        edit =(Button)findViewById(R.id.edbtn);
+       /** edit =(Button)findViewById(R.id.edbtn);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                routed();
+
             }
         });
 
@@ -63,42 +105,49 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 routed2();
             }
-        });
+        });**/
 
         enterExpenses = (Button)findViewById(R.id.logoutBtn);
         enterExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(HomePage.this,MainActivity.class);
+                Intent myIntent = new Intent(HomePage.this, MainActivity.class);
+                startActivity(myIntent);
+
+                logout = (Button) findViewById(R.id.logoutBtn);
+                logout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(HomePage.this, LoginActivity.class);
+                        startActivity(myIntent);
+                    }
+                });
+            }
+
+            private void routed() {
+                Intent myIntent = new Intent(HomePage.this, updateDetail.class);
+                Bundle b = new Bundle();
+                b.putString("username", usr);
+        /*b.putInt("income", Income);
+        b.putInt("rent", Rent);
+        b.putInt("bills", Bills);
+        b.putInt("ins", Insurance);*/
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+
+            }
+
+            private void routed2() {
+                Intent myIntent = new Intent(HomePage.this, enterExpenses.class);
+                Bundle b = new Bundle();
+                b.putString("username", usr);
+                b.putInt("income", Income);
+                b.putInt("rent", Rent);
+                b.putInt("bills", Bills);
+                b.putInt("ins", Insurance);
+                b.putString("famous_cat", famous_cat);
+                myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
-        });
-    }
 
-    private void routed()
-    {
-        Intent myIntent = new Intent(HomePage.this,updateDetail.class);
-        Bundle b = new Bundle();
-        b.putInt("income", Income);
-        b.putInt("rent", Rent);
-        b.putInt("bills", Bills);
-        b.putInt("ins", Insurance);
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-
-    }
-
-    private void routed2()
-    {
-        Intent myIntent = new Intent(HomePage.this,enterExpenses.class);
-        Bundle b = new Bundle();
-        b.putInt("income", Income);
-        b.putInt("rent", Rent);
-        b.putInt("bills", Bills);
-        b.putInt("ins", Insurance);
-        b.putString("famous_cat",famous_cat);
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-
-    }
 }
