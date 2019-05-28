@@ -13,12 +13,14 @@ This App will eventually be able to help its user spend their resources in a wis
 
 ## Current Version
 
-*Current Project Version not available yet*
+**Basic Prototype Version** <br/>
+***Smartbucks_v0*** : <br/>
+https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/Releases/SmartBucks_v0.apk
 
 ## Github Page Links
 
 * Main Project Github Page: https://github.com/DBSE-teaching/isee2019-SmartBucks
-* Blog Posts Github Page: https://github.com/DBSE-teaching/isee2019-SmartBucks/tree/master/docs/blog
+* Blog Posts Github Page: https://dbse-teaching.github.io/isee2019-SmartBucks/
 
 ## Project Members
 
@@ -27,4 +29,4 @@ This App will eventually be able to help its user spend their resources in a wis
 * Theodora Paraskevi Kyriakou - theodora.kyriakou@st.ovgu.de, Github- ktheodora
 * Venkatesh Murugadas - venkatesh.murugadas@st.ovgu.de, Github - VenkateshDas
 
-, students of the Faculty of Informatics, Otto-Von-Guericke Universität Magdeburg
+Students of the Faculty of Informatics, Otto-Von-Guericke Universität Magdeburg
