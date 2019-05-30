@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
@@ -30,8 +31,8 @@ public class HomePage extends AppCompatActivity {
         peopleDB = new DBHandler(this);
         Bundle b = getIntent().getExtras();
 
-        if(b != null) {
-           usr = b.getString("usr_str");
+        if (b != null) {
+            usr = b.getString("usr_str");
            /* Income = b.getInt("income");
             Rent = b.getInt("rent");
             Bills = b.getInt("bills");
@@ -76,34 +77,33 @@ public class HomePage extends AppCompatActivity {
         }
         */
 
-        TextView MText = (TextView)findViewById(R.id.TotalExpenses);
+        TextView MText = (TextView) findViewById(R.id.TotalExpenses);
         double totalexp = userr.getRent() + userr.getBills() + userr.getInsurance() + extra_exp;
         MText.setText(String.valueOf(totalexp));
 
-        TextView mmText = (TextView)findViewById(R.id.Savings);
+        TextView mmText = (TextView) findViewById(R.id.Savings);
         mmText.setText(String.valueOf(Income - totalexp));
 
-        TextView mmmText = (TextView)findViewById(R.id.FamousCategText);
+        TextView mmmText = (TextView) findViewById(R.id.FamousCategText);
         mmmText.setText(famous_cat);
 
 
-       /** edit =(Button)findViewById(R.id.edbtn);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        /** edit =(Button)findViewById(R.id.edbtn);
+         edit.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
 
-            }
+        }
         });
 
-        enterExpenses = (Button)findViewById(R.id.expButton);
-        enterExpenses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                routed2();
-            }
+         enterExpenses = (Button)findViewById(R.id.expButton);
+         enterExpenses.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+        routed2();
+        }
         });**/
 
-        enterExpenses = (Button)findViewById(R.id.logoutBtn);
+
+        /*enterExpenses = (Button)findViewById(R.id.logoutBtn);
         enterExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,8 +117,11 @@ public class HomePage extends AppCompatActivity {
                         Intent myIntent = new Intent(HomePage.this, LoginActivity.class);
                         startActivity(myIntent);
                     }
-                });
-            }
+                }
+            });
+
+        }*/
+
 
             private void routed() {
                 Intent myIntent = new Intent(HomePage.this, updateDetail.class);
@@ -147,5 +150,7 @@ public class HomePage extends AppCompatActivity {
                 startActivity(myIntent);
             }
 
+            //TODO functions for stats and graphs of homepage
+            //public expProg
+
 }
-    }

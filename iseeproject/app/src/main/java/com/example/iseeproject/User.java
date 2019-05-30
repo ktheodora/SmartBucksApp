@@ -32,10 +32,6 @@ public class User {
         return password_raw;
     }
 
-    public void setPaymentMethod(String Paymentmethod)
-    {
-            this.paymentMethod  = Paymentmethod;
-    }
 
     public void setName(String Name) {
         this.name = Name;
@@ -78,6 +74,7 @@ public class User {
     public double getInsurance() {
         return insurance;
     }
+
 
 
 

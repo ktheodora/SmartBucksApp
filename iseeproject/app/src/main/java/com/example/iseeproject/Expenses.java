@@ -1,20 +1,19 @@
 package com.example.iseeproject;
 
 import java. util. Date;
-import java. sql. Timestamp;
 
 public class Expenses {
     private String username, category;
     private double price;
-    private Timestamp time;
-   // private String PaymentMethod;
+    private Date time ;
+    private String PaymentMethod;
 
-    //TODO Add Payment Method
-    public Expenses (String Username, double Price,  Timestamp Time, String Category) {
+    public Expenses (String Username, double Price,  Date Time, String Category, String PaymentMethods) {
         this.username = Username;
         this.category = Category;
         this.price = Price;
         this.time= Time;
+        this.PaymentMethod = PaymentMethods;
     }
 
     public String getUsername() {
@@ -31,10 +30,10 @@ public class Expenses {
         this.price = Price;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Date getTime() {
+            return time;
     }
-    public void setTime(Timestamp Time) {
+    public void setTime(Date Time) {
         this.time = Time;
     }
 
@@ -44,5 +43,16 @@ public class Expenses {
     public void setCategory(String Category) {
         this.category = Category;
     }
+
+
+    public void setPaymentMethod(String Paymentmethod)
+    {
+        this.PaymentMethod  = Paymentmethod;
+    }
+
+    public  String  getPaymentMethod(){
+        return PaymentMethod;
+    }
+
 
 }

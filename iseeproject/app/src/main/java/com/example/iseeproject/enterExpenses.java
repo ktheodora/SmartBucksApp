@@ -75,19 +75,6 @@ public class enterExpenses extends AppCompatActivity {
                 }
                 //now finding out for which category we have the most expenses so far
                 //we can only find current value of category because we don't have previous data
-                if ((leis > food) && (leis > misc)) {
-                    famous_categ = "Leisure";
-                }
-                else if(food > misc) {
-                    famous_categ = "Food";
-                }
-                else if (misc > food) {
-                    famous_categ = "Miscelaneous";
-                }
-                else {
-                    famous_categ = "Equal Category Expenses";
-                }
-
 
                 //in case of same values in a category, the string remails the same
                 // with the last time that we got it from the bundle

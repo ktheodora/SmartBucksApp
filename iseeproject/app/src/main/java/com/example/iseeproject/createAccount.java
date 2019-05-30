@@ -70,7 +70,7 @@ public class createAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = UserName.getText().toString();
-                String surname = Name.getText().toString()
+                String surname = Name.getText().toString();
                 String password = Password.getText().toString();
                 String income = Income.getText().toString();
                 String bills = Bills.getText().toString();
