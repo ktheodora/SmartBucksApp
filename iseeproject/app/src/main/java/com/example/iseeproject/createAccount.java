@@ -38,13 +38,13 @@ public class createAccount extends AppCompatActivity {
 
     private void routed(){
 
-        UserName   = (EditText)findViewById(R.id.entUsName);
+        UserName   = (EditText)findViewById(R.id.etName);
 
-        Password  = (EditText)findViewById(R.id.entPsWord);
+        Password  = (EditText)findViewById(R.id.etPassword);
 
         Income   = (EditText)findViewById(R.id.entInc);
 
-        Rent  = (EditText)findViewById(R.id.entRent);
+        Rent  = (EditText)findViewById(R.id.entRen);
 
         Bills   = (EditText)findViewById(R.id.entBills);
 

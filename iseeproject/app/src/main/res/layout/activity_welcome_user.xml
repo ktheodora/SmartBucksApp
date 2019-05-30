@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.iseeproject.LoginActivity">
+    tools:context=".welcomeUser"
+    android:id="@+id/welcomeUseractivity">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
@@ -16,7 +16,6 @@
         app:menu="@menu/drawermenu">
 
     </android.support.design.widget.NavigationView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,100 +52,74 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/welcomeUser"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
+
             android:layout_marginTop="120dp">
 
-            <ImageView
-                android:id="@+id/usrnameicon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/usrname" />
 
-            <EditText
-                android:id="@+id/etName"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Username"
-                android:inputType="textPersonName"
-                android:textSize="20sp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-
-            <ImageView
+            <ImageButton
                 android:id="@+id/passkeyicon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:scaleType="fitStart"
-                app:srcCompat="@drawable/passkey" />
+                android:background="#ffffff"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/passkey"
+                android:contentDescription="TODO" />
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:ems="10"
+                android:layout_weight="1"
+                android:inputType="textPassword"
                 android:hint="Password"
-                android:inputType="textPersonName"
-                android:textSize="20sp"
-                />
-
+                android:textSize="20dp" />
         </LinearLayout>
         <TextView
-            android:id="@+id/incorrectinfo"
-            android:layout_width="228dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="8dp"
-            android:textSize="15sp"
+            android:id="@+id/tvinfo"
+            android:layout_width="230dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/login"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="48dp"
+            android:text="Sign in"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tvinfo"
-        android:layout_width="228dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:textSize="15sp"
-        android:layout_gravity="center"
-        />
+        <Button
+            android:id="@+id/notUser"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="not user"
+            android:layout_gravity="center"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="30dp"
+            android:textSize="15sp"
+            android:layout_marginEnd="48dp"/>
 
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="@string/action_sign_in"
-        android:textSize="15sp"
-/>
-
-    <Button
-        android:id="@+id/backbtn"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="@string/backtomain"
-        android:textSize="15sp"
- />
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
