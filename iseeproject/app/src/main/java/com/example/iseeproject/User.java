@@ -1,14 +1,17 @@
 package com.example.iseeproject;
 
+import java.util.List;
+
 public class User {
     private String username, name, surname, password_raw;
     private double income, rent, bills, insurance;
+    private String paymentMethod;
 
-    public User (String Username,String Password_raw, String Name,String Surname, double Income, double Rent, double Bills, double Insurance) {
+    public User (String Username,String Password_raw, String Name, double Income, double Rent, double Bills, double Insurance) {
         this.username = Username;
         this.password_raw = Password_raw;
         this.name = Name;
-        this.surname = Surname;
+      //  this.surname = Surname;
         this.income = Income;
         this.rent = Rent;
         this.bills = Bills;
@@ -29,6 +32,7 @@ public class User {
         return password_raw;
     }
 
+
     public void setName(String Name) {
         this.name = Name;
     }
@@ -36,12 +40,12 @@ public class User {
         return name;
     }
 
-    public void setSurname(String Surname) {
+   /** public void setSurname(String Surname) {
         this.surname = Surname;
     }
     public String getSurname() {
         return surname;
-    }
+    } **/
 
     public void setIncome(double Income) {
         this.income = Income;
@@ -70,6 +74,7 @@ public class User {
     public double getInsurance() {
         return insurance;
     }
+
 
 
 
