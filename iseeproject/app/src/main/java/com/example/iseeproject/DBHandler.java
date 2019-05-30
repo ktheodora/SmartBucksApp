@@ -186,7 +186,7 @@ public class DBHandler extends SQLiteOpenHelper {
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                //TODO Add Timestamp, Payment in the constructor
+
                 String expdate = cursor.getString(2);
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.GERMANY);
                 Date edate = df.parse(expdate);
