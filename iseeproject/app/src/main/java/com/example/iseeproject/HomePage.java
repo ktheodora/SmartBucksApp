@@ -15,11 +15,11 @@ public class HomePage extends AppCompatActivity {
     private Button logout;
     DBHandler peopleDB;
     String usr = ""; // or other values
-    int Income = 0;
-    int Rent =0;
-    int Bills =0;
-    int Insurance =0;
-    int extra_exp = 0;
+    double Income = 0;
+    double Rent =0;
+    double Bills =0;
+    double Insurance =0;
+    double extra_exp = 0;
     String famous_cat = "Not Defined";
 
     @Override
@@ -28,10 +28,8 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         peopleDB = new DBHandler(this);
-
-
-
         Bundle b = getIntent().getExtras();
+
         if(b != null) {
            usr = b.getString("usr_str");
            /* Income = b.getInt("income");
@@ -49,13 +47,11 @@ public class HomePage extends AppCompatActivity {
 
         User userr = peopleDB.getUser(usr);
 
-        double extra_exp ;
-
 
         //TODO Seperate function for calculating extra expenses
         List<Expenses> exp = peopleDB.getAllExpenses(userr);
-        int foodcount, leiscount, medcount, billscount;
-        int totalexpamount;
+        double foodcount, leiscount, medcount, billscount;
+        double totalexpamount;
 
         //Function
          /*
@@ -81,7 +77,7 @@ public class HomePage extends AppCompatActivity {
         */
 
         TextView MText = (TextView)findViewById(R.id.TotalExpenses);
-        int totalexp = userr.getRent() + userr.getBills() + userr.getInsurance() + extra_exp;
+        double totalexp = userr.getRent() + userr.getBills() + userr.getInsurance() + extra_exp;
         MText.setText(String.valueOf(totalexp));
 
         TextView mmText = (TextView)findViewById(R.id.Savings);
@@ -140,14 +136,16 @@ public class HomePage extends AppCompatActivity {
             private void routed2() {
                 Intent myIntent = new Intent(HomePage.this, enterExpenses.class);
                 Bundle b = new Bundle();
-                b.putString("username", usr);
+                b.putString("username",usr);
+              /**  b.putString("username", usr);
                 b.putInt("income", Income);
                 b.putInt("rent", Rent);
                 b.putInt("bills", Bills);
                 b.putInt("ins", Insurance);
-                b.putString("famous_cat", famous_cat);
+                b.putString("famous_cat", famous_cat);**/
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
 
 }
+    }

@@ -104,7 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_USN, usr.getUsername());
         values.put(KEY_PWD, md5(usr.getPwd()));
         values.put(KEY_NAME , usr.getName());
-        values.put(KEY_SURNAME , usr.getSurname());
+        //values.put(KEY_SURNAME , usr.getSurname());
         values.put(KEY_INCOME , usr.getIncome());
         values.put(KEY_RENT, usr.getRent());
         values.put(KEY_BILLS , usr.getBills());
@@ -195,7 +195,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_USN, usr.getUsername());
         values.put(KEY_PWD, md5(usr.getPwd()));
         values.put(KEY_NAME , usr.getName());
-        values.put(KEY_SURNAME , usr.getSurname());
+      //  values.put(KEY_SURNAME , usr.getSurname());
         values.put(KEY_INCOME , usr.getIncome());
         values.put(KEY_RENT, usr.getRent());
         values.put(KEY_BILLS , usr.getBills());

@@ -7,7 +7,7 @@ public class Expenses {
     private String username, category;
     private double price;
     private Timestamp time;
-    private String PaymentMethod;
+   // private String PaymentMethod;
 
     //TODO Add Payment Method
     public Expenses (String Username, double Price,  Timestamp Time, String Category) {

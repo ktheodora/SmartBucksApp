@@ -15,7 +15,9 @@ public class createAccount extends AppCompatActivity {
     DBHandler peopleDB;
     private Button finish;
     private EditText UserName;
-    private EditText EmailAdress;
+    private EditText Name;
+
+    //private  EditText EmailAdress;
     private EditText Password;
     private EditText Income;
     private EditText Rent;
@@ -68,13 +70,20 @@ public class createAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = UserName.getText().toString();
+                String surname = Name.getText().toString()
                 String password = Password.getText().toString();
                 String income = Income.getText().toString();
                 String bills = Bills.getText().toString();
                 String insurance = Insurance.getText().toString();
-                User user1 = new User(UserName,Password,Income,Rent,Bills);
+                String rents = Rent.getText().toString();
+                double R = Double.parseDouble(rents);
+                double i = Double.parseDouble(insurance);
+                double inc = Double.parseDouble(income);
+                double bill = Double.parseDouble(bills);
 
-                boolean insertData = peopleDB.addUser(usr);
+                User user1 = new User(name,password,surname,inc,R,bill,i);
+
+                boolean insertData = peopleDB.addUser(user1);
 
 
                 if (insertData == true){
@@ -108,8 +117,8 @@ public class createAccount extends AppCompatActivity {
                         "Username already taken", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if (Integer.parseInt(Income.getText().toString()) <= Integer.parseInt(Rent.getText().toString())
-                    + Integer.parseInt(Bills.getText().toString()) + Integer.parseInt(Insurance.getText().toString())) {
+            else if (Double.parseDouble(Income.getText().toString()) <= Double.parseDouble(Rent.getText().toString())
+                    + Double.parseDouble(Bills.getText().toString()) + Double.parseDouble(Insurance.getText().toString())) {
                 //we have to ensure that income is always more than expenses
                 //we cannot convert to int until we make sure that fields are not null
                 Toast t = Toast.makeText(createAccount.this,

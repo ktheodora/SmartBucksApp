@@ -10,11 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class updateDetail extends AppCompatActivity {
-        private Button update;
-    int Income = 0;
-    int Rent =0;
-    int Bills =0;
-    int Insurance =0;
+    private Button update;
+    double Income = 0;
+    double Rent =0;
+    double Bills =0;
+    double Insurance =0;
     String username ;
     DBHandler peopleDB;
     User usr;
@@ -35,13 +35,13 @@ public class updateDetail extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updated(Income, Rent, Bills, Insurance);
+                updated(Income,Rent,Bills,Insurance);
             }
         });
     }
 
     //TODO Double parsed Text Views
-        private void updated(int Income,  int Rent, int Bills, int Insurance)
+        private void updated(double Income,  double Rent, double Bills, double Insurance)
         {
             EditText IncomeView   = (EditText)findViewById(R.id.entInc);
             //Only if value of view changes we update it, orelse we pass the initial again
@@ -69,7 +69,7 @@ public class updateDetail extends AppCompatActivity {
                 usr.setInsurance(Insurance);
             }
 
-            int extra_inc = 0;
+            double extra_inc = 0;
             EditText ExtraIncView   = (EditText)findViewById(R.id.entExtraInc);
             if (!TextUtils.isEmpty(ExtraIncView.getText())) {
                 extra_inc = Integer.parseInt(ExtraIncView.getText().toString());
