@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".graph"></activity>
+        <activity android:name=".lineGraph"></activity>
+        <activity android:name=".graph" />
         <activity android:name=".preferences" />
         <activity android:name=".welcomeUser" />
         <activity android:name=".LoginActivity" />
