@@ -207,13 +207,12 @@
 
         </LinearLayout>
 
-  <fragment
-      android:layout_width="match_parent"
-      android:layout_height="300dp"
-      android:id="@+id/lineGraph"
-      android:layout_weight="1"
-      android:background="#ffffff"
-        />
+        <fragment
+            android:id="@+id/lineGraph"
+            android:layout_width="match_parent"
+            android:layout_height="252dp"
+            android:layout_weight="1"
+            android:background="#ffffff" />
 
         <Button
             android:id="@+id/addExpenses"
