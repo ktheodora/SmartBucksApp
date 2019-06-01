@@ -47,6 +47,8 @@ public class createAccount extends AppCompatActivity {
 
     private void routed(){
 
+        //TODO add handling for new fields (email, budget)
+        //TODO add regex for valid email
         UserName   = (EditText)findViewById(R.id.etName);
 
         Password  = (EditText)findViewById(R.id.etPassword);

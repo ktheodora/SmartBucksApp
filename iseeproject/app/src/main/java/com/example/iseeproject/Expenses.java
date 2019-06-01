@@ -1,14 +1,16 @@
 package com.example.iseeproject;
 
-import java. util. Date;
+import java.util.Date;
 
 public class Expenses {
     private String username, category;
+    //timestamp of expense creation will be converted later to a real date type on the homepage
+    //when we will want to make comparison of the days that the expenses were created
+    private String time;
     private double price;
-    private Date time ;
     private String PaymentMethod;
 
-    public Expenses (String Username, double Price,  Date Time, String Category, String PaymentMethods) {
+    public Expenses (String Username, double Price, String Category, String Time, String PaymentMethods) {
         this.username = Username;
         this.category = Category;
         this.price = Price;
@@ -30,10 +32,10 @@ public class Expenses {
         this.price = Price;
     }
 
-    public Date getTime() {
+    public String getTime() {
             return time;
     }
-    public void setTime(Date Time) {
+    public void setTime(String Time) {
         this.time = Time;
     }
 
@@ -44,15 +46,14 @@ public class Expenses {
         this.category = Category;
     }
 
-
+    public  String  getPaymentMethod(){
+        return PaymentMethod;
+    }
     public void setPaymentMethod(String Paymentmethod)
     {
         this.PaymentMethod  = Paymentmethod;
     }
 
-    public  String  getPaymentMethod(){
-        return PaymentMethod;
-    }
 
 
 }
