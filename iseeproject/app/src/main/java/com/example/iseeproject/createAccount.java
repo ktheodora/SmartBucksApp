@@ -96,6 +96,15 @@ public class createAccount extends AppCompatActivity {
                 else{
                     Toast.makeText(createAccount.this,"Data not Successfully Inserted",Toast.LENGTH_LONG).show();
                 }
+
+                //start new activity
+                Intent myIntent = new Intent(createAccount.this,
+                        HomePage.class);
+                Bundle b = new Bundle();
+                b.putString("username", username);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+                finish();
             }
         });
 

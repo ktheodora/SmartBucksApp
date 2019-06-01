@@ -118,24 +118,22 @@
                 app:srcCompat="@drawable/coin" />
 
             <TextView
-                android:id="@+id/extraInc"
+                android:id="@+id/totalIncLabel"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Extra Income"
+                android:text="Total Income"
                 android:textSize="20sp"
                 />
 
             <TextView
-                android:id="@+id/entExtraInc"
+                android:id="@+id/totalInc"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0.00"
-                android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
 
@@ -170,8 +168,6 @@
                 android:ems="10"
                 android:layout_marginLeft="8dp"
                 android:layout_gravity="center"
-                android:inputType="textPersonName"
-                android:hint="0.00"
                 android:textSize="20sp"/>
 
 

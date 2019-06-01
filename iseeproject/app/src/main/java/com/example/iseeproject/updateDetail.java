@@ -100,7 +100,6 @@ public class updateDetail extends AppCompatActivity {
                     myIntent.putExtras(b); //Put your id to your next Intent
                     startActivity(myIntent);
                     finish();
-                    startActivity(myIntent);
                 }
             }
 
