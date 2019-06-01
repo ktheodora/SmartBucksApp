@@ -21,7 +21,6 @@
         <activity android:name=".welcomeUser" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".enterExpenses" />
-        <activity android:name=".numPad" />
         <activity android:name=".updateDetail" />
         <activity android:name=".createAccount" />
         <activity android:name=".HomePage" />

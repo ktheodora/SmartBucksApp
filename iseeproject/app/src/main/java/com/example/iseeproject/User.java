@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import java.util.List;
 
 public class User {
+    //TODO add user budget
     private String username, name, surname, password_raw;
     private double income, rent, bills, insurance;
     private String paymentMethod;

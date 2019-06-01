@@ -48,7 +48,7 @@ public class enterExpenses extends AppCompatActivity {
 
                 if (LeisureEdit.getText().toString() != "") {
                     leis = Double.parseDouble(LeisureEdit.getText().toString());
-                    Expenses exp = new Expenses(username, leis, ts,"LEISURE");
+                    Expenses exp = new Expenses(username, leis, ts,"LEISURE", );
 
                     peopleDB.addExpenses(exp);
 

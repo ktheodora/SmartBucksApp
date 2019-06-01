@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -86,7 +87,7 @@ public class HomePage extends AppCompatActivity {
 
         TextView mmmText = (TextView) findViewById(R.id.FamousCategText);
         mmmText.setText(famous_cat);
-
+    }
 
         /** edit =(Button)findViewById(R.id.edbtn);
          edit.setOnClickListener(new View.OnClickListener() {
@@ -122,15 +123,17 @@ public class HomePage extends AppCompatActivity {
 
         }*/
 
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.options_menu, menu);
+            return true;
+        }
+
 
             private void routed() {
                 Intent myIntent = new Intent(HomePage.this, updateDetail.class);
                 Bundle b = new Bundle();
                 b.putString("username", usr);
-        /*b.putInt("income", Income);
-        b.putInt("rent", Rent);
-        b.putInt("bills", Bills);
-        b.putInt("ins", Insurance);*/
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
 
@@ -140,12 +143,7 @@ public class HomePage extends AppCompatActivity {
                 Intent myIntent = new Intent(HomePage.this, enterExpenses.class);
                 Bundle b = new Bundle();
                 b.putString("username",usr);
-              /**  b.putString("username", usr);
-                b.putInt("income", Income);
-                b.putInt("rent", Rent);
-                b.putInt("bills", Bills);
-                b.putInt("ins", Insurance);
-                b.putString("famous_cat", famous_cat);**/
+
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
