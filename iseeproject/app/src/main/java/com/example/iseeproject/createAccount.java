@@ -1,6 +1,7 @@
 package com.example.iseeproject;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,9 +18,10 @@ public class createAccount extends AppCompatActivity {
     private EditText UserName;
     private EditText Name;
 
-    //private  EditText EmailAdress;
+    private  EditText EmailAdress;
     private EditText Password;
     private EditText Income;
+    private EditText Budget;
     private EditText Rent;
     private EditText Bills;
     private EditText Insurance;
@@ -47,23 +49,25 @@ public class createAccount extends AppCompatActivity {
 
     private void routed(){
 
-        //TODO add handling for new fields (email, budget)
-        //TODO add regex for valid email
-        UserName   = (EditText)findViewById(R.id.etName);
+        UserName   = (EditText)findViewById(R.id.etUsname);
 
         Password  = (EditText)findViewById(R.id.etPassword);
 
+        EmailAdress =  (EditText)findViewById(R.id.entEmail);
+
+        Name = (EditText)findViewById(R.id.entfullname);
+
         Income   = (EditText)findViewById(R.id.entInc);
+
+        Budget  = (EditText)findViewById(R.id.entbudget);
 
         Rent  = (EditText)findViewById(R.id.entRen);
 
         Bills   = (EditText)findViewById(R.id.entBills);
 
-        finish=(Button)findViewById(R.id.finButton);
-
         Insurance   = (EditText)findViewById(R.id.entIns);
 
-
+        finish=(Button)findViewById(R.id.finButton);
 
     }
 
@@ -71,24 +75,22 @@ public class createAccount extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = UserName.getText().toString();
-                String surname = Name.getText().toString();
+                String username = UserName.getText().toString();
+                String name = Name.getText().toString();
                 String password = Password.getText().toString();
-                String income = Income.getText().toString();
-                String bills = Bills.getText().toString();
-                String insurance = Insurance.getText().toString();
-                String rents = Rent.getText().toString();
-                double R = Double.parseDouble(rents);
-                double i = Double.parseDouble(insurance);
-                double inc = Double.parseDouble(income);
-                double bill = Double.parseDouble(bills);
+                String email = EmailAdress.getText().toString();
+                double inc = Double.parseDouble(Income.getText().toString());
+                double bud = Double.parseDouble(Budget.getText().toString());
+                double rent = Double.parseDouble(Rent.getText().toString());
+                double ins = Double.parseDouble(Insurance.getText().toString());
+                double bill = Double.parseDouble(Bills.getText().toString());
 
-                User user1 = new User(name,password,surname,inc,R,bill,i);
+                User user1 = new User(username,password,name,email, inc, bud,rent,bill,ins);
 
                 boolean insertData = peopleDB.addUser(user1);
 
 
-                if (insertData == true){
+                if (insertData){
                         Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -102,9 +104,11 @@ public class createAccount extends AppCompatActivity {
         private boolean validate()
         {   Boolean result = false;
 
-            if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Password.getText())
+            if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Name.getText())
+                    || TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(EmailAdress.getText())
                     || TextUtils.isEmpty(Income.getText()) || TextUtils.isEmpty(Rent.getText())
-                    || TextUtils.isEmpty(Bills.getText())|| TextUtils.isEmpty(Insurance.getText())) {
+                    || TextUtils.isEmpty(Bills.getText())|| TextUtils.isEmpty(Insurance.getText())
+                    || TextUtils.isEmpty(Budget.getText())) {
                 Toast t = Toast.makeText(createAccount.this,
                         "All fields are required to proceed", Toast.LENGTH_LONG);
                 t.show();
