@@ -41,10 +41,13 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_INSURANCE = "insurance";
 
     // Expenses Table Columns names
+    private static final String KEY_ADDTIME = "addition_time";
+    private static final String KEY_REALTIME = "expense_time";
     private static final String KEY_PRICE = "price";
     private static final String KEY_CATEGORY = "category";
-    private static final String KEY_TIMESTAMP = "timestamp";
+
     private static final String KEY_PAYMENT = "payment_method";
+    //TODO fix expenses constructor
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,8 +62,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_USN + " TEXT PRIMARY KEY REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
-                + KEY_CATEGORY + " TEXT," + KEY_TIMESTAMP + " TEXT, "+ KEY_PAYMENT + " Text )";
+                + KEY_TIMESTAMP + " TEXT PRIMARY KEY, "+ KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " Text )";
         db.execSQL(CREATE_EXPENSES_TABLE);
     }
 
@@ -147,10 +150,10 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(KEY_TIMESTAMP,getCurrDate());
         values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CATEGORY, exp.getCategory());
-        values.put(KEY_TIMESTAMP,getCurrDate());
         values.put(KEY_PAYMENT,exp.getPaymentMethod());
 
         db.insert(TABLE_EXPENSES, null, values);
