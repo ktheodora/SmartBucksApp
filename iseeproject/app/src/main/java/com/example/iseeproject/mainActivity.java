@@ -2,15 +2,12 @@ package com.example.iseeproject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.MediaRouter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class mainActivity extends AppCompatActivity {
 
 
 
@@ -43,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void routelogin()
     {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(mainActivity.this, loginActivity.class);
         startActivity(intent);
     }
 
     private void routesignup()
     {
-        Intent intent = new Intent(MainActivity.this, createAccount.class);
+        Intent intent = new Intent(mainActivity.this, createAccount.class);
         startActivity(intent);
     }
 

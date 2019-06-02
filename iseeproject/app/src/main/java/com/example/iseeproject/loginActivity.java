@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+public class loginActivity extends AppCompatActivity {
 
     private EditText Name;
     private EditText Password;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         if( (userName.equals("Pawan")) && (userPassword.equals("1234")) )
         {   //Switching from one Activity to another
-            Intent intent1 = new Intent(LoginActivity.this, HomePage.class);
+            Intent intent1 = new Intent(loginActivity.this, homePage.class);
             Bundle b = new Bundle();
             b.putString("usr_str", userName); //Your id
             intent1.putExtras(b);
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void routeback()
     {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(loginActivity.this, mainActivity.class);
         startActivity(intent);
     }
 

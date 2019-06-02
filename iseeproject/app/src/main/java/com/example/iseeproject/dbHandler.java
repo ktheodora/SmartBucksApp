@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class DBHandler extends SQLiteOpenHelper {
+public class dbHandler extends SQLiteOpenHelper {
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -49,7 +49,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_PAYMENT = "payment_method";
     //TODO fix expenses constructor
 
-    public DBHandler(Context context) {
+    public dbHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -62,8 +62,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_TIMESTAMP + " TEXT PRIMARY KEY, "+ KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
-                + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " Text )";
+                + KEY_ADDTIME + " TEXT PRIMARY KEY, "+ KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " TEXT )";
         db.execSQL(CREATE_EXPENSES_TABLE);
     }
 
@@ -149,8 +149,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addExpenses(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-        values.put(KEY_TIMESTAMP,getCurrDate());
+        values.put(KEY_ADDTIME , exp.getAdditionTime());
+        values.put(KEY_REALTIME ,exp.getExpenseTime());
         values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CATEGORY, exp.getCategory());
@@ -167,10 +167,10 @@ public class DBHandler extends SQLiteOpenHelper {
                 new String[] { username }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-            User user = new User(cursor.getString(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getString(3), Double.parseDouble(cursor.getString(4)),
-                    Double.parseDouble(cursor.getString(5)), Double.parseDouble(cursor.getString(6)),
-                    Double.parseDouble(cursor.getString(7)), Double.parseDouble(cursor.getString(8)));
+        User user = new User(cursor.getString(0), cursor.getString(1),
+                cursor.getString(2), cursor.getString(3), Double.parseDouble(cursor.getString(4)),
+                Double.parseDouble(cursor.getString(5)), Double.parseDouble(cursor.getString(6)),
+                Double.parseDouble(cursor.getString(7)), Double.parseDouble(cursor.getString(8)));
 
 
         return user;
@@ -217,13 +217,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<Expenses> getAllExpenses(User user) {
         List<Expenses> expList = new ArrayList<Expenses>();
 // Select All Query
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + "WHERE username =" + user.getUsername();
+        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Expenses exp = new Expenses(cursor.getString(0),Double.parseDouble(cursor.getString(1)), cursor.getString(2),cursor.getString(3), cursor.getString(4));
+                Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
                 exp.setUsername(cursor.getString(0));
                 expList.add(exp);
             } while (cursor.moveToNext());

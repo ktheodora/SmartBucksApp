@@ -5,19 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.util.List;
 
-public class HomePage extends AppCompatActivity {
+public class homePage extends AppCompatActivity {
       //  private Button edit;
-    private Button enterExpenses;
-    private Button logout;
-    DBHandler peopleDB;
+    private Button enterExpbtn;
+    dbHandler peopleDB;
     String usr = ""; // or other values
 
     @Override
@@ -25,7 +22,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        peopleDB = new DBHandler(this);
+        peopleDB = new dbHandler(this);
         Bundle b = getIntent().getExtras();
 
         if (b != null) {
@@ -34,7 +31,7 @@ public class HomePage extends AppCompatActivity {
 
         User userr = peopleDB.getUser(usr);
 
-        //Set values of Text Views in HomePage
+        //Set values of Text Views in homePage
 
         TextView budgetView = (TextView) findViewById(R.id.budgetview);
         budgetView.setText(String.valueOf(userr.getBudget()));
@@ -53,15 +50,15 @@ public class HomePage extends AppCompatActivity {
 
         TextView savingsView = (TextView) findViewById(R.id.SavingsView);
         //savings = budget - sum of expenses
-        double savings = userr.getBudget() - sum;
+        double savings = userr.getBudget() - sum ;
         expensesView.setText(String.valueOf(savings));
 
         //add expenses button setup
 
-        enterExpenses =(Button)findViewById(R.id.addExpenses);
-        enterExpenses.setOnClickListener(new View.OnClickListener() {
+        enterExpbtn =(Button)findViewById(R.id.addExpenses);
+        enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Intent myIntent = new Intent(HomePage.this, enterExpenses.class);
+                Intent myIntent = new Intent(homePage.this, enterExpenses.class);
                 Bundle b = new Bundle();
                 b.putString("username",usr);
 
@@ -86,7 +83,7 @@ public class HomePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            /*case R.id.HomePage:
+            /*case R.id.homePage:
                 goToHomePage();
                 return true;
             case R.id.Preferences:

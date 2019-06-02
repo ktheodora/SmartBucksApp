@@ -17,14 +17,14 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".lineGraph"></activity>
         <activity android:name=".graph" />
-        <activity android:name=".preferences" />
+        <activity android:name=".preferencesActivity" />
         <activity android:name=".welcomeUser" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".loginActivity" />
         <activity android:name=".enterExpenses" />
         <activity android:name=".updateDetail" />
         <activity android:name=".createAccount" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".homePage" />
+        <activity android:name=".mainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

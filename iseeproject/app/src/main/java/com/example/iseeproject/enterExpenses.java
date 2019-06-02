@@ -4,23 +4,23 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java. util. Date;
-import java. sql. Timestamp;
+import java.util.List;
 import java.util.Locale;
 
 public class enterExpenses extends AppCompatActivity {
-    DBHandler peopleDB;
+    dbHandler peopleDB;
     String username;
-
-    EditText datepick;
+    EditText datepick, amount;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
 
@@ -28,7 +28,7 @@ public class enterExpenses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
-        peopleDB = new DBHandler(this);
+        peopleDB = new dbHandler(this);
 
         Bundle b = getIntent().getExtras();
         if (b != null)
@@ -65,39 +65,83 @@ public class enterExpenses extends AppCompatActivity {
             }
         });
 
+        //TODO Fix spinner
+
+        //we set the button behaviour
         Button confirmbtn = (Button) findViewById(R.id.confirmBtn);
 
         Button backbtn = (Button) findViewById(R.id.backBtn);
 
+
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-
                 //getting values of the parameters of the new expense
-                String additionTime = peopleDB.getCurrDate();
-                String expenseTime = datepick.getText().toString();
-                //TODO retrieve the rest of the values
 
-                //creating the expense instance and adding it to the database
-                Expenses exp = new Expenses();
+                String category = "";
+                //TODO Ensure that only one button is checked at a time
+                RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
+                RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
+                RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
+                RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
+                if (rb1.isChecked()) {
+                    category = "LEISURE";
+                }
+                else if (rb2.isChecked()) {
+                    category = "FOOD";
+                }
+                else if (rb3.isChecked()) {
+                    category = "BILLS";
+                }
+                else if (rb4.isChecked()) {
+                    category = "MISCELLANEOUS";
+                }
 
-                //TODO fix expenses price check
-                if (Income < extra_exp + extra_expen + Rent + Bills + Insurance) {
+                amount = (EditText) findViewById(R.id.amountText);
+
+                //TODO check if payment method is also selected
+                if (TextUtils.isEmpty(datepick.getText()) || category.equals("") || TextUtils.isEmpty(amount.getText()) ){
                     Toast t = Toast.makeText(enterExpenses.this,
-                            "Expenses entered overcome savings", Toast.LENGTH_LONG);
+                            "All fields must be given", Toast.LENGTH_LONG);
                     t.show();
                 }
                 else {
-                    // Start NewActivity.class
-                    Intent myIntent = new Intent(enterExpenses.this,
-                            HomePage.class);
+                    User user = peopleDB.getUser(username);
+                    //get sum of money spent in expenses
+                    List<Expenses> exp = peopleDB.getAllExpenses(user);
+                    double sum=0;
+                    for (Expenses expense : exp) {
+                        sum+=expense.getPrice();
+                    }
+                    double expAmount = Double.parseDouble(amount.getText().toString());
+                    //if current expense price sumed with the already existing expenses is higher than budget
+                    //then show toast message
+                    if (user.getBudget() <= sum + expAmount) {
+                        Toast t = Toast.makeText(enterExpenses.this,
+                                "Expenses entered overcome savings", Toast.LENGTH_LONG);
+                        t.show();
+                    }
+                    else {//move on with the addtion of the expense to the database
+                        String additionTime = peopleDB.getCurrDate();
+                        String expenseTime = datepick.getText().toString();
 
-                      // peopleDB = new DBHandler(this);
-                        Bundle b = getIntent().getExtras();
-                        username =b.getString("username");
+                        //TODO Take payment method from spinner
+                        //adding temporarily a default chosen payment method
+                        String payment_method = "CASH";
 
-                    myIntent.putExtras(b); //Put your id to your next Intent
-                    startActivity(myIntent);
-                    finish();
+                        //creating the expense instance and adding it to the database
+                        Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
+
+                        peopleDB.addExpenses(newExpense);
+
+                        // Start NewActivity.class
+                        Intent myIntent = new Intent(enterExpenses.this,
+                                homePage.class);
+
+                        Bundle b = new Bundle();
+                        b.putString("username",username);
+                        myIntent.putExtras(b); //Put your id to your next Intent
+                        startActivity(myIntent);
+                    }
                 }
             }
         });
@@ -105,7 +149,7 @@ public class enterExpenses extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Intent myIntent = new Intent(enterExpenses.this,
-                        HomePage.class);
+                        homePage.class);
                 Bundle b = getIntent().getExtras();
                 username = b.getString("username");
                 myIntent.putExtras(b);

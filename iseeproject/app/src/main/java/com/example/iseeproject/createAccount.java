@@ -1,7 +1,6 @@
 package com.example.iseeproject;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 public class createAccount extends AppCompatActivity {
 
-    DBHandler peopleDB;
+    dbHandler peopleDB;
     private Button finish;
     private EditText UserName;
     private EditText Name;
@@ -33,7 +32,7 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         routed();
 
-        peopleDB = new DBHandler(this);
+        peopleDB = new dbHandler(this);
         finish.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -91,20 +90,20 @@ public class createAccount extends AppCompatActivity {
 
 
                 if (insertData){
-                        Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_LONG).show();
+                    Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
+                    //start new activity
+                    Intent myIntent = new Intent(createAccount.this,
+                            homePage.class);
+                    Bundle b = new Bundle();
+                    b.putString("username", username);
+                    myIntent.putExtras(b); //Put your id to your next Intent
+                    startActivity(myIntent);
+                    finish();
                 }
                 else{
                     Toast.makeText(createAccount.this,"Data not Successfully Inserted",Toast.LENGTH_LONG).show();
                 }
 
-                //start new activity
-                Intent myIntent = new Intent(createAccount.this,
-                        HomePage.class);
-                Bundle b = new Bundle();
-                b.putString("username", username);
-                myIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(myIntent);
-                finish();
             }
         });
 
