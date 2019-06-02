@@ -48,6 +48,34 @@
                     android:background="#00000000"
                     android:scaleType="fitStart"
                     app:srcCompat="@drawable/ourlogo" />
+=======
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="80dp"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/menu_lines"
+                />
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:layout_marginLeft="20dp"
+                android:text="@string/officialname"
+                android:textColor="#ffffff"
+                android:textSize="50sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ourlogo" />
+>>>>>>> devel/theo
         </LinearLayout>
         <TextView
             android:id="@+id/enterExpenses"
@@ -76,11 +104,21 @@
                 app:srcCompat="@drawable/cale"
                 android:background="#00000000"/>
 
+<<<<<<< HEAD
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+=======
+            <EditText
+                android:id="@+id/selectDate"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="false"
+>>>>>>> devel/theo
                 android:hint="Select Date"
                 android:layout_marginLeft="8dp"
                 android:textSize="20sp" />

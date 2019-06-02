@@ -41,6 +41,7 @@ public class updateDetail extends AppCompatActivity {
     }
 
     //TODO Double parsed Text Views
+    //TODO Fix beackend to correspond with frontend
         private void updated(double Income,  double Rent, double Bills, double Insurance)
         {
             EditText IncomeView   = (EditText)findViewById(R.id.entInc);
@@ -100,7 +101,6 @@ public class updateDetail extends AppCompatActivity {
                     myIntent.putExtras(b); //Put your id to your next Intent
                     startActivity(myIntent);
                     finish();
-                    startActivity(myIntent);
                 }
             }
 
