@@ -7,17 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".createAccount">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
-
 <LinearLayout
-
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,8 +26,7 @@
             android:layout_gravity="center"
             android:ems="10"
             android:layout_marginLeft="10dp"
-            android:inputType="textPersonName"
-            android:text="SmartBucks"
+            android:text="@string/officialname"
             android:textColor="#ffffff"
             android:textSize="50sp" />
 
@@ -50,7 +39,6 @@
             android:background="#00000000"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/ourlogo" />
-
 
     </LinearLayout>
     <TextView
@@ -107,7 +95,7 @@
         app:srcCompat="@drawable/usrname" />
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etUsname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
@@ -141,7 +129,7 @@
             android:layout_marginRight="20dp"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textSize="20sp"
             />
 
@@ -169,7 +157,7 @@
             android:layout_marginRight="20dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:textSize="20sp"
             />
 

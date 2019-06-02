@@ -31,39 +31,39 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // User Table Columns names
     private static final String KEY_USN = "username";
-    private static final String KEY_NAME = "name";
     private static final String KEY_PWD = "password";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL= "email";
     private static final String KEY_INCOME = "income";
+    private static final String KEY_BUDGET= "budget";
     private static final String KEY_RENT = "rent";
     private static final String KEY_BILLS = "bills";
     private static final String KEY_INSURANCE = "insurance";
 
     // Expenses Table Columns names
+    private static final String KEY_ADDTIME = "addition_time";
+    private static final String KEY_REALTIME = "expense_time";
     private static final String KEY_PRICE = "price";
     private static final String KEY_CATEGORY = "category";
-    private static final String KEY_TIMESTAMP = "timestamp";
+
     private static final String KEY_PAYMENT = "payment_method";
+    //TODO fix expenses constructor
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
-    //TODO Declare types of categories and payment methods for expenses
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
                 + KEY_USN + " TEXT PRIMARY KEY," + KEY_PWD + " TEXT ," + KEY_NAME + " TEXT,"
-                + KEY_INCOME + " REAL, " +  KEY_RENT + " REAL, " +
+                +  KEY_EMAIL + " TEXT," + KEY_INCOME + " REAL, " +  KEY_BUDGET + " REAL," + KEY_RENT + " REAL, " +
                 KEY_BILLS + " REAL, " + KEY_INSURANCE + " REAL " + ")";
         db.execSQL(CREATE_USER_TABLE);
 
-
-
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_USN + " TEXT PRIMARY KEY REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
-                + KEY_CATEGORY + " TEXT," + KEY_TIMESTAMP + " DATE, "+ KEY_PAYMENT + " Text )";
+                + KEY_TIMESTAMP + " TEXT PRIMARY KEY, "+ KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " Text )";
         db.execSQL(CREATE_EXPENSES_TABLE);
     }
 
@@ -75,6 +75,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // Creating tables again
         onCreate(db);
     }
+
+    //TODO convert-md5-back-to-normal method
 
     public static final String md5(final String s) {
         final String MD5 = "MD5";
@@ -100,17 +102,35 @@ public class DBHandler extends SQLiteOpenHelper {
         return "";
     }
 
-    //TODO convert-md5-back-to-normal method
 
+    public String getCurrDate() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //example value to be returned: 2019-06-01 12:31:36
+        final Cursor cursor = db.rawQuery("SELECT datetime('now', 'localtime');", null);
+        String date = "";
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    date= cursor.getString(0);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return date;
+    }
 
 
     public boolean addUser(User usr) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(KEY_USN, usr.getUsername());
         values.put(KEY_PWD, md5(usr.getPwd()));
         values.put(KEY_NAME , usr.getName());
+        values.put(KEY_EMAIL , usr.getEmail());
         values.put(KEY_INCOME , usr.getIncome());
+        values.put(KEY_BUDGET , usr.getBudget());
         values.put(KEY_RENT, usr.getRent());
         values.put(KEY_BILLS , usr.getBills());
         values.put(KEY_INSURANCE , usr.getInsurance());
@@ -129,15 +149,12 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addExpenses(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
+        values.put(KEY_TIMESTAMP,getCurrDate());
         values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CATEGORY, exp.getCategory());
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.GERMANY);
-        values.put(KEY_TIMESTAMP,df.format(exp.getTime()));
-
         values.put(KEY_PAYMENT,exp.getPaymentMethod());
-
 
         db.insert(TABLE_EXPENSES, null, values);
         db.close(); // Closing database connection
@@ -146,14 +163,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USER, new String[] {KEY_USN , KEY_PWD , KEY_NAME
-                        , KEY_INCOME , KEY_RENT , KEY_BILLS,KEY_INSURANCE}, KEY_USN + "=?",
+                        , KEY_EMAIL, KEY_INCOME , KEY_BUDGET, KEY_RENT , KEY_BILLS,KEY_INSURANCE}, KEY_USN + "=?",
                 new String[] { username }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
             User user = new User(cursor.getString(0), cursor.getString(1),
-                    cursor.getString(2), Double.parseDouble(cursor.getString(3)),
-                    Double.parseDouble(cursor.getString(4)), Double.parseDouble(cursor.getString(5)),
-                    Double.parseDouble(cursor.getString(6)));
+                    cursor.getString(2), cursor.getString(3), Double.parseDouble(cursor.getString(4)),
+                    Double.parseDouble(cursor.getString(5)), Double.parseDouble(cursor.getString(6)),
+                    Double.parseDouble(cursor.getString(7)), Double.parseDouble(cursor.getString(8)));
 
 
         return user;
@@ -163,7 +180,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public boolean isUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USER, new String[] {KEY_USN , KEY_PWD , KEY_NAME
-                        , KEY_INCOME , KEY_RENT , KEY_BILLS,KEY_INSURANCE}, KEY_USN + "=?",
+                        ,KEY_EMAIL, KEY_INCOME , KEY_BUDGET, KEY_RENT , KEY_BILLS,KEY_INSURANCE}, KEY_USN + "=?",
                 new String[] { username }, null, null, null, null);
         if (cursor != null) {
             return true;
@@ -176,8 +193,28 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public int updateUser(User usr) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-    public List<Expenses> getAllExpenses(User user) throws ParseException {
+        values.put(KEY_USN, usr.getUsername());
+        values.put(KEY_PWD, md5(usr.getPwd()));
+        values.put(KEY_NAME , usr.getName());
+        values.put(KEY_EMAIL , usr.getEmail());
+        values.put(KEY_INCOME , usr.getIncome());
+        values.put(KEY_BUDGET , usr.getBudget());
+        values.put(KEY_RENT, usr.getRent());
+        values.put(KEY_BILLS , usr.getBills());
+        values.put(KEY_INSURANCE , usr.getInsurance());
+
+// updating row
+        return db.update(TABLE_USER, values, KEY_USN + " = ?",
+                new String[]{String.valueOf(usr.getUsername())});
+    }
+
+
+
+    public List<Expenses> getAllExpenses(User user) {
         List<Expenses> expList = new ArrayList<Expenses>();
 // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + "WHERE username =" + user.getUsername();
@@ -186,37 +223,14 @@ public class DBHandler extends SQLiteOpenHelper {
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-
-                String expdate = cursor.getString(2);
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.GERMANY);
-                Date edate = df.parse(expdate);
-                Expenses exp = new Expenses(cursor.getString(0),Double.parseDouble(cursor.getString(1)), edate,cursor.getString(3), cursor.getString(4));
+                Expenses exp = new Expenses(cursor.getString(0),Double.parseDouble(cursor.getString(1)), cursor.getString(2),cursor.getString(3), cursor.getString(4));
                 exp.setUsername(cursor.getString(0));
-                //TODO set price and category
-// Adding contact to list
                 expList.add(exp);
             } while (cursor.moveToNext());
         }
-// return contact list
+
         return expList;
     }
 
-
-
-    public int updateUser(User usr) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_USN, usr.getUsername());
-        values.put(KEY_PWD, md5(usr.getPwd()));
-        values.put(KEY_NAME , usr.getName());
-      //  values.put(KEY_SURNAME , usr.getSurname());
-        values.put(KEY_INCOME , usr.getIncome());
-        values.put(KEY_RENT, usr.getRent());
-        values.put(KEY_BILLS , usr.getBills());
-        values.put(KEY_INSURANCE , usr.getInsurance());
-// updating row
-        return db.update(TABLE_USER, values, KEY_USN + " = ?",
-                new String[]{String.valueOf(usr.getUsername())});
-    }
 
 }

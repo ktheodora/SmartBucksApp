@@ -26,15 +26,21 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="80dp"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/menu_lines"
+                />
+
             <TextView
                 android:id="@+id/editText"
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:layout_marginLeft="10dp"
-                android:inputType="textPersonName"
-                android:text="SmartBucks"
+                android:layout_marginLeft="20dp"
+                android:text="@string/officialname"
                 android:textColor="#ffffff"
                 android:textSize="50sp" />
 
@@ -43,7 +49,6 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="45dp"
                 android:background="#00000000"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/ourlogo" />
