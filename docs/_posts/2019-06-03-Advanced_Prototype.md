@@ -6,26 +6,28 @@ This blog post is for the next version of the SmartBucks which is built to enlig
 
 ## Design Pattern 
  
- In software engineering, commonly occuring problems can be reduced or solved using the resusable solutions which are called as the software design patterns. In the creation of the application there are many problems that we encoutered were able to solve with the help of the design patterns that were already developed by other developers. We had to use structural pattern and behaviour patterns in our development which will be desribed clearly below. 
+In software engineering, commonly occuring problems can be reduced or solved using the resusable solutions which are called as the software design patterns. In the creation of the application there are many problems that we encoutered were able to solve with the help of the design patterns that were already developed by other developers. We had to use structural pattern and behaviour patterns in our development which will be desribed clearly below. 
 
 ### Creational Design Pattern:
--  **Prototype:**  Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+**Prototype:**  Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
 - With the prototyping patter we created the object Expenses with the parameters mentioned as above which were used throughout the program whenever a new expense is created. 
 
 ### Structural Design Pattern:
+
 - The Decorator (https://en.wikipedia.org/wiki/Decorator_pattern#cite_note-GoF-3)  design pattern is one of the twenty-three well-known _[GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns "Design Patterns")_ that describe how to solve recurring design problems to design flexible and reusable object-oriented software, that is, objects that are easier to implement, change, test, and reuse.
 - In our application the recurrent objects such as the daily, weekly, monthly, and yearly overview of the expenses design problem was solved using the decorator design pattern, which helped us to reuse these objects throughout the application. 
 
-### Behavioural Design Pattern 
-- The **observer pattern** is a [software design pattern](https://en.wikipedia.org/wiki/Design_pattern_(computer_science) "Design pattern (computer science)") in which an [object](https://en.wikipedia.org/wiki/Object_(computer_science)#Objects_in_object-oriented_programming "Object (computer science)"), called the **subject**, maintains a list of its dependents, called **observers**, and notifies them automatically of any state changes, usually by calling one of their [methods](https://en.wikipedia.org/wiki/Method_(computer_science) "Method (computer science)").
+### Behavioural Design Pattern
+
+-The **observer pattern** is a [software design pattern](https://en.wikipedia.org/wiki/Design_pattern_(computer_science) "Design pattern (computer science)") in which an [object](https://en.wikipedia.org/wiki/Object_(computer_science)#Objects_in_object-oriented_programming "Object (computer science)"), called the **subject**, maintains a list of its dependents, called **observers**, and notifies them automatically of any state changes, usually by calling one of their [methods](https://en.wikipedia.org/wiki/Method_(computer_science) "Method (computer science)").
 - The Observer pattern addresses the following problems:
--   A one-to-many dependency between objects should be defined without making the objects tightly coupled.
--   It should be ensured that when one object changes state an open-ended number of dependent objects are updated automatically.
--   It should be possible that one object can notify an open-ended number of other objects.
+- A one-to-many dependency between objects should be defined without making the objects tightly coupled.
+- It should be ensured that when one object changes state an open-ended number of dependent objects are updated automatically.
+- It should be possible that one object can notify an open-ended number of other objects.
 - This was used in our application in the case where if the sum of the expenses was less than or equal to the budget specified then this would change/ affect other parameters created in the application. 
 <br/>
- ![Deadline image]({{site.baseurl}}/images/designPattern.jpg "Design Patter UML"){:height="70%" width="70%"} 
- <br/>
+![Deadline image]({{site.baseurl}}/images/designPattern.jpg "Design Patter UML"){:height="70%" width="70%"} 
+<br/>
 
 ## Coding Conventions 
 
@@ -33,15 +35,15 @@ Being a software developer it is very important to follow the coding conventions
 
 The coding standards that we followed are described below.
 
-**1. Classes and methods**
+**1.Classes and methods**
 
-	- For class names corresponding to the back-end code of activities, we used the camelCase (https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc).<br/>
+- For class names corresponding to the back-end code of activities, we used the camelCase (https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc).<br/>
 ![Deadline image]({{site.baseurl}}/images/camelCase.jpeg "camelCase Naming"){:height="50%" width="50%"}
 <br/>
-	- If the name of the activity is defined by a single word and not by multiple, then we add as a second part of the name the word 'activity' (for example mainActivity, loginActivity, preferencesActivity etc). 
-	-  For the classes names corresponding to object creation, we just named them after their specific object name, in our case the User and the Expenses classes.
+- If the name of the activity is defined by a single word and not by multiple, then we add as a second part of the name the word 'activity' (for example mainActivity, loginActivity, preferencesActivity etc). 
+-  For the classes names corresponding to object creation, we just named them after their specific object name, in our case the User and the Expenses classes.
 	
-**2. Variables**
+**2.Variables**
 
 - For variables names, we keep the letters lowercase, but depending on whether we want to declare a front end view or button, we add in the end of the variable the word 'view' or 'btn', so that we are able to always separate where the variable refers to. 
 
@@ -69,15 +71,15 @@ The coding standards that we followed are described below.
 - Braces were added properly wherever necessary. 
 - Indentation was used for easier radability and understanding of the functionality. 
 	
-##  Context of Use 
+## Context of Use 
 
 Any application that is created has a group of  target audience for the usage of the application. Our target audience tends to be any person with an income and expense. This demography can vary from college student to pensioner in the society. As this is a large crowd of audience we are mainly now focusing on the college students and the office-goers who has an income and multiple expenses for the obtained income which becomes a tedious job to have a track on them. 
 
 To illustrate this we have created two user persona which will describe our target audience. 
 
-### User 1 - Hannah Fischer
+## User 1 - Hannah Fischer
 
-#### Demograhic info: 
+### Demograhic info: 
 
 - Female
 - Age : 22
@@ -171,6 +173,17 @@ These objectives were designed with the help of the following items.
 - The graphs presented makes the visualization of the expenses more easy and understandable. They can be filtered with options such as weekly, monthly and daily expenses. 
 
 The workflow of the application with respect to two use cases along with the screen shots are provided. 
+<br/>
+The user story is illustrated with the below provided screen shots. 
+<br/>
+**Enter Expense Activity**
+<br/>
+![Deadline image]({{site.baseurl}}/images/addExpenses.jpeg "Usage of Icons"){:height="60%" width="60%"}
+<br/>
+**Account Creation**
+<br/>
+![Deadline image]({{site.baseurl}}/images/createAccountStory.jpeg "Usage of Icons"){:height="60%" width="60%"}
+<br/>
 
 
 ## Summary of Changes
@@ -202,12 +215,19 @@ The above mentioned are the major changes.
 
 ## Working Prototype 
 
-The advanced prototype of the SmartBucks can be downloaded in the provided link here.
+The advanced prototype of the SmartBucks can be downloaded in the provided link _[here](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/Releases/adv-prot.apk)_
 
 ### Screeenshots 
 
 The screen shots of the advanced prototype is provided here for the reference. 
- 
+<br/>
+**Image 1: Update Details Activity**
+![Deadline image]({{site.baseurl}}/images/updateDetails.jpeg "User Story"){:height="50%" width="50%"}
+<br/>
+**Image 2: Date Picker**
+![Deadline image]({{site.baseurl}}/images/datePicker.jpeg "User Story"){:height="50%" width="50%"}
+<br/>
+
 
 
 
