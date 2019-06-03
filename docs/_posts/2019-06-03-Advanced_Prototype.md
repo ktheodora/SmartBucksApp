@@ -25,7 +25,7 @@ This blog post is for the next version of the SmartBucks which is built to enlig
 - This was used in our application in the case where if the sum of the expenses was less than or equal to the budget specified then this would change/ affect other parameters created in the application. 
 <br/>
  ![Deadline image]({{site.baseurl}}/images/designPattern.jpg "Design Patter UML"){:height="70%" width="70%"} 
- </br>
+ <br/>
 
 ## Coding Conventions 
 
