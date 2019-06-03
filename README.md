@@ -14,7 +14,7 @@ This App will eventually be able to help its user spend their resources in a wis
 ## Current Version
 
 **Advanced prototype version of the SmartBucks application is downloable at the given link:**<br/>
-***SmartBucks_v0 :*** 
+***Advanced Prototype Sample Version:*** 
 https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/Releases/adv_prot.apk
 
 ## Github Page Links
