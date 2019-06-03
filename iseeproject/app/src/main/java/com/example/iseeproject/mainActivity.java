@@ -9,8 +9,6 @@ import android.widget.Button;
 
 public class mainActivity extends AppCompatActivity {
 
-
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,6 @@ public class mainActivity extends AppCompatActivity {
         Intent intent = new Intent(mainActivity.this, createAccount.class);
         startActivity(intent);
     }
-
 
 
 }

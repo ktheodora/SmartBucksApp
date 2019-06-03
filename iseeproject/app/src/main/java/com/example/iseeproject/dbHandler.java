@@ -198,7 +198,7 @@ public class dbHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_USN, usr.getUsername());
-        values.put(KEY_PWD, md5(usr.getPwd()));
+        values.put(KEY_PWD, usr.getPwd());
         values.put(KEY_NAME , usr.getName());
         values.put(KEY_EMAIL , usr.getEmail());
         values.put(KEY_INCOME , usr.getIncome());

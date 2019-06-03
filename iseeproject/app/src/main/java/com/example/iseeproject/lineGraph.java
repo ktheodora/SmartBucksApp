@@ -63,9 +63,17 @@ public class lineGraph extends AppCompatActivity {
             xaxes[i] = xAxes.get(i).toString();
         }*/
 
-        ArrayList<Entry> xyCoord = calculateYaxes(user);
+        //ArrayList<Entry> xyCoord = calculateYaxes(user);
+        ArrayList<Entry> yAxes = new ArrayList<>();
 
-        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses");
+
+        yAxes.add(new Entry(10,0));
+        yAxes.add(new Entry(50,1));
+        yAxes.add(new Entry(40,2));
+        yAxes.add(new Entry(60,3));
+        yAxes.add(new Entry(20,4));
+
+        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses");
         lineDataSet.setDrawCircles(true);
         lineDataSet.setColor(Color.BLUE);
 

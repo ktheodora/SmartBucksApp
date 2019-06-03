@@ -25,7 +25,6 @@ public class createAccount extends AppCompatActivity {
     private EditText Bills;
     private EditText Insurance;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

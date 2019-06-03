@@ -1,6 +1,8 @@
 package com.example.iseeproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,12 +17,16 @@ public class homePage extends AppCompatActivity {
       //  private Button edit;
     private Button enterExpbtn;
     dbHandler peopleDB;
-    String usr = ""; // or other values
+    String usr = "";
+    static String USERPREF = "USER"; // or other values
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        setSessionPreferences();
 
         peopleDB = new dbHandler(this);
         Bundle b = getIntent().getExtras();
@@ -72,6 +78,16 @@ public class homePage extends AppCompatActivity {
 
     }
 
+    public void setSessionPreferences() {
+        sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        editor.putString("username", usr);
+
+        editor.apply();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -103,7 +119,12 @@ public class homePage extends AppCompatActivity {
         }
     }
     */
-
+    public void logout() {
+        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
 
     //TODO functions for stats and graphs of homepage
