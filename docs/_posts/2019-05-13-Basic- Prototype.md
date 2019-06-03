@@ -22,7 +22,7 @@ With the above mentioned Workflow the basic prototype has been developed.
 
 ##  Login Activity
  
- ![LoginActivity](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/docs/images/Login.jpeg)
+ ![Deadline image]({{site.baseurl}}/images/Login.jpeg "Application Logo")
  
 **The Signup / Login Activity**<br/>
 The above activity lets a new user to sign up or a registered user to log in using his credentials.

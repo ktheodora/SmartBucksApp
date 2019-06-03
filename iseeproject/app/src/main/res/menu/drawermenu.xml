@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/HomePage" android:title="home" android:icon="@drawable/ic_iconmonstr_home_6"/>
+    <item android:id="@+id/Preferences" android:title="Preferences" android:icon="@drawable/ic_iconmonstr_gear_1"/>
+    <item android:id=" @+id/EnterDetails" android:title="Update Details" android:icon="@drawable/ic_iconmonstr_volume_control_9"/>
+    <item android:id=" @+id/help" android:title="Help" android:icon="@drawable/ic_iconmonstr_help_1"/>
+    <item android:id="@+id/logoutBtn" android:title="logout" android:icon="@drawable/ic_iconmonstr_log_out_14"/>
+</menu>

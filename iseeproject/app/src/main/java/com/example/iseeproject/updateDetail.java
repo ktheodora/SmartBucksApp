@@ -6,24 +6,43 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class updateDetail extends AppCompatActivity {
-        private Button update;
+    private Button update;
+    double Income = 0;
+    double Rent =0;
+    double Bills =0;
+    double Insurance =0;
+    String username ;
+    dbHandler peopleDB;
+    User usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_detail);
 
-        update=(Button)findViewById(R.id.updtbtn);
+        peopleDB = new dbHandler(this);
+
+        Bundle b = getIntent().getExtras();
+        //we pass all the arguments cause they need to be passed again on the homepage
+        //in order to be displayed
+        if (b != null)
+            username = b.getString("username");
+
+        User usr = peopleDB.getUser(username);
+
+        update=(Button)findViewById(R.id.finButton);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                updated();
+                updated(Income,Rent,Bills,Insurance);
             }
         });
     }
 
+<<<<<<< HEAD
         private void updated()
         {
 <<<<<<< HEAD
@@ -35,18 +54,50 @@ public class updateDetail extends AppCompatActivity {
 
             Income   = (EditText)findViewById(R.id.entInc);
             String inc_str = UserName.getText().toString();
+=======
+    //TODO Double parsed Text Views
+    //TODO Fix beackend to correspond with frontend
+    private void updated(double Income,  double Rent, double Bills, double Insurance)
+    {
+        EditText IncomeView   = (EditText)findViewById(R.id.entInc);
+        //Only if value of view changes we update it, orelse we pass the initial again
+        if (!TextUtils.isEmpty(IncomeView.getText())) {
+            Income = Double.parseDouble(IncomeView.getText().toString());
+            usr.setIncome(Income);
+        }
+>>>>>>> devel/theo
 
-            SumExp   = (EditText)findViewById(R.id.sumExp);
-            String sum_str = UserName.getText().toString();
+        EditText BillsView   = (EditText)findViewById(R.id.entBills);
+        if (!TextUtils.isEmpty(BillsView.getText())){
+            Bills = Double.parseDouble(BillsView.getText().toString());
+            usr.setBills(Bills);
+        }
 
-            Rent  = (EditText)findViewById(R.id.entRent);
-            String rent_str = UserName.getText().toString();
+        EditText RentView  = (EditText)findViewById(R.id.entRen);
+        if (!TextUtils.isEmpty(RentView.getText())) {
+            Rent = Double.parseDouble(RentView.getText().toString());
+            usr.setRent(Rent);
+        }
 
-            Bills   = (EditText)findViewById(R.id.entBills);
-            String bill_str = UserName.getText().toString();
+        EditText InsuranceView   = (EditText)findViewById(R.id.entIns);
+        if (!TextUtils.isEmpty(InsuranceView.getText())) {
+            Insurance = Double.parseDouble(InsuranceView.getText().toString());
+            usr.setInsurance(Insurance);
+        }
 
-            Insurance   = (EditText)findViewById(R.id.entIns);
-            String ins_str = UserName.getText().toString();
+        if ((Income) <= Rent + Bills + Insurance ) {
+            Toast t = Toast.makeText(updateDetail.this,
+                    "Total income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
+            t.show();
+        }
+        else {
+            int isUpdated = peopleDB.updateUser(usr);
+            if (isUpdated == 0) {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Problem with Database Update", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else {
 
 =======
             EditText IncomeView   = (EditText)findViewById(R.id.entInc);
@@ -78,6 +129,7 @@ public class updateDetail extends AppCompatActivity {
 
 >>>>>>> 508499a... final basic prototype working version - small adjustments made
 
+<<<<<<< HEAD
             // Start NewActivity.class
             Intent myIntent = new Intent(updateDetail.this,
                     HomePage.class);
@@ -100,7 +152,19 @@ public class updateDetail extends AppCompatActivity {
             startActivity(myIntent);
             finish();
             startActivity(myIntent);
+=======
+                // Start NewActivity.class
+                Intent myIntent = new Intent(updateDetail.this,
+                        homePage.class);
+                Bundle b = new Bundle();
+                b.putString("username", username);
+>>>>>>> devel/theo
 
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+                finish();
+            }
         }
-}
 
+    }
+}
