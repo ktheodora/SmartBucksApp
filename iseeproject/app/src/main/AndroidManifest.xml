@@ -16,7 +16,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".lineGraph"></activity>
-        <activity android:name=".graph" />
         <activity android:name=".preferencesActivity" />
         <activity android:name=".welcomeUser" />
         <activity android:name=".loginActivity" />
