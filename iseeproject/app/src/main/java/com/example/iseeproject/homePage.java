@@ -58,7 +58,9 @@ public class homePage extends AppCompatActivity {
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
         enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Intent myIntent = new Intent(homePage.this, enterExpenses.class);
+                //Intent myIntent = new Intent(homePage.this, enterExpenses.class);
+                //starting line graph activitiy here for testing reasons
+                Intent myIntent = new Intent(homePage.this, lineGraph.class);
                 Bundle b = new Bundle();
                 b.putString("username",usr);
 
