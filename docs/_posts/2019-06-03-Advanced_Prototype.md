@@ -30,8 +30,9 @@ Being a software developer it is very important to follow the coding conventions
 The coding standards that we followed are described below.
 
 1. Classes and methods 
--  For class names corresponding to the back-end code of activities, we used the camelCase ( https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc.</br>
-![Deadline image]({{site.baseurl}}/images/camelCase.jpeg "camelCase Naming"){:height="30%" width="30%"}
+- For class names corresponding to the back-end code of activities, we used the camelCase (https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc).</br>
+![Deadline image]({{site.baseurl}}/images/camelCase.jpeg "camelCase Naming"){:height="50%" width="50%"}
+
 - If the name of the activity is defined by a single word and not by multiple, then we add as a second part of the name the word 'activity' (for example mainActivity, loginActivity, preferencesActivity etc). 
 -  For the classes names corresponding to object creation, we just named them after their specific object name, in our case the User and the Expenses classes.
 2. Variables
@@ -41,10 +42,14 @@ The coding standards that we followed are described below.
 
 - Another coding convention we applied is that we tried to separate the extra code needed for specific functions of each activity from its onCreate method , so that there is not a big confusion in too many lines of code for one function. For example, when validating data on the createAccount activity, we created the validate() and the addUser() functions that are called inside the onCreate, or in the updateDetail class we call the updated() function that controls the input and stores the updated user details in the database.
 
-- Comments play an important coding convention in order to cooperate as a team for our coding comprehesion and the next steps. We try to have comments for describing a function's usage, or also when there's a more specific block of code performing a more detailed operation (e.g. variable declaration, checking variable values etc). Furthermore, the TODO comments are inserted when someone wants to pass one task to another indivudual, therefore the future coding work is organized and implemented more efficiently.</br>
-![Deadline image]({{site.baseurl}}/images/comments.jpeg "Comments"){:height="30%" width="30%"}</br>
-- Finally, there were gaps or white spaces provided whenever a new block of code is started which serves a new purpose than the other block. This makes the readability of the more easier. </br>
-![Deadline image]({{site.baseurl}}/images/gaps.jpeg "Gaps for New Block"){:height="30%" width="30%"}
+- Comments play an important coding convention in order to cooperate as a team for our coding comprehesion and the next steps. We try to have comments for describing a function's usage, or also when there's a more specific block of code performing a more detailed operation (e.g. variable declaration, checking variable values etc). Furthermore, the TODO comments are inserted when someone wants to pass one task to another indivudual, therefore the future coding work is organized and implemented more efficiently.
+</br>
+![Deadline image]({{site.baseurl}}/images/comments.jpeg "Comments"){:height="50%" width="50%"}
+</br>
+- Finally, there were gaps or white spaces provided whenever a new block of code is started which serves a new purpose than the other block. This makes the readability of the more easier. 
+</br>
+![Deadline image]({{site.baseurl}}/images/gaps.jpeg "Gaps for New Block"){:height="50%" width="50%"}
+</br>
 
 4. Annotaitons
 - @Override for methods were used as the annotations. 
@@ -141,11 +146,15 @@ These objectives were designed with the help of the following items.
 - They were used to navigate within and out of the application. This ensured that the user can move smoothly in between the transactions. 
 
 2. Navigation Drawer 
-- This was effectively used as menu option for transaction of other activities.</br>
-![Deadline image]({{site.baseurl}}/images/navDrawer.jpeg "Navigation Drawer"){:height="30%" width="30%"}
+- This was effectively used as menu option for transaction of other activities.
+</br>
+![Deadline image]({{site.baseurl}}/images/navDrawer.jpeg "Navigation Drawer"){:height="50%" width="50%"}
+</br>
 3. Icons 
-- They were used to make the application more intuitive for the users where they can easily understand the activity that needs to be done. </br>
-![Deadline image]({{site.baseurl}}/images/createAccountNew.jpeg "Usage of Icons"){:height="30%" width="30%"}
+- They were used to make the application more intuitive for the users where they can easily understand the activity that needs to be done. 
+</br>
+![Deadline image]({{site.baseurl}}/images/createAccountNew.jpeg "Usage of Icons"){:height="50%" width="50%"}
+</br>
 
 4. Statisitcs 
 - The graphs presented makes the visualization of the expenses more easy and understandable. They can be filtered with options such as weekly, monthly and daily expenses. 
@@ -165,9 +174,11 @@ There were new features added to the advanced prototype when compared to the bas
 
 ### User story   
 
-There are changes in the user stories since there were new features added to the application. </br>
+There are changes in the user stories since there were new features added to the application.
+</br>
 
-![Deadline image]({{site.baseurl}}/images/userStoryChange.jpeg "User Story"){:height="30%" width="30%"}
+![Deadline image]({{site.baseurl}}/images/userStoryChange.jpeg "User Story"){:height="50%" width="50%"}
+</br>
 
 One of the changes in the user story is the activity of the homepage where the expenses and savings can be tracked. 
 
