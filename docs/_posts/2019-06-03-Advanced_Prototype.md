@@ -1,6 +1,6 @@
 
 # Advanced Prototype
-![enter image description here](https://www.dashdevs.com/images/hero%20%281%29.jpg)
+![enter image description here](https://www.dashdevs.com/images/hero%20%281%29.jpg){:height="60%" width="60%"}
 
 This blog post is for the next version of the SmartBucks which is built to enlighten your wallet in an efficient way. This blog contains the design pattern that we used for creating our application which were solved and proposed earlier by other developers, the coding conventions that were followed while creating the applicaiton, the context of use of the applicaiton with respect to the user personas, the design solutons that were used for building the user interface, along with that the summary of changes that were made from the basic prototype to the advanced prototype and finally we will be presenting you the working prototype of the application. 
 
