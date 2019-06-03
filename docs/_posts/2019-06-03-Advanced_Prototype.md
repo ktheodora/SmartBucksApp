@@ -33,33 +33,39 @@ Being a software developer it is very important to follow the coding conventions
 
 The coding standards that we followed are described below.
 
-1. Classes and methods 
-- For class names corresponding to the back-end code of activities, we used the camelCase (https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc).<br/>
+**1. Classes and methods**
+
+	- For class names corresponding to the back-end code of activities, we used the camelCase (https://en.wikipedia.org/wiki/Camel_case ) practice, where our classes' names practically contain the first part's letter starting with lowercase letter and the second part starting with uppercase (for example enterExpenses, updateDetails etc).<br/>
 ![Deadline image]({{site.baseurl}}/images/camelCase.jpeg "camelCase Naming"){:height="50%" width="50%"}
 <br/>
+	- If the name of the activity is defined by a single word and not by multiple, then we add as a second part of the name the word 'activity' (for example mainActivity, loginActivity, preferencesActivity etc). 
+	-  For the classes names corresponding to object creation, we just named them after their specific object name, in our case the User and the Expenses classes.
+	
+**2. Variables**
 
-- If the name of the activity is defined by a single word and not by multiple, then we add as a second part of the name the word 'activity' (for example mainActivity, loginActivity, preferencesActivity etc). 
--  For the classes names corresponding to object creation, we just named them after their specific object name, in our case the User and the Expenses classes.
-2. Variables
 - For variables names, we keep the letters lowercase, but depending on whether we want to declare a front end view or button, we add in the end of the variable the word 'view' or 'btn', so that we are able to always separate where the variable refers to. 
 
-3. Clean coding conventions
+**3. Clean coding conventions**
 
 - Another coding convention we applied is that we tried to separate the extra code needed for specific functions of each activity from its onCreate method , so that there is not a big confusion in too many lines of code for one function. For example, when validating data on the createAccount activity, we created the validate() and the addUser() functions that are called inside the onCreate, or in the updateDetail class we call the updated() function that controls the input and stores the updated user details in the database.
 
 - Comments play an important coding convention in order to cooperate as a team for our coding comprehesion and the next steps. We try to have comments for describing a function's usage, or also when there's a more specific block of code performing a more detailed operation (e.g. variable declaration, checking variable values etc). Furthermore, the TODO comments are inserted when someone wants to pass one task to another indivudual, therefore the future coding work is organized and implemented more efficiently.
-<br/>
+<br>
 ![Deadline image]({{site.baseurl}}/images/comments.jpeg "Comments"){:height="50%" width="50%"}
 <br/>
+
 - Finally, there were gaps or white spaces provided whenever a new block of code is started which serves a new purpose than the other block. This makes the readability of the more easier. 
-<br/>
+
+<br>
 ![Deadline image]({{site.baseurl}}/images/gaps.jpeg "Gaps for New Block"){:height="50%" width="50%"}
 <br/>
 
-4. Annotaitons
+**4. Annotations**
+
 - @Override for methods were used as the annotations. 
 
-5. Formatting 
+**5. Formatting**
+
 - Braces were added properly wherever necessary. 
 - Indentation was used for easier radability and understanding of the functionality. 
 	
