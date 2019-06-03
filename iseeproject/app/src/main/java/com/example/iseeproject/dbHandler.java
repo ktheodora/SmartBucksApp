@@ -182,7 +182,8 @@ public class dbHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_USER, new String[] {KEY_USN , KEY_PWD , KEY_NAME
                         ,KEY_EMAIL, KEY_INCOME , KEY_BUDGET, KEY_RENT , KEY_BILLS,KEY_INSURANCE}, KEY_USN + "=?",
                 new String[] { username }, null, null, null, null);
-        if (cursor != null) {
+        if (cursor!=null && cursor.getCount()>0) {
+            cursor.close();
             return true;
         }
         else{
@@ -212,7 +213,20 @@ public class dbHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(usr.getUsername())});
     }
 
-
+    public boolean expensesExist(User user) {
+        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
+                new String[] { user.getUsername() }, null, null, null, null);
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor!=null && cursor.getCount()>0) {
+            cursor.close();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public List<Expenses> getAllExpenses(User user) {
         List<Expenses> expList = new ArrayList<Expenses>();
@@ -228,7 +242,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 expList.add(exp);
             } while (cursor.moveToNext());
         }
-
+        cursor.close();
         return expList;
     }
 

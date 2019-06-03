@@ -16,9 +16,10 @@ import android.widget.Toast;
 public class welcomeUser extends AppCompatActivity {
     private DrawerLayout mDrawerlayout ;
     private ActionBarDrawerToggle mToggle ;
-    TextView userView, pwdView;
+    TextView userView, pwdView, infoView;
     Button loginbtn;
-    int attempts = 0;
+    String username = "", info;
+    int attempts = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class welcomeUser extends AppCompatActivity {
         mDrawerlayout = (DrawerLayout) findViewById(R.id.welcomeUseractivity);
 
         SharedPreferences sharedpreferences = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        final String username = sharedpreferences.getString("username","");
+        username = sharedpreferences.getString("username","");
         //if there is no previous session, redirect to main activity
         if (username.equals("")) {
             Intent intent = new Intent(welcomeUser.this, mainActivity.class);
@@ -39,6 +40,10 @@ public class welcomeUser extends AppCompatActivity {
             userView.setText(wbText);
 
             pwdView = (TextView) findViewById(R.id.etPassword);
+
+            infoView = (TextView) findViewById(R.id.tvinfo);
+            info = "No of attempts left: " + attempts;
+            infoView.setText(info);
 
             loginbtn =(Button)findViewById(R.id.login);
             loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -59,19 +64,9 @@ public class welcomeUser extends AppCompatActivity {
                             myIntent.putExtras(b); //Put your id to your next Intent
                             startActivity(myIntent);
                         }
-                        else {
-                            if (attempts < 3) {
-                                Toast t = Toast.makeText(welcomeUser.this,
-                                        "Password and Username don't match", Toast.LENGTH_LONG);
-                                t.show();
-                                attempts++;
-                            }
-                            else {
-                                //TODO close button for 10 mins
-                                loginbtn.setEnabled(false);
-                            }
+                        else {//reduce number of attempts
+                            checkAttempts();
                         }
-
                     }
                 }
             });
@@ -79,10 +74,25 @@ public class welcomeUser extends AppCompatActivity {
     }
 
     public boolean checkPwd(String username, String password) {
+
         dbHandler db = new dbHandler(this);
         User user = db.getUser(username);
 
         return (user.getPwd()).equals(password);
+    }
 
+    public void checkAttempts() {
+        if (attempts > 0) {
+            attempts--;
+            info = "No of attempts left: " + attempts;
+            infoView.setText(info);
+            Toast t = Toast.makeText(welcomeUser.this,
+                    "Password and Username don't match", Toast.LENGTH_LONG);
+            t.show();
+        }
+        else {
+            //TODO close button for 10 mins
+            loginbtn.setEnabled(false);
+        }
     }
 }
