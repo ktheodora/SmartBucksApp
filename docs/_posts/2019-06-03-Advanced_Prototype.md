@@ -174,7 +174,8 @@ These objectives were designed with the help of the following items.
 
 The workflow of the application with respect to two use cases along with the screen shots are provided. 
 <br/>
-The user story is illustrated with the below provided screen shots. 
+The user story is illustrated with the below provided screen shots.
+**User chooses if he will create account or login, then he's able to view statistics in the homepage and add expenses or choose one of the menu options, to update his preferences or application settings, to get help or logout**
 <br/>
 **Enter Expense Activity**
 <br/>
