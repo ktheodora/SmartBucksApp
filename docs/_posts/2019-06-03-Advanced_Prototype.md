@@ -148,10 +148,10 @@ To save money, keep track of the expenses then and there with the ease of techno
 
 The design of the application was mostly based on the ground fact that it must be easily usable and not complex. The basic prototype also followed the same prinicple and the advanced prototype was also built with the same concern. 
 
-The three main objectives of the design are: 
-	- Simple  
-	- Intuitive 
-	- Quick
+The three main objectives of the design are: <br/>
+	- Simple  <br/>
+	- Intuitive <br/>
+	- Quick<br/>
 
 These objectives were designed with the help of the following items. 
 
@@ -220,10 +220,9 @@ The advanced prototype of the SmartBucks can be downloaded in the provided link 
 ### Screeenshots 
 
 The screen shots of the advanced prototype is provided here for the reference. 
-<br/>
 **Image 1: Update Details Activity**
 ![Deadline image]({{site.baseurl}}/images/updateDetails.jpeg "User Story"){:height="50%" width="50%"}
-<br/>
+
 **Image 2: Date Picker**
 ![Deadline image]({{site.baseurl}}/images/datePicker.jpeg "User Story"){:height="50%" width="50%"}
 <br/>
