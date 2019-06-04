@@ -107,10 +107,12 @@ public class enterExpenses extends AppCompatActivity {
                 else {
                     User user = peopleDB.getUser(username);
                     //get sum of money spent in expenses
-                    List<Expenses> exp = peopleDB.getAllExpenses(user);
-                    double sum=0;
-                    for (Expenses expense : exp) {
-                        sum+=expense.getPrice();
+                    double sum = 0;
+                    if (peopleDB.expensesExist(user)) {
+                        List<Expenses> exp = peopleDB.getAllExpenses(user);
+                        for (Expenses expense : exp) {
+                            sum += expense.getPrice();
+                        }
                     }
                     double expAmount = Double.parseDouble(amount.getText().toString());
                     //if current expense price sumed with the already existing expenses is higher than budget

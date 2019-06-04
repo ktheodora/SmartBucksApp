@@ -69,7 +69,6 @@ public class lineGraph extends AppCompatActivity {
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         ArrayList<Entry> yAxes = new ArrayList<>();
 
-
         yAxes.add(new Entry(10,0));
         yAxes.add(new Entry(50,1));
         yAxes.add(new Entry(40,2));
@@ -90,6 +89,8 @@ public class lineGraph extends AppCompatActivity {
 
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);
+
+
         Description d = new Description();
         d.setText("Monday");
         d.setPosition(10,0);

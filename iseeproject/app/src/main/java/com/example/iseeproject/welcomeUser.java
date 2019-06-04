@@ -27,7 +27,7 @@ public class welcomeUser extends AppCompatActivity {
         mDrawerlayout = (DrawerLayout) findViewById(R.id.welcomeUseractivity);
 
         SharedPreferences sharedpreferences = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username","");
+        //username = sharedpreferences.getString("username","");
         //if there is no previous session, redirect to main activity
         if (username.equals("")) {
             Intent intent = new Intent(welcomeUser.this, mainActivity.class);
