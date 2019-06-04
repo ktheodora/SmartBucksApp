@@ -6,18 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class enterExpenses extends AppCompatActivity {
+public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
+{
     dbHandler peopleDB;
     String username;
     EditText datepick, amount;
@@ -28,6 +33,22 @@ public class enterExpenses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
+
+        Spinner spinner= (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Leisure");
+        categories.add("Food");
+        categories.add("miscellaneous");
+        categories.add("Bills");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
+        // Drop down layout style - list view with radio button
+        datAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(datAdapter);
         peopleDB = new dbHandler(this);
 
         Bundle b = getIntent().getExtras();
@@ -164,5 +185,23 @@ public class enterExpenses extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
 
         datepick.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+        Toast t = Toast.makeText(enterExpenses.this,
+                "Select one Category", Toast.LENGTH_LONG);
+        t.show();
     }
 }

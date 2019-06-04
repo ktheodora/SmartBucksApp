@@ -22,13 +22,15 @@ public class mainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               routelogin();
+
+                routelogin();
             }
         });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 routesignup();
             }
         });

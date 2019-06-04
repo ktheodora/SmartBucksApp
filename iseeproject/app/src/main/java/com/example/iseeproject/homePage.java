@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -95,30 +98,68 @@ public class homePage extends AppCompatActivity {
         return true;
     }
 
-    /*
+
+    public void gotoHomepage(){
+        Intent intent = new Intent(homePage.this,homePage.class);
+       startActivity(intent);
+    }
+
+    public void logoutActivity(){
+        Intent intent = new Intent(homePage.this,loginActivity.class);
+        startActivity(intent);
+    }
+
+    public void enterDetails(){
+        Intent intent = new Intent(homePage.this,updateDetail.class);
+        startActivity(intent);
+    }
+
+    public boolean showHelp(){
+        return true;
+    }
+
+    public void preferences(){
+        Intent intent = new Intent(homePage.this,updateDetail.class);
+    }
+
+    public void onCreateOptionsMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu,v,menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.drawermenu,menu);
+    }
+
+
+
     @Override
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            /*case R.id.homePage:
-                goToHomePage();
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.HomePage:
+                gotoHomepage();
                 return true;
+
             case R.id.Preferences:
-                showHelp();
+                preferences();
                 return true;
-            case R.id.EnterDetails:
-                return true;
-            case R.id.logoutBtn:
-                return true;
-                case R.id.help
-            default:
-                return super.onOptionsItemSelected(item);
-        }
 
+            case  R.id.updateAccount:
+                enterDetails();
+                return true;
+
+            case  R.id.logoutBtn:
+                logoutActivity();
+                return true;
+
+                default:
+                    return super.onContextItemSelected(item);
         }
     }
-    */
+
+
+
+
+
+
+
     public void logout() {
         SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -132,6 +173,7 @@ public class homePage extends AppCompatActivity {
 
     public void calculate() {
         //TODO Seperate function for calculating extra expenses
+
         /*List<Expenses> exp = peopleDB.getAllExpenses(user);
         double foodcount, leiscount, medcount, billscount;
         double totalexpamount;

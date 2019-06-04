@@ -19,6 +19,7 @@ public class welcomeUser extends AppCompatActivity {
     TextView userView, pwdView;
     Button loginbtn;
     int attempts = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
