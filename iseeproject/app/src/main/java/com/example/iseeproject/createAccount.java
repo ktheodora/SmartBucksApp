@@ -25,6 +25,9 @@ public class createAccount extends AppCompatActivity {
     private EditText Bills;
     private EditText Insurance;
 
+    String username ,name, password , email ;
+    double inc ,bud ,rent ,ins, bill ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,15 +76,10 @@ public class createAccount extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = UserName.getText().toString();
-                String name = Name.getText().toString();
-                String password = Password.getText().toString();
-                String email = EmailAdress.getText().toString();
-                double inc = Double.parseDouble(Income.getText().toString());
-                double bud = Double.parseDouble(Budget.getText().toString());
-                double rent = Double.parseDouble(Rent.getText().toString());
-                double ins = Double.parseDouble(Insurance.getText().toString());
-                double bill = Double.parseDouble(Bills.getText().toString());
+                username = UserName.getText().toString();
+                name = Name.getText().toString();
+                password = Password.getText().toString();
+                email = EmailAdress.getText().toString();
 
                 User user1 = new User(username,password,name,email, inc, bud,rent,bill,ins);
 
@@ -102,10 +100,8 @@ public class createAccount extends AppCompatActivity {
                 else{
                     Toast.makeText(createAccount.this,"Data not Successfully Inserted",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
-
     }
 
         private boolean validate()
@@ -130,20 +126,32 @@ public class createAccount extends AppCompatActivity {
                         "Username already taken", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if (Double.parseDouble(Income.getText().toString()) <= Double.parseDouble(Rent.getText().toString())
-                    + Double.parseDouble(Bills.getText().toString()) + Double.parseDouble(Insurance.getText().toString())) {
-                //we have to ensure that income is always more than expenses
-                //we cannot convert to int until we make sure that fields are not null
-                Toast t = Toast.makeText(createAccount.this,
-                        "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
-                t.show();
-            }
+            else {
+                //check income, budget and stable expenses added
 
-            else
-            {
-                result = true;
-            }
+                inc = Double.parseDouble(Income.getText().toString());
+                bud = Double.parseDouble(Budget.getText().toString());
+                rent = Double.parseDouble(Rent.getText().toString());
+                ins = Double.parseDouble(Insurance.getText().toString());
+                bill = Double.parseDouble(Bills.getText().toString());
 
+                if(inc <= (rent + bill + ins)) {
+                    //we have to ensure that income is always more than expenses
+                    //we cannot convert to int until we make sure that fields are not null
+                    Toast t = Toast.makeText(createAccount.this,
+                            "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
+                    t.show();
+                }
+                else if((inc - (rent + bill + ins)) < bud) {
+                    //we have to ensure that budget is less than income minus stable expenses
+                    Toast t = Toast.makeText(createAccount.this,
+                            "Budget cannot be less than income - stable expenses", Toast.LENGTH_LONG);
+                    t.show();
+                }
+                else{
+                    result = true;
+                }
+            }
             return result;
         }
 

@@ -1,10 +1,13 @@
 package com.example.iseeproject;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -66,14 +69,13 @@ public class lineGraph extends AppCompatActivity {
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         ArrayList<Entry> yAxes = new ArrayList<>();
 
-
         yAxes.add(new Entry(10,0));
         yAxes.add(new Entry(50,1));
         yAxes.add(new Entry(40,2));
         yAxes.add(new Entry(60,3));
         yAxes.add(new Entry(20,4));
 
-        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses");
+        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
         lineDataSet.setDrawCircles(true);
         lineDataSet.setColor(Color.BLUE);
 
@@ -82,8 +84,18 @@ public class lineGraph extends AppCompatActivity {
         lineChart.setData(new LineData(lineDataSets));
 
         lineChart.setVisibleXRangeMaximum(65f);
+
+        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
+
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);
+
+
+        Description d = new Description();
+        d.setText("Monday");
+        d.setPosition(10,0);
+        d.setTextAlign(Paint.Align.CENTER);
+        lineChart.setDescription(d);
 
 
     }

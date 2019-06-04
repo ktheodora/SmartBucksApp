@@ -93,8 +93,8 @@
 
         <Button
             android:id="@+id/login"
-            android:layout_width="100dp"
-            android:layout_height="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
             android:layout_marginTop="80dp"
@@ -104,9 +104,9 @@
 
         <Button
             android:id="@+id/notUser"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="not user"
+            android:text="not this user?"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
             android:layout_marginTop="30dp"

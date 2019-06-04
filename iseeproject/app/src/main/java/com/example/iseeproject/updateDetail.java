@@ -30,6 +30,7 @@ public class updateDetail extends AppCompatActivity {
         //in order to be displayed
         if (b != null)
             username = b.getString("username");
+
         User usr = peopleDB.getUser(username);
 
         update=(Button)findViewById(R.id.finButton);
@@ -48,25 +49,25 @@ public class updateDetail extends AppCompatActivity {
         EditText IncomeView   = (EditText)findViewById(R.id.entInc);
         //Only if value of view changes we update it, orelse we pass the initial again
         if (!TextUtils.isEmpty(IncomeView.getText())) {
-            Income = Integer.parseInt(IncomeView.getText().toString());
+            Income = Double.parseDouble(IncomeView.getText().toString());
             usr.setIncome(Income);
         }
 
         EditText BillsView   = (EditText)findViewById(R.id.entBills);
         if (!TextUtils.isEmpty(BillsView.getText())){
-            Bills = Integer.parseInt(BillsView.getText().toString());
+            Bills = Double.parseDouble(BillsView.getText().toString());
             usr.setBills(Bills);
         }
 
         EditText RentView  = (EditText)findViewById(R.id.entRen);
         if (!TextUtils.isEmpty(RentView.getText())) {
-            Rent = Integer.parseInt(RentView.getText().toString());
+            Rent = Double.parseDouble(RentView.getText().toString());
             usr.setRent(Rent);
         }
 
         EditText InsuranceView   = (EditText)findViewById(R.id.entIns);
         if (!TextUtils.isEmpty(InsuranceView.getText())) {
-            Insurance = Integer.parseInt(InsuranceView.getText().toString());
+            Insurance = Double.parseDouble(InsuranceView.getText().toString());
             usr.setInsurance(Insurance);
         }
 

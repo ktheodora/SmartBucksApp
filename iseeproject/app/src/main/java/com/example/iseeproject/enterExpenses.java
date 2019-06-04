@@ -93,7 +93,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
         Button backbtn = (Button) findViewById(R.id.backBtn);
 
-
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 //getting values of the parameters of the new expense
@@ -128,10 +127,12 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 else {
                     User user = peopleDB.getUser(username);
                     //get sum of money spent in expenses
-                    List<Expenses> exp = peopleDB.getAllExpenses(user);
-                    double sum=0;
-                    for (Expenses expense : exp) {
-                        sum+=expense.getPrice();
+                    double sum = 0;
+                    if (peopleDB.expensesExist(user)) {
+                        List<Expenses> exp = peopleDB.getAllExpenses(user);
+                        for (Expenses expense : exp) {
+                            sum += expense.getPrice();
+                        }
                     }
                     double expAmount = Double.parseDouble(amount.getText().toString());
                     //if current expense price sumed with the already existing expenses is higher than budget
