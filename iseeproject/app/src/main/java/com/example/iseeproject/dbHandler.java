@@ -214,7 +214,7 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
     public boolean expensesExist(User user) {
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
+        //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, null, null);
@@ -231,9 +231,12 @@ public class dbHandler extends SQLiteOpenHelper {
     public List<Expenses> getAllExpenses(User user) {
         List<Expenses> expList = new ArrayList<Expenses>();
 // Select All Query
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
+                new String[] { user.getUsername() }, null, null, null, null);
+
+        //Cursor cursor = db.rawQuery(selectQuery, null);
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {

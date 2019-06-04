@@ -72,7 +72,6 @@ public class enterExpenses extends AppCompatActivity {
 
         Button backbtn = (Button) findViewById(R.id.backBtn);
 
-
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 //getting values of the parameters of the new expense
