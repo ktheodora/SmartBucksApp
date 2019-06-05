@@ -2,9 +2,13 @@ package com.example.iseeproject;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,14 +38,16 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
 
+
+
         Spinner spinner= (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Leisure");
-        categories.add("Food");
-        categories.add("miscellaneous");
-        categories.add("Bills");
+        categories.add("Cash");
+        categories.add("Card  ");
+        categories.add("Online");
+
 
         // Creating adapter for spinner
         ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
@@ -67,6 +73,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
+
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -84,25 +91,35 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
+
+
+
+
+
+
         });
 
-        //TODO Fix spinner
+
+
 
         //we set the button behaviour
         Button confirmbtn = (Button) findViewById(R.id.confirmBtn);
-
         Button backbtn = (Button) findViewById(R.id.backBtn);
-
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 //getting values of the parameters of the new expense
 
                 String category = "";
                 //TODO Ensure that only one button is checked at a time
-                RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
+
+
+
+
+                /*RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
                 RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
                 RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
                 RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
+
                 if (rb1.isChecked()) {
                     category = "LEISURE";
                 }
@@ -114,11 +131,19 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 }
                 else if (rb4.isChecked()) {
                     category = "MISCELLANEOUS";
-                }
+                }*/
+
+
+
+
+
+
 
                 amount = (EditText) findViewById(R.id.amountText);
 
                 //TODO check if payment method is also selected
+
+
                 if (TextUtils.isEmpty(datepick.getText()) || category.equals("") || TextUtils.isEmpty(amount.getText()) ){
                     Toast t = Toast.makeText(enterExpenses.this,
                             "All fields must be given", Toast.LENGTH_LONG);
@@ -179,7 +204,84 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 finish();
             }
         });
+
+
+
     }
+
+
+    public void onRadioButtonClicked( View v  ){
+
+        String category = "";
+        RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
+        RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
+        RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
+        RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
+
+        boolean checked = ((RadioButton ) v).isChecked();
+        switch(v.getId()){
+
+            case R.id.leisurebutton:
+                if (checked)
+                    rb1.setTypeface(null, Typeface.BOLD_ITALIC);
+                //set the other two radio buttons text style to default
+                rb2.setTypeface(null, Typeface.NORMAL);
+
+                rb3.setTypeface(null, Typeface.NORMAL);
+                rb4.setTypeface(null, Typeface.NORMAL);
+                break;
+
+
+            case R.id.foodbutton:
+                if(checked)
+                    rb2.setTypeface(null, Typeface.BOLD_ITALIC);
+                rb1.setTypeface(null, Typeface.NORMAL);
+                rb3.setTypeface(null, Typeface.NORMAL);
+                rb4.setTypeface(null, Typeface.NORMAL);
+                break;
+
+            case R.id.billbutton:
+                if(checked)
+                    rb3.setTypeface(null, Typeface.BOLD_ITALIC);
+                rb1.setTypeface(null, Typeface.NORMAL);
+                rb2.setTypeface(null, Typeface.NORMAL);
+                rb4.setTypeface(null, Typeface.NORMAL);
+                break;
+
+            case R.id.miscbutton:
+                if(checked)
+                    rb4.setTypeface(null, Typeface.BOLD_ITALIC);
+                rb1.setTypeface(null, Typeface.NORMAL);
+                rb2.setTypeface(null, Typeface.NORMAL);
+                rb3.setTypeface(null, Typeface.NORMAL);
+
+
+        }
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.drawermenu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.welcomeUseractivity) {
+            return true;
+        }
+
+        return enterExpenses.super.onOptionsItemSelected(item);
+    }
+
+
+
 
     private void updateLabel() {
         String myFormat = "MM/dd/yy"; //In which you need put here

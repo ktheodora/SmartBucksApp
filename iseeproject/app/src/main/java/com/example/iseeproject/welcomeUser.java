@@ -18,13 +18,13 @@ public class welcomeUser extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle ;
     TextView userView, pwdView, infoView;
     Button loginbtn;
-<<<<<<< HEAD
-    int attempts = 0;
 
-=======
+    // int attempts = 0;
+
+
     String username = "", info;
     int attempts = 3;
->>>>>>> 37cb4468e3c74c829737989853b221f7051a5dc3
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

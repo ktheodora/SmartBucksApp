@@ -94,6 +94,17 @@
         </LinearLayout>
 
         <!--TODO Ensure that only one radio button is checked every time-->
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left"
+            android:layout_margin="25dp"
+
+            android:paddingRight="50dp"
+            >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -116,7 +127,8 @@
                 android:text="Leisure"
                 android:layout_marginLeft="8dp"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                />
 
             <RadioButton
                 android:id="@+id/leisurebutton"
@@ -124,6 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:onClick="onRadioButtonClicked"
+
                  />/>
         </LinearLayout>
 
@@ -157,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
+            android:onClick="onRadioButtonClicked"
             />/>
     </LinearLayout>
 
@@ -190,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:onClick="onRadioButtonClicked"
                 />/>
         </LinearLayout>
 
@@ -223,9 +239,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:onClick="onRadioButtonClicked"
                 />
         </LinearLayout>
-
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="300dp"
