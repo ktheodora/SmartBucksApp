@@ -104,37 +104,7 @@ public class homePage extends AppCompatActivity {
         });
 
         lineChart = (LineChart)findViewById(R.id.lineChart);
-
-        //we normally use
-        //ArrayList<Entry> xyCoord = calculateYaxes(user);
-        //but for testing purposes we are going to use hardcoded values
-        ArrayList<Entry> yAxes = new ArrayList<>();
-
-        yAxes.add(new Entry(10,0));
-        yAxes.add(new Entry(50,1));
-        yAxes.add(new Entry(40,2));
-        yAxes.add(new Entry(60,3));
-        yAxes.add(new Entry(20,4));
-
-        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
-        lineDataSet.setDrawCircles(true);
-        lineDataSet.setColor(Color.BLUE);
-
-        lineDataSets.add(lineDataSet);
-        //removes xaxes
-        lineChart.setData(new LineData(lineDataSets));
-
-        lineChart.setVisibleXRangeMaximum(65f);
-
-        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
-
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        Description d = new Description();
-        d.setText("Monday");
-        d.setPosition(10,0);
-        d.setTextAlign(Paint.Align.CENTER);
-        lineChart.setDescription(d);
+        setGraphStyle();
 
     }
 
@@ -211,17 +181,45 @@ public class homePage extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
     public void logout() {
         SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.apply();
+    }
+
+    public void setGraphStyle() {
+        //we normally use
+        //ArrayList<Entry> xyCoord = calculateYaxes(user);
+        //but for testing purposes we are going to use hardcoded values
+        ArrayList<Entry> yAxes = new ArrayList<>();
+
+        yAxes.add(new Entry(10,0));
+        yAxes.add(new Entry(50,1));
+        yAxes.add(new Entry(40,2));
+        yAxes.add(new Entry(60,3));
+        yAxes.add(new Entry(20,4));
+
+        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
+        lineDataSet.setDrawCircles(true);
+        lineDataSet.setColor(Color.BLUE);
+
+        lineDataSets.add(lineDataSet);
+        //removes xaxes
+        lineChart.setData(new LineData(lineDataSets));
+
+        lineChart.setVisibleXRangeMaximum(65f);
+
+        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        Description d = new Description();
+        d.setText("Monday");
+        d.setPosition(10,0);
+        d.setTextAlign(Paint.Align.CENTER);
+        lineChart.setDescription(d);
+
     }
 
     public ArrayList<Entry> calculateYaxes(User user) {
@@ -258,33 +256,6 @@ public class homePage extends AppCompatActivity {
             daysum = 0;//make daysum 0 again for the next day
         }
         return xyCoord;
-    }
-
-
-    //TODO functions for stats and graphs of homepage
-    //public expProg
-
-    public void calculate() {
-        //TODO Seperate function for calculating extra expenses
-
-        /*List<Expenses> exp = peopleDB.getAllExpenses(user);
-        double foodcount, leiscount, medcount, billscount;
-        double totalexpamount;
-        for each(expense :exp){
-        extra_exp += expense.getPrice();
-
-        if (expense.getCategory() == "Food") {
-            foodcount += expense.getPrice();
-        } else if (expense.getCategory() == "Leisure") {
-            leiscount += expense.getPrice();
-        }
-        totalexpamount += expense.getPrice();
-    }
-
-        double food perc = (foodcount / totalexpamount) * 100;
-        ProgressView pg (ProgressView)findViewById(R.id.ProgViewFood);
-        pg.set
-            */
     }
 
 }
