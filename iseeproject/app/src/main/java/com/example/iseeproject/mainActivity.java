@@ -2,17 +2,15 @@ package com.example.iseeproject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.MediaRouter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
-
+public class mainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -27,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               routelogin();
+
+                routelogin();
             }
         });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 routesignup();
             }
         });
@@ -43,15 +43,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void routelogin()
     {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(mainActivity.this, loginActivity.class);
         startActivity(intent);
     }
 
     private void routesignup()
     {
-        Intent intent = new Intent(MainActivity.this, createAccount.class);
+        Intent intent = new Intent(mainActivity.this, createAccount.class);
         startActivity(intent);
     }
+
+
+
 
 
 

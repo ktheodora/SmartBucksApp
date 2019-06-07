@@ -2,8 +2,8 @@ package com.example.iseeproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-public class preferences extends AppCompatActivity {
+//Todo PreferencesCode
+public class preferencesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

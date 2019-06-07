@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3333885b-242e-4176-a02e-98d34a3c0c64" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/createAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/createAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iseeproject/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/iseeproject/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iseeproject/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/iseeproject/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java" beforeDir="false" afterPath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/homePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/homePage.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,10 +30,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/HomePage.java">
+        <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/homePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+            <state relative-caret-position="204">
+              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -52,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+              <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -60,7 +60,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/activity_create_account.xml">
           <provider editor-type-id="android-designer2" />
-
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4080">
               <caret line="240" column="32" selection-start-line="240" selection-start-column="32" selection-end-line="240" selection-end-column="32" />
@@ -81,17 +80,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="170">
               <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/MainActivity.java">
+        <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/mainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="782">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -101,16 +100,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="816">
               <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/editdetails.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -144,14 +133,14 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="15" />
     <option name="width" value="1890" />
-    <option name="height" value="1033" />
+    <option name="height" value="1035" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -159,170 +148,12 @@
               <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
               <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="values" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isee2019-SmartBucks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="isee2019-SmartBucks" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="iseeproject" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -362,8 +193,8 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.5017794" side_tool="true" weight="0.33441296" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.8142458" visible="true" weight="0.3342282" />
-      <window_info id="Structure" order="2" sideWeight="0.1857542" side_tool="true" visible="true" weight="0.3342282" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.81005585" visible="true" weight="0.3342282" />
+      <window_info id="Structure" order="2" sideWeight="0.18994413" side_tool="true" visible="true" weight="0.3342282" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Resources Explorer" order="5" />
@@ -373,7 +204,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.3282123" />
       <window_info anchor="bottom" id="Logcat" order="4" />
       <window_info anchor="bottom" id="Android Profiler" order="5" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -395,14 +226,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/activity_num_pad.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/activity_num_pad.xml" />
     <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/activity_update_detail.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
@@ -415,13 +239,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/numPad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/numPad.java" />
+    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/editdetails.xml" />
     <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/createAccount.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -440,7 +259,7 @@
     <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -462,15 +281,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="170">
           <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/mainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="782">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
@@ -481,18 +300,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/res/layout/editdetails.xml">
-      <provider editor-type-id="android-designer2" />
+    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/homePage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iseeproject/app/src/main/java/com/example/iseeproject/HomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        <state relative-caret-position="204">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>

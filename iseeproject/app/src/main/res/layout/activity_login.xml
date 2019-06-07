@@ -6,7 +6,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.iseeproject.LoginActivity">
+    tools:context="com.example.iseeproject.loginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,6 @@
                 android:layout_gravity="center"
                 android:ems="10"
                 android:layout_marginLeft="10dp"
-                android:inputType="textPersonName"
                 android:text="SmartBucks"
                 android:textColor="#ffffff"
                 android:textSize="50sp" />
@@ -96,7 +95,7 @@
                 android:layout_marginRight="20dp"
                 android:ems="10"
                 android:hint="Password"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:textSize="20sp"
                 />
 

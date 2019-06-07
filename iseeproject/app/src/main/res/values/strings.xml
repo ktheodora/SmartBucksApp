@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">iseeproject</string>
+    <string name="officialname">SmartBucks</string>
     <string name="finish">Finish</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -62,4 +63,10 @@
     <string name="enlighten">Enlighten</string>
     <string name="pocket">Pocket</string>
     <string name="your">Your</string>
+
+
+
+
+
+
 </resources>

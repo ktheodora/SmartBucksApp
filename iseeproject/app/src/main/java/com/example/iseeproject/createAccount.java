@@ -12,18 +12,21 @@ import android.widget.Toast;
 
 public class createAccount extends AppCompatActivity {
 
-    DBHandler peopleDB;
+    dbHandler peopleDB;
     private Button finish;
     private EditText UserName;
     private EditText Name;
 
-    //private  EditText EmailAdress;
+    private  EditText EmailAdress;
     private EditText Password;
     private EditText Income;
+    private EditText Budget;
     private EditText Rent;
     private EditText Bills;
     private EditText Insurance;
 
+    String username ,name, password , email ;
+    double inc ,bud ,rent ,ins, bill ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         routed();
 
-        peopleDB = new DBHandler(this);
+        peopleDB = new dbHandler(this);
         finish.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -47,21 +50,25 @@ public class createAccount extends AppCompatActivity {
 
     private void routed(){
 
-        UserName   = (EditText)findViewById(R.id.etName);
+        UserName   = (EditText)findViewById(R.id.etUsname);
 
         Password  = (EditText)findViewById(R.id.etPassword);
 
+        EmailAdress =  (EditText)findViewById(R.id.entEmail);
+
+        Name = (EditText)findViewById(R.id.entfullname);
+
         Income   = (EditText)findViewById(R.id.entInc);
+
+        Budget  = (EditText)findViewById(R.id.entbudget);
 
         Rent  = (EditText)findViewById(R.id.entRen);
 
         Bills   = (EditText)findViewById(R.id.entBills);
 
-        finish=(Button)findViewById(R.id.finButton);
-
         Insurance   = (EditText)findViewById(R.id.entIns);
 
-
+        finish=(Button)findViewById(R.id.finButton);
 
     }
 
@@ -69,40 +76,42 @@ public class createAccount extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = UserName.getText().toString();
-                String surname = Name.getText().toString();
-                String password = Password.getText().toString();
-                String income = Income.getText().toString();
-                String bills = Bills.getText().toString();
-                String insurance = Insurance.getText().toString();
-                String rents = Rent.getText().toString();
-                double R = Double.parseDouble(rents);
-                double i = Double.parseDouble(insurance);
-                double inc = Double.parseDouble(income);
-                double bill = Double.parseDouble(bills);
+                username = UserName.getText().toString();
+                name = Name.getText().toString();
+                password = Password.getText().toString();
+                email = EmailAdress.getText().toString();
 
-                User user1 = new User(name,password,surname,inc,R,bill,i);
+                User user1 = new User(username,password,name,email, inc, bud,rent,bill,ins);
 
                 boolean insertData = peopleDB.addUser(user1);
 
 
-                if (insertData == true){
-                        Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_LONG).show();
+                if (insertData){
+                    Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
+                    //start new activity
+                    Intent myIntent = new Intent(createAccount.this,
+                            homePage.class);
+                    Bundle b = new Bundle();
+                    b.putString("username", username);
+                    myIntent.putExtras(b); //Put your id to your next Intent
+                    startActivity(myIntent);
+                    finish();
                 }
                 else{
                     Toast.makeText(createAccount.this,"Data not Successfully Inserted",Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
 
         private boolean validate()
         {   Boolean result = false;
 
-            if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Password.getText())
+            if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Name.getText())
+                    || TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(EmailAdress.getText())
                     || TextUtils.isEmpty(Income.getText()) || TextUtils.isEmpty(Rent.getText())
-                    || TextUtils.isEmpty(Bills.getText())|| TextUtils.isEmpty(Insurance.getText())) {
+                    || TextUtils.isEmpty(Bills.getText())|| TextUtils.isEmpty(Insurance.getText())
+                    || TextUtils.isEmpty(Budget.getText())) {
                 Toast t = Toast.makeText(createAccount.this,
                         "All fields are required to proceed", Toast.LENGTH_LONG);
                 t.show();
@@ -117,20 +126,32 @@ public class createAccount extends AppCompatActivity {
                         "Username already taken", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if (Double.parseDouble(Income.getText().toString()) <= Double.parseDouble(Rent.getText().toString())
-                    + Double.parseDouble(Bills.getText().toString()) + Double.parseDouble(Insurance.getText().toString())) {
-                //we have to ensure that income is always more than expenses
-                //we cannot convert to int until we make sure that fields are not null
-                Toast t = Toast.makeText(createAccount.this,
-                        "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
-                t.show();
-            }
+            else {
+                //check income, budget and stable expenses added
 
-            else
-            {
-                result = true;
-            }
+                inc = Double.parseDouble(Income.getText().toString());
+                bud = Double.parseDouble(Budget.getText().toString());
+                rent = Double.parseDouble(Rent.getText().toString());
+                ins = Double.parseDouble(Insurance.getText().toString());
+                bill = Double.parseDouble(Bills.getText().toString());
 
+                if(inc <= (rent + bill + ins)) {
+                    //we have to ensure that income is always more than expenses
+                    //we cannot convert to int until we make sure that fields are not null
+                    Toast t = Toast.makeText(createAccount.this,
+                            "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
+                    t.show();
+                }
+                else if((inc - (rent + bill + ins)) < bud) {
+                    //we have to ensure that budget is less than income minus stable expenses
+                    Toast t = Toast.makeText(createAccount.this,
+                            "Budget cannot be less than income - stable expenses", Toast.LENGTH_LONG);
+                    t.show();
+                }
+                else{
+                    result = true;
+                }
+            }
             return result;
         }
 

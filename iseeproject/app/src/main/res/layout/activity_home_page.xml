@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage">
+    tools:context=".homePage">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
+
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -21,21 +22,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/menuLines"
+                android:layout_width="50dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:padding="1dp"
+                app:srcCompat="@drawable/menu_lines"
+                />
+
             <TextView
                 android:id="@+id/editText"
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:layout_marginLeft="10dp"
-                android:inputType="textPersonName"
-                android:text="SmartBucks"
+                android:layout_marginLeft="20dp"
+                android:text="@string/officialname"
                 android:textColor="#ffffff"
                 android:textSize="50sp" />
 
@@ -44,7 +56,6 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="45dp"
                 android:background="#00000000"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/ourlogo" />
@@ -57,12 +68,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="HomeScreen"
             android:textSize="25sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -101,7 +111,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -113,24 +123,22 @@
                 app:srcCompat="@drawable/coin" />
 
             <TextView
-                android:id="@+id/extraInc"
+                android:id="@+id/totalIncLabel"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Extra Income"
+                android:text="Total Income"
                 android:textSize="20sp"
                 />
 
             <TextView
-                android:id="@+id/entExtraInc"
+                android:id="@+id/totalInc"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="0.00"
-                android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
 
@@ -165,8 +173,6 @@
                 android:ems="10"
                 android:layout_marginLeft="8dp"
                 android:layout_gravity="center"
-                android:inputType="textPersonName"
-                android:hint="0.00"
                 android:textSize="20sp"/>
 
 
@@ -207,21 +213,60 @@
 
 
         </LinearLayout>
-
-        <fragment
-            android:id="@+id/lineGraph"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="252dp"
-            android:layout_weight="1"
-            android:background="#ffffff" />
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/extraIncomeIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/budgeticon" />
+
+            <TextView
+                android:id="@+id/extraIncomeText"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Extra Income"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/extraIncomeView"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"
+                android:inputType=""
+                android:hint="0.00"
+                android:textSize="20sp"/>
+
+
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+            </com.github.mikephil.charting.charts.LineChart>
 
         <Button
             android:id="@+id/addExpenses"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:text="Add Expenses"
+            android:onClick="showPopup"
             android:textSize="15sp" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
