@@ -31,7 +31,11 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     String username;
     EditText datepick, amount;
     Calendar myCalendar;
+
     DatePickerDialog.OnDateSetListener date;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         //we set the button behaviour
         Button confirmbtn = (Button) findViewById(R.id.confirmBtn);
         Button backbtn = (Button) findViewById(R.id.backBtn);
+
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 //getting values of the parameters of the new expense
@@ -139,15 +144,15 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
 
-                amount = (EditText) findViewById(R.id.amountText);
-
-                //TODO check if payment method is also selected
+                    amount = (EditText) findViewById(R.id.amountText);
 
 
-                if (TextUtils.isEmpty(datepick.getText()) || category.equals("") || TextUtils.isEmpty(amount.getText()) ){
-                    Toast t = Toast.makeText(enterExpenses.this,
-                            "All fields must be given", Toast.LENGTH_LONG);
-                    t.show();
+
+                    //TODO check if payment method is also selected
+                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText()) ){
+                        Toast t = Toast.makeText(enterExpenses.this,
+                                "All fields must be given", Toast.LENGTH_LONG);
+                        t.show();
                 }
                 else {
                     User user = peopleDB.getUser(username);
@@ -171,7 +176,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                         String additionTime = peopleDB.getCurrDate();
                         String expenseTime = datepick.getText().toString();
 
-                        //TODO Take payment method from spinner
+
                         //adding temporarily a default chosen payment method
                         String payment_method = "CASH";
 
@@ -212,7 +217,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
     public void onRadioButtonClicked( View v  ){
 
-        String category = "";
+       // String category = "";
         RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
         RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
         RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
@@ -251,6 +256,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             case R.id.miscbutton:
                 if(checked)
                     rb4.setTypeface(null, Typeface.BOLD_ITALIC);
+
                 rb1.setTypeface(null, Typeface.NORMAL);
                 rb2.setTypeface(null, Typeface.NORMAL);
                 rb3.setTypeface(null, Typeface.NORMAL);

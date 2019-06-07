@@ -1,10 +1,13 @@
 package com.example.iseeproject;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -104,6 +108,10 @@ public class homePage extends AppCompatActivity {
         });
 
         lineChart = (LineChart)findViewById(R.id.lineChart);
+
+        //we normally use
+        //ArrayList<Entry> xyCoord = calculateYaxes(user);
+        //but for testing purposes we are going to use hardcoded values
         setGraphStyle();
 
     }
@@ -118,68 +126,62 @@ public class homePage extends AppCompatActivity {
         editor.apply();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawermenu, menu);
-        return true;
-    }
+    //@Override
 
 
-    public void gotoHomepage(){
-        Intent intent = new Intent(homePage.this,homePage.class);
-       startActivity(intent);
-    }
 
-    public void logoutActivity(){
-        Intent intent = new Intent(homePage.this,loginActivity.class);
-        startActivity(intent);
-    }
 
-    public void enterDetails(){
-        Intent intent = new Intent(homePage.this,updateDetail.class);
-        startActivity(intent);
-    }
 
-    public boolean showHelp(){
-        return true;
-    }
 
-    public void preferences(){
-        Intent intent = new Intent(homePage.this,updateDetail.class);
-    }
 
-    public void onCreateOptionsMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu,v,menuInfo);
+   @Override
+    public boolean  onCreateOptionsMenu(Menu menu){
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.drawermenu,menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //  preparation code here
+        return super.onPrepareOptionsMenu(menu);
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(final MenuItem item){
         switch (item.getItemId()){
+
             case R.id.HomePage:
-                gotoHomepage();
+               startActivity(new Intent(this,homePage.class));
                 return true;
 
             case R.id.Preferences:
-                preferences();
+                startActivity(new Intent(this,updateDetail.class));
                 return true;
 
-            case  R.id.updateAccount:
-                enterDetails();
+            case  R.id.item2:
+                startActivity(new Intent(this,updateDetail.class));
                 return true;
 
             case  R.id.logoutBtn:
-                logoutActivity();
+                startActivity(new Intent(this,loginActivity.class));
                 return true;
 
+            case  R.id.item1:
+                Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+                return true;
+
+
                 default:
-                    return super.onContextItemSelected(item);
+                    return super.onOptionsItemSelected(item);
         }
     }
+
+
+
+
+
+
 
     public void logout() {
         SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
@@ -189,9 +191,6 @@ public class homePage extends AppCompatActivity {
     }
 
     public void setGraphStyle() {
-        //we normally use
-        //ArrayList<Entry> xyCoord = calculateYaxes(user);
-        //but for testing purposes we are going to use hardcoded values
         ArrayList<Entry> yAxes = new ArrayList<>();
 
         yAxes.add(new Entry(10,0));
@@ -219,7 +218,6 @@ public class homePage extends AppCompatActivity {
         d.setPosition(10,0);
         d.setTextAlign(Paint.Align.CENTER);
         lineChart.setDescription(d);
-
     }
 
     public ArrayList<Entry> calculateYaxes(User user) {
@@ -256,6 +254,33 @@ public class homePage extends AppCompatActivity {
             daysum = 0;//make daysum 0 again for the next day
         }
         return xyCoord;
+    }
+
+
+    //TODO functions for stats and graphs of homepage
+    //public expProg
+
+    public void calculate() {
+        //TODO Seperate function for calculating extra expenses
+
+        /*List<Expenses> exp = peopleDB.getAllExpenses(user);
+        double foodcount, leiscount, medcount, billscount;
+        double totalexpamount;
+        for each(expense :exp){
+        extra_exp += expense.getPrice();
+
+        if (expense.getCategory() == "Food") {
+            foodcount += expense.getPrice();
+        } else if (expense.getCategory() == "Leisure") {
+            leiscount += expense.getPrice();
+        }
+        totalexpamount += expense.getPrice();
+    }
+
+        double food perc = (foodcount / totalexpamount) * 100;
+        ProgressView pg (ProgressView)findViewById(R.id.ProgViewFood);
+        pg.set
+            */
     }
 
 }
