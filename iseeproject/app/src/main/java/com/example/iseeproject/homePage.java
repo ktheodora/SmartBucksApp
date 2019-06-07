@@ -1,10 +1,13 @@
 package com.example.iseeproject;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -148,66 +151,54 @@ public class homePage extends AppCompatActivity {
         editor.apply();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawermenu, menu);
-        return true;
-    }
+    //@Override
 
 
-    public void gotoHomepage(){
-        Intent intent = new Intent(homePage.this,homePage.class);
-       startActivity(intent);
-    }
 
-    public void logoutActivity(){
-        Intent intent = new Intent(homePage.this,loginActivity.class);
-        startActivity(intent);
-    }
 
-    public void enterDetails(){
-        Intent intent = new Intent(homePage.this,updateDetail.class);
-        startActivity(intent);
-    }
 
-    public boolean showHelp(){
-        return true;
-    }
 
-    public void preferences(){
-        Intent intent = new Intent(homePage.this,updateDetail.class);
-    }
 
-    public void onCreateOptionsMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu,v,menuInfo);
+   @Override
+    public boolean  onCreateOptionsMenu(Menu menu){
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.drawermenu,menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //  preparation code here
+        return super.onPrepareOptionsMenu(menu);
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(final MenuItem item){
         switch (item.getItemId()){
+
             case R.id.HomePage:
-                gotoHomepage();
+               startActivity(new Intent(this,homePage.class));
                 return true;
 
             case R.id.Preferences:
-                preferences();
+                startActivity(new Intent(this,updateDetail.class));
                 return true;
 
-            case  R.id.updateAccount:
-                enterDetails();
+            case  R.id.item2:
+                startActivity(new Intent(this,updateDetail.class));
                 return true;
 
             case  R.id.logoutBtn:
-                logoutActivity();
+                startActivity(new Intent(this,loginActivity.class));
                 return true;
 
+            case  R.id.item1:
+                Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+                return true;
+
+
                 default:
-                    return super.onContextItemSelected(item);
+                    return super.onOptionsItemSelected(item);
         }
     }
 
