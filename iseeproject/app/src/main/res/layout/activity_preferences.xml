@@ -27,7 +27,8 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/menuLines"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
                 android:scaleType="fitStart"

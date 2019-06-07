@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="example.javatpoint.com.optionmenu.homePage">
+    tools:context=".homePage">
 >
 
     <item android:id="@+id/HomePage" android:title="home" android:icon="@drawable/ic_iconmonstr_home_6"/>
@@ -16,7 +16,7 @@
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/item2"
-        android:icon="@drawable/ic_iconmonstr_help_1"
+        android:icon="@drawable/ic_menu_manage"
         android:title="Update Details"
         app:showAsAction="never"/>
 

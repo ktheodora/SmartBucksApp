@@ -9,6 +9,7 @@
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
+
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -28,10 +29,14 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/menuLines"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:scaleType="fitStart"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:padding="1dp"
                 app:srcCompat="@drawable/menu_lines"
                 />
 
@@ -260,6 +265,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="Add Expenses"
+            android:onClick="showPopup"
             android:textSize="15sp" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

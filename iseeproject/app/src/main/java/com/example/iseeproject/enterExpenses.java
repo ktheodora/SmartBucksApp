@@ -43,9 +43,10 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         setContentView(R.layout.activity_enter_expenses);
 
 
-
         Spinner spinner= (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
+
+
 
         List<String> categories = new ArrayList<String>();
         categories.add("Cash");
@@ -117,36 +118,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 String category = "";
                 //TODO Ensure that only one button is checked at a time
 
-
-
-
-                /*RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
-                RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
-                RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
-                RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
-
-                if (rb1.isChecked()) {
-                    category = "LEISURE";
-                }
-                else if (rb2.isChecked()) {
-                    category = "FOOD";
-                }
-                else if (rb3.isChecked()) {
-                    category = "BILLS";
-                }
-                else if (rb4.isChecked()) {
-                    category = "MISCELLANEOUS";
-                }*/
-
-
-
-
-
-
-
-                    amount = (EditText) findViewById(R.id.amountText);
-
-
+                amount = (EditText) findViewById(R.id.amountText);
 
                     //TODO check if payment method is also selected
                     if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText()) ){
@@ -210,59 +182,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             }
         });
 
-
-
-    }
-
-
-    public void onRadioButtonClicked( View v  ){
-
-       // String category = "";
-        RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
-        RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
-        RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
-        RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
-
-        boolean checked = ((RadioButton ) v).isChecked();
-        switch(v.getId()){
-
-            case R.id.leisurebutton:
-                if (checked)
-                    rb1.setTypeface(null, Typeface.BOLD_ITALIC);
-                //set the other two radio buttons text style to default
-                rb2.setTypeface(null, Typeface.NORMAL);
-
-                rb3.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-
-            case R.id.foodbutton:
-                if(checked)
-                    rb2.setTypeface(null, Typeface.BOLD_ITALIC);
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb3.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-            case R.id.billbutton:
-                if(checked)
-                    rb3.setTypeface(null, Typeface.BOLD_ITALIC);
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb2.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-            case R.id.miscbutton:
-                if(checked)
-                    rb4.setTypeface(null, Typeface.BOLD_ITALIC);
-
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb2.setTypeface(null, Typeface.NORMAL);
-                rb3.setTypeface(null, Typeface.NORMAL);
-
-
-        }
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {

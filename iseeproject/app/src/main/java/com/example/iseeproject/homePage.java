@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ import java.util.Locale;
 public class homePage extends AppCompatActivity {
       //  private Button edit;
     private Button enterExpbtn;
+    private ImageButton menuBtn;
     dbHandler peopleDB;
     String usr = "";
     static String USERPREF = "USER"; // or other values
@@ -93,6 +96,46 @@ public class homePage extends AppCompatActivity {
 
         //add expenses button setup
 
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(homePage.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+
+                            case R.id.HomePage:
+                                goToSettings();
+                                return true;
+
+                            case R.id.Preferences:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.item2:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.logoutBtn:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.item12:
+                                showToast();
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
+
+
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
         enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -116,6 +159,18 @@ public class homePage extends AppCompatActivity {
 
     }
 
+    public void goToSettings() {
+        Intent myIntent = new Intent(this, enterExpenses.class);
+        startActivity(myIntent);
+        finish();
+    }
+
+    public void showToast() {
+        Toast t = Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+
     public void setSessionPreferences() {
         sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
 
@@ -129,12 +184,51 @@ public class homePage extends AppCompatActivity {
     //@Override
 
 
+   /* public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.drawermenu, popup.getMenu());
+        popup.show();
+    }
 
 
+    public void showMenu(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.inflate(R.menu.actions);
+        popup.show();
+    }*/
+
+    /*public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.HomePage:
+                startActivity(new Intent(this,homePage.class));
+                return true;
+
+            case R.id.Preferences:
+                startActivity(new Intent(this,updateDetail.class));
+                return true;
+
+            case  R.id.item2:
+                startActivity(new Intent(this,updateDetail.class));
+                return true;
+
+            case  R.id.logoutBtn:
+                startActivity(new Intent(this,loginActivity.class));
+                return true;
+
+            case  R.id.item12:
+                Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+                return true;
 
 
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
 
-   @Override
+
+   /*@Override
     public boolean  onCreateOptionsMenu(Menu menu){
 
         MenuInflater inflater = getMenuInflater();
@@ -176,9 +270,7 @@ public class homePage extends AppCompatActivity {
                     return super.onOptionsItemSelected(item);
         }
     }
-
-
-
+    */
 
 
 

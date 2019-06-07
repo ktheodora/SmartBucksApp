@@ -27,7 +27,8 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/menuLines"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
                 android:scaleType="fitStart"
@@ -95,154 +96,35 @@
 
         <!--TODO Ensure that only one radio button is checked every time-->
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="left"
-            android:layout_margin="25dp"
-
-            android:paddingRight="50dp"
-            >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/leisureicon"
+                android:id="@+id/catIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/leisure"/>
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/misc" />
 
-            <TextView
-                android:id="@+id/leisuretext"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Leisure"
-                android:layout_marginLeft="8dp"
+            <!--TODO add payment method dropdown list-->
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="20sp"
+                android:layout_weight="1"
                 />
 
-            <RadioButton
-                android:id="@+id/leisurebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:onClick="onRadioButtonClicked"
-
-                 />/>
         </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
-
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/food"/>
-
-        <TextView
-            android:id="@+id/foodtext"
-            android:layout_width="140dp"
-            android:layout_height="30dp"
-            android:text="Food"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center"
-            android:textSize="20sp"/>
-
-        <RadioButton
-            android:id="@+id/foodbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:onClick="onRadioButtonClicked"
-            />/>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-
-            <ImageView
-                android:id="@+id/billIcn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/bill"/>
-
-            <TextView
-                android:id="@+id/billText"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Bill"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-            <RadioButton
-                android:id="@+id/billbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:onClick="onRadioButtonClicked"
-                />/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-
-            <ImageView
-                android:id="@+id/miscIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/misc"/>
-
-            <TextView
-                android:id="@+id/miscText"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Miscellaneous"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-            <RadioButton
-                android:id="@+id/miscbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:onClick="onRadioButtonClicked"
-                />
-        </LinearLayout>
-        </RadioGroup>
 
         <LinearLayout
             android:layout_width="300dp"
