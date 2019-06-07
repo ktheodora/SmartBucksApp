@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.YAxis;
@@ -111,33 +112,7 @@ public class homePage extends AppCompatActivity {
         //we normally use
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         //but for testing purposes we are going to use hardcoded values
-        ArrayList<Entry> yAxes = new ArrayList<>();
-
-        yAxes.add(new Entry(10,0));
-        yAxes.add(new Entry(50,1));
-        yAxes.add(new Entry(40,2));
-        yAxes.add(new Entry(60,3));
-        yAxes.add(new Entry(20,4));
-
-        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
-        lineDataSet.setDrawCircles(true);
-        lineDataSet.setColor(Color.BLUE);
-
-        lineDataSets.add(lineDataSet);
-        //removes xaxes
-        lineChart.setData(new LineData(lineDataSets));
-
-        lineChart.setVisibleXRangeMaximum(65f);
-
-        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
-
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        Description d = new Description();
-        d.setText("Monday");
-        d.setPosition(10,0);
-        d.setTextAlign(Paint.Align.CENTER);
-        lineChart.setDescription(d);
+        setGraphStyle();
 
     }
 
@@ -213,6 +188,36 @@ public class homePage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.apply();
+    }
+
+    public void setGraphStyle() {
+        ArrayList<Entry> yAxes = new ArrayList<>();
+
+        yAxes.add(new Entry(10,0));
+        yAxes.add(new Entry(50,1));
+        yAxes.add(new Entry(40,2));
+        yAxes.add(new Entry(60,3));
+        yAxes.add(new Entry(20,4));
+
+        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
+        lineDataSet.setDrawCircles(true);
+        lineDataSet.setColor(Color.BLUE);
+
+        lineDataSets.add(lineDataSet);
+        //removes xaxes
+        lineChart.setData(new LineData(lineDataSets));
+
+        lineChart.setVisibleXRangeMaximum(65f);
+
+        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        Description d = new Description();
+        d.setText("Monday");
+        d.setPosition(10,0);
+        d.setTextAlign(Paint.Align.CENTER);
+        lineChart.setDescription(d);
     }
 
     public ArrayList<Entry> calculateYaxes(User user) {
