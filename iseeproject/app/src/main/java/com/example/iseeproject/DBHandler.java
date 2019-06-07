@@ -48,7 +48,7 @@ public class DBHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
+//TODO
     //TODO Declare types of categories and payment methods for expenses
 
     @Override
