@@ -167,7 +167,7 @@ public class homePage extends AppCompatActivity {
                 startActivity(new Intent(this,loginActivity.class));
                 return true;
 
-            case  R.id.item1:
+            case  R.id.item12:
                 Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
                 return true;
 
