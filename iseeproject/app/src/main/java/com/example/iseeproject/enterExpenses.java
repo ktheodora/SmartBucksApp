@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.AdapterView;
@@ -31,7 +33,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     String username;
     EditText datepick, amount;
     Calendar myCalendar;
-
+    private ImageButton menuBtn;
     DatePickerDialog.OnDateSetListener date;
 
 
@@ -41,11 +43,11 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
-
-
-        Spinner spinner= (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-
+        List<String> categories1= new ArrayList<>();
+        categories1.add("Leisure");
+        categories1.add("Food");
+        categories1.add("Bill");
+        categories1.add("miscellaneous");
 
 
         List<String> categories = new ArrayList<String>();
@@ -54,13 +56,81 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         categories.add("Online");
 
 
-        // Creating adapter for spinner
+        Spinner spinner= (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
-        // Drop down layout style - list view with radio button
         datAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner.setAdapter(datAdapter);
+        spinner.setOnItemSelectedListener(this);
+
+
+
+
+        Spinner spinner1 =(Spinner)findViewById(R.id.spinnerCategory);
+
+        ArrayAdapter<String> datAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories1);
+        datAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(datAdapter1);
+        spinner1.setOnItemSelectedListener(this);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         peopleDB = new dbHandler(this);
+
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(enterExpenses.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+
+                            case R.id.HomePage:
+                                goToSettings();
+                                return true;
+
+                            case R.id.Preferences:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.item2:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.logoutBtn:
+                                goToSettings();
+                                return true;
+
+                            case  R.id.item12:
+                                showToast();
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
+
+
+
+
+
 
         Bundle b = getIntent().getExtras();
         if (b != null)
@@ -102,7 +172,12 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
 
-        });
+        }
+
+
+
+
+        );
 
 
 
@@ -184,6 +259,17 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
     }
+    public void goToSettings() {
+        Intent myIntent = new Intent(this, enterExpenses.class);
+        startActivity(myIntent);
+        finish();
+    }
+
+    public void showToast() {
+        Toast t = Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+        t.show();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.drawermenu, menu);
@@ -217,13 +303,25 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
 
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+       if (parent.getId() == R.id.spinner) {
+           // On selecting a spinner item
+           String item = parent.getItemAtPosition(position).toString();
+           // Showing selected spinner item
+           Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+       }
+       else if(parent.getId() == R.id.spinnerCategory){
+           // On selecting a spinner item
+           String item1 = parent.getItemAtPosition(position).toString();
+           // Showing selected spinner item
+           Toast.makeText(parent.getContext(), "Selected: " + item1, Toast.LENGTH_LONG).show();
+       }
+
+
 
     }
+
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
