@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listActivity">
+    tools:context="com.example.iseeproject.listActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/wallnew"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/menuLines"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:padding="1dp"
+            app:srcCompat="@drawable/menu_lines"
+            />
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:layout_marginLeft="20dp"
+            android:text="@string/officialname"
+            android:textColor="#ffffff"
+            android:textSize="50sp" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/ourlogo" />
+
+    </LinearLayout>
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="Back"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

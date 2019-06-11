@@ -7,15 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.iseeproject.homePage">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -215,40 +206,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:gravity = "center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/extraIncomeIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/budgeticon" />
-
-            <TextView
-                android:id="@+id/extraIncomeText"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Extra Income"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/extraIncomeView"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:inputType=""
-                android:hint="0.00"
-                android:textSize="20sp"/>
-
-
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/Weekly"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="Weekly"
+            android:textSize="15sp" />
+        <Button
+            android:id="@+id/Monthly"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="Monthly"
+            android:textSize="15sp" />
+    </LinearLayout>
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
@@ -257,7 +232,11 @@
             android:background="#ffffff"
             >
             </com.github.mikephil.charting.charts.LineChart>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity = "center"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/addExpenses"
             android:layout_width="150dp"
@@ -265,6 +244,23 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="Add Expenses"
+            android:textSize="15sp" />
+        <Button
+            android:id="@+id/addIncome"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Add Income"
+            android:textSize="15sp" />
+    </LinearLayout>
+        <Button
+            android:id="@+id/showExpenses"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Show All Expenses"
             android:textSize="15sp" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

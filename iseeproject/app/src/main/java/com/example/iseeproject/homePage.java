@@ -95,7 +95,18 @@ public class homePage extends AppCompatActivity {
         savingsView.setText(String.valueOf(savings));
 
         //add expenses button setup
+        Button showExp = (Button) findViewById(R.id.showExpenses);
+        showExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(homePage.this, listActivity.class);
+                Bundle b = new Bundle();
+                b.putString("username",usr);
 
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+            }
+        });
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -144,7 +155,7 @@ public class homePage extends AppCompatActivity {
         });
 
         lineChart = (LineChart)findViewById(R.id.lineChart);
-        setGraphStyle();
+        setGraphStyle(userr);
         //we normally use
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         //but for testing purposes we are going to use hardcoded values
@@ -207,16 +218,12 @@ public class homePage extends AppCompatActivity {
         editor.apply();
     }
 
-    public void setGraphStyle() {
-        ArrayList<Entry> yAxes = new ArrayList<>();
 
-        yAxes.add(new Entry(10,0));
-        yAxes.add(new Entry(50,1));
-        yAxes.add(new Entry(40,2));
-        yAxes.add(new Entry(60,3));
-        yAxes.add(new Entry(20,4));
+    public void setGraphStyle(User userr) {
 
-        LineDataSet lineDataSet = new LineDataSet(yAxes,"expenses per day");
+        ArrayList<Entry> xyCoord = calculateAxes(userr);
+
+        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
         lineDataSet.setDrawCircles(true);
         lineDataSet.setColor(Color.BLUE);
 
@@ -226,7 +233,7 @@ public class homePage extends AppCompatActivity {
 
         lineChart.setVisibleXRangeMaximum(65f);
 
-        lineChart.setVisibleYRangeMaximum(8F, YAxis.AxisDependency.LEFT);
+        lineChart.setVisibleYRangeMaximum(100, YAxis.AxisDependency.LEFT);
 
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);
@@ -237,38 +244,38 @@ public class homePage extends AppCompatActivity {
         lineChart.setDescription(d);
     }
 
-    public ArrayList<Entry> calculateYaxes(User user) {
+    public ArrayList<Entry> calculateAxes(User user) {
         ArrayList<Entry> xyCoord = new ArrayList<>();
-
         //setting up the calendar dates of this week
         LocalDate now = LocalDate.now();
         TemporalField fieldISO = WeekFields.of(Locale.GERMANY).dayOfWeek();
         System.out.println(now.with(fieldISO, 1));
 
         //getting the expenses and their dates
-        List<Expenses> expenses = peopleDB.getAllExpenses(user);
-        double daysum=0;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        formatter = formatter.withLocale(Locale.GERMANY);
-        LocalDate expdate;
+        if (peopleDB.expensesExist(user)) {
+            List<Expenses> expenses = peopleDB.getAllExpenses(user);
+            double daysum = 0;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            formatter = formatter.withLocale(Locale.GERMANY);
+            LocalDate expdate;
 
-        for (int i = 1; i <= 7; i++ )
-        {
-            //i presents monday for 1, tuesday for 2 etc
-            LocalDate d = now.with(fieldISO, i);//get week date
-            for (Expenses exp : expenses) {
-                //search all expenses and add to the one of this day of the week
-                expdate = LocalDate.parse( exp.getExpenseTime(), formatter);
-                if (d.isEqual(expdate)) {
-                    daysum += exp.getPrice();
+            for (int i = 1; i <= 7; i++) {
+                //i presents monday for 1, tuesday for 2 etc
+                LocalDate d = now.with(fieldISO, i);//get week date
+                for (Expenses exp : expenses) {
+                    //search all expenses and add to the one of this day of the week
+                    expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                    if (d.isEqual(expdate)) {
+                        daysum += exp.getPrice();
+                    }
                 }
+                //after all expenses of the day are added,
+                //add this as a new entry to the LineGraph
+                float x = (float) (i-1);//bc x starts from 1
+                float y = (float) daysum;
+                xyCoord.add(new Entry(x, y));
+                daysum = 0;//make daysum 0 again for the next day
             }
-            //after all expenses of the day are added,
-            //add this as a new entry to the LineGraph
-            float x = (float)daysum;
-            float y = (float)(i-1);//because y axes start from 0
-            xyCoord.add(new Entry(x,y));
-            daysum = 0;//make daysum 0 again for the next day
         }
         return xyCoord;
     }

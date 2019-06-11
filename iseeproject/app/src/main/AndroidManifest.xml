@@ -15,17 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".listActivity"></activity>
         <activity android:name=".lineGraph" />
         <activity android:name=".preferencesActivity" />
-        <activity android:name="com.example.iseeproject.welcomeUser" />
+        <activity android:name=".welcomeUser" />
         <activity android:name=".loginActivity" />
         <activity android:name=".enterExpenses" />
         <activity android:name=".updateDetail" />
         <activity android:name=".createAccount" />
         <activity android:name=".homePage" />
-        <activity android:name="com.example.iseeproject.mainActivity">
+        <activity android:name=".mainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
