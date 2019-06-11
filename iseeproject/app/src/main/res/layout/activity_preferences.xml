@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".preferencesActivity">
+    tools:context="com.example.iseeproject.preferencesActivity">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"

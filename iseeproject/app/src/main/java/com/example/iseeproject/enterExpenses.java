@@ -1,7 +1,9 @@
 package com.example.iseeproject;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,10 +35,10 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     String username;
     EditText datepick, amount;
     Calendar myCalendar;
+    static String USERPREF = "USER"; // or other values
     private ImageButton menuBtn;
+    Spinner spinner,spinner1;
     DatePickerDialog.OnDateSetListener date;
-
-
 
 
     @Override
@@ -56,35 +58,18 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         categories.add("Online");
 
 
-        Spinner spinner= (Spinner) findViewById(R.id.spinner);
+        spinner= (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
         datAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(datAdapter);
         spinner.setOnItemSelectedListener(this);
 
-
-
-
-        Spinner spinner1 =(Spinner)findViewById(R.id.spinnerCategory);
+        spinner1 =(Spinner)findViewById(R.id.spinnerCategory);
 
         ArrayAdapter<String> datAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories1);
         datAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(datAdapter1);
         spinner1.setOnItemSelectedListener(this);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         peopleDB = new dbHandler(this);
 
@@ -98,23 +83,23 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                         switch (item.getItemId()){
 
                             case R.id.HomePage:
-                                goToSettings();
+                                goToHomepage();
                                 return true;
 
                             case R.id.Preferences:
-                                goToSettings();
+                                showToast("Preferences under construction");
                                 return true;
 
                             case  R.id.item2:
-                                goToSettings();
+                                goToDetails();
                                 return true;
 
                             case  R.id.logoutBtn:
-                                goToSettings();
+                                logout();
                                 return true;
 
                             case  R.id.item12:
-                                showToast();
+                                showToast("FAQ under construction");
                                 return true;
 
                             default:
@@ -126,11 +111,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 popup.show();
             }
         });
-
-
-
-
-
 
         Bundle b = getIntent().getExtras();
         if (b != null)
@@ -174,13 +154,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
         }
 
-
-
-
         );
-
-
-
 
         //we set the button behaviour
         Button confirmbtn = (Button) findViewById(R.id.confirmBtn);
@@ -202,80 +176,87 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                         t.show();
                 }
                 else {
-                    User user = peopleDB.getUser(username);
-                    //get sum of money spent in expenses
-                    double sum = 0;
-                    if (peopleDB.expensesExist(user)) {
-                        List<Expenses> exp = peopleDB.getAllExpenses(user);
-                        for (Expenses expense : exp) {
-                            sum += expense.getPrice();
-                        }
-                    }
-                    double expAmount = Double.parseDouble(amount.getText().toString());
-                    //if current expense price sumed with the already existing expenses is higher than budget
-                    //then show toast message
-                    if (user.getBudget() <= sum + expAmount) {
-                        Toast t = Toast.makeText(enterExpenses.this,
-                                "Expenses entered overcome savings", Toast.LENGTH_LONG);
-                        t.show();
-                    }
-                    else {//move on with the addtion of the expense to the database
-                        String additionTime = peopleDB.getCurrDate();
-                        String expenseTime = datepick.getText().toString();
-
-
-                        //adding temporarily a default chosen payment method
-                        String payment_method = "CASH";
-
-                        //creating the expense instance and adding it to the database
-                        Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
-
-                        peopleDB.addExpenses(newExpense);
-
-                        // Start NewActivity.class
-                        Intent myIntent = new Intent(enterExpenses.this,
-                                homePage.class);
-
-                        Bundle b = new Bundle();
-                        b.putString("username",username);
-                        myIntent.putExtras(b); //Put your id to your next Intent
-                        startActivity(myIntent);
-                    }
+                    checkInput();
                 }
             }
         });
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                Intent myIntent = new Intent(enterExpenses.this,
-                        homePage.class);
-                Bundle b = getIntent().getExtras();
-                username = b.getString("username");
-                myIntent.putExtras(b);
-                startActivity(myIntent);
-                finish();
+                goToHomepage();
             }
         });
 
 
     }
-    public void goToSettings() {
-        Intent myIntent = new Intent(this, enterExpenses.class);
-        startActivity(myIntent);
-        finish();
+
+    public void checkInput() {
+        User user = peopleDB.getUser(username);
+        //get sum of money spent in expenses
+        double sum = 0;
+        if (peopleDB.expensesExist(user)) {
+            List<Expenses> exp = peopleDB.getAllExpenses(user);
+            for (Expenses expense : exp) {
+                sum += expense.getPrice();
+            }
+        }
+        double expAmount = Double.parseDouble(amount.getText().toString());
+        //if current expense price sumed with the already existing expenses is higher than budget
+        //then show toast message
+        if (user.getBudget() <= sum + expAmount) {
+            Toast t = Toast.makeText(enterExpenses.this,
+                    "Expenses entered overcome savings", Toast.LENGTH_LONG);
+            t.show();
+        }
+        else {//move on with the addtion of the expense to the database
+            String additionTime = peopleDB.getCurrDate();
+            String expenseTime = datepick.getText().toString();
+
+            //get values of spinners
+            String payment_method = spinner.getSelectedItem().toString();
+            String category = spinner1.getSelectedItem().toString();
+
+            //creating the expense instance and adding it to the database
+            Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
+
+            peopleDB.addExpenses(newExpense);
+
+           goToHomepage();
+        }
     }
 
-    public void showToast() {
-        Toast t = Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+    public void goToHomepage() {
+        Intent myIntent = new Intent(enterExpenses.this, homePage.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void goToDetails() {
+        Intent myIntent = new Intent(enterExpenses.this, updateDetail.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void showToast(String text) {
+        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
         t.show();
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawermenu, menu);
-        return true;
+    public void logout() {
+        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+        //then redirect to initial activity
+        Intent myIntent = new Intent(enterExpenses.this, mainActivity.class);
+        startActivity(myIntent);
     }
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -292,10 +273,8 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     }
 
 
-
-
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
 
         datepick.setText(sdf.format(myCalendar.getTime()));

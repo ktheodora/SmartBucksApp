@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".homePage">
+    tools:context="com.example.iseeproject.homePage">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
@@ -265,7 +265,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="Add Expenses"
-            android:onClick="showPopup"
             android:textSize="15sp" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

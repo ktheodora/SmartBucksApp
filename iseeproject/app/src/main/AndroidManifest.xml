@@ -17,19 +17,18 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".lineGraph" />
         <activity android:name=".preferencesActivity" />
-        <activity android:name=".welcomeUser">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.example.iseeproject.welcomeUser" />
         <activity android:name=".loginActivity" />
         <activity android:name=".enterExpenses" />
         <activity android:name=".updateDetail" />
         <activity android:name=".createAccount" />
         <activity android:name=".homePage" />
-        <activity android:name=".mainActivity" />
+        <activity android:name="com.example.iseeproject.mainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

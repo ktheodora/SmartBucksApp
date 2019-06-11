@@ -172,7 +172,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 Double.parseDouble(cursor.getString(5)), Double.parseDouble(cursor.getString(6)),
                 Double.parseDouble(cursor.getString(7)), Double.parseDouble(cursor.getString(8)));
 
-
+        cursor.close();
         return user;
 
     }

@@ -106,23 +106,23 @@ public class homePage extends AppCompatActivity {
                         switch (item.getItemId()){
 
                             case R.id.HomePage:
-                                goToSettings();
+                                goToHomepage();
                                 return true;
 
                             case R.id.Preferences:
-                                goToSettings();
+                                showToast("Preferences under construction");
                                 return true;
 
                             case  R.id.item2:
-                                goToSettings();
+                                goToDetails();
                                 return true;
 
                             case  R.id.logoutBtn:
-                                goToSettings();
+                                logout();
                                 return true;
 
                             case  R.id.item12:
-                                showToast();
+                                showToast("FAQ under construction");
                                 return true;
 
                             default:
@@ -139,35 +139,61 @@ public class homePage extends AppCompatActivity {
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
         enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                //Intent myIntent = new Intent(homePage.this, enterExpenses.class);
-                //starting line graph activitiy here for testing reasons
-                Intent myIntent = new Intent(homePage.this, enterExpenses.class);
-                Bundle b = new Bundle();
-                b.putString("username",usr);
-
-                myIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(myIntent);
+                goToExpenses();
             }
         });
 
         lineChart = (LineChart)findViewById(R.id.lineChart);
-
+        setGraphStyle();
         //we normally use
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         //but for testing purposes we are going to use hardcoded values
-        setGraphStyle();
 
     }
 
-    public void goToSettings() {
-        Intent myIntent = new Intent(this, enterExpenses.class);
+    //methods for redirecting
+
+    public void goToHomepage() {
+        Intent myIntent = new Intent(homePage.this, homePage.class);
+        Bundle b = new Bundle();
+        b.putString("username",usr);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
-        finish();
     }
 
-    public void showToast() {
-        Toast t = Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
+    public void goToDetails() {
+        Intent myIntent = new Intent(homePage.this, updateDetail.class);
+        Bundle b = new Bundle();
+        b.putString("username",usr);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+
+    public void showToast(String text) {
+        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
         t.show();
+    }
+
+    public void logout() {
+        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+        //then redirect to initial activity
+        Intent myIntent = new Intent(homePage.this, mainActivity.class);
+        startActivity(myIntent);
+    }
+
+    public void goToExpenses() {
+        Intent myIntent = new Intent(homePage.this, enterExpenses.class);
+        Bundle b = new Bundle();
+        b.putString("username",usr);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
     }
 
 
@@ -178,107 +204,6 @@ public class homePage extends AppCompatActivity {
 
         editor.putString("username", usr);
 
-        editor.apply();
-    }
-
-    //@Override
-
-
-   /* public void showPopup(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.drawermenu, popup.getMenu());
-        popup.show();
-    }
-
-
-    public void showMenu(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.inflate(R.menu.actions);
-        popup.show();
-    }*/
-
-    /*public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
-
-            case R.id.HomePage:
-                startActivity(new Intent(this,homePage.class));
-                return true;
-
-            case R.id.Preferences:
-                startActivity(new Intent(this,updateDetail.class));
-                return true;
-
-            case  R.id.item2:
-                startActivity(new Intent(this,updateDetail.class));
-                return true;
-
-            case  R.id.logoutBtn:
-                startActivity(new Intent(this,loginActivity.class));
-                return true;
-
-            case  R.id.item12:
-                Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
-                return true;
-
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
-
-
-   /*@Override
-    public boolean  onCreateOptionsMenu(Menu menu){
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawermenu,menu);
-        return true;
-    }
-
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //  preparation code here
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-
-    public boolean onOptionsItemSelected(final MenuItem item){
-        switch (item.getItemId()){
-
-            case R.id.HomePage:
-               startActivity(new Intent(this,homePage.class));
-                return true;
-
-            case R.id.Preferences:
-                startActivity(new Intent(this,updateDetail.class));
-                return true;
-
-            case  R.id.item2:
-                startActivity(new Intent(this,updateDetail.class));
-                return true;
-
-            case  R.id.logoutBtn:
-                startActivity(new Intent(this,loginActivity.class));
-                return true;
-
-            case  R.id.item12:
-                Toast.makeText(this,"We wil help you shortly",Toast.LENGTH_SHORT);
-                return true;
-
-
-                default:
-                    return super.onOptionsItemSelected(item);
-        }
-    }
-    */
-
-
-
-
-    public void logout() {
-        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
         editor.apply();
     }
 
@@ -323,7 +248,7 @@ public class homePage extends AppCompatActivity {
         //getting the expenses and their dates
         List<Expenses> expenses = peopleDB.getAllExpenses(user);
         double daysum=0;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         formatter = formatter.withLocale(Locale.GERMANY);
         LocalDate expdate;
 
@@ -346,33 +271,6 @@ public class homePage extends AppCompatActivity {
             daysum = 0;//make daysum 0 again for the next day
         }
         return xyCoord;
-    }
-
-
-    //TODO functions for stats and graphs of homepage
-    //public expProg
-
-    public void calculate() {
-        //TODO Seperate function for calculating extra expenses
-
-        /*List<Expenses> exp = peopleDB.getAllExpenses(user);
-        double foodcount, leiscount, medcount, billscount;
-        double totalexpamount;
-        for each(expense :exp){
-        extra_exp += expense.getPrice();
-
-        if (expense.getCategory() == "Food") {
-            foodcount += expense.getPrice();
-        } else if (expense.getCategory() == "Leisure") {
-            leiscount += expense.getPrice();
-        }
-        totalexpamount += expense.getPrice();
-    }
-
-        double food perc = (foodcount / totalexpamount) * 100;
-        ProgressView pg (ProgressView)findViewById(R.id.ProgViewFood);
-        pg.set
-            */
     }
 
 }

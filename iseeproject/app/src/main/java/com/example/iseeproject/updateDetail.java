@@ -1,12 +1,17 @@
 package com.example.iseeproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class updateDetail extends AppCompatActivity {
@@ -17,6 +22,8 @@ public class updateDetail extends AppCompatActivity {
     double Insurance =0;
     String username ;
     dbHandler peopleDB;
+    static String USERPREF = "USER"; // or other values
+    private ImageButton menuBtn;
     User usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +38,7 @@ public class updateDetail extends AppCompatActivity {
         if (b != null)
             username = b.getString("username");
 
-        User usr = peopleDB.getUser(username);
+        usr = peopleDB.getUser(username);
 
         update=(Button)findViewById(R.id.finButton);
         update.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +47,81 @@ public class updateDetail extends AppCompatActivity {
                 updated(Income,Rent,Bills,Insurance);
             }
         });
+
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(updateDetail.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+
+                            case R.id.HomePage:
+                                goToHomepage();
+                                return true;
+
+                            case R.id.Preferences:
+                                showToast("Preferences under construction");
+                                return true;
+
+                            case  R.id.item2:
+                                goToDetails();
+                                return true;
+
+                            case  R.id.logoutBtn:
+                                logout();
+                                return true;
+
+                            case  R.id.item12:
+                                showToast("FAQ under construction");
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
+
     }
+
+    public void goToHomepage() {
+        Intent myIntent = new Intent(updateDetail.this, homePage.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void goToDetails() {
+        Intent myIntent = new Intent(updateDetail.this, updateDetail.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void showToast(String text) {
+        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void logout() {
+        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+        //then redirect to initial activity
+        Intent myIntent = new Intent(updateDetail.this, mainActivity.class);
+        startActivity(myIntent);
+    }
+
 
     //TODO Double parsed Text Views
     //TODO Fix beackend to correspond with frontend
@@ -84,8 +165,6 @@ public class updateDetail extends AppCompatActivity {
                 t.show();
             }
             else {
-
-
                 // Start NewActivity.class
                 Intent myIntent = new Intent(updateDetail.this,
                         homePage.class);
