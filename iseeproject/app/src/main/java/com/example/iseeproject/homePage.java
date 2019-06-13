@@ -280,6 +280,4 @@ public class homePage extends AppCompatActivity {
         }
         return xyCoord;
     }
-
-
 }
