@@ -92,6 +92,35 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:id="@+id/monthlybud"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/coin" />
+
+            <EditText
+                android:id="@+id/entBud"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="Monthly Income"
+                android:inputType="numberDecimal"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
             android:layout_marginTop="10dp">
 
             <ImageView

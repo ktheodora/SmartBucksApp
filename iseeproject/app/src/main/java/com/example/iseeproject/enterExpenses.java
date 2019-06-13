@@ -101,7 +101,9 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                             case  R.id.item12:
                                 showToast("FAQ under construction");
                                 return true;
-
+                            case R.id.report:
+                                showToast("Report under construction");
+                                return true;
                             default:
                                 return false;
                         }

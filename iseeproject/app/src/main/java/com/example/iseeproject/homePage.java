@@ -135,7 +135,9 @@ public class homePage extends AppCompatActivity {
                             case  R.id.item12:
                                 showToast("FAQ under construction");
                                 return true;
-
+                            case R.id.report:
+                                showToast("Report under construction");
+                                return true;
                             default:
                                 return false;
                         }
@@ -218,7 +220,6 @@ public class homePage extends AppCompatActivity {
         editor.apply();
     }
 
-
     public void setGraphStyle(User userr) {
 
         ArrayList<Entry> xyCoord = calculateAxes(userr);
@@ -279,5 +280,6 @@ public class homePage extends AppCompatActivity {
         }
         return xyCoord;
     }
+
 
 }
