@@ -2,11 +2,16 @@ package com.example.iseeproject;
 
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +34,13 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalField;
@@ -48,6 +59,7 @@ public class homePage extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     LineChart lineChart;
     ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +112,17 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(homePage.this, listActivity.class);
-                Bundle b = new Bundle();
-                b.putString("username",usr);
-
-                myIntent.putExtras(b); //Put your id to your next Intent
+//                Bundle b = new Bundle();
+//                b.putString("username",usr);
+//
+//                myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
         });
+
+
+
+
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -136,7 +152,9 @@ public class homePage extends AppCompatActivity {
                                 showToast("FAQ under construction");
                                 return true;
                             case R.id.report:
-                                showToast("Report under construction");
+                                //smartBucksReport();
+                                Permission();
+
                                 return true;
                             default:
                                 return false;
@@ -147,6 +165,9 @@ public class homePage extends AppCompatActivity {
                 popup.show();
             }
         });
+
+
+
 
 
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
@@ -162,6 +183,83 @@ public class homePage extends AppCompatActivity {
         //ArrayList<Entry> xyCoord = calculateYaxes(user);
         //but for testing purposes we are going to use hardcoded values
 
+    }
+
+
+    private void smartBucksReport() {
+
+        Document myPdfDocument = new Document();
+        //pdf filename
+        String myFilename = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(System.currentTimeMillis());
+        //pdf path
+        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + myFilename + ".pdf";
+
+        try {
+            //Create instance of PdfWriter class and open pdf
+            PdfWriter.getInstance(myPdfDocument, new FileOutputStream(myFilePath));
+            myPdfDocument.open();
+            //get transactions from databaase
+            peopleDB = new dbHandler(this);
+
+            ArrayList<Expenses> expensesList = peopleDB.getExpenses();
+            myPdfDocument.addAuthor("Pawan Kumar");
+            Paragraph p3 = new Paragraph();
+            p3.add("SmartBucks Report\n");
+            try {
+                myPdfDocument.add(p3);
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+            PdfPTable table = new PdfPTable(4);
+
+            table.addCell("Date");
+            table.addCell("Amount");
+            table.addCell("Category");
+            table.addCell("Payment_Method");
+
+
+            for (int i = 0; i < expensesList.size(); i++) {
+
+                table.addCell(expensesList.get(i).getExpenseTime());
+                table.addCell(Double.toString(expensesList.get(i).getPrice()));
+                table.addCell(expensesList.get(i).getCategory());
+                table.addCell(expensesList.get(i).getPaymentMethod());
+
+            }
+
+            try {
+                myPdfDocument.add(table);
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+            myPdfDocument.addCreationDate();
+            myPdfDocument.close();
+            Toast.makeText(this, myFilename + ".pdf\nis saved to\n" + myFilePath, Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+
+            //if anything goes wrong ,get and show up exception
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void Permission() {
+        int STORAGE_CODE = 1000;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            //System OS >= Marshmellow (6.0), check if permission enabled
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+
+                //Permission not granted request it now
+                String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permission, STORAGE_CODE);
+
+            } else {
+                //permission already granted
+                smartBucksReport();
+
+            }
+
+        }
     }
 
     //methods for redirecting

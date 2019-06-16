@@ -146,19 +146,43 @@ public class dbHandler extends SQLiteOpenHelper {
 
     }
 
+
+
+
     public void addExpenses(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ADDTIME , exp.getAdditionTime());
+        //values.put(KEY_ADDTIME , exp.getAdditionTime());
         values.put(KEY_REALTIME ,exp.getExpenseTime());
-        values.put(KEY_USN, exp.getUsername());
+        //values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CATEGORY, exp.getCategory());
         values.put(KEY_PAYMENT,exp.getPaymentMethod());
 
         db.insert(TABLE_EXPENSES, null, values);
         db.close(); // Closing database connection
+
+
     }
+
+    public ArrayList<Expenses> getExpenses(){
+        SQLiteDatabase ab = this.getWritableDatabase();
+        ArrayList<Expenses> expenselist = new ArrayList<>();
+        String expensequery = "SELECT expense_time,price,category,payment_method FROM " +TABLE_EXPENSES;
+        Cursor cursor= ab.rawQuery(expensequery,null);
+
+        while(cursor.moveToNext()){
+            Expenses exp = new Expenses();
+            exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
+            exp.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
+            exp.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CATEGORY)));
+            exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
+            expenselist.add(exp);
+
+        }
+        return expenselist;
+    }
+
 
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -240,8 +264,9 @@ public class dbHandler extends SQLiteOpenHelper {
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                exp.setUsername(cursor.getString(0));
+               // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
+             Expenses exp = new Expenses();
+                exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
                 expList.add(exp);
             } while (cursor.moveToNext());
         }

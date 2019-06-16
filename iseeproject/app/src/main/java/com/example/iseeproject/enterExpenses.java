@@ -211,17 +211,24 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             t.show();
         }
         else {//move on with the addtion of the expense to the database
-            String additionTime = peopleDB.getCurrDate();
-            String expenseTime = datepick.getText().toString();
-
-            //get values of spinners
-            String payment_method = spinner.getSelectedItem().toString();
-            String category = spinner1.getSelectedItem().toString();
-
-            //creating the expense instance and adding it to the database
-            Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
-
-            peopleDB.addExpenses(newExpense);
+            Expenses newExenses = new Expenses();
+            //newExenses.setAdditionTime(peopleDB.getCurrDate());
+            newExenses.setPrice(expAmount);
+            newExenses.setExpenseTime(datepick.getText().toString());
+            newExenses.setPaymentMethod(spinner.getSelectedItem().toString());
+            newExenses.setCategory(spinner1.getSelectedItem().toString());
+            peopleDB.addExpenses(newExenses);
+//            String additionTime = peopleDB.getCurrDate();
+//            String expenseTime = datepick.getText().toString();
+//
+//            //get values of spinners
+//            String payment_method = spinner.getSelectedItem().toString();
+//            String category = spinner1.getSelectedItem().toString();
+//
+//            //creating the expense instance and adding it to the database
+//            Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
+//
+//            peopleDB.addExpenses(newExpense);
 
            goToHomepage();
         }
