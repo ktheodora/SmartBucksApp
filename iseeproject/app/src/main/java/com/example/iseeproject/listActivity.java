@@ -17,6 +17,7 @@ public class listActivity extends AppCompatActivity {
 
     ListView expenselistview;
     dbHandler dbhandler;
+    String usr = "";
 
 
     String username;
@@ -24,11 +25,19 @@ public class listActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        dbhandler = new dbHandler(this);
+        Bundle b = getIntent().getExtras();
+
+        if (b != null) {
+            usr = b.getString("username");
+        }
+
+        User userr = dbhandler.getUser(usr);
 
 
         expenselistview = findViewById(R.id.expenseLV);
         dbhandler = new dbHandler(this);
-        ArrayList<Expenses>  explist = dbhandler.getExpenses();
+        ArrayList<Expenses>  explist = dbhandler.getAllExpenses(userr);
 
         ArrayList<HashMap<String,String>> myMapList = new ArrayList<>();
         for(int i=0; i<explist.size();i++){
@@ -46,11 +55,6 @@ public class listActivity extends AppCompatActivity {
                 new int[]{R.id.textviewdate,R.id.textviewamount,R.id.textviewcategory,R.id.textviewpaymenttype});
         expenselistview.setAdapter(adapter);
 
-        Bundle b = getIntent().getExtras();
-
-        if (b != null) {
-            username = b.getString("username");
-        }
 
         Button back = (Button) findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +62,7 @@ public class listActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(listActivity.this, homePage.class);
                 Bundle b = new Bundle();
-                b.putString("username",username);
+                b.putString("username",usr);
 
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);

@@ -272,7 +272,7 @@ public class dbHandler extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<Expenses> getExpenses(){
+    /*public ArrayList<Expenses> getExpenses(){
         SQLiteDatabase ab = this.getWritableDatabase();
         ArrayList<Expenses> expenselist = new ArrayList<>();
         String expensequery = "SELECT expense_time,price,category,payment_method FROM " +TABLE_EXPENSES;
@@ -288,14 +288,14 @@ public class dbHandler extends SQLiteOpenHelper {
 
         }
         return expenselist;
-    }
+    }*/
 
 
-    public List<Expenses> getAllExpenses(User user) {
-        List<Expenses> expList = new ArrayList<Expenses>();
+    public ArrayList<Expenses> getAllExpenses(User user) {
+        ArrayList<Expenses> expList = new ArrayList<Expenses>();
 // Select All Query
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
+        //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, null, null);
 
@@ -304,7 +304,9 @@ public class dbHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                Expenses exp = new Expenses();
+                Expenses exp = new Expenses(cursor.getString(0), cursor.getString(1),
+                        cursor.getString(2), Double.parseDouble(cursor.getString(3)),
+                        cursor.getString(4),  cursor.getString(5));
                 exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
                 //exp.setUsername(cursor.getString(0));
                 expList.add(exp);
@@ -313,6 +315,5 @@ public class dbHandler extends SQLiteOpenHelper {
         cursor.close();
         return expList;
     }
-
 
 }

@@ -55,6 +55,7 @@ public class homePage extends AppCompatActivity {
     private ImageButton menuBtn;
     dbHandler peopleDB;
     String usr = "";
+    User userr;
     static String USERPREF = "USER"; // or other values
     SharedPreferences sharedpreferences;
     LineChart lineChart;
@@ -75,7 +76,7 @@ public class homePage extends AppCompatActivity {
             usr = b.getString("username");
         }
 
-        User userr = peopleDB.getUser(usr);
+        userr = peopleDB.getUser(usr);
 
         //Set values of Text Views in homePage
 
@@ -94,7 +95,7 @@ public class homePage extends AppCompatActivity {
         double sum=0;
         if (peopleDB.expensesExist(userr)) {
             //if user has entered at least one expense
-            List<Expenses> exp = peopleDB.getAllExpenses(userr);
+            ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
             for (Expenses expense : exp) {
                 sum+=expense.getPrice();
             }
@@ -112,10 +113,9 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(homePage.this, listActivity.class);
-//                Bundle b = new Bundle();
-//                b.putString("username",usr);
-//
-//                myIntent.putExtras(b); //Put your id to your next Intent
+                Bundle b = new Bundle();
+               b.putString("username",usr);
+                myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
         });
@@ -202,7 +202,7 @@ public class homePage extends AppCompatActivity {
             //get transactions from databaase
             peopleDB = new dbHandler(this);
 
-            ArrayList<Expenses> expensesList = peopleDB.getExpenses();
+            ArrayList<Expenses> expensesList = peopleDB.getAllExpenses(userr);
             myPdfDocument.addAuthor("Pawan Kumar");
             Paragraph p3 = new Paragraph();
             p3.add("SmartBucks Report\n");
@@ -330,7 +330,7 @@ public class homePage extends AppCompatActivity {
         //removes xaxes
         lineChart.setData(new LineData(lineDataSets));
 
-        lineChart.setVisibleXRangeMaximum(65f);
+        lineChart.setVisibleXRangeMaximum(80);
 
         lineChart.setVisibleYRangeMaximum(100, YAxis.AxisDependency.LEFT);
 

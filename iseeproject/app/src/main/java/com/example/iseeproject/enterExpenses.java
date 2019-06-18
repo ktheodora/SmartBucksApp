@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -216,14 +217,13 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             t.show();
         }
         else {//move on with the addtion of the expense to the database
-            Expenses newExenses = new Expenses();
+
+            Expenses newExpenses = new Expenses(LocalDate.now().toString(), datepick.getText().toString(),
+                   username, expAmount, spinner1.getSelectedItem().toString(), spinner.getSelectedItem().toString());
             //newExenses.setAdditionTime(peopleDB.getCurrDate());
-            newExenses.setPrice(expAmount);
-            newExenses.setExpenseTime(datepick.getText().toString());
-            newExenses.setPaymentMethod(spinner.getSelectedItem().toString());
-            newExenses.setCategory(spinner1.getSelectedItem().toString());
-            peopleDB.addExpenses(newExenses);
-//            String additionTime = peopleDB.getCurrDate();
+
+            peopleDB.addExpenses(newExpenses);
+//            String additionTime = LocalDate.now().toString();
 //            String expenseTime = datepick.getText().toString();
 //
 //            //get values of spinners
