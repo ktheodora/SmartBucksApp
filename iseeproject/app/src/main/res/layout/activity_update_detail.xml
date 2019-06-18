@@ -22,7 +22,10 @@
                 android:id="@+id/menuLines"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:scaleType="fitStart"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:padding="1dp"
                 app:srcCompat="@drawable/menu_lines"
                 />
 
@@ -55,15 +58,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_gravity="center"
-            android:text="@string/update_details"
-            android:textSize="25sp"
+            android:text="Update Basic Details"
+            android:textSize="20sp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:id="@+id/monthlyinc"
@@ -92,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            >
 
             <ImageView
                 android:id="@+id/monthlybud"
@@ -110,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Monthly Income"
+                android:hint="Monthly Budget"
                 android:inputType="numberDecimal"
                 android:textSize="20sp"
                 />
@@ -202,13 +205,53 @@
                 />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/newExpCatLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:text="Create new expense category:"
+            android:textSize="20sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+
+
+            <ImageView
+                android:id="@+id/caticon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/drop" />
+
+            <EditText
+                android:id="@+id/entCat"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="New Category Name"
+                android:inputType="numberDecimal"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
 
 
         <Button
         android:id="@+id/finButton"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:text="@string/finish"
         android:layout_gravity="center"
         android:textSize="15sp"/>

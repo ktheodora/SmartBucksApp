@@ -25,6 +25,7 @@ import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -45,11 +46,15 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
-        List<String> categories1= new ArrayList<>();
+        dbHandler db = new dbHandler(this);
+        //getting expenses categories names from database and avoiding hardcoded values
+        List<String> categories1= Arrays.asList(db.getCategoriesNames());
+
+        /*List<String> categories1= new ArrayList<>();
         categories1.add("Leisure");
         categories1.add("Food");
         categories1.add("Bill");
-        categories1.add("miscellaneous");
+        categories1.add("miscellaneous");*/
 
 
         List<String> categories = new ArrayList<String>();

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class dbHandler extends SQLiteOpenHelper {
@@ -28,6 +29,7 @@ public class dbHandler extends SQLiteOpenHelper {
     // Contacts table name
     private static final String TABLE_USER = "user";
     private static final String TABLE_EXPENSES = "expenses";
+    private static final String TABLE_CATEGORIES = "categories";
 
     // User Table Columns names
     private static final String KEY_USN = "username";
@@ -45,9 +47,12 @@ public class dbHandler extends SQLiteOpenHelper {
     private static final String KEY_REALTIME = "expense_time";
     private static final String KEY_PRICE = "price";
     private static final String KEY_CATEGORY = "category";
-
     private static final String KEY_PAYMENT = "payment_method";
-    //TODO fix expenses constructor
+
+    private static final String KEY_CAT1 = "Leisure";
+    private static final String KEY_CAT2 = "Food";
+    private static final String KEY_CAT3 = "Bills";
+    private static final String KEY_CAT4 = "Miscellaneous";
 
     public dbHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -65,6 +70,11 @@ public class dbHandler extends SQLiteOpenHelper {
                 + KEY_ADDTIME + " TEXT PRIMARY KEY, "+ KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
                 + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " TEXT )";
         db.execSQL(CREATE_EXPENSES_TABLE);
+
+        String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
+                + KEY_USN + " TEXT PRIMARY KEY, "+ KEY_CAT1 + " REAL," + KEY_CAT2 + " REAL," + KEY_CAT3 + " REAL,"
+                + KEY_CAT4 + " REAL )";
+        db.execSQL(CREATE_CATEGORIES_TABLE);
     }
 
     @Override
@@ -72,6 +82,7 @@ public class dbHandler extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIES);
         // Creating tables again
         onCreate(db);
     }
@@ -103,24 +114,6 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
 
-    public String getCurrDate() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //example value to be returned: 2019-06-01 12:31:36
-        final Cursor cursor = db.rawQuery("SELECT datetime('now', 'localtime');", null);
-        String date = "";
-        if (cursor != null) {
-            try {
-                if (cursor.moveToFirst()) {
-                    date= cursor.getString(0);
-                }
-            } finally {
-                cursor.close();
-            }
-        }
-        return date;
-    }
-
-
     public boolean addUser(User usr) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -146,43 +139,70 @@ public class dbHandler extends SQLiteOpenHelper {
 
     }
 
-
-
-
     public void addExpenses(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //values.put(KEY_ADDTIME , exp.getAdditionTime());
+        //why comment addtime and username?
+        values.put(KEY_ADDTIME , exp.getAdditionTime());
         values.put(KEY_REALTIME ,exp.getExpenseTime());
-        //values.put(KEY_USN, exp.getUsername());
+        values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CATEGORY, exp.getCategory());
         values.put(KEY_PAYMENT,exp.getPaymentMethod());
 
         db.insert(TABLE_EXPENSES, null, values);
         db.close(); // Closing database connection
-
-
     }
 
-    public ArrayList<Expenses> getExpenses(){
-        SQLiteDatabase ab = this.getWritableDatabase();
-        ArrayList<Expenses> expenselist = new ArrayList<>();
-        String expensequery = "SELECT expense_time,price,category,payment_method FROM " +TABLE_EXPENSES;
-        Cursor cursor= ab.rawQuery(expensequery,null);
+    public void addCatThresholds(String username, Map<String,Double> thresholds) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_USN, username);
+        for (Map.Entry<String,Double> entry : thresholds.entrySet()) {
+            //key of the map is the column name and value is the threshold set
+            values.put(entry.getKey(), entry.getValue());
+        }
+        db.insert(TABLE_CATEGORIES, null, values);
+        db.close(); // Closing database connection
+    }
 
-        while(cursor.moveToNext()){
-            Expenses exp = new Expenses();
-            exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
-            exp.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
-            exp.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CATEGORY)));
-            exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
-            expenselist.add(exp);
+    //method to add a new expenses category
+    public boolean updateCategories(String[] newCat) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] cols = getCategoriesNames();
+        for (int i= 0;i<= newCat.length;i++) {
+            db.execSQL("ALTER TABLE " + TABLE_CATEGORIES + " ADD COLUMN " + newCat[i] + "REAL ;");
+        }
+        boolean booly;
+        if (cols.length < (getCategoriesNames()).length) {
+            //succesful addition to the database
+            //String username, Map<String,Double> thresholds
+            booly=true;
+        }
+        else{
+            booly = false;
+        }
+        db.close();
+        return booly;
+    }
+
+    public String[] getCategoriesNames() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CATEGORIES, null, null, null, null, null, null);
+        String[] colNames = cursor.getColumnNames();
+        for (String name : colNames) {
+            //check if specific column contains a threshold set from the user
 
         }
-        return expenselist;
+        cursor.close();
+        db.close();
+        return colNames;
     }
 
+    //public Map<String,Double> getThresholds(String username) {
+
+      //  return
+    //}
 
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -252,6 +272,25 @@ public class dbHandler extends SQLiteOpenHelper {
         }
     }
 
+    public ArrayList<Expenses> getExpenses(){
+        SQLiteDatabase ab = this.getWritableDatabase();
+        ArrayList<Expenses> expenselist = new ArrayList<>();
+        String expensequery = "SELECT expense_time,price,category,payment_method FROM " +TABLE_EXPENSES;
+        Cursor cursor= ab.rawQuery(expensequery,null);
+
+        while(cursor.moveToNext()){
+            Expenses exp = new Expenses();
+            exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
+            exp.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
+            exp.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CATEGORY)));
+            exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
+            expenselist.add(exp);
+
+        }
+        return expenselist;
+    }
+
+
     public List<Expenses> getAllExpenses(User user) {
         List<Expenses> expList = new ArrayList<Expenses>();
 // Select All Query
@@ -264,9 +303,10 @@ public class dbHandler extends SQLiteOpenHelper {
 // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-             Expenses exp = new Expenses();
+                // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
+                Expenses exp = new Expenses();
                 exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
+                //exp.setUsername(cursor.getString(0));
                 expList.add(exp);
             } while (cursor.moveToNext());
         }
