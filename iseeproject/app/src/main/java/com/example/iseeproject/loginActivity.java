@@ -87,8 +87,8 @@ public class loginActivity extends AppCompatActivity {
     public boolean checkPwd(String username, String password) {
 
         User user = db.getUser(username);
-        String pwd = user.getPwd();
-        return (user.getPwd()).equals(password);
+        String encrypt = db.md5(password);
+        return (user.getPwd()).equals(encrypt);
 
     }
 

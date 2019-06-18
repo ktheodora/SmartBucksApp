@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -120,9 +121,6 @@ public class homePage extends AppCompatActivity {
             }
         });
 
-
-
-
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -167,9 +165,6 @@ public class homePage extends AppCompatActivity {
         });
 
 
-
-
-
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
         enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -178,11 +173,30 @@ public class homePage extends AppCompatActivity {
         });
 
         lineChart = (LineChart)findViewById(R.id.lineChart);
-        setGraphStyle(userr);
-        //we normally use
-        //ArrayList<Entry> xyCoord = calculateYaxes(user);
-        //but for testing purposes we are going to use hardcoded values
+        //by default, we show the weekly style
+        setWeekGraphStyle(userr);
 
+        Button catbtn = (Button)findViewById(R.id.Category);
+        catbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCatGraphStyle(userr);
+            }
+        });
+        Button weekbtn = (Button)findViewById(R.id.Weekly);
+        weekbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeekGraphStyle(userr);
+            }
+        });
+        Button monbtn = (Button)findViewById(R.id.Monthly);
+        monbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setMonthGraphStyle(userr);
+            }
+        });
     }
 
 
@@ -318,10 +332,10 @@ public class homePage extends AppCompatActivity {
         editor.apply();
     }
 
-    public void setGraphStyle(User userr) {
+    //TODO Fix graph style according to chosen option
+    public void setWeekGraphStyle(User userr) {
 
         ArrayList<Entry> xyCoord = calculateAxes(userr);
-
         LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
         lineDataSet.setDrawCircles(true);
         lineDataSet.setColor(Color.BLUE);
@@ -330,9 +344,57 @@ public class homePage extends AppCompatActivity {
         //removes xaxes
         lineChart.setData(new LineData(lineDataSets));
 
-        lineChart.setVisibleXRangeMaximum(80);
+        lineChart.setVisibleXRangeMaximum(100F);
 
-        lineChart.setVisibleYRangeMaximum(100, YAxis.AxisDependency.LEFT);
+        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        Description d = new Description();
+        d.setText("Monday");
+        d.setPosition(10,0);
+        d.setTextAlign(Paint.Align.CENTER);
+        lineChart.setDescription(d);
+    }
+
+    public void setMonthGraphStyle(User userr) {
+
+        ArrayList<Entry> xyCoord = calculateAxes(userr);
+        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
+        lineDataSet.setDrawCircles(true);
+        lineDataSet.setColor(Color.BLUE);
+
+        lineDataSets.add(lineDataSet);
+        //removes xaxes
+        lineChart.setData(new LineData(lineDataSets));
+
+        lineChart.setVisibleXRangeMaximum(100F);
+
+        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        Description d = new Description();
+        d.setText("Monday");
+        d.setPosition(10,0);
+        d.setTextAlign(Paint.Align.CENTER);
+        lineChart.setDescription(d);
+    }
+
+    public void setCatGraphStyle(User userr) {
+
+        ArrayList<Entry> xyCoord = calculateAxes(userr);
+        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
+        lineDataSet.setDrawCircles(true);
+        lineDataSet.setColor(Color.BLUE);
+
+        lineDataSets.add(lineDataSet);
+        //removes xaxes
+        lineChart.setData(new LineData(lineDataSets));
+
+        lineChart.setVisibleXRangeMaximum(100F);
+
+        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
 
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);

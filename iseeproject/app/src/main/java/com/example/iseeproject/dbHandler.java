@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class dbHandler extends SQLiteOpenHelper {
 
     //TODO convert-md5-back-to-normal method
 
-    public static final String md5(final String s) {
+    public String md5(final String s) {
         final String MD5 = "MD5";
         try {
             // Create MD5 Hash
@@ -119,7 +120,8 @@ public class dbHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_USN, usr.getUsername());
-        values.put(KEY_PWD, usr.getPwd());
+        String encrypt = md5(usr.getPwd());
+        values.put(KEY_PWD, encrypt);
         values.put(KEY_NAME , usr.getName());
         values.put(KEY_EMAIL , usr.getEmail());
         values.put(KEY_INCOME , usr.getIncome());
@@ -199,10 +201,24 @@ public class dbHandler extends SQLiteOpenHelper {
         return colNames;
     }
 
-    //public Map<String,Double> getThresholds(String username) {
-
-      //  return
-    //}
+    public Map<String,Double> getThresholds(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Map<String,Double> thresholds = new HashMap<String,Double>();
+        Cursor cursor = db.query(TABLE_CATEGORIES, getCategoriesNames(),KEY_USN + "=?" , new String[] { username }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+            for (int i =0; i< cursor.getColumnCount();i++){
+                if (!cursor.isNull(i)) {
+                    //if for the specific category we have set a value
+                    String category = cursor.getColumnName(i);
+                    Double value = cursor.getDouble(i);
+                    thresholds.put(category,value);
+                }
+            }
+            cursor.close();
+            db.close();
+        return thresholds;
+    }
 
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -211,7 +227,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 new String[] { username }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        User user = new User(cursor.getString(0), cursor.getString(1),
+            User user = new User(cursor.getString(0), cursor.getString(1),
                 cursor.getString(2), cursor.getString(3), Double.parseDouble(cursor.getString(4)),
                 Double.parseDouble(cursor.getString(5)), Double.parseDouble(cursor.getString(6)),
                 Double.parseDouble(cursor.getString(7)), Double.parseDouble(cursor.getString(8)));
