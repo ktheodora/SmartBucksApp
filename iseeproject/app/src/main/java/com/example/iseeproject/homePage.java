@@ -35,6 +35,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -204,7 +205,7 @@ public class homePage extends AppCompatActivity {
 
         Document myPdfDocument = new Document();
         //pdf filename
-        String myFilename = new SimpleDateFormat("yyyyMMdd_HHmmss",
+        String myFilename = "SmartBucks" + new SimpleDateFormat("ddMMYYYY",
                 Locale.getDefault()).format(System.currentTimeMillis());
         //pdf path
         String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + myFilename + ".pdf";
@@ -335,26 +336,33 @@ public class homePage extends AppCompatActivity {
     //TODO Fix graph style according to chosen option
     public void setWeekGraphStyle(User userr) {
 
-        ArrayList<Entry> xyCoord = calculateAxes(userr);
-        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
-        lineDataSet.setDrawCircles(true);
-        lineDataSet.setColor(Color.BLUE);
+        ArrayList<Entry> xyCoord = new ArrayList<>();; //= calculateAxes(userr);
+        xyCoord.add(new Entry(1,1));
+        xyCoord.add(new Entry(2,2));
+        if (xyCoord.size() == 7+1) {
+            LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
+            lineDataSet.setDrawCircles(true);
+            lineDataSet.setColor(Color.BLUE);
 
-        lineDataSets.add(lineDataSet);
-        //removes xaxes
-        lineChart.setData(new LineData(lineDataSets));
+            lineDataSets.add(lineDataSet);
+            //removes xaxes
+            lineChart.setData(new LineData(lineDataSets));
 
-        lineChart.setVisibleXRangeMaximum(100F);
+            lineChart.setVisibleYRange(0,100,YAxis.AxisDependency.LEFT);
 
-        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
+            lineChart.setVisibleXRange(0,100);
 
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        Description d = new Description();
-        d.setText("Monday");
-        d.setPosition(10,0);
-        d.setTextAlign(Paint.Align.CENTER);
-        lineChart.setDescription(d);
+            //lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.LEFT);
+
+            lineChart.setTouchEnabled(true);
+            lineChart.setDragEnabled(true);
+            Description d = new Description();
+            d.setText("Monday");
+            d.setPosition(10,0);
+            d.setTextAlign(Paint.Align.CENTER);
+            lineChart.setDescription(d);
+        }
+
     }
 
     public void setMonthGraphStyle(User userr) {

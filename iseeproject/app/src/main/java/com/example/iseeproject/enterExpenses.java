@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
 {
@@ -47,9 +48,16 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
-        dbHandler db = new dbHandler(this);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            username = b.getString("username");
+
+        peopleDB = new dbHandler(this);
+        User usr = peopleDB.getUser(username);
         //getting expenses categories names from database and avoiding hardcoded values
-        List<String> categories1= Arrays.asList(db.getCategoriesNames());
+        Set<String> cats = peopleDB.getThresholds(username).keySet();
+        List<String> categories1= Arrays.asList(cats.toArray(new String[cats.size()]));
 
         /*List<String> categories1= new ArrayList<>();
         categories1.add("Leisure");
@@ -120,11 +128,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             }
         });
 
-        Bundle b = getIntent().getExtras();
-        if (b != null)
-            username = b.getString("username");
-
-        User usr = peopleDB.getUser(username);
 
         //we set the calendar view in the ui
         myCalendar = Calendar.getInstance();
@@ -218,7 +221,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         }
         else {//move on with the addtion of the expense to the database
 
-            Expenses newExpenses = new Expenses(LocalDate.now().toString(), datepick.getText().toString(),
+            Expenses newExpenses = new Expenses(datepick.getText().toString(),
                    username, expAmount, spinner1.getSelectedItem().toString(), spinner.getSelectedItem().toString());
             //newExenses.setAdditionTime(peopleDB.getCurrDate());
 

@@ -6,24 +6,16 @@ public class Expenses {
     private String username, category;
     //timestamp of expense creation will be converted later to a real date type on the homepage
     //when we will want to make comparison of the days that the expenses were created
-    private String additionTime, expenseTime;
+    private String expenseTime;
     private double price;
     private String PaymentMethod;
 
-    public Expenses(String AdditionTime, String ExpenseTime, String Username, double Price, String Category, String PaymentMethods) {
-        this.additionTime = AdditionTime;
+    public Expenses(String ExpenseTime, String Username, double Price, String Category, String PaymentMethods) {
         this.expenseTime = ExpenseTime;
         this.username = Username;
         this.category = Category;
         this.price = Price;
         this.PaymentMethod = PaymentMethods;
-    }
-
-    public String getAdditionTime() {
-        return additionTime;
-    }
-    public void setAdditionTime(String AdditionTime) {
-        this.additionTime= AdditionTime;
     }
 
     public String getExpenseTime() {

@@ -44,7 +44,6 @@ public class dbHandler extends SQLiteOpenHelper {
     private static final String KEY_INSURANCE = "insurance";
 
     // Expenses Table Columns names
-    private static final String KEY_ADDTIME = "addition_time";
     private static final String KEY_REALTIME = "expense_time";
     private static final String KEY_PRICE = "price";
     private static final String KEY_CATEGORY = "category";
@@ -52,8 +51,10 @@ public class dbHandler extends SQLiteOpenHelper {
 
     private static final String KEY_CAT1 = "Leisure";
     private static final String KEY_CAT2 = "Food";
-    private static final String KEY_CAT3 = "Bills";
-    private static final String KEY_CAT4 = "Miscellaneous";
+    private static final String KEY_CAT3 = "Services";
+    private static final String KEY_CAT4 = "Health";
+    private static final String KEY_CAT5 = "Miscellaneous";
+
 
     public dbHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -68,7 +69,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_ADDTIME + " TEXT PRIMARY KEY, "+ KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
                 + KEY_CATEGORY + " TEXT," + KEY_PAYMENT + " TEXT )";
         db.execSQL(CREATE_EXPENSES_TABLE);
 
@@ -87,8 +88,6 @@ public class dbHandler extends SQLiteOpenHelper {
         // Creating tables again
         onCreate(db);
     }
-
-    //TODO convert-md5-back-to-normal method
 
     public String md5(final String s) {
         final String MD5 = "MD5";
@@ -131,13 +130,8 @@ public class dbHandler extends SQLiteOpenHelper {
         values.put(KEY_INSURANCE , usr.getInsurance());
 
         long result = db.insert(TABLE_USER,null,values);
-        if (result == -1){
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+
+        return (!(result == -1));
 
     }
 
@@ -145,7 +139,6 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //why comment addtime and username?
-        values.put(KEY_ADDTIME , exp.getAdditionTime());
         values.put(KEY_REALTIME ,exp.getExpenseTime());
         values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
@@ -154,6 +147,25 @@ public class dbHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_EXPENSES, null, values);
         db.close(); // Closing database connection
+    }
+
+    public boolean createThresholds() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String checkTable = "SELECT * FROM  " + TABLE_CATEGORIES;
+        try {
+            Cursor cursor = db.rawQuery(checkTable, null);
+            cursor.close();
+            return false;
+        }
+        catch (Exception e) {//no such table exists
+            String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
+                    + KEY_USN + " TEXT PRIMARY KEY, "+ KEY_CAT1 + " REAL," + KEY_CAT2 + " REAL," + KEY_CAT3 + " REAL,"
+                    + KEY_CAT4 + " REAL )";
+            db.execSQL(CREATE_CATEGORIES_TABLE);
+            db.close();
+            return true;
+        }
+
     }
 
     public void addCatThresholds(String username, Map<String,Double> thresholds) {
@@ -169,17 +181,21 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
     //method to add a new expenses category
-    public boolean updateCategories(String[] newCat) {
+    public boolean addNewCategory(String newCat, String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] cols = getCategoriesNames();
-        for (int i= 0;i<= newCat.length;i++) {
-            db.execSQL("ALTER TABLE " + TABLE_CATEGORIES + " ADD COLUMN " + newCat[i] + "REAL ;");
-        }
+
+        db.execSQL("ALTER TABLE " + TABLE_CATEGORIES + " ADD COLUMN " + newCat + "REAL ;");
+
         boolean booly;
-        if (cols.length < (getCategoriesNames()).length) {
+        ContentValues values = new ContentValues();
+        Cursor cursor = db.query(TABLE_CATEGORIES, new String[] {newCat}, null, null, null, null, null);
+        if (cursor.getColumnCount() > 0) {
             //succesful addition to the database
             //String username, Map<String,Double> thresholds
-            booly=true;
+                values.put(newCat, 0);//to distinguish from null to 0
+                db.update(TABLE_CATEGORIES,values, KEY_USN + " = ?",
+                        new String[]{String.valueOf(username)});
+                booly = true;
         }
         else{
             booly = false;
@@ -188,35 +204,47 @@ public class dbHandler extends SQLiteOpenHelper {
         return booly;
     }
 
-    public String[] getCategoriesNames() {
+    public void updateCategories(String username, Map<String,Double> categ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_USN, username);
+        for (Map.Entry<String,Double> entry : categ.entrySet()) {
+            //key of the map is the column name and value is the threshold set
+            values.put(entry.getKey(), entry.getValue());
+        }
+        db.update(TABLE_CATEGORIES,values, KEY_USN + " = ?",
+                new String[]{String.valueOf(username)});
+        db.close(); // Closing database connection
+    }
+
+    /*private String[] getCategoriesNames() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_CATEGORIES, null, null, null, null, null, null);
         String[] colNames = cursor.getColumnNames();
-        for (String name : colNames) {
-            //check if specific column contains a threshold set from the user
-
-        }
+        return colNames;
         cursor.close();
         db.close();
-        return colNames;
-    }
+    }*/
 
     public Map<String,Double> getThresholds(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Map<String,Double> thresholds = new HashMap<String,Double>();
-        Cursor cursor = db.query(TABLE_CATEGORIES, getCategoriesNames(),KEY_USN + "=?" , new String[] { username }, null, null, null, null);
-        if (cursor != null)
+        Map<String, Double> thresholds = new HashMap<String, Double>();
+        Cursor cursor1 = db.query(TABLE_CATEGORIES, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CATEGORIES, cursor1.getColumnNames(), KEY_USN + "=?", new String[]{username}, null, null, null, null);
+        if (cursor != null) {
             cursor.moveToFirst();
-            for (int i =0; i< cursor.getColumnCount();i++){
-                if (!cursor.isNull(i)) {
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                if (!cursor.isNull(i) || !cursor.getString(i).contentEquals(new StringBuffer(KEY_USN))) {
                     //if for the specific category we have set a value
                     String category = cursor.getColumnName(i);
                     Double value = cursor.getDouble(i);
-                    thresholds.put(category,value);
+                    thresholds.put(category, value);
                 }
             }
-            cursor.close();
-            db.close();
+        }
+        cursor.close();
+        cursor1.close();
+        db.close();
         return thresholds;
     }
 
@@ -276,7 +304,7 @@ public class dbHandler extends SQLiteOpenHelper {
     public boolean expensesExist(User user) {
         //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, null, null);
         //Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor!=null && cursor.getCount()>0) {
@@ -312,7 +340,7 @@ public class dbHandler extends SQLiteOpenHelper {
 // Select All Query
         SQLiteDatabase db = this.getWritableDatabase();
         //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
-        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_ADDTIME, KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CATEGORY ,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, null, null);
 
         //Cursor cursor = db.rawQuery(selectQuery, null);
@@ -320,7 +348,7 @@ public class dbHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                Expenses exp = new Expenses(cursor.getString(0), cursor.getString(1),
+                Expenses exp = new Expenses( cursor.getString(1),
                         cursor.getString(2), Double.parseDouble(cursor.getString(3)),
                         cursor.getString(4),  cursor.getString(5));
                 exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
