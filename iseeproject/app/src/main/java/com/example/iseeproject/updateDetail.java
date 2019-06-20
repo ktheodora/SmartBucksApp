@@ -244,13 +244,20 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
                 b = true;
             }
         }
+
         if (b) {
             String newCat = entCat.getText().toString();
-            Double newThres = Double.parseDouble(entThres.getText().toString());
-            db.addNewCategory(username, newCat,newThres);
-            Toast t = Toast.makeText(updateDetail.this,
-                    "Succesful addition of category " + newCat, Toast.LENGTH_LONG);
-            t.show();
+            if (!db.categoryExists(username,newCat)) {
+                Double newThres = Double.parseDouble(entThres.getText().toString());
+                db.addNewCategory(username, newCat, newThres);
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Succesful addition of category " + newCat, Toast.LENGTH_LONG);
+                t.show();
+            }else {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Category name already exists" + newCat, Toast.LENGTH_LONG);
+                t.show();
+            }
         }
 
         EditText updatedThres = (EditText) findViewById(R.id.newThres);

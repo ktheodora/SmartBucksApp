@@ -495,7 +495,7 @@ public class homePage extends AppCompatActivity {
                 maxY =xy.getY();
             }
         }
-        return maxY;
+        return (maxY + 10);
     }
 
 }

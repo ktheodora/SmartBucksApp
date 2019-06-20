@@ -203,6 +203,16 @@ public class dbHandler extends SQLiteOpenHelper {
         return thresholds;
     }
 
+    public boolean categoryExists(String username ,String cat) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        TABLE_CATEGORIES = username + "_categories";
+        Cursor cursor = db.query(TABLE_CATEGORIES, new String[] {KEY_CAT, KEY_THRES}, KEY_CAT + "=?", new String[] {cat}, null, null, null);
+        boolean result = (cursor.moveToFirst());
+        //will return false if cursor is null
+        cursor.close();
+        return result;
+    }
+
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USER, new String[] {KEY_USN , KEY_PWD , KEY_NAME
@@ -232,7 +242,6 @@ public class dbHandler extends SQLiteOpenHelper {
         else{
             return false;
         }
-
     }
 
 
