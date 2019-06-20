@@ -41,7 +41,6 @@ public class loginActivity extends AppCompatActivity {
 
         info = "No of attempts left: " + attempts;
         infoView.setText(info);
-        final dbHandler db= new dbHandler(this);
 
         //method will  be working when button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +115,6 @@ public class loginActivity extends AppCompatActivity {
         Intent intent = new Intent(loginActivity.this, mainActivity.class);
         startActivity(intent);
     }
-
-
 
 }
 

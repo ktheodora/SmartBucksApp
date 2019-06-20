@@ -46,13 +46,6 @@ public class createAccount extends AppCompatActivity {
             public void onClick(View v) {
             if  (validate())
                 //if table exists it won't do anything
-                peopleDB.createThresholds();
-                defThres.put("Miscellaneous", 50.0);
-                defThres.put("Food", 30.0);
-                defThres.put("Services", 40.0);
-                defThres.put("Health", 20.0);
-                defThres.put("Enterntainment", 100.0);
-                peopleDB.addCatThresholds(username,defThres);
                 addData();
             }
         });
@@ -99,8 +92,8 @@ public class createAccount extends AppCompatActivity {
 
                 boolean insertData = peopleDB.addUser(user1);
 
-
                 if (insertData){
+                    peopleDB.addCatThresholds(username);
                     Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
                     //start new activity
                     Intent myIntent = new Intent(createAccount.this,

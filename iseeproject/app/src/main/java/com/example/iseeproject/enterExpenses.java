@@ -59,13 +59,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         Set<String> cats = peopleDB.getThresholds(username).keySet();
         List<String> categories1= Arrays.asList(cats.toArray(new String[cats.size()]));
 
-        /*List<String> categories1= new ArrayList<>();
-        categories1.add("Leisure");
-        categories1.add("Food");
-        categories1.add("Bill");
-        categories1.add("miscellaneous");*/
-
-
         List<String> categories = new ArrayList<String>();
         categories.add("Cash");
         categories.add("Card  ");
@@ -198,7 +191,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             }
         });
 
-
     }
 
     public void checkInput() {
@@ -219,24 +211,18 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                     "Expenses entered overcome savings", Toast.LENGTH_LONG);
             t.show();
         }
-        else {//move on with the addtion of the expense to the database
+        else {//move on with the addtion of the expense to the data
 
-            Expenses newExpenses = new Expenses(datepick.getText().toString(),
-                   username, expAmount, spinner1.getSelectedItem().toString(), spinner.getSelectedItem().toString());
-            //newExenses.setAdditionTime(peopleDB.getCurrDate());
+          String expenseTime = datepick.getText().toString();
 
-            peopleDB.addExpenses(newExpenses);
-//            String additionTime = LocalDate.now().toString();
-//            String expenseTime = datepick.getText().toString();
-//
-//            //get values of spinners
-//            String payment_method = spinner.getSelectedItem().toString();
-//            String category = spinner1.getSelectedItem().toString();
-//
-//            //creating the expense instance and adding it to the database
-//            Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
-//
-//            peopleDB.addExpenses(newExpense);
+              //get values of spinners
+          String payment_method = spinner.getSelectedItem().toString();
+          String category = spinner1.getSelectedItem().toString();
+
+            //creating the expense instance and adding it to the database
+           Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
+
+           peopleDB.addExpenses(newExpense);
 
            goToHomepage();
         }
@@ -316,8 +302,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
     }
-
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
