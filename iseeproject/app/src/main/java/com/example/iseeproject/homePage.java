@@ -50,6 +50,7 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class homePage extends AppCompatActivity {
       //  private Button edit;
@@ -336,10 +337,8 @@ public class homePage extends AppCompatActivity {
     //TODO Fix graph style according to chosen option
     public void setWeekGraphStyle(User userr) {
 
-        ArrayList<Entry> xyCoord = new ArrayList<>();; //= calculateAxes(userr);
-        xyCoord.add(new Entry(1,1));
-        xyCoord.add(new Entry(2,2));
-        if (xyCoord.size() == 7+1) {
+        ArrayList<Entry> xyCoord = calculateAxes(userr, "week");
+
             LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
             lineDataSet.setDrawCircles(true);
             lineDataSet.setColor(Color.BLUE);
@@ -348,51 +347,52 @@ public class homePage extends AppCompatActivity {
             //removes xaxes
             lineChart.setData(new LineData(lineDataSets));
 
-            lineChart.setVisibleYRange(0,100,YAxis.AxisDependency.LEFT);
+            lineChart.setVisibleYRange(0,getMaxY(xyCoord),YAxis.AxisDependency.LEFT);
 
-            lineChart.setVisibleXRange(0,100);
-
-            //lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.LEFT);
+            //because of 7 days of week
+            lineChart.setVisibleXRange(0,6);
 
             lineChart.setTouchEnabled(true);
             lineChart.setDragEnabled(true);
-            Description d = new Description();
-            d.setText("Monday");
-            d.setPosition(10,0);
+            /*Description d = new Description();
+            d.setText("Tuesday");
+            d.setPosition(1,10);
             d.setTextAlign(Paint.Align.CENTER);
-            lineChart.setDescription(d);
-        }
+            lineChart.setDescription(d);*/
 
     }
 
     public void setMonthGraphStyle(User userr) {
 
-        ArrayList<Entry> xyCoord = calculateAxes(userr);
-        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
+        ArrayList<Entry> xyCoord = calculateAxes(userr, "month");
+        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per week of month");
         lineDataSet.setDrawCircles(true);
-        lineDataSet.setColor(Color.BLUE);
+        lineDataSet.setColor(Color.RED);
 
         lineDataSets.add(lineDataSet);
         //removes xaxes
         lineChart.setData(new LineData(lineDataSets));
 
-        lineChart.setVisibleXRangeMaximum(100F);
+        lineChart.setVisibleYRange(0,getMaxY(xyCoord),YAxis.AxisDependency.LEFT);
 
-        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
+        //because of 4 weeks of month
+        lineChart.setVisibleXRange(0,4);
+
+        //lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.LEFT);
 
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);
-        Description d = new Description();
-        d.setText("Monday");
-        d.setPosition(10,0);
-        d.setTextAlign(Paint.Align.CENTER);
-        lineChart.setDescription(d);
+            /*Description d = new Description();
+            d.setText("Tuesday");
+            d.setPosition(1,10);
+            d.setTextAlign(Paint.Align.CENTER);
+            lineChart.setDescription(d);*/
     }
 
     public void setCatGraphStyle(User userr) {
 
-        ArrayList<Entry> xyCoord = calculateAxes(userr);
-        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per day");
+        ArrayList<Entry> xyCoord = calculateAxes(userr, "category");
+        LineDataSet lineDataSet = new LineDataSet(xyCoord,"expenses per category");
         lineDataSet.setDrawCircles(true);
         lineDataSet.setColor(Color.BLUE);
 
@@ -400,25 +400,43 @@ public class homePage extends AppCompatActivity {
         //removes xaxes
         lineChart.setData(new LineData(lineDataSets));
 
-        lineChart.setVisibleXRangeMaximum(100F);
+        Map<String, Double> thresholds = peopleDB.getThresholds(usr);
 
-        lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.RIGHT);
+        //the graph has a maximum y axis range the biggest
+        // threshold of the expenses categories
+        double maxThres = 0.0;
+        for (Map.Entry<String, Double> t : thresholds.entrySet()) {
+            if (t.getValue() > maxThres) {
+                maxThres = t.getValue();
+            }
+        }
+        float maxY = (float)maxThres;
+        lineChart.setVisibleYRange(0,maxY,YAxis.AxisDependency.LEFT);
+
+        //because of number of categories
+        lineChart.setVisibleXRange(0,thresholds.size());
 
         lineChart.setTouchEnabled(true);
         lineChart.setDragEnabled(true);
-        Description d = new Description();
-        d.setText("Monday");
-        d.setPosition(10,0);
-        d.setTextAlign(Paint.Align.CENTER);
-        lineChart.setDescription(d);
+            /*Description d = new Description();
+            d.setText("Tuesday");
+            d.setPosition(1,10);
+            d.setTextAlign(Paint.Align.CENTER);
+            lineChart.setDescription(d);*/
     }
 
-    public ArrayList<Entry> calculateAxes(User user) {
+    public ArrayList<Entry> calculateAxes(User user, String choice) {
         ArrayList<Entry> xyCoord = new ArrayList<>();
+
         //setting up the calendar dates of this week
         LocalDate now = LocalDate.now();
-        TemporalField fieldISO = WeekFields.of(Locale.GERMANY).dayOfWeek();
-        System.out.println(now.with(fieldISO, 1));
+
+        //TemporalField fieldISO1 = WeekFields.of(Locale.GERMANY).we
+
+        //LocalDate d = now.with(fieldISO1, 0);
+
+        TemporalField fieldISO2 = WeekFields.of(Locale.GERMANY).dayOfWeek();
+        System.out.println(now.with(fieldISO2, 1));
 
         //getting the expenses and their dates
         if (peopleDB.expensesExist(user)) {
@@ -428,24 +446,56 @@ public class homePage extends AppCompatActivity {
             formatter = formatter.withLocale(Locale.GERMANY);
             LocalDate expdate;
 
-            for (int i = 1; i <= 7; i++) {
-                //i presents monday for 1, tuesday for 2 etc
-                LocalDate d = now.with(fieldISO, i);//get week date
-                for (Expenses exp : expenses) {
-                    //search all expenses and add to the one of this day of the week
-                    expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
-                    if (d.isEqual(expdate)) {
-                        daysum += exp.getPrice();
+            if (choice.equals("week")) {
+                for (int i = 1; i <= 7; i++) {
+                    //i presents monday for 1, tuesday for 2 etc
+                    LocalDate d = now.with(fieldISO2, i);//get week date
+                    for (Expenses exp : expenses) {
+                        //search all expenses and add to the one of this day of the week
+                        expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                        if (d.isEqual(expdate)) {
+                            daysum += exp.getPrice();
+                        }
                     }
+                    //after all expenses of the day are added,
+                    //add this as a new entry to the LineGraph
+                    float x = (float) (i - 1);//bc x starts from 1
+                    float y = (float) daysum;
+                    xyCoord.add(new Entry(x, y));
+                    daysum = 0;//make daysum 0 again for the next day
                 }
-                //after all expenses of the day are added,
-                //add this as a new entry to the LineGraph
-                float x = (float) (i-1);//bc x starts from 1
-                float y = (float) daysum;
-                xyCoord.add(new Entry(x, y));
-                daysum = 0;//make daysum 0 again for the next day
+            } else if (choice.equals("month")) {
+                for (int i = 1; i <= 7; i++) {
+                    //i presents monday for 1, tuesday for 2 etc
+                    LocalDate d = now.with(fieldISO2, i);//get week date
+                    for (Expenses exp : expenses) {
+                        //search all expenses and add to the one of this day of the week
+                        expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                        if (d.isEqual(expdate)) {
+                            daysum += exp.getPrice();
+                        }
+                    }
+                    //after all expenses of the day are added,
+                    //add this as a new entry to the LineGraph
+                    float x = (float) (i - 1);//bc x starts from 1
+                    float y = (float) daysum;
+                    xyCoord.add(new Entry(x, y));
+                    daysum = 0;//make daysum 0 again for the next day
+                }
             }
         }
         return xyCoord;
     }
+
+    //mini function for returning back the maximum y coord of every set of points
+    public float getMaxY(ArrayList<Entry> xyCoord) {
+        float maxY = 0;
+        for ( Entry xy : xyCoord) {
+            if (xy.getY() > maxY) {
+                maxY =xy.getY();
+            }
+        }
+        return maxY;
+    }
+
 }

@@ -10,7 +10,7 @@ public class Expenses {
     private double price;
     private String PaymentMethod;
 
-    public Expenses(String ExpenseTime, String Username, double Price, String Category, String PaymentMethods) {
+    public Expenses(String ExpenseTime, String Username, Double Price, String Category, String PaymentMethods) {
         this.expenseTime = ExpenseTime;
         this.username = Username;
         this.category = Category;
