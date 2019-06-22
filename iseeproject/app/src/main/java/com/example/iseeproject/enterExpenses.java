@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
@@ -198,21 +199,37 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         //get sum of money spent in expenses
         double sum = 0;
         if (peopleDB.expensesExist(user)) {
+            Map<String, Double> cat = peopleDB.getThresholds(username);
             List<Expenses> exp = peopleDB.getAllExpenses(user);
-            for (Expenses expense : exp) {
-                sum += expense.getPrice();
+            for (Map.Entry categ : cat.entrySet()) {
+                for (Expenses expense : exp) {
+                    if (expense.getCategory() == (String) categ.getKey()){
+                        sum += expense.getPrice();
+                        if (sum <50.0) {
+                            Toast t = Toast.makeText(enterExpenses.this,
+                                    "Be careful! You are overcoming threshold for" + (String) categ.getKey(), Toast.LENGTH_LONG);
+                            t.show();
+                        }
+                    }
+
+                }
+
             }
         }
-        double expAmount = Double.parseDouble(amount.getText().toString());
         //if current expense price sumed with the already existing expenses is higher than budget
         //then show toast message
-        if (user.getBudget() <= sum + expAmount) {
+       /* if (user.getBudget() <= sum + expAmount) {
             Toast t = Toast.makeText(enterExpenses.this,
                     "Expenses entered overcome savings", Toast.LENGTH_LONG);
             t.show();
-        }
-        else {//move on with the addtion of the expense to the data
-
+        }*/
+    //move on with the addtion of the expense to the data
+            Double expAmount = Double.parseDouble(amount.getText().toString());
+            if(expAmount <= 0.0) {
+                Toast t = Toast.makeText(enterExpenses.this,
+                        "Expense price should be more than 0", Toast.LENGTH_LONG);
+                t.show();
+            } else {
           String expenseTime = datepick.getText().toString();
 
               //get values of spinners

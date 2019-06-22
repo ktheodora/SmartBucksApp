@@ -4,6 +4,7 @@ package com.example.iseeproject;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Environment;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -101,13 +103,39 @@ public class homePage extends AppCompatActivity {
             ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
             for (Expenses expense : exp) {
                 sum+=expense.getPrice();
+
             }
         }
-        expensesView.setText(String.valueOf(sum));
+
+        if(sum>userr.getBudget()){
+            AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
+            bx1.setCancelable(true);
+            bx1.setTitle("You are overcoming threshold for");
+            bx1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alertDialog = bx1.create();
+            alertDialog.show();
+
+//            Toast t = Toast.makeText(homePage.this,
+//                    "Be careful! You are overcoming threshold for" , Toast.LENGTH_LONG);
+//            t.show();
+
+        }else{
+            expensesView.setText(String.valueOf(sum));
+        }
+
 
         TextView savingsView = (TextView) findViewById(R.id.SavingsView);
         //savings = budget - sum of expenses
         double savings = userr.getBudget() - sum ;
+
+
         savingsView.setText(String.valueOf(savings));
 
         //add expenses button setup
