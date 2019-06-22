@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class loginActivity extends AppCompatActivity {
 
     private EditText Name;
@@ -87,8 +90,8 @@ public class loginActivity extends AppCompatActivity {
     public boolean checkPwd(String username, String password) {
 
         User user = db.getUser(username);
-        String pwd = user.getPwd();
-        return (user.getPwd()).equals(password);
+        String encrypt = db.md5(password);
+        return (user.getPwd()).equals(encrypt);
 
     }
 
@@ -112,8 +115,6 @@ public class loginActivity extends AppCompatActivity {
         Intent intent = new Intent(loginActivity.this, mainActivity.class);
         startActivity(intent);
     }
-
-
 
 }
 

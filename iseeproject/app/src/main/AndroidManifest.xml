@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".faqActivity"></activity>
+        <activity android:name=".createAccountTwo"></activity>
+        <activity android:name=".faqActivity" />
         <activity android:name=".listActivity" />
         <activity android:name=".lineGraph" />
         <activity android:name=".preferencesActivity" />

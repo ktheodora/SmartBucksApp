@@ -24,11 +24,13 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
 {
@@ -46,16 +48,16 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
-        dbHandler db = new dbHandler(this);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            username = b.getString("username");
+
+        peopleDB = new dbHandler(this);
+        User usr = peopleDB.getUser(username);
         //getting expenses categories names from database and avoiding hardcoded values
-        List<String> categories1= Arrays.asList(db.getCategoriesNames());
-
-        /*List<String> categories1= new ArrayList<>();
-        categories1.add("Leisure");
-        categories1.add("Food");
-        categories1.add("Bill");
-        categories1.add("miscellaneous");*/
-
+        Set<String> cats = peopleDB.getThresholds(username).keySet();
+        List<String> categories1= Arrays.asList(cats.toArray(new String[cats.size()]));
 
         List<String> categories = new ArrayList<String>();
         categories.add("Cash");
@@ -119,11 +121,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             }
         });
 
-        Bundle b = getIntent().getExtras();
-        if (b != null)
-            username = b.getString("username");
-
-        User usr = peopleDB.getUser(username);
 
         //we set the calendar view in the ui
         myCalendar = Calendar.getInstance();
@@ -194,7 +191,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             }
         });
 
-
     }
 
     public void checkInput() {
@@ -215,25 +211,18 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                     "Expenses entered overcome savings", Toast.LENGTH_LONG);
             t.show();
         }
-        else {//move on with the addtion of the expense to the database
-            Expenses newExenses = new Expenses();
-            //newExenses.setAdditionTime(peopleDB.getCurrDate());
-            newExenses.setPrice(expAmount);
-            newExenses.setExpenseTime(datepick.getText().toString());
-            newExenses.setPaymentMethod(spinner.getSelectedItem().toString());
-            newExenses.setCategory(spinner1.getSelectedItem().toString());
-            peopleDB.addExpenses(newExenses);
-//            String additionTime = peopleDB.getCurrDate();
-//            String expenseTime = datepick.getText().toString();
-//
-//            //get values of spinners
-//            String payment_method = spinner.getSelectedItem().toString();
-//            String category = spinner1.getSelectedItem().toString();
-//
-//            //creating the expense instance and adding it to the database
-//            Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
-//
-//            peopleDB.addExpenses(newExpense);
+        else {//move on with the addtion of the expense to the data
+
+          String expenseTime = datepick.getText().toString();
+
+              //get values of spinners
+          String payment_method = spinner.getSelectedItem().toString();
+          String category = spinner1.getSelectedItem().toString();
+
+            //creating the expense instance and adding it to the database
+           Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
+
+           peopleDB.addExpenses(newExpense);
 
            goToHomepage();
         }
@@ -313,8 +302,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
     }
-
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
