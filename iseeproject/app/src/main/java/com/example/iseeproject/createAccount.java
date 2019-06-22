@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class createAccount extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class createAccount extends AppCompatActivity {
     private EditText Rent;
     private EditText Bills;
     private EditText Insurance;
+    private Map<String, Double> defThres;
 
     String username ,name, password , email ;
     double inc ,bud ,rent ,ins, bill ;
@@ -35,11 +39,13 @@ public class createAccount extends AppCompatActivity {
         routed();
 
         peopleDB = new dbHandler(this);
+        defThres = new HashMap<String, Double>();
         finish.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
             if  (validate())
+                //if table exists it won't do anything
                 addData();
             }
         });
@@ -72,6 +78,7 @@ public class createAccount extends AppCompatActivity {
 
     }
 
+
     public void addData(){
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +92,8 @@ public class createAccount extends AppCompatActivity {
 
                 boolean insertData = peopleDB.addUser(user1);
 
-
                 if (insertData){
+                    peopleDB.addCatThresholds(username);
                     Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
                     //start new activity
                     Intent myIntent = new Intent(createAccount.this,

@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class loginActivity extends AppCompatActivity {
 
     private EditText Name;
@@ -112,8 +115,6 @@ public class loginActivity extends AppCompatActivity {
         Intent intent = new Intent(loginActivity.this, mainActivity.class);
         startActivity(intent);
     }
-
-
 
 }
 
