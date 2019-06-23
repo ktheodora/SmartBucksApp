@@ -102,30 +102,33 @@ public class homePage extends AppCompatActivity {
         incomeView.setText(String.valueOf(userr.getIncome()));
 
         TextView expensesView = (TextView) findViewById(R.id.TotalExpenses);
+
         //get sum of money spent in expenses
         double sum=0;
         if (peopleDB.expensesExist(userr)) {
             //if user has entered at least one expense
+
             ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
             for (Expenses expense : exp) {
                 sum+=expense.getPrice();
 
             }
         }
+        else{
+            expensesView.setText(String.valueOf(sum));
+        }
 
         if(sum>userr.getBudget()){
 
-
-
-            final TextView budget = (TextView) findViewById(R.id.budgetview);
-
+           // final TextView budget = (TextView) findViewById(R.id.budgetview);
+            expensesView.setText(String.valueOf(sum));
             final Animation anim = new AlphaAnimation(0.0f,1.0f);
             anim.setDuration(5);
             anim.setStartOffset(20);
             anim.setRepeatMode(Animation.REVERSE);
             anim.setRepeatCount(Animation.INFINITE);
 
-            budget.startAnimation(anim);
+            budgetView.startAnimation(anim);
 
 
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
@@ -149,8 +152,6 @@ public class homePage extends AppCompatActivity {
 //                    "Be careful! You are overcoming threshold for" , Toast.LENGTH_LONG);
 //            t.show();
 
-        }else{
-            expensesView.setText(String.valueOf(sum));
         }
 
 
