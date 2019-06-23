@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -112,9 +114,18 @@ public class homePage extends AppCompatActivity {
         }
 
         if(sum>userr.getBudget()){
+
+            TextView budget = (TextView) findViewById(R.id.budgetview);
+            Animation anim = new AlphaAnimation(0.0f,1.0f);
+            anim.setDuration(20);
+            anim.setStartOffset(20);
+            anim.setRepeatMode(Animation.REVERSE);
+            anim.setRepeatCount(Animation.INFINITE);
+            budget.startAnimation(anim);
+
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
             bx1.setCancelable(true);
-            bx1.setTitle("You are overcoming threshold for");
+            bx1.setTitle("Alert!Spendings getting more than Budget");
             bx1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
