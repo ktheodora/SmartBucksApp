@@ -47,17 +47,12 @@
     </LinearLayout>
 
     <item android:id="@+id/HomePage"
-        android:title="home"
+        android:title="Home"
         android:icon="@drawable/homeicn"/>
 
     <item android:id="@+id/item2"
         android:icon="@drawable/settings"
         android:title="Update Details"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/addIncome"
-        android:icon="@drawable/addincome"
-        android:title="Add Income"
         app:showAsAction="never"/>
 
     <item android:id="@+id/Preferences"
@@ -66,7 +61,7 @@
 
     <item android:id="@+id/report"
         android:icon="@drawable/pdf"
-        android:title="Report"
+        android:title="Download Report"
         app:showAsAction="never"/>
 
     <item android:id="@+id/item12"
@@ -75,7 +70,7 @@
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/logoutBtn"
-        android:title="logout"
+        android:title="Logout"
         android:icon="@drawable/logouticn"/>
 
 </menu>
