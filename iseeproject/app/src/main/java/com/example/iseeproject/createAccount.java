@@ -45,7 +45,6 @@ public class createAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             if  (validate())
-                //if table exists it won't do anything
                 addData();
             }
         });
@@ -128,16 +127,6 @@ public class createAccount extends AppCompatActivity {
                         "All fields are required to proceed", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if((Password.getText().toString()).length() < 6) {
-                Toast t = Toast.makeText(createAccount.this,
-                        "Password must contain at least 6 characters", Toast.LENGTH_LONG);
-                t.show();
-            }
-            else if (peopleDB.isUser(UserName.getText().toString())) {
-                Toast t = Toast.makeText(createAccount.this,
-                        "Username already taken", Toast.LENGTH_LONG);
-                t.show();
-            }
             else if(!(UserName.getText().toString().matches(usnReg))) {
                 //checking if username has a valid form
                 Toast t = Toast.makeText(createAccount.this,
@@ -145,9 +134,19 @@ public class createAccount extends AppCompatActivity {
                 t.show();
                 //to overcome database problems
             }
+            else if (peopleDB.isUser(UserName.getText().toString())) {
+                Toast t = Toast.makeText(createAccount.this,
+                        "Username already taken", Toast.LENGTH_LONG);
+                t.show();
+            }
             else if (!(EmailAdress.getText().toString().matches(emailReg))) {
                 Toast t = Toast.makeText(createAccount.this,
                         "Not a valid email form", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else if((Password.getText().toString()).length() < 6) {
+                Toast t = Toast.makeText(createAccount.this,
+                        "Password must contain at least 6 characters", Toast.LENGTH_LONG);
                 t.show();
             }
             else {
@@ -159,14 +158,7 @@ public class createAccount extends AppCompatActivity {
                 ins = Double.parseDouble(Insurance.getText().toString());
                 bill = Double.parseDouble(Bills.getText().toString());
 
-                if(inc <= (rent + bill + ins)) {
-                    //we have to ensure that income is always more than expenses
-                    //we cannot convert to int until we make sure that fields are not null
-                    Toast t = Toast.makeText(createAccount.this,
-                            "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
-                    t.show();
-                }
-                else if((inc - (rent + bill + ins)) < bud) {
+                if((inc - (rent + bill + ins)) < bud) {
                     //we have to ensure that budget is less than income minus stable expenses
                     Toast t = Toast.makeText(createAccount.this,
                             "Budget cannot be less than income - stable expenses", Toast.LENGTH_LONG);
