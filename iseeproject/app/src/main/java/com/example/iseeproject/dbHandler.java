@@ -178,7 +178,8 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         TABLE_CATEGORIES = username + "_categories";
-        values.put(category, threshold);
+        values.put(KEY_CAT, category);
+        values.put(KEY_THRES, threshold);
         db.update(TABLE_CATEGORIES,values, KEY_CAT + " = ?",
                 new String[]{category});
         db.close(); // Closing database connection
