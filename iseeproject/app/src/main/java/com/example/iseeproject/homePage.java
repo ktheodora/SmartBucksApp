@@ -115,22 +115,30 @@ public class homePage extends AppCompatActivity {
 
         if(sum>userr.getBudget()){
 
-            TextView budget = (TextView) findViewById(R.id.budgetview);
-            Animation anim = new AlphaAnimation(0.0f,1.0f);
-            anim.setDuration(20);
+         
+
+            final TextView budget = (TextView) findViewById(R.id.budgetview);
+
+            final Animation anim = new AlphaAnimation(0.0f,1.0f);
+            anim.setDuration(5);
             anim.setStartOffset(20);
             anim.setRepeatMode(Animation.REVERSE);
             anim.setRepeatCount(Animation.INFINITE);
+
             budget.startAnimation(anim);
+
 
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
             bx1.setCancelable(true);
             bx1.setTitle("Alert!Spendings getting more than Budget");
-            bx1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
                     dialog.cancel();
+                    anim.cancel();
+
                 }
             });
 
