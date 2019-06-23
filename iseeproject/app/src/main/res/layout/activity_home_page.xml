@@ -207,70 +207,28 @@
 
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/graphlabel"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Show graph for:"
-            android:textSize="20sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity = "center"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/Category"
-                android:layout_width="wrap_content"
+                android:id="@+id/addExpenses"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:text="Category"
+                android:layout_marginTop="10dp"
+                android:text="Add Expenses"
                 android:textSize="15sp" />
-        <Button
-            android:id="@+id/Weekly"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:text="Weekly"
-            android:textSize="15sp" />
-        <Button
-            android:id="@+id/Monthly"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:text="Monthly"
-            android:textSize="15sp" />
-    </LinearLayout>
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="250dp"
-            android:background="#ffffff"
-            >
-            </com.github.mikephil.charting.charts.LineChart>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity = "center"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/addExpenses"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="Add Expenses"
-            android:textSize="15sp" />
-        <Button
-            android:id="@+id/addIncome"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="Add Income"
-            android:textSize="15sp" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/addIncome"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Add Income"
+                android:textSize="15sp" />
+        </LinearLayout>
         <Button
             android:id="@+id/showExpenses"
             android:layout_width="wrap_content"
@@ -279,6 +237,38 @@
             android:layout_marginTop="10dp"
             android:text="Show All Expenses"
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/graphlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Expenses Summary Graphs"
+            android:textSize="20sp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartWeek"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+        </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartMon"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+        </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartCat"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+        </com.github.mikephil.charting.charts.LineChart>
     </LinearLayout>
     </ScrollView>
 </android.support.v4.widget.DrawerLayout>

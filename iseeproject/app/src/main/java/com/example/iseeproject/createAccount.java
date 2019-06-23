@@ -111,8 +111,9 @@ public class createAccount extends AppCompatActivity {
         });
     }
 
-        private boolean validate()
-        {   Boolean result = false;
+        private boolean validate() {
+        Boolean result = false;
+        String usnReg = "^[a-zA-Z0-9_]*$", emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 
             if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Name.getText())
                     || TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(EmailAdress.getText())
@@ -131,6 +132,18 @@ public class createAccount extends AppCompatActivity {
             else if (peopleDB.isUser(UserName.getText().toString())) {
                 Toast t = Toast.makeText(createAccount.this,
                         "Username already taken", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else if(!(UserName.getText().toString().matches(usnReg))) {
+                //checking if username has a valid form
+                Toast t = Toast.makeText(createAccount.this,
+                        "Username must contain only alphanumeric or underscore characters", Toast.LENGTH_LONG);
+                t.show();
+                //to overcome database problems
+            }
+            else if (!(EmailAdress.getText().toString().matches(emailReg))) {
+                Toast t = Toast.makeText(createAccount.this,
+                        "Not a valid email form", Toast.LENGTH_LONG);
                 t.show();
             }
             else {
