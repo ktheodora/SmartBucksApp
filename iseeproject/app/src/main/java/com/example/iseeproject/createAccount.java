@@ -113,7 +113,10 @@ public class createAccount extends AppCompatActivity {
 
         private boolean validate() {
         Boolean result = false;
-        String usnReg = "^[a-zA-Z0-9_]*$", emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        String usnReg = "^[a-zA-Z0-9_]*$";
+        String emailReg = "^(.+)@(.+)$";
+            //String emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+
 
             if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Name.getText())
                     || TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(EmailAdress.getText())

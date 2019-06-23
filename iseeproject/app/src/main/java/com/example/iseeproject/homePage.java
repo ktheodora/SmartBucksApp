@@ -115,7 +115,7 @@ public class homePage extends AppCompatActivity {
 
         if(sum>userr.getBudget()){
 
-         
+
 
             final TextView budget = (TextView) findViewById(R.id.budgetview);
 
