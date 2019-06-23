@@ -149,9 +149,6 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
         startActivity(myIntent);
     }
 
-
-    //TODO Double parsed Text Views
-    //TODO Fix beackend to correspond with frontend
     private void updated(double Income, double budget, double Rent, double Bills, double Insurance)
     {
         boolean b = false;

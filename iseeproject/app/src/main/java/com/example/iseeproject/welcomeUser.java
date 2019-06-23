@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -96,8 +97,13 @@ public class welcomeUser extends AppCompatActivity {
             t.show();
         }
         else {
-            //TODO close button for 10 mins
             loginbtn.setEnabled(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loginbtn.setEnabled(true);
+                }
+            }, 5000);
         }
     }
 }

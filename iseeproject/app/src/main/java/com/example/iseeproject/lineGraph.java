@@ -47,7 +47,6 @@ public class lineGraph {
         userr = user;
     }
 
-    //TODO Fix graph style according to chosen option
     public void setWeekGraphStyle(LineChart lineChart, ArrayList<ILineDataSet> lineDataSets) {
 
         ArrayList<Entry> xyCoord = calculateWeekAxes();

@@ -73,6 +73,9 @@ public class loginActivity extends AppCompatActivity {
                         startActivity(myIntent);
                     }
                     else {//reduce number of attempts
+                        Toast t = Toast.makeText(loginActivity.this,
+                                "Incorrect username/password combination", Toast.LENGTH_LONG);
+                        t.show();
                         checkAttempts();
                     }
 
@@ -122,8 +125,13 @@ public class loginActivity extends AppCompatActivity {
             t.show();
         }
         else {
-            //TODO close button for 10 mins
             login.setEnabled(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    login.setEnabled(true);
+                }
+            }, 5000);
         }
     }
 
