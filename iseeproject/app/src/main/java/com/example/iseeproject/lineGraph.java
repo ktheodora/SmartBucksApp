@@ -124,6 +124,10 @@ public class lineGraph {
                 }
             }
             float maxY = (float) maxThres;
+            //if the user overcame the budget
+            if (getMaxY(xyCoord) > maxY) {
+                maxY = getMaxY(xyCoord);
+            }
             lineChart.setVisibleYRange(0, maxY, YAxis.AxisDependency.LEFT);
 
             //because of number of categories
