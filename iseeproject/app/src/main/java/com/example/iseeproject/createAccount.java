@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class createAccount extends AppCompatActivity {
@@ -114,7 +115,10 @@ public class createAccount extends AppCompatActivity {
         Boolean result = false;
         String usnReg = "^[a-zA-Z0-9_]*$";
         //String emailReg = "^(.+)@(.+)$";
-        String emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        final Pattern VALID_EMAIL_ADDRESS_REGEX =
+                    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+            String emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         // email regex is [word(inc. dot, underscore, minus symbols] @ [word] . [word (2-6 chars long)]
 
 
@@ -139,7 +143,7 @@ public class createAccount extends AppCompatActivity {
                         "Username already taken", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if (!(EmailAdress.getText().toString().matches(emailReg))) {
+            else if (!(VALID_EMAIL_ADDRESS_REGEX .matcher(EmailAdress.getText().toString()).find())) {
                 Toast t = Toast.makeText(createAccount.this,
                         "Not a valid email form", Toast.LENGTH_LONG);
                 t.show();
