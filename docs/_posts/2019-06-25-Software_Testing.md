@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Software Testing"
+date: 2019-06-25
+---
+
+
 ![system_test](https://appinventiv.com/blog/wp-content/uploads/2018/11/The-Mobile-App-Testing-Strategies-that-Appinventiv-Follows.jpg){:height="70%" width="70%"}
 
 # Software Testing
@@ -127,8 +134,9 @@ The classes we selected to develop test cases for, at the current beta version o
 
 ### Class 1 - _[createAccount.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/createAccount.java)_
 
+<span align="center">
 ![class_1]({{site.baseurl}}/images/class_1.png){:height="30%" width="30%"}
-
+</span>
 The createAccount class contains the methods onCreate(), routed(), validate() and addData().
 
 Since this class is responsible for checking the user input of the data inserted from the user while he’s registering to the app, we will check some test cases of different data input. 
@@ -177,9 +185,9 @@ Testing Result:
 We were able to identify a not-needed if condition in our validate() method regarding the control of income and stable expenses entered, which we removed after performing this test. 
 
 ### Class 2 - _[login.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/loginActivity.java)_
-
+<span align="center">
 ![class_2]({{site.baseurl}}/images/class_2.png){:height="30%" width="30%"}
-
+</span>
 This class is responsible for checking the username and password and let the user access the homepage.
 
 The test cases we developed we different data input at each case are:
@@ -225,9 +233,9 @@ Testing Result:
 The incorrect attempts were not counted when the username couldn’t be found in the database because we weren’t calling the checkAttempts() method after entering the specific if condition, so the problem was fixed.
 
 ### Class 3 - _[updateDetails.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/updateDetail.java)_
-
+<span align="center">
 ![class_3]({{site.baseurl}}/images/class_3.png){:height="30%" width="30%"}
-
+</span>
 This class is checking the data the user enters when he wishes to update the initial account details. We are using the onCreate(), updated(), updateCats() methods to check and update the data when the user hits the ok button. The methods onItemSelected() and onNothingSelected() refer to the implementation of the drop down list and therefore will not be tested.
 
 The sample test cases we’ll be examining are:
@@ -259,9 +267,9 @@ Testing result
 There weren’t all the correct checks performed inside the updateCats() methods regarding the budget so they were added. There was a problem with the update of the threshold when the drop down list was reloaded and it was also fixed.
 
 ### Class 4 - _[addExpenses.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java)_
-
+<span align="center">
 ![class_4]({{site.baseurl}}/images/class_4.png){:height="30%" width="30%"}
-
+</span>
 Apart from the onCreate() method, we use the checkInput() method to check the data added from the user when he wants to add a new expense.
 
 The methods updateLabel() (for date picker), onItemSelected() and onNothingSelected() (for drop-down spinner elements) are used complimentary and therefore won’t be tested.
@@ -281,9 +289,9 @@ Testing result:
 Initial incorrect check of budget fixed, user was able to choose a future day for adding expense so a max date was set to today.
 
 ### Class 5 - _[addIncome.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/addIncome.java)_
-
+<span align="center">
 ![class_5]({{site.baseurl}}/images/class_5.png){:height="30%" width="30%"}
-
+</span>
 addIncome is a simple class adding the amount entered as additional to the total income of the user, through the validate() and addData() methods.
 
 The sample test cases we will be examining are:
@@ -298,7 +306,6 @@ Inside the confirmation button listener, included in the onCreate() method, the 
 ## Summary of Changes
  
  - Addition of user categories table:
- 
 	- For each new account creation, there is a user categories table created containing two columns.One that holds all of the categories' names and second one for holding the amount of money set as threshold for the specific category. 
 There is a default value of 50.0 money units set as limit for the five basic categories. Of course, the user can add a new category or modify one that doesn't exist by changing the threshold set for it. 
 
@@ -316,4 +323,4 @@ There is a default value of 50.0 money units set as limit for the five basic cat
 
 
 The Beta version of the application is available for download in the following link:
-(https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk)
+<https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk>
