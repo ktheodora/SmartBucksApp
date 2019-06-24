@@ -34,15 +34,15 @@ Procedure:
 1. Open the Application
 2. Click Sign-Up button
 3. Enter the Details: 
-	- Name
-	- Username 
-	- Email Id 
-	- Password 
-	- Monthly Income 
-	- Monthly Budget 
-	- Rent
-	- Bills (Stable)
-	- Insurance 
+- Name
+- Username 
+- Email Id 
+- Password 
+- Monthly Income 
+- Monthly Budget 
+- Rent
+- Bills (Stable)
+- Insurance 
 
 
 ![use_case1]({{site.baseurl}}/images/use_case1.png){:height="70%" width="70%"}
