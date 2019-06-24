@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.iseeproject.addIncome">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/wallnew"
+        android:orientation="horizontal">
+
+        <ImageButton
+
+            android:id="@+id/menuLines"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:background="#00000000"
+            android:layout_marginLeft="2dp"
+            app:srcCompat="@drawable/menu7"
+            android:layout_gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:layout_marginLeft="20dp"
+            android:text="@string/officialname"
+            android:textColor="#ffffff"
+            android:textSize="50sp" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/ourlogo" />
+
+
+    </LinearLayout>
+        <TextView
+            android:id="@+id/ExtraIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:text="Additional Income"
+            android:textSize="25sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="150dp">
+
+            <ImageView
+                android:id="@+id/monthlyinc"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/coin" />
+
+            <EditText
+                android:id="@+id/extraInc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="Enter Amount"
+                android:inputType="numberDecimal"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Add"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:layout_marginTop="100dp"
+            />
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="BACK"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</android.support.v4.widget.DrawerLayout>

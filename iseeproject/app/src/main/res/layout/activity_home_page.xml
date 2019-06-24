@@ -5,16 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage">
+    tools:context="com.example.iseeproject.homePage">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
 
-    </android.support.design.widget.NavigationView>
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,11 +26,19 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="80dp"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/menu_lines"
+            <ImageButton
+
+                android:id="@+id/menuLines"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:padding="1dp"
+                android:background="#00000000"
+                android:layout_marginLeft="2dp"
+                app:srcCompat="@drawable/menu7"
+                android:layout_gravity="start"
                 />
 
             <TextView
@@ -58,12 +64,12 @@
 
         </LinearLayout>
 
+
         <TextView
             android:id="@+id/HomePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Home Page"
             android:textSize="25sp" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -209,6 +215,7 @@
 
         </LinearLayout>
         <LinearLayout
+<<<<<<< HEAD
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -252,13 +259,70 @@
             android:layout_height="250dp"
             android:background="#ffffff" />
 
+=======
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity = "center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/addExpenses"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Add Expenses"
+                android:textSize="15sp" />
+            <Button
+                android:id="@+id/addIncome"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Add Income"
+                android:textSize="15sp" />
+        </LinearLayout>
+>>>>>>> devel/theo
         <Button
-            android:id="@+id/addExpenses"
-            android:layout_width="150dp"
+            android:id="@+id/showExpenses"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+<<<<<<< HEAD
             android:text="Add Expenses"
+=======
+            android:text="Show All Expenses"
+>>>>>>> devel/theo
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/graphlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Expenses Summary Graphs"
+            android:textSize="20sp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartWeek"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+        </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartMon"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="250dp"
+            android:background="#ffffff"
+            >
+        </com.github.mikephil.charting.charts.LineChart>
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
     </LinearLayout>
+    </ScrollView>
+
 </android.support.v4.widget.DrawerLayout>

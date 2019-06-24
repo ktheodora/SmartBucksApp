@@ -5,16 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".updateDetail">
+    tools:context="com.example.iseeproject.updateDetail">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,11 +21,19 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="80dp"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/menu_lines"
+            <ImageButton
+
+                android:id="@+id/menuLines"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:padding="1dp"
+                android:background="#00000000"
+                android:layout_marginLeft="2dp"
+                app:srcCompat="@drawable/menu7"
+                android:layout_gravity="start"
                 />
 
             <TextView
@@ -62,15 +65,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_gravity="center"
-            android:text="@string/update_details"
-            android:textSize="25sp"
+            android:text="Update Basic Details"
+            android:textSize="20sp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:id="@+id/monthlyinc"
@@ -89,6 +92,35 @@
                 android:layout_marginRight="20dp"
                 android:ems="10"
                 android:hint="Monthly Income"
+                android:inputType="numberDecimal"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/monthlybud"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/coin" />
+
+            <EditText
+                android:id="@+id/entBud"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="Monthly Budget"
                 android:inputType="numberDecimal"
                 android:textSize="20sp"
                 />
@@ -180,17 +212,120 @@
                 />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/newExpCatLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:text="Create new expense category:"
+            android:textSize="20sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
 
-        <Button
-        android:id="@+id/finButton"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="200dp"
-        android:text="@string/finish"
-        android:layout_gravity="center"
-        android:textSize="15sp"/>
+            <ImageView
+                android:id="@+id/caticon"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/drop" />
 
+            <EditText
+                android:id="@+id/entCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="Category Name"
+                android:inputType="textPersonName"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:id="@+id/entThres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="Category Threshold"
+                android:inputType="numberDecimal"
+                android:textSize="15sp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/newCatThresLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:text="Change threshold for category"
+            android:textSize="20sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+
+            <EditText
+                android:id="@+id/newThres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="New Threshold Amount"
+                android:inputType="numberDecimal"
+                android:textSize="15sp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity = "center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/finButton"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="OK"
+                android:textSize="15sp"/>
+
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="BACK"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>
