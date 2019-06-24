@@ -125,7 +125,7 @@ The classes we selected to develop test cases for, at the current beta version o
 - **addExpenses.java**
 - **addIncome.java**
 
-### Class 1 - createAccount.java
+### Class 1 - _[createAccount.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/createAccount.java)_
 
 ![class_1]({{site.baseurl}}/images/class_1.png){:height="30%" width="30%"}
 
@@ -176,7 +176,7 @@ Testing Result:
 
 We were able to identify a not-needed if condition in our validate() method regarding the control of income and stable expenses entered, which we removed after performing this test. 
 
-### Class 2 - login.java
+### Class 2 - _[login.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/loginActivity.java)_
 
 ![class_2]({{site.baseurl}}/images/class_2.png){:height="30%" width="30%"}
 
@@ -224,7 +224,7 @@ Testing Result:
 
 The incorrect attempts were not counted when the username couldn’t be found in the database because we weren’t calling the checkAttempts() method after entering the specific if condition, so the problem was fixed.
 
-### Class 3 - updateDetails.java
+### Class 3 - _[updateDetails.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/updateDetail.java)_
 
 ![class_3]({{site.baseurl}}/images/class_3.png){:height="30%" width="30%"}
 
@@ -258,7 +258,7 @@ Testing result
 
 There weren’t all the correct checks performed inside the updateCats() methods regarding the budget so they were added. There was a problem with the update of the threshold when the drop down list was reloaded and it was also fixed.
 
-### Class 4 - addExpenses.java
+### Class 4 - _[addExpenses.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/enterExpenses.java)_
 
 ![class_4]({{site.baseurl}}/images/class_4.png){:height="30%" width="30%"}
 
@@ -280,7 +280,7 @@ Testing result:
 
 Initial incorrect check of budget fixed, user was able to choose a future day for adding expense so a max date was set to today.
 
-### Class 5 - addIncome.java
+### Class 5 - _[addIncome.java](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/src/main/java/com/example/iseeproject/addIncome.java)_
 
 ![class_5]({{site.baseurl}}/images/class_5.png){:height="30%" width="30%"}
 
