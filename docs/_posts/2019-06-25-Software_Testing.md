@@ -127,7 +127,7 @@ The classes we selected to develop test cases for, at the current beta version o
 
 ### Class 1 - createAccount.java
 
-![class_1]({{site.baseurl}}/images/class_1.png){:height="30" width="30"}
+![class_1]({{site.baseurl}}/images/class_1.png){:height="30%" width="30%"}
 
 The createAccount class contains the methods onCreate(), routed(), validate() and addData().
 
