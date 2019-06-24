@@ -114,18 +114,15 @@ public class homePage extends AppCompatActivity {
 
             ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
             for (Expenses expense : exp) {
-                sum+=expense.getPrice();
+                sum += expense.getPrice();
 
             }
         }
-        else{
-            expensesView.setText(String.valueOf(sum));
-        }
+        expensesView.setText(String.valueOf(sum));
 
         if(sum>userr.getBudget()){
 
            // final TextView budget = (TextView) findViewById(R.id.budgetview);
-            expensesView.setText(String.valueOf(sum));
             final Animation anim = new AlphaAnimation(0.0f,1.0f);
             anim.setDuration(5);
             anim.setStartOffset(20);
@@ -133,7 +130,6 @@ public class homePage extends AppCompatActivity {
             anim.setRepeatCount(Animation.INFINITE);
 
             budgetView.startAnimation(anim);
-
 
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
             bx1.setCancelable(true);
@@ -151,11 +147,6 @@ public class homePage extends AppCompatActivity {
 
             AlertDialog alertDialog = bx1.create();
             alertDialog.show();
-
-//            Toast t = Toast.makeText(homePage.this,
-//                    "Be careful! You are overcoming threshold for" , Toast.LENGTH_LONG);
-//            t.show();
-
         }
 
 
