@@ -1,4 +1,4 @@
-![system_test](https://appinventiv.com/blog/wp-content/uploads/2018/11/The-Mobile-App-Testing-Strategies-that-Appinventiv-Follows.jpg)
+![system_test](https://appinventiv.com/blog/wp-content/uploads/2018/11/The-Mobile-App-Testing-Strategies-that-Appinventiv-Follows.jpg){:height="70%" width="70%"}
 
 # Software Testing
 
