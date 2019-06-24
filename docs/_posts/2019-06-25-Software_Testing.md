@@ -312,3 +312,7 @@ User is able to view his last transactions sorted by date from a homepage button
 The user is able to download the report as a pdf directly from the menu options. The pdf includes a list with his last transactions (more statistics to be added)
 
 - Created lineGraph and sbMenu classes: All the methods used to display graph data are included in the lineGraph class and we simply call an object of the class in the homepage, and same for sbMenu (stands for SmartBucks menu) all the redirects and the code needed for the menu options are held in this class and an object is called for every activity where the menu is displayed
+
+
+The Beta version of the application is available for download in the following link:
+https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk
