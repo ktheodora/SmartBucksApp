@@ -305,7 +305,7 @@ There is a default value of 50.0 money units set as limit for the five basic cat
 - Addition of multiple graph statistics display:
 	- The user is able to view the sum of his expenses per day of the most recent week, per week of the most recent month and per category, all in a modern graph view directly from the homepage.
 
--Addition of list of expenses:
+- Addition of list of expenses:
 	- User is able to view his last transactions sorted by date from a homepage button. 
 
 - Addition of SmartBucks report:
@@ -316,4 +316,4 @@ There is a default value of 50.0 money units set as limit for the five basic cat
 
 
 The Beta version of the application is available for download in the following link:
-https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk
+(https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk)
