@@ -299,19 +299,20 @@ Inside the confirmation button listener, included in the onCreate() method, the 
  
  - Addition of user categories table:
  
-For each new account creation, there is a user categories table created containing two columns.One that holds all of the categories' names and second one for holding the amount of money set as threshold for the specific category. 
+	- For each new account creation, there is a user categories table created containing two columns.One that holds all of the categories' names and second one for holding the amount of money set as threshold for the specific category. 
 There is a default value of 50.0 money units set as limit for the five basic categories. Of course, the user can add a new category or modify one that doesn't exist by changing the threshold set for it. 
 
 - Addition of multiple graph statistics display:
-The user is able to view the sum of his expenses per day of the most recent week, per week of the most recent month and per category, all in a modern graph view directly from the homepage.
+	- The user is able to view the sum of his expenses per day of the most recent week, per week of the most recent month and per category, all in a modern graph view directly from the homepage.
 
 -Addition of list of expenses:
-User is able to view his last transactions sorted by date from a homepage button. 
+	- User is able to view his last transactions sorted by date from a homepage button. 
 
 - Addition of SmartBucks report:
-The user is able to download the report as a pdf directly from the menu options. The pdf includes a list with his last transactions (more statistics to be added)
+	- The user is able to download the report as a pdf directly from the menu options. The pdf includes a list with his last transactions (more statistics to be added)
 
-- Created lineGraph and sbMenu classes: All the methods used to display graph data are included in the lineGraph class and we simply call an object of the class in the homepage, and same for sbMenu (stands for SmartBucks menu) all the redirects and the code needed for the menu options are held in this class and an object is called for every activity where the menu is displayed
+- Created lineGraph and sbMenu classes: 
+	- All the methods used to display graph data are included in the lineGraph class and we simply call an object of the class in the homepage, and same for sbMenu (stands for SmartBucks menu) all the redirects and the code needed for the menu options are held in this class and an object is called for every activity where the menu is displayed
 
 
 The Beta version of the application is available for download in the following link:
