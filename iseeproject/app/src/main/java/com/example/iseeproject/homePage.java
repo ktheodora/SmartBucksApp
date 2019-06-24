@@ -30,6 +30,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -70,6 +73,7 @@ public class homePage extends AppCompatActivity {
     ArrayList<ILineDataSet> lineDataSets2 = new ArrayList<>();
     ArrayList<ILineDataSet> lineDataSets3 = new ArrayList<>();
     lineGraph lg;
+    PieChartView pieChartView;
     int choice;
 
 
@@ -227,12 +231,12 @@ public class homePage extends AppCompatActivity {
 
         lineChart1 = (LineChart)findViewById(R.id.lineChartWeek);
         lineChart2 = (LineChart)findViewById(R.id.lineChartMon);
-        lineChart3 = (LineChart)findViewById(R.id.lineChartCat);
+        pieChartView = findViewById(R.id.chart);
 
         lg = new lineGraph(userr,peopleDB);
         lg.setWeekGraphStyle(lineChart1,lineDataSets2);
         lg.setMonthGraphStyle(lineChart2,lineDataSets3);
-        lg.setCatGraphStyle(lineChart3,lineDataSets1);
+        lg.setCatGraphStyle(pieChartView);
 
     }
 
