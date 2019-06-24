@@ -127,7 +127,7 @@ The classes we selected to develop test cases for, at the current beta version o
 
 ### Class 1 - createAccount.java
 
-![class_1]({{site.baseurl}}/images/class_1.png){:height="70%" width="70%"}
+![class_1]({{site.baseurl}}/images/class_1.png){:height="30" width="30"}
 
 The createAccount class contains the methods onCreate(), routed(), validate() and addData().
 
@@ -178,7 +178,7 @@ We were able to identify a not-needed if condition in our validate() method rega
 
 ### Class 2 - login.java
 
-![class_2]({{site.baseurl}}/images/class_2.png){:height="70%" width="70%"}
+![class_2]({{site.baseurl}}/images/class_2.png){:height="30%" width="30%"}
 
 This class is responsible for checking the username and password and let the user access the homepage.
 
@@ -226,7 +226,7 @@ The incorrect attempts were not counted when the username couldn’t be found in
 
 ### Class 3 - updateDetails.java
 
-![class_3]({{site.baseurl}}/images/class_3.png){:height="70%" width="70%"}
+![class_3]({{site.baseurl}}/images/class_3.png){:height="30%" width="30%"}
 
 This class is checking the data the user enters when he wishes to update the initial account details. We are using the onCreate(), updated(), updateCats() methods to check and update the data when the user hits the ok button. The methods onItemSelected() and onNothingSelected() refer to the implementation of the drop down list and therefore will not be tested.
 
@@ -260,7 +260,7 @@ There weren’t all the correct checks performed inside the updateCats() methods
 
 ### Class 4 - addExpenses.java
 
-![class_4]({{site.baseurl}}/images/class_4.png){:height="70%" width="70%"}
+![class_4]({{site.baseurl}}/images/class_4.png){:height="30%" width="30%"}
 
 Apart from the onCreate() method, we use the checkInput() method to check the data added from the user when he wants to add a new expense.
 
@@ -282,7 +282,7 @@ Initial incorrect check of budget fixed, user was able to choose a future day fo
 
 ### Class 5 - addIncome.java
 
-![class_5]({{site.baseurl}}/images/class_5.png){:height="70%" width="70%"}
+![class_5]({{site.baseurl}}/images/class_5.png){:height="30%" width="30%"}
 
 addIncome is a simple class adding the amount entered as additional to the total income of the user, through the validate() and addData() methods.
 
@@ -297,14 +297,18 @@ Inside the confirmation button listener, included in the onCreate() method, the 
 
 ## Summary of Changes
  
- - Addition of user categories' table:
+ - Addition of user categories table:
+ 
 For each new account creation, there is a user categories table created containing two columns.One that holds all of the categories' names and second one for holding the amount of money set as threshold for the specific category. 
-There is a default value of 50.0 money units set as limit for the five basic categories. Of course, the user can add a new category 
-or modify one that doesn't exist by changing the threshold set for it. 
+There is a default value of 50.0 money units set as limit for the five basic categories. Of course, the user can add a new category or modify one that doesn't exist by changing the threshold set for it. 
+
 - Addition of multiple graph statistics display:
 The user is able to view the sum of his expenses per day of the most recent week, per week of the most recent month and per category, all in a modern graph view directly from the homepage.
+
 -Addition of list of expenses:
 User is able to view his last transactions sorted by date from a homepage button. 
+
 - Addition of SmartBucks report:
 The user is able to download the report as a pdf directly from the menu options. The pdf includes a list with his last transactions (more statistics to be added)
+
 - Created lineGraph and sbMenu classes: All the methods used to display graph data are included in the lineGraph class and we simply call an object of the class in the homepage, and same for sbMenu (stands for SmartBucks menu) all the redirects and the code needed for the menu options are held in this class and an object is called for every activity where the menu is displayed
