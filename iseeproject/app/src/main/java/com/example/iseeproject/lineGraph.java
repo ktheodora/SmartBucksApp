@@ -149,7 +149,7 @@ public class lineGraph {
 
             PieChartData pieChartData = new PieChartData(pie_Data);
             pieChartData.setHasLabels(true).setValueLabelTextSize(14);
-            pieChartData.setHasCenterCircle(true).setCenterText1("Expenses per category %").setCenterText1FontSize(15).setCenterText1Color(Color.parseColor("#FFFFFF"));
+            pieChartData.setHasCenterCircle(true).setCenterText1("Expenses per category %").setCenterText1FontSize(15).setCenterText1Color(Color.BLACK);
             pieChartView.setPieChartData(pieChartData);
 
         }
