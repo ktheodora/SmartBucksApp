@@ -45,7 +45,7 @@ Procedure:
 	- Insurance 
 
 
-![use_case1]({{site.baseurl}}/images/use_case1){:height="70%" width="70%"}
+![use_case1]({{site.baseurl}}/images/use_case1.png){:height="70%" width="70%"}
 
 
 ### Use Case 2 - Log In 
@@ -59,7 +59,7 @@ Procedure:
 	- Password 
 4. Click Login
 
-![use_case2]({{site.baseurl}}/images/use_case2){:height="70%" width="70%"}
+![use_case2]({{site.baseurl}}/images/use_case2.png){:height="70%" width="70%"}
 
 ### Use Case 3 - Adding an Expense 
 
@@ -75,7 +75,7 @@ Procedure :
 	- Select the Mode of Payment 
 5. Click Confirm. 
 
-![use_case3]({{site.baseurl}}/images/use_case3){:height="70%" width="70%"}
+![use_case3]({{site.baseurl}}/images/use_case3.png){:height="70%" width="70%"}
 
 ### Use Case 4 - Creating a new Category 
 
@@ -90,7 +90,7 @@ Procedure:
 	- Threshold for that category 
 6. Click Ok.
 
-![use_case4]({{site.baseurl}}/images/use_case4){:height="70%" width="70%"}
+![use_case4]({{site.baseurl}}/images/use_case4.png){:height="70%" width="70%"}
 
 ### Use Case 5 - Update Details 
 	
@@ -109,7 +109,7 @@ Procedure:
 	- Threshold of a Catergory (Service)
 6. Click Ok. 
 
-![use_case5]({{site.baseurl}}/images/use_case5){:height="70%" width="70%"}
+![use_case5]({{site.baseurl}}/images/use_case5.png){:height="70%" width="70%"}
 
 ## White Box Testing 
 
@@ -127,7 +127,7 @@ The classes we selected to develop test cases for, at the current beta version o
 
 ### Class 1 - createAccount.java
 
-![class_1]({{site.baseurl}}/images/class_1){:height="70%" width="70%"}
+![class_1]({{site.baseurl}}/images/class_1.png){:height="70%" width="70%"}
 
 The createAccount class contains the methods onCreate(), routed(), validate() and addData().
 
@@ -178,7 +178,7 @@ We were able to identify a not-needed if condition in our validate() method rega
 
 ### Class 2 - login.java
 
-![class_2]({{site.baseurl}}/images/class_2){:height="70%" width="70%"}
+![class_2]({{site.baseurl}}/images/class_2.png){:height="70%" width="70%"}
 
 This class is responsible for checking the username and password and let the user access the homepage.
 
@@ -226,7 +226,7 @@ The incorrect attempts were not counted when the username couldn’t be found in
 
 ### Class 3 - updateDetails.java
 
-![class_3]({{site.baseurl}}/images/class_3){:height="70%" width="70%"}
+![class_3]({{site.baseurl}}/images/class_3.png){:height="70%" width="70%"}
 
 This class is checking the data the user enters when he wishes to update the initial account details. We are using the onCreate(), updated(), updateCats() methods to check and update the data when the user hits the ok button. The methods onItemSelected() and onNothingSelected() refer to the implementation of the drop down list and therefore will not be tested.
 
@@ -260,7 +260,7 @@ There weren’t all the correct checks performed inside the updateCats() methods
 
 ### Class 4 - addExpenses.java
 
-![class_4]({{site.baseurl}}/images/class_4){:height="70%" width="70%"}
+![class_4]({{site.baseurl}}/images/class_4.png){:height="70%" width="70%"}
 
 Apart from the onCreate() method, we use the checkInput() method to check the data added from the user when he wants to add a new expense.
 
@@ -282,7 +282,7 @@ Initial incorrect check of budget fixed, user was able to choose a future day fo
 
 ### Class 5 - addIncome.java
 
-![class_5]({{site.baseurl}}/images/class_5){:height="70%" width="70%"}
+![class_5]({{site.baseurl}}/images/class_5.png){:height="70%" width="70%"}
 
 addIncome is a simple class adding the amount entered as additional to the total income of the user, through the validate() and addData() methods.
 
