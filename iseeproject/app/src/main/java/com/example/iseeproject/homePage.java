@@ -93,6 +93,7 @@ public class homePage extends AppCompatActivity {
 
         userr = peopleDB.getUser(usr);
 
+
         //Set values of Text Views in homePage
 
         TextView homeView = (TextView) findViewById(R.id.HomePage);
@@ -165,6 +166,18 @@ public class homePage extends AppCompatActivity {
                 Intent myIntent = new Intent(homePage.this, listActivity.class);
                 Bundle b = new Bundle();
                b.putString("username",usr);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+            }
+        });
+
+        Button addIncome = (Button) findViewById(R.id.addIncome);
+        addIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(homePage.this, addIncome.class);
+                Bundle b = new Bundle();
+                b.putString("username",usr);
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }

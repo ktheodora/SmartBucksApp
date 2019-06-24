@@ -137,8 +137,7 @@ public class lineGraph {
                 percent = (long) div;
                 percentsum += percent;
                 description = entry.getKey() + " : " +
-                        String.valueOf(entry.getValue()) + "$ \n (" + String.valueOf(percent) + "%)";
-                System.out.println(percent + description);
+                        String.valueOf(entry.getValue()) + "€ \n (" + String.valueOf(percent) + "%)";
                 r = rand.nextInt(255);
                 g = rand.nextInt(255);
                 b = rand.nextInt(255);

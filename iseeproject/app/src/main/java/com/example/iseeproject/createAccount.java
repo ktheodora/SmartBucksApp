@@ -51,9 +51,6 @@ public class createAccount extends AppCompatActivity {
         });
     }
 
-
-
-
     private void routed(){
 
         UserName   = (EditText)findViewById(R.id.etUsname);
@@ -93,7 +90,7 @@ public class createAccount extends AppCompatActivity {
                 boolean insertData = peopleDB.addUser(user1);
 
                 if (insertData){
-                    peopleDB.addCatThresholds(username);
+                    peopleDB.addCatThresholds(username, user1.getBudget());
                     Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
                     //start new activity
                     Intent myIntent = new Intent(createAccount.this,
@@ -165,7 +162,8 @@ public class createAccount extends AppCompatActivity {
                 if((inc - (rent + bill + ins)) < bud) {
                     //we have to ensure that budget is less than income minus stable expenses
                     Toast t = Toast.makeText(createAccount.this,
-                            "Budget cannot be less than income - stable expenses", Toast.LENGTH_LONG);
+                            "Budget cannot be more than income - stable expenses. " +
+                                    "Please decrease budget or increase income", Toast.LENGTH_LONG);
                     t.show();
                 }
                 else{
