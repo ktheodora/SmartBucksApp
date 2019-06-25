@@ -89,7 +89,28 @@ public class homePage extends AppCompatActivity {
 
         if (b != null) {
             usr = b.getString("username");
+            if (b.containsKey("createAccount")) {
+                //Show dialog box with app rules
+                AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
+                bx1.setTitle("Welcome to the SmartBucks App!");
+                bx1.setMessage("\n To enter new expense/income source" +
+                        ", click on the 'Add Expenses/Income' buttons located on the homepage." +
+                        "\n To update your details/expenses categories," +
+                        "+ navigate to Menu-> Update Details.");
+                bx1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+
+                    }
+                });
+
+                AlertDialog alertDialog = bx1.create();
+                alertDialog.show();
+            }
         }
+
 
         userr = peopleDB.getUser(usr);
 
