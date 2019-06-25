@@ -3,10 +3,12 @@ package com.example.iseeproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
@@ -18,9 +20,8 @@ public class listActivity extends AppCompatActivity {
     ListView expenselistview;
     dbHandler dbhandler;
     String usr = "";
-
-
     String username;
+    SearchView sv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,10 @@ public class listActivity extends AppCompatActivity {
         dbhandler = new dbHandler(this);
         ArrayList<Expenses>  explist = dbhandler.getAllExpenses(userr);
 
+
+        sv=(SearchView) findViewById(R.id.search_view);
+
+
         ArrayList<HashMap<String,String>> myMapList = new ArrayList<>();
         for(int i=0; i<explist.size();i++){
             HashMap<String,String> myMap = new HashMap<>();
@@ -50,10 +55,26 @@ public class listActivity extends AppCompatActivity {
             myMapList.add(myMap);
         }
 
-        ListAdapter adapter = new SimpleAdapter(listActivity.this,myMapList,R.layout.row,
+        final ListAdapter adapter = new SimpleAdapter(listActivity.this,myMapList,R.layout.row,
                 new String[]{"Date","Amount","Category","Payment_Method"},
                 new int[]{R.id.textviewdate,R.id.textviewamount,R.id.textviewcategory,R.id.textviewpaymenttype});
         expenselistview.setAdapter(adapter);
+
+
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ((SimpleAdapter) adapter).getFilter().filter(newText);
+                 return false;
+            }
+        });
+
 
 
         Button back = (Button) findViewById(R.id.backBtn);
@@ -70,6 +91,17 @@ public class listActivity extends AppCompatActivity {
 
 
 
+
+
         });
+
+
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.drawermenu, menu);
+        return true;
+    }
+
 }
