@@ -12,11 +12,18 @@ import android.widget.Button;
 
 public class mainActivity extends AppCompatActivity {
 
+    boolean loginstate;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            loginstate = b.getBoolean("state");
+        }
 
         Button login = (Button)findViewById(R.id.btnLogin);
         Button signup = (Button)findViewById(R.id.btnSignup);
@@ -44,6 +51,9 @@ public class mainActivity extends AppCompatActivity {
     private void routelogin()
     {
         Intent intent = new Intent(mainActivity.this, loginActivity.class);
+        Bundle b = new Bundle();
+        b.putBoolean("state",loginstate);
+        intent.putExtras(b); //Put your id to your next Intent
         startActivity(intent);
     }
 

@@ -17,8 +17,10 @@ import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class updateDetail extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -30,6 +32,8 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
     private ImageButton menuBtn;
     Spinner spinner;
     User usr;
+    Map<String, Double> cats;
+    List<String> categories = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +49,11 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
 
         usr = peopleDB.getUser(username);
 
-
-        Set<String> cats = peopleDB.getThresholds(username).keySet();
-        List<String> categories= Arrays.asList(cats.toArray(new String[cats.size()]));
+        cats = peopleDB.getThresholds(username);
+        categories.clear();
+        for (Map.Entry<String, Double> entry : cats.entrySet()) {
+            categories.add(entry.getKey()+"- max €:" + String.valueOf(entry.getValue()) );
+        }
 
         spinner= (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
@@ -149,9 +155,6 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
         startActivity(myIntent);
     }
 
-
-    //TODO Double parsed Text Views
-    //TODO Fix beackend to correspond with frontend
     private void updated(double Income, double budget, double Rent, double Bills, double Insurance)
     {
         boolean b = false;
@@ -197,9 +200,10 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
                     "No values entered!", Toast.LENGTH_LONG);
             t.show();
         }
-        else if ((Income) <= Rent + Bills + Insurance ) {
+        else if ((usr.getIncome() - usr.getRent() + usr.getBills() + usr.getInsurance()) < usr.getBudget() ) {
             Toast t = Toast.makeText(updateDetail.this,
-                    "Total income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
+                    "Budget cannot be more than income - stable expenses. " +
+                            "Please decrease budget or increase income", Toast.LENGTH_LONG);
             t.show();
         }
         else {
@@ -247,28 +251,57 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
 
         if (b) {
             String newCat = entCat.getText().toString();
-            if (!db.categoryExists(username,newCat)) {
-                Double newThres = Double.parseDouble(entThres.getText().toString());
+            Double newThres = Double.parseDouble(entThres.getText().toString());
+            double sum = 0;
+            Map<String, Double> map = peopleDB.getThresholds(username);
+            for (Map.Entry<String, Double> entry : map.entrySet()) {
+                sum += entry.getValue();
+            }
+            if((sum + newThres) > usr.getBudget()) {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Total of thresholds are more than budget." +
+                                "Please increase budget or decrease another threshold" + newCat, Toast.LENGTH_LONG);
+                t.show();
+            }
+            else if (db.categoryExists(username,newCat)) {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Category name already exists" , Toast.LENGTH_LONG);
+                t.show();
+            }else {
                 db.addNewCategory(username, newCat, newThres);
                 Toast t = Toast.makeText(updateDetail.this,
                         "Succesful addition of category " + newCat, Toast.LENGTH_LONG);
                 t.show();
-            }else {
-                Toast t = Toast.makeText(updateDetail.this,
-                        "Category name already exists" + newCat, Toast.LENGTH_LONG);
-                t.show();
+                goToDetails();
             }
         }
 
         EditText updatedThres = (EditText) findViewById(R.id.newThres);
         if (!TextUtils.isEmpty(updatedThres.getText())) {
             //only if a threshold is given
-            String updatedCat = spinner.getSelectedItem().toString();
             Double upThres = Double.parseDouble(updatedThres.getText().toString());
-            db.updateCategory(username, updatedCat, upThres);
-            Toast t = Toast.makeText(updateDetail.this,
-                    "Succesful update of "+ updatedCat +" threshold", Toast.LENGTH_LONG);
-            t.show();
+            String spinnerItem = spinner.getSelectedItem().toString();
+            String[] splitter = spinnerItem.split("-");
+            String updatedCat = splitter[0];
+            double sum = 0;
+            Map<String, Double> map = peopleDB.getThresholds(username);
+            for (Map.Entry<String, Double> entry : map.entrySet()) {
+                sum += entry.getValue();
+            }
+            if((sum + upThres) > usr.getBudget()) {
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Total of thresholds with " + updatedCat +" are more than budget." +
+                                "Please increase budget or decrease another threshold" , Toast.LENGTH_LONG);
+                t.show();
+            }
+            else {
+                //because we are displaying another name
+                db.updateCategory(username, updatedCat, upThres);
+                Toast t = Toast.makeText(updateDetail.this,
+                        "Successful update of " + updatedCat + " threshold", Toast.LENGTH_LONG);
+                t.show();
+                goToDetails();
+            }
         }
         db.close();
     }

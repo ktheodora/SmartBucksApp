@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -13,6 +14,10 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.itextpdf.text.pdf.parser.Line;
+
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,10 +31,16 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
+
 import android.content.Context;
+
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
 
 public class lineGraph {
 
@@ -47,7 +58,6 @@ public class lineGraph {
         userr = user;
     }
 
-    //TODO Fix graph style according to chosen option
     public void setWeekGraphStyle(LineChart lineChart, ArrayList<ILineDataSet> lineDataSets) {
 
         ArrayList<Entry> xyCoord = calculateWeekAxes();
@@ -101,41 +111,46 @@ public class lineGraph {
         }
     }
 
-    public void setCatGraphStyle(LineChart lineChart, ArrayList<ILineDataSet> lineDataSets) {
+    public void setCatGraphStyle(PieChartView pieChartView) {
 
-        ArrayList<Entry> xyCoord = calculateCatAxes();
+        Map<String, Double> xyCoord = calculateCatAxes();
         if (!xyCoord.isEmpty()) {
-            LineDataSet lineDataSet = new LineDataSet(xyCoord, "expenses per category");
-            lineDataSet.setDrawCircles(true);
-            lineDataSet.setColor(Color.GREEN);
-
-            lineDataSets.add(lineDataSet);
-            //removes xaxes
-            lineChart.setData(new LineData(lineDataSets));
-
-            Map<String, Double> thresholds = peopleDB.getThresholds(userr.getUsername());
-
-            //the graph has a maximum y axis range the biggest
-            // threshold of the expenses categories
-            double maxThres = 0.0;
-            for (Map.Entry<String, Double> t : thresholds.entrySet()) {
-                if (t.getValue() > maxThres) {
-                    maxThres = t.getValue();
-                }
+            //first getting the sum of all expenses to be dividing with
+            List<Expenses> expenses = peopleDB.getAllExpenses(userr);
+            double sum = 0.0;
+            for (Expenses exp : expenses) {
+                sum += exp.getPrice();
             }
-            float maxY = (float) maxThres;
-            lineChart.setVisibleYRange(0, maxY, YAxis.AxisDependency.LEFT);
+            //getting random colors to color the pieces of the chart
+            Random rand = new Random();
+            int r = rand.nextInt(255);
+            int g = rand.nextInt(255);
+            int b = rand.nextInt(255);
 
-            //because of number of categories
-            lineChart.setVisibleXRange(0, thresholds.size());
+            List<SliceValue> pie_Data = new ArrayList<>();
+            long percent = 0, percentsum = 0;
+            double div;
+            String description = "";
+            for (Map.Entry<String,Double> entry : xyCoord.entrySet()) {
+                if (entry.getValue() > 0){
+                    div = Math.round((entry.getValue().doubleValue() / sum) * 100);
+                percent = (long) div;
+                percentsum += percent;
+                description = entry.getKey() + " : " +
+                        String.valueOf(entry.getValue()) + "€ \n (" + String.valueOf(percent) + "%)";
+                r = rand.nextInt(255);
+                g = rand.nextInt(255);
+                b = rand.nextInt(255);
+                pie_Data.add(new SliceValue(percent, Color.rgb(r, g, b)).setLabel(description));
+            }
+            }
+            //pie_Data.add(new SliceValue(40, Color.rgb(r,g,b)).setLabel("yolo"));
 
-            lineChart.setTouchEnabled(true);
-            lineChart.setDragEnabled(true);
-            /*Description d = new Description();
-            d.setText("Tuesday");
-            d.setPosition(1,10);
-            d.setTextAlign(Paint.Align.CENTER);
-            lineChart.setDescription(d);*/
+            PieChartData pieChartData = new PieChartData(pie_Data);
+            pieChartData.setHasLabels(true).setValueLabelTextSize(14);
+            pieChartData.setHasCenterCircle(true).setCenterText1("Expenses per category %").setCenterText1FontSize(15).setCenterText1Color(Color.BLACK);
+            pieChartView.setPieChartData(pieChartData);
+
         }
     }
 
@@ -215,15 +230,14 @@ public class lineGraph {
         return xyCoord;
     }
 
-    public ArrayList<Entry> calculateCatAxes() {
-        ArrayList<Entry> xyCoord = new ArrayList<>();
+    public Map<String, Double> calculateCatAxes() {
+        Map<String, Double> xyCoord = new HashMap<String, Double>();
 
         //getting the expenses and their dates
         if (peopleDB.expensesExist(userr)) {
             Map<String, Double> map = peopleDB.getThresholds(userr.getUsername());
             List<Expenses> expenses = peopleDB.getAllExpenses(userr);
             double catsum = 0;
-            int counter = 0;
             for (Map.Entry<String,Double> entry : map.entrySet()) {
                 for (Expenses exp : expenses) {
                     //search all expenses and add to the one of this category
@@ -233,11 +247,8 @@ public class lineGraph {
                 }
                 //after all expenses of the day are added,
                 //add this as a new entry to the LineGraph
-                float x = (float) (counter);//bc x starts from 1
-                float y = (float) catsum;
-                xyCoord.add(new Entry(x, y));
-                catsum = 0;//make daysum 0 again for the next day
-                counter++;
+                xyCoord.put(entry.getKey(),catsum);
+                catsum = 0;
             }
         }
         return xyCoord;

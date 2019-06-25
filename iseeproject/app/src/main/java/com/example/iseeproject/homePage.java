@@ -33,6 +33,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -73,6 +76,7 @@ public class homePage extends AppCompatActivity {
     ArrayList<ILineDataSet> lineDataSets2 = new ArrayList<>();
     ArrayList<ILineDataSet> lineDataSets3 = new ArrayList<>();
     lineGraph lg;
+    PieChartView pieChartView;
     int choice;
 
 
@@ -88,9 +92,31 @@ public class homePage extends AppCompatActivity {
 
         if (b != null) {
             usr = b.getString("username");
+            if (b.containsKey("createAccount")) {
+                //Show dialog box with app rules
+                AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
+                bx1.setTitle("Welcome to the SmartBucks App!");
+                bx1.setMessage("\n To enter new expense/income source" +
+                        ", click on the 'Add Expenses/Income' buttons located on the homepage." +
+                        "\n To update your details/expenses categories," +
+                        "+ navigate to Menu-> Update Details.");
+                bx1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+
+                    }
+                });
+
+                AlertDialog alertDialog = bx1.create();
+                alertDialog.show();
+            }
         }
 
+
         userr = peopleDB.getUser(usr);
+
 
         //Set values of Text Views in homePage
 
@@ -113,18 +139,15 @@ public class homePage extends AppCompatActivity {
 
             ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
             for (Expenses expense : exp) {
-                sum+=expense.getPrice();
+                sum += expense.getPrice();
 
             }
         }
-        else{
-            expensesView.setText(String.valueOf(sum));
-        }
+        expensesView.setText(String.valueOf(sum));
 
         if(sum>userr.getBudget()){
 
            // final TextView budget = (TextView) findViewById(R.id.budgetview);
-            expensesView.setText(String.valueOf(sum));
             final Animation anim = new AlphaAnimation(0.0f,1.0f);
             anim.setDuration(5);
             anim.setStartOffset(20);
@@ -132,7 +155,6 @@ public class homePage extends AppCompatActivity {
             anim.setRepeatCount(Animation.INFINITE);
 
             budgetView.startAnimation(anim);
-
 
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
             bx1.setCancelable(true);
@@ -150,11 +172,6 @@ public class homePage extends AppCompatActivity {
 
             AlertDialog alertDialog = bx1.create();
             alertDialog.show();
-
-//            Toast t = Toast.makeText(homePage.this,
-//                    "Be careful! You are overcoming threshold for" , Toast.LENGTH_LONG);
-//            t.show();
-
         }
 
 
@@ -173,6 +190,18 @@ public class homePage extends AppCompatActivity {
                 Intent myIntent = new Intent(homePage.this, listActivity.class);
                 Bundle b = new Bundle();
                b.putString("username",usr);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+            }
+        });
+
+        Button addIncome = (Button) findViewById(R.id.addIncome);
+        addIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(homePage.this, addIncome.class);
+                Bundle b = new Bundle();
+                b.putString("username",usr);
                 myIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(myIntent);
             }
@@ -237,12 +266,12 @@ public class homePage extends AppCompatActivity {
 
         lineChart1 = (LineChart)findViewById(R.id.lineChartWeek);
         lineChart2 = (LineChart)findViewById(R.id.lineChartMon);
-        lineChart3 = (LineChart)findViewById(R.id.lineChartCat);
+        pieChartView = findViewById(R.id.chart);
 
         lg = new lineGraph(userr,peopleDB);
         lg.setWeekGraphStyle(lineChart1,lineDataSets2);
         lg.setMonthGraphStyle(lineChart2,lineDataSets3);
-        lg.setCatGraphStyle(lineChart3,lineDataSets1);
+        lg.setCatGraphStyle(pieChartView);
 
     }
 

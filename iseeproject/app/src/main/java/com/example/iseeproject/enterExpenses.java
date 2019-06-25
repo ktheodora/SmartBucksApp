@@ -2,9 +2,11 @@ package com.example.iseeproject;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,13 +38,14 @@ import java.util.Set;
 public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
 {
     dbHandler peopleDB;
-    String username;
     EditText datepick, amount;
     Calendar myCalendar;
     static String USERPREF = "USER"; // or other values
     private ImageButton menuBtn;
     Spinner spinner,spinner1;
     DatePickerDialog.OnDateSetListener date;
+    String expenseTime,username,category,payment_method;
+    double expAmount;
 
 
     @Override
@@ -147,9 +150,11 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(enterExpenses.this, date, myCalendar
+                DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                mDatePicker.show();
             }
 
 
@@ -197,52 +202,70 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     public void checkInput() {
         User user = peopleDB.getUser(username);
         //get sum of money spent in expenses
-        double sum = 0;
-        if (peopleDB.expensesExist(user)) {
+        expAmount = Double.parseDouble(amount.getText().toString());
+        expenseTime = datepick.getText().toString();
+
+        //get values of spinners
+        payment_method = spinner.getSelectedItem().toString();
+        category = spinner1.getSelectedItem().toString();
+        if(expAmount <= 0.0) {
+            Toast t = Toast.makeText(enterExpenses.this,
+                    "Expense price should be more than 0", Toast.LENGTH_LONG);
+            t.show();
+        }
+        else {
+            double sum = 0;
             Map<String, Double> cat = peopleDB.getThresholds(username);
+            if (peopleDB.expensesExist(user)) {
             List<Expenses> exp = peopleDB.getAllExpenses(user);
-            for (Map.Entry categ : cat.entrySet()) {
-                for (Expenses expense : exp) {
-                    if (expense.getCategory() == (String) categ.getKey()){
-                        sum += expense.getPrice();
-                        if (sum <50.0) {
-                            Toast t = Toast.makeText(enterExpenses.this,
-                                    "Be careful! You are overcoming threshold for" + (String) categ.getKey(), Toast.LENGTH_LONG);
-                            t.show();
-                        }
-                    }
-
+            for (Expenses expense : exp) {
+                if (expense.getCategory().equals(category)){
+                    sum += expense.getPrice();
                 }
+            }}
+            if ((sum + expAmount) > cat.get(category)) {
+                AlertDialog.Builder bx1 = new AlertDialog.Builder(enterExpenses.this);
+                bx1.setCancelable(true);
+                bx1.setTitle("Attention!You are about to overcome "+
+                        category +" budget");
 
+                bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                        //creating the expense instance and adding it to the database
+                        addNewExp();
+
+                    }
+                });
+                bx1.setPositiveButton("Update Category Threshold", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                        goToDetails();
+
+                    }
+                });
+
+                AlertDialog alertDialog = bx1.create();
+                alertDialog.show();
+            }
+            else {
+                //if expenses don't overcome threshold
+                addNewExp();
             }
         }
-        //if current expense price sumed with the already existing expenses is higher than budget
-        //then show toast message
-       /* if (user.getBudget() <= sum + expAmount) {
-            Toast t = Toast.makeText(enterExpenses.this,
-                    "Expenses entered overcome savings", Toast.LENGTH_LONG);
-            t.show();
-        }*/
-    //move on with the addtion of the expense to the data
-            Double expAmount = Double.parseDouble(amount.getText().toString());
-            if(expAmount <= 0.0) {
-                Toast t = Toast.makeText(enterExpenses.this,
-                        "Expense price should be more than 0", Toast.LENGTH_LONG);
-                t.show();
-            } else {
-          String expenseTime = datepick.getText().toString();
+    }
 
-              //get values of spinners
-          String payment_method = spinner.getSelectedItem().toString();
-          String category = spinner1.getSelectedItem().toString();
+    public void addNewExp() {
+        Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
 
-            //creating the expense instance and adding it to the database
-           Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
-
-           peopleDB.addExpenses(newExpense);
-
-           goToHomepage();
-        }
+        peopleDB.addExpenses(newExpense);
+        Toast t = Toast.makeText(enterExpenses.this,
+                "Successful addition of new expense", Toast.LENGTH_LONG);
+        t.show();
     }
 
     public void goToHomepage() {

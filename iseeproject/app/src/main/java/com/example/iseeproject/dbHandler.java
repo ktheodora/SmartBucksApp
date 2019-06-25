@@ -145,7 +145,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public void addCatThresholds(String username/*, Map<String,Double> thresholds*/) {
+    public void addCatThresholds(String username, double Budget) {
         SQLiteDatabase db = this.getWritableDatabase();
         TABLE_CATEGORIES = username + "_categories";
         String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
@@ -155,9 +155,10 @@ public class dbHandler extends SQLiteOpenHelper {
         //then moving on to the addition of the thresholds
         String[] categs = new String[] {"Leisure","Food","Services","Health","Miscellaneous"};
         //default threshold can change later
+        double default_thres = Budget / categs.length;
         for ( String cat: categs) {
             values.put(KEY_CAT, cat);
-            values.put(KEY_THRES, 50.0);
+            values.put(KEY_THRES, default_thres);
             db.insert(TABLE_CATEGORIES, null, values);
         }
         db.close(); // Closing database connection
@@ -182,9 +183,7 @@ public class dbHandler extends SQLiteOpenHelper {
         values.put(KEY_THRES, threshold);
         db.update(TABLE_CATEGORIES,values, KEY_CAT + " = ?",
                 new String[]{category});
-        db.close(); // Closing database connection
     }
-
 
     public Map<String,Double> getThresholds(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -282,14 +281,14 @@ public class dbHandler extends SQLiteOpenHelper {
 
     public ArrayList<Expenses> getAllExpenses(User user) {
         ArrayList<Expenses> expList = new ArrayList<Expenses>();
-// Select All Query
+        // Select All Query
         SQLiteDatabase db = this.getWritableDatabase();
         //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CAT,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, KEY_REALTIME, null);
 
         //Cursor cursor = db.rawQuery(selectQuery, null);
-// looping through all rows and adding to list
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
