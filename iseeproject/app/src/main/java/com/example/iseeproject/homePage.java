@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.design.widget.BottomNavigationView;
@@ -24,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -201,9 +204,16 @@ public class homePage extends AppCompatActivity {
                                 return true;
 
                             case  R.id.item12:
-                                showToast("FAQ under construction");
+
+
+                                String url = "https://example.net/privacy_policy";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(url));
+                                startActivity(i);
+                                //showToast("FAQ under construction");
                                 return true;
-                            case R.id.report:
+
+                                case R.id.report:
                                 //smartBucksReport();
                                 Permission();
 
