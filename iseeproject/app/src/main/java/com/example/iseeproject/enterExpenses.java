@@ -60,6 +60,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         peopleDB = new dbHandler(this);
         User usr = peopleDB.getUser(username);
         //getting expenses categories names from database and avoiding hardcoded values
+
         Set<String> cats = peopleDB.getThresholds(username).keySet();
         List<String> categories1= Arrays.asList(cats.toArray(new String[cats.size()]));
 
@@ -80,7 +81,9 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         ArrayAdapter<String> datAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories1);
         datAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(datAdapter1);
-        spinner1.setOnItemSelectedListener(this);
+        spinner1.setSelected(false);
+//        spinner1.setSelection(0,true);
+//        spinner1.setOnItemSelectedListener(this);
 
         peopleDB = new dbHandler(this);
 
@@ -178,9 +181,8 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 //TODO Ensure that only one button is checked at a time
 
                 amount = (EditText) findViewById(R.id.amountText);
-
                     //TODO check if payment method is also selected
-                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText()) ){
+                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText())  ){
                         Toast t = Toast.makeText(enterExpenses.this,
                                 "All fields must be given", Toast.LENGTH_LONG);
                         t.show();
@@ -260,7 +262,14 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     }
 
     public void addNewExp() {
-        Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
+        //Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
+
+        Expenses newExpense = new Expenses();
+        newExpense.setExpenseTime(expenseTime);
+        newExpense.setUsername(username);
+        newExpense.setPrice(expAmount);
+        newExpense.setCategory(category);
+        newExpense.setPaymentMethod(payment_method);
 
         peopleDB.addExpenses(newExpense);
         Toast t = Toast.makeText(enterExpenses.this,

@@ -244,6 +244,15 @@
             android:layout_marginTop="10dp"
             android:text="Show All Expenses"
             android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/showall"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="all expense"
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/graphlabel"
             android:layout_width="wrap_content"

@@ -64,7 +64,7 @@ import java.util.Map;
 
 public class homePage extends AppCompatActivity {
       //  private Button edit;
-    private Button enterExpbtn, weekbtn, catbtn, monbtn;
+    private Button enterExpbtn, weekbtn, catbtn, monbtn,allexpense;
     private ImageButton menuBtn;
     dbHandler peopleDB;
     String usr = "";
@@ -157,9 +157,9 @@ public class homePage extends AppCompatActivity {
             budgetView.startAnimation(anim);
 
             AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
-            bx1.setCancelable(true);
-            bx1.setTitle("Alert!Spendings getting more than Budget");
 
+            bx1.setTitle("Alert!Spendings getting more than Budget");
+            bx1.setCancelable(true);
             bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -207,6 +207,19 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+
+        allexpense = (Button)findViewById(R.id.showall);
+        allexpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(homePage.this, AllExpenses.class);
+                Bundle b = new Bundle();
+                b.putString("username",usr);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
+            }
+        });
+
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -221,6 +234,8 @@ public class homePage extends AppCompatActivity {
                                 return true;
 
                             case R.id.Preferences:
+
+
                                 showToast("Preferences under construction");
                                 return true;
 
@@ -370,6 +385,9 @@ public class homePage extends AppCompatActivity {
         myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
     }
+
+
+
 
 
     public void showToast(String text) {
