@@ -27,6 +27,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView expenselistview;
     dbHandler dbhandler;
     String usr = "";
+    User userr;
     String username;
     SearchView sv;
     String selectedCategory;
@@ -43,7 +44,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             usr = b.getString("username");
         }
 
-            User userr = dbhandler.getUser(usr);
+            userr = dbhandler.getUser(usr);
 
 
 
@@ -51,11 +52,6 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         dbhandler = new dbHandler(this);
         ArrayList<Expenses>  explist = dbhandler.getAllExpenses(userr);
         filteredExpenses(explist);
-
-
-
-
-
 
 
 
@@ -123,7 +119,10 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dbhandler = new dbHandler(this);
         Set<String> cats1 = dbhandler.getThresholds(usr).keySet();
-        List<String> categories1= Arrays.asList(cats1.toArray(new String[cats1.size()]));
+        //we add all of the categories but first the option to choose to view every expense
+        List<String> categories1= new ArrayList<String>();
+        categories1.add("All");
+        categories1.addAll(cats1);
 
         spinner12 = (Spinner)findViewById(R.id.spinner123);
         ArrayAdapter<String> datAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories1);
@@ -138,9 +137,14 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCategory = parent.getItemAtPosition(position).toString();
                 dbhandler = new dbHandler(getApplicationContext());
-                ArrayList<Expenses>  cateList = dbhandler.getSortedCategory(selectedCategory);
+                ArrayList<Expenses>  cateList;
+                if (selectedCategory.equals("All")) {
+                    cateList = dbhandler.getAllExpenses(userr);
+                }
+                else {
+                    cateList = dbhandler.getSortedCategory(userr, selectedCategory);
+                }
                 filteredExpenses(cateList);
-
             }
 
             @Override
@@ -149,14 +153,11 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-
-
     }
 
     public void filteredExpenses(final ArrayList<Expenses> explist){
 
         ArrayList<HashMap<String,String>> myMapList = new ArrayList<>();
-
 
         for(int i=0; i<explist.size();i++){
             HashMap<String,String> myMap = new HashMap<>();

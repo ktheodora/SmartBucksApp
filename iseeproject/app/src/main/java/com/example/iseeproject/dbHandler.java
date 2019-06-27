@@ -310,10 +310,11 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Expenses> getSortedCategory(String cate){
+    public ArrayList<Expenses> getSortedCategory(User user, String cate){
         ArrayList<Expenses> categoryList = new ArrayList<Expenses>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String cateQuery = " SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_CAT + " = '" + cate + "'";
+        String cateQuery = " SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN +
+                " = '" + user.getUsername() + "'" +" AND " + KEY_CAT + " = '" + cate + "'"  ;
         Cursor cursor = db.rawQuery(cateQuery,null);
 
 //        while (cursor.moveToNext()){
