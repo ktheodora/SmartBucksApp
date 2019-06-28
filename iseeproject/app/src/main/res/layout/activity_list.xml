@@ -5,28 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.iseeproject.preferencesActivity">
+    tools:context="com.example.iseeproject.listActivity">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
+
+
+
 
             <ImageButton
 
@@ -64,73 +61,77 @@
                 app:srcCompat="@drawable/ourlogo" />
 
 
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preferences"
-            android:textSize="25sp"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="80dp"
-            android:background="#F5F5F5"
-            >
-
-            <TextView
-                android:id="@+id/curreny"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="Currency"
-                android:textSize="20sp"
-                android:layout_marginLeft="8dp"
-                />
-
-                <Spinner
-                    android:id="@+id/spinnerCategory"
-                    android:layout_width="210dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"/>
-
-
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:background="#F5F5F5">
-
-
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Turn Notification"
-                android:textSize="20sp"
-                android:textColor="#616161"
-                android:layout_marginLeft="8dp"
-                />
 
         </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="#F5F5F5">
+
+        <ImageView
+            android:id="@+id/catIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/misc" />
+
+        <!--TODO add payment method dropdown list-->
+
+        <Spinner
+            android:id="@+id/spinner123"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+          <!--  <SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ourlogo"
+                android:iconifiedByDefault="false"
+                android:padding="2dp"
+                android:queryHint="Search...." />-->
+
+
+            <ListView
+                android:id="@+id/expenseLV"
+                android:layout_gravity="center"
+                android:layout_width="400dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
         <Button
-            android:id="@+id/confirmBtn"
+            android:id="@+id/backBtn"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginTop="250dp"
-            android:text="Confirm"
-            android:background="#90A4AE"
-            android:textColor="#ffffff"
+            android:layout_marginTop="20dp"
+            android:text="Back"
             android:layout_gravity="center"
             android:textSize="15sp"/>
-        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 </android.support.v4.widget.DrawerLayout>

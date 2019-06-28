@@ -1,8 +1,12 @@
 package com.example.iseeproject;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,27 +18,34 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public class enterExpenses extends AppCompatActivity  implements AdapterView.OnItemSelectedListener
 {
     dbHandler peopleDB;
-    String username;
     EditText datepick, amount;
     Calendar myCalendar;
-
+    static String USERPREF = "USER"; // or other values
+    private ImageButton menuBtn;
+    Spinner spinner,spinner1;
     DatePickerDialog.OnDateSetListener date;
-
-
+    String expenseTime,username,category,payment_method;
+    double expAmount;
 
 
     @Override
@@ -42,10 +53,16 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_expenses);
 
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            username = b.getString("username");
 
+        peopleDB = new dbHandler(this);
+        User usr = peopleDB.getUser(username);
+        //getting expenses categories names from database and avoiding hardcoded values
 
-        Spinner spinner= (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
+        Set<String> cats = peopleDB.getThresholds(username).keySet();
+        List<String> categories1= Arrays.asList(cats.toArray(new String[cats.size()]));
 
         List<String> categories = new ArrayList<String>();
         categories.add("Cash");
@@ -53,19 +70,64 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         categories.add("Online");
 
 
-        // Creating adapter for spinner
+        spinner= (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> datAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories);
-        // Drop down layout style - list view with radio button
         datAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner.setAdapter(datAdapter);
+        spinner.setOnItemSelectedListener(this);
+
+        spinner1 =(Spinner)findViewById(R.id.spinnerCategory);
+
+        ArrayAdapter<String> datAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories1);
+        datAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(datAdapter1);
+        spinner1.setSelected(false);
+//        spinner1.setSelection(0,true);
+//        spinner1.setOnItemSelectedListener(this);
+
         peopleDB = new dbHandler(this);
 
-        Bundle b = getIntent().getExtras();
-        if (b != null)
-            username = b.getString("username");
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(enterExpenses.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
 
-        User usr = peopleDB.getUser(username);
+                            case R.id.HomePage:
+                                goToHomepage();
+                                return true;
+
+                            case R.id.Preferences:
+                                showToast("Preferences under construction");
+                                return true;
+
+                            case  R.id.item2:
+                                goToDetails();
+                                return true;
+
+                            case  R.id.logoutBtn:
+                                logout();
+                                return true;
+
+                            case  R.id.item12:
+                                showToast("FAQ under construction");
+                                return true;
+                            case R.id.report:
+                                showToast("Report under construction");
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
+
 
         //we set the calendar view in the ui
         myCalendar = Calendar.getInstance();
@@ -91,9 +153,11 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(enterExpenses.this, date, myCalendar
+                DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                mDatePicker.show();
             }
 
 
@@ -101,10 +165,9 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
 
-        });
+        }
 
-
-
+        );
 
         //we set the button behaviour
         Button confirmbtn = (Button) findViewById(R.id.confirmBtn);
@@ -117,160 +180,135 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 String category = "";
                 //TODO Ensure that only one button is checked at a time
 
-
-
-
-                /*RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
-                RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
-                RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
-                RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
-
-                if (rb1.isChecked()) {
-                    category = "LEISURE";
-                }
-                else if (rb2.isChecked()) {
-                    category = "FOOD";
-                }
-                else if (rb3.isChecked()) {
-                    category = "BILLS";
-                }
-                else if (rb4.isChecked()) {
-                    category = "MISCELLANEOUS";
-                }*/
-
-
-
-
-
-
-
-                    amount = (EditText) findViewById(R.id.amountText);
-
-
-
+                amount = (EditText) findViewById(R.id.amountText);
                     //TODO check if payment method is also selected
-                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText()) ){
+                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText())  ){
                         Toast t = Toast.makeText(enterExpenses.this,
                                 "All fields must be given", Toast.LENGTH_LONG);
                         t.show();
                 }
                 else {
-                    User user = peopleDB.getUser(username);
-                    //get sum of money spent in expenses
-                    double sum = 0;
-                    if (peopleDB.expensesExist(user)) {
-                        List<Expenses> exp = peopleDB.getAllExpenses(user);
-                        for (Expenses expense : exp) {
-                            sum += expense.getPrice();
-                        }
-                    }
-                    double expAmount = Double.parseDouble(amount.getText().toString());
-                    //if current expense price sumed with the already existing expenses is higher than budget
-                    //then show toast message
-                    if (user.getBudget() <= sum + expAmount) {
-                        Toast t = Toast.makeText(enterExpenses.this,
-                                "Expenses entered overcome savings", Toast.LENGTH_LONG);
-                        t.show();
-                    }
-                    else {//move on with the addtion of the expense to the database
-                        String additionTime = peopleDB.getCurrDate();
-                        String expenseTime = datepick.getText().toString();
-
-
-                        //adding temporarily a default chosen payment method
-                        String payment_method = "CASH";
-
-                        //creating the expense instance and adding it to the database
-                        Expenses newExpense = new Expenses(additionTime,expenseTime,username,expAmount,category,payment_method);
-
-                        peopleDB.addExpenses(newExpense);
-
-                        // Start NewActivity.class
-                        Intent myIntent = new Intent(enterExpenses.this,
-                                homePage.class);
-
-                        Bundle b = new Bundle();
-                        b.putString("username",username);
-                        myIntent.putExtras(b); //Put your id to your next Intent
-                        startActivity(myIntent);
-                    }
+                    checkInput();
                 }
             }
         });
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                Intent myIntent = new Intent(enterExpenses.this,
-                        homePage.class);
-                Bundle b = getIntent().getExtras();
-                username = b.getString("username");
-                myIntent.putExtras(b);
-                startActivity(myIntent);
-                finish();
+                goToHomepage();
             }
         });
 
-
-
     }
 
+    public void checkInput() {
+        User user = peopleDB.getUser(username);
+        //get sum of money spent in expenses
+        expAmount = Double.parseDouble(amount.getText().toString());
+        expenseTime = datepick.getText().toString();
 
-    public void onRadioButtonClicked( View v  ){
-
-       // String category = "";
-        RadioButton rb1 = (RadioButton) findViewById(R.id.leisurebutton);
-        RadioButton rb2 = (RadioButton) findViewById(R.id.foodbutton);
-        RadioButton rb3 = (RadioButton) findViewById(R.id.billbutton);
-        RadioButton rb4 = (RadioButton) findViewById(R.id.miscbutton);
-
-        boolean checked = ((RadioButton ) v).isChecked();
-        switch(v.getId()){
-
-            case R.id.leisurebutton:
-                if (checked)
-                    rb1.setTypeface(null, Typeface.BOLD_ITALIC);
-                //set the other two radio buttons text style to default
-                rb2.setTypeface(null, Typeface.NORMAL);
-
-                rb3.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-
-            case R.id.foodbutton:
-                if(checked)
-                    rb2.setTypeface(null, Typeface.BOLD_ITALIC);
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb3.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-            case R.id.billbutton:
-                if(checked)
-                    rb3.setTypeface(null, Typeface.BOLD_ITALIC);
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb2.setTypeface(null, Typeface.NORMAL);
-                rb4.setTypeface(null, Typeface.NORMAL);
-                break;
-
-            case R.id.miscbutton:
-                if(checked)
-                    rb4.setTypeface(null, Typeface.BOLD_ITALIC);
-
-                rb1.setTypeface(null, Typeface.NORMAL);
-                rb2.setTypeface(null, Typeface.NORMAL);
-                rb3.setTypeface(null, Typeface.NORMAL);
-
-
+        //get values of spinners
+        payment_method = spinner.getSelectedItem().toString();
+        category = spinner1.getSelectedItem().toString();
+        if(expAmount <= 0.0) {
+            Toast t = Toast.makeText(enterExpenses.this,
+                    "Expense price should be more than 0", Toast.LENGTH_LONG);
+            t.show();
         }
+        else {
+            double sum = 0;
+            Map<String, Double> cat = peopleDB.getThresholds(username);
+            if (peopleDB.expensesExist(user)) {
+            List<Expenses> exp = peopleDB.getAllExpenses(user);
+            for (Expenses expense : exp) {
+                if (expense.getCategory().equals(category)){
+                    sum += expense.getPrice();
+                }
+            }}
+            if ((sum + expAmount) > cat.get(category)) {
+                AlertDialog.Builder bx1 = new AlertDialog.Builder(enterExpenses.this);
+                bx1.setCancelable(true);
+                bx1.setTitle("Attention!You are about to overcome "+
+                        category +" budget");
 
-    }
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawermenu, menu);
-        return true;
+                bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                        //creating the expense instance and adding it to the database
+                        addNewExp();
+
+                    }
+                });
+                bx1.setPositiveButton("Update Category Threshold", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                        goToDetails();
+
+                    }
+                });
+
+                AlertDialog alertDialog = bx1.create();
+                alertDialog.show();
+            }
+            else {
+                //if expenses don't overcome threshold
+                addNewExp();
+            }
+        }
     }
 
+    public void addNewExp() {
+        //Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
+
+        Expenses newExpense = new Expenses();
+        newExpense.setExpenseTime(expenseTime);
+        newExpense.setUsername(username);
+        newExpense.setPrice(expAmount);
+        newExpense.setCategory(category);
+        newExpense.setPaymentMethod(payment_method);
+
+        peopleDB.addExpenses(newExpense);
+        Toast t = Toast.makeText(enterExpenses.this,
+                "Successful addition of new expense", Toast.LENGTH_LONG);
+        t.show();
+    }
+
+    public void goToHomepage() {
+        Intent myIntent = new Intent(enterExpenses.this, homePage.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void goToDetails() {
+        Intent myIntent = new Intent(enterExpenses.this, updateDetail.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
+    }
+
+    public void showToast(String text) {
+        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void logout() {
+        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+        //then redirect to initial activity
+        Intent myIntent = new Intent(enterExpenses.this, mainActivity.class);
+        startActivity(myIntent);
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -287,10 +325,8 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     }
 
 
-
-
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
 
         datepick.setText(sdf.format(myCalendar.getTime()));
@@ -298,11 +334,21 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
 
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+       if (parent.getId() == R.id.spinner) {
+           // On selecting a spinner item
+           String item = parent.getItemAtPosition(position).toString();
+           // Showing selected spinner item
+           Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+       }
+       else if(parent.getId() == R.id.spinnerCategory){
+           // On selecting a spinner item
+           String item1 = parent.getItemAtPosition(position).toString();
+           // Showing selected spinner item
+           Toast.makeText(parent.getContext(), "Selected: " + item1, Toast.LENGTH_LONG).show();
+       }
+
+
 
     }
 

@@ -1,27 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="example.javatpoint.com.optionmenu.homePage">
->
+    tools:context=".homePage">
 
-    <item android:id="@+id/HomePage" android:title="home" android:icon="@drawable/ic_iconmonstr_home_6"/>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="200dp"
+        android:layout_height="160dp"
+        android:background="#FF0266"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/enlighten"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="@string/enlighten"
+            android:textColor="#ffffff"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/your"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="@string/your"
+            android:textColor="#ffffff"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/pocket"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/pocket"
+            android:textSize="35sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="10dp"/>
 
 
-    <item android:id="@+id/Preferences" android:title="Preferences" android:icon="@drawable/ic_iconmonstr_gear_1"/>
 
-  <item android:id="@+id/item1"
-      android:icon="@drawable/ic_iconmonstr_help_1"
-      android:title="Help"
-      app:showAsAction="ifRoom"/>
+    </LinearLayout>
+
+    <item android:id="@+id/HomePage"
+        android:title="Home"
+        android:icon="@drawable/homeicn"/>
 
     <item android:id="@+id/item2"
-        android:icon="@drawable/ic_iconmonstr_help_1"
+        android:icon="@drawable/settings"
         android:title="Update Details"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/Preferences"
+        android:title="Preferences"
+        android:icon="@drawable/preficn"/>
 
-   <!-- <item android:id=" @+id/EnterDetails" android:title="Update Details" android:icon="@drawable/ic_iconmonstr_volume_control_9"/>-->
-    <!--<item android:id=" @+id/help" android:title="Help" android:icon="@drawable/ic_iconmonstr_help_1"/>-->
-    <item android:id="@+id/logoutBtn" android:title="logout" android:icon="@drawable/ic_iconmonstr_log_out_14"/>
+    <item android:id="@+id/report"
+        android:icon="@drawable/pdf"
+        android:title="Download Report"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/item12"
+        android:icon="@drawable/helpicn"
+        android:title="Help"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/logoutBtn"
+        android:title="Logout"
+        android:icon="@drawable/logouticn"/>
+
 </menu>

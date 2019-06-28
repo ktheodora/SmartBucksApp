@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 
 public class createAccount extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class createAccount extends AppCompatActivity {
     private EditText Rent;
     private EditText Bills;
     private EditText Insurance;
+    private Map<String, Double> defThres;
 
     String username ,name, password , email ;
     double inc ,bud ,rent ,ins, bill ;
@@ -35,6 +40,7 @@ public class createAccount extends AppCompatActivity {
         routed();
 
         peopleDB = new dbHandler(this);
+        defThres = new HashMap<String, Double>();
         finish.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -44,9 +50,6 @@ public class createAccount extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     private void routed(){
 
@@ -85,14 +88,16 @@ public class createAccount extends AppCompatActivity {
 
                 boolean insertData = peopleDB.addUser(user1);
 
-
                 if (insertData){
+                    peopleDB.addCatThresholds(username, user1.getBudget());
                     Toast.makeText(createAccount.this,"Data Successfully Inserted",Toast.LENGTH_SHORT).show();
                     //start new activity
                     Intent myIntent = new Intent(createAccount.this,
                             homePage.class);
                     Bundle b = new Bundle();
                     b.putString("username", username);
+                    //for displaying welcome alert on the screen
+                    b.putBoolean("createAccount", true);
                     myIntent.putExtras(b); //Put your id to your next Intent
                     startActivity(myIntent);
                     finish();
@@ -104,8 +109,16 @@ public class createAccount extends AppCompatActivity {
         });
     }
 
-        private boolean validate()
-        {   Boolean result = false;
+        private boolean validate() {
+        Boolean result = false;
+        String usnReg = "^[a-zA-Z]+[a-zA-Z0-9_]*$";
+        //String emailReg = "^(.+)@(.+)$";
+        final Pattern VALID_EMAIL_ADDRESS_REGEX =
+                    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+            String emailReg = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        // email regex is [word(inc. dot, underscore, minus symbols] @ [word] . [word (2-6 chars long)]
+
 
             if (TextUtils.isEmpty(UserName.getText()) || TextUtils.isEmpty(Name.getText())
                     || TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(EmailAdress.getText())
@@ -116,14 +129,26 @@ public class createAccount extends AppCompatActivity {
                         "All fields are required to proceed", Toast.LENGTH_LONG);
                 t.show();
             }
-            else if((Password.getText().toString()).length() < 6) {
+            else if(!(UserName.getText().toString().matches(usnReg))) {
+                //checking if username has a valid form
                 Toast t = Toast.makeText(createAccount.this,
-                        "Password must contain at least 6 characters", Toast.LENGTH_LONG);
+                        "Username must contain only alphanumeric or underscore characters and begin with a letter", Toast.LENGTH_LONG);
                 t.show();
+                //to overcome database problems
             }
             else if (peopleDB.isUser(UserName.getText().toString())) {
                 Toast t = Toast.makeText(createAccount.this,
                         "Username already taken", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else if (!(VALID_EMAIL_ADDRESS_REGEX .matcher(EmailAdress.getText().toString()).find())) {
+                Toast t = Toast.makeText(createAccount.this,
+                        "Not a valid email form", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else if((Password.getText().toString()).length() < 6) {
+                Toast t = Toast.makeText(createAccount.this,
+                        "Password must contain at least 6 characters", Toast.LENGTH_LONG);
                 t.show();
             }
             else {
@@ -135,17 +160,11 @@ public class createAccount extends AppCompatActivity {
                 ins = Double.parseDouble(Insurance.getText().toString());
                 bill = Double.parseDouble(Bills.getText().toString());
 
-                if(inc <= (rent + bill + ins)) {
-                    //we have to ensure that income is always more than expenses
-                    //we cannot convert to int until we make sure that fields are not null
-                    Toast t = Toast.makeText(createAccount.this,
-                            "Income cannot be equal or less to stable expenses", Toast.LENGTH_LONG);
-                    t.show();
-                }
-                else if((inc - (rent + bill + ins)) < bud) {
+                if((inc - (rent + bill + ins)) < bud) {
                     //we have to ensure that budget is less than income minus stable expenses
                     Toast t = Toast.makeText(createAccount.this,
-                            "Budget cannot be less than income - stable expenses", Toast.LENGTH_LONG);
+                            "Budget cannot be more than income - stable expenses. " +
+                                    "Please decrease budget or increase income", Toast.LENGTH_LONG);
                     t.show();
                 }
                 else{

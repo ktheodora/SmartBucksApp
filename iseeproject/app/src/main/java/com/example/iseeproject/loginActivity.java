@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -56,8 +60,9 @@ public class loginActivity extends AppCompatActivity {
 
                     if (!(db.isUser(username))) {
                         Toast t = Toast.makeText(loginActivity.this,
-                                "Username doesn't exist", Toast.LENGTH_LONG);
+                                "User doesn't exist", Toast.LENGTH_LONG);
                         t.show();
+                        checkAttempts();
                     }
                     else if (checkPwd(username,password)){
                         //if username is correct then go to homepage
@@ -68,12 +73,30 @@ public class loginActivity extends AppCompatActivity {
                         startActivity(myIntent);
                     }
                     else {//reduce number of attempts
+                        Toast t = Toast.makeText(loginActivity.this,
+                                "Incorrect username/password combination", Toast.LENGTH_LONG);
+                        t.show();
                         checkAttempts();
                     }
 
                 }
             }
         });
+        //in case we have tried to login and locked the attempts previously
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+          boolean state = b.getBoolean("state");
+          login.setEnabled(state);
+        }
+        //reeenable after 5 mins
+        if (!login.isEnabled()) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    login.setEnabled(true);
+                }
+            }, 5000);
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +110,8 @@ public class loginActivity extends AppCompatActivity {
     public boolean checkPwd(String username, String password) {
 
         User user = db.getUser(username);
-        String pwd = user.getPwd();
-        return (user.getPwd()).equals(password);
+        String encrypt = db.md5(password);
+        return (user.getPwd()).equals(encrypt);
 
     }
 
@@ -102,18 +125,24 @@ public class loginActivity extends AppCompatActivity {
             t.show();
         }
         else {
-            //TODO close button for 10 mins
             login.setEnabled(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    login.setEnabled(true);
+                }
+            }, 5000);
         }
     }
 
     private void routeback()
     {
         Intent intent = new Intent(loginActivity.this, mainActivity.class);
+        Bundle b = new Bundle();
+        b.putBoolean("state",login.isEnabled());
+        intent.putExtras(b); //Put your id to your next Intent
         startActivity(intent);
     }
-
-
 
 }
 
