@@ -74,7 +74,7 @@
           android:layout_height="50dp"
           android:layout_marginTop="30dp"
           android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             >
 
 
@@ -109,7 +109,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#EEEEEE">
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/catIcon"
@@ -139,7 +139,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#EEEEEE">
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/amountIcon"
@@ -170,7 +170,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#EEEEEE">
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/paymentIcon"

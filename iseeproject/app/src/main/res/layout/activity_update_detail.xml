@@ -74,7 +74,7 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:background="#EEEEEE">
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/monthlyinc"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp"
             >
 
@@ -134,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp">
 
             <ImageView
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp">
 
             <ImageView
@@ -193,7 +193,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp">
 
             <ImageView
@@ -223,7 +223,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp">
 
             <TextView
@@ -281,7 +281,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#EEEEEE"
+            android:background="#F5F5F5"
             android:layout_marginTop="8dp"
             >
             <TextView
