@@ -13,9 +13,9 @@ This App will eventually be able to help its user spend their resources in a wis
 
 ## Current Version
 
-**Basic Prototype Version** <br/>
-***Smartbucks_v0*** : <br/>
-https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/Releases/SmartBucks_v0.apk
+**Basic Beta Version** <br/>
+***Release APK link*** : <br/>
+https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk
 
 ## Github Page Links
 

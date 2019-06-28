@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
     android:layout_height="160dp"
     android:background="#FF0266"
     android:orientation="vertical"
-
     >
 
     <TextView
@@ -13,7 +13,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-
         android:text="@string/enlighten"
         android:textColor="#ffffff"
         android:textSize="35sp" />
@@ -37,4 +36,6 @@
         android:textSize="35sp"
         android:textColor="#ffffff"
         android:layout_marginTop="10dp"/>
+
+
 </LinearLayout>

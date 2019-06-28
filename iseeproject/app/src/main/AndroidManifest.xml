@@ -15,22 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".lineGraph"></activity>
-        <activity android:name=".graph" />
-        <activity android:name=".preferences" />
-        <activity android:name=".welcomeUser" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".enterExpenses" />
-        <activity android:name=".updateDetail" />
-        <activity android:name=".createAccount" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".lineGraph" />
+        <activity android:name=".preferencesActivity" />
+        <activity android:name=".welcomeUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".loginActivity" />
+        <activity android:name=".enterExpenses" />
+        <activity android:name=".updateDetail" />
+        <activity android:name=".createAccount" />
+        <activity android:name=".homePage" />
+        <activity android:name=".mainActivity" />
     </application>
 
 </manifest>

@@ -5,16 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".enterExpenses">
+    tools:context="com.example.iseeproject.enterExpenses">
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/header"
-        android:layout_width="200dp"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
+       >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +23,7 @@
             android:background="@drawable/wallnew"
             android:orientation="horizontal">
 
+<<<<<<< HEAD
                 <TextView
                     android:id="@+id/editText"
                     android:layout_width="300dp"
@@ -49,6 +46,43 @@
                     android:scaleType="fitStart"
                     app:srcCompat="@drawable/ourlogo" />
 
+=======
+            <ImageButton
+
+                android:id="@+id/menuLines"
+                android:layout_width="71dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="#00000000"
+                android:padding="1dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu7" />
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:layout_marginLeft="20dp"
+                android:text="@string/officialname"
+                android:textColor="#ffffff"
+                android:textSize="50sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ourlogo" />
+
+
+>>>>>>> devel/theo
         </LinearLayout>
         <TextView
             android:id="@+id/enterExpenses"
@@ -64,7 +98,9 @@
           android:layout_width="match_parent"
           android:layout_height="50dp"
           android:layout_marginTop="30dp"
-          android:orientation="horizontal">
+          android:orientation="horizontal"
+            android:background="#F5F5F5"
+            >
 
 
             <ImageButton
@@ -90,137 +126,7 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-
-            <ImageView
-                android:id="@+id/leisureicon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/leisure"/>
-
-            <TextView
-                android:id="@+id/leisuretext"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Leisure"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-            <RadioButton
-                android:id="@+id/leisurebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                 />/>
-        </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
-
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/food"/>
-
-        <TextView
-            android:id="@+id/foodtext"
-            android:layout_width="140dp"
-            android:layout_height="30dp"
-            android:text="Food"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center"
-            android:textSize="20sp"/>
-
-        <RadioButton
-            android:id="@+id/foodbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            />/>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-
-            <ImageView
-                android:id="@+id/billIcn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/bill"/>
-
-            <TextView
-                android:id="@+id/billText"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Bill"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-            <RadioButton
-                android:id="@+id/billButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                />/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-
-            <ImageView
-                android:id="@+id/miscIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/misc"/>
-
-            <TextView
-                android:id="@+id/miscText"
-                android:layout_width="140dp"
-                android:layout_height="30dp"
-                android:text="Miscellaneous"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-            <RadioButton
-                android:id="@+id/miscButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                />
-        </LinearLayout>
+        <!--TODO Ensure that only one radio button is checked every time-->
 
 
         <LinearLayout
@@ -228,7 +134,38 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="#F5F5F5">
+
+            <ImageView
+                android:id="@+id/catIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/misc" />
+
+            <!--TODO add payment method dropdown list-->
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/amountIcon"
@@ -247,7 +184,7 @@
                 android:layout_marginRight="20dp"
                 android:ems="10"
                 android:hint="Enter Amount"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:textSize="20sp"
                 />
 
@@ -258,7 +195,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="#F5F5F5">
 
             <ImageView
                 android:id="@+id/paymentIcon"
@@ -300,5 +238,6 @@
         android:textSize="15sp"/>
 
 </LinearLayout>
+    </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>

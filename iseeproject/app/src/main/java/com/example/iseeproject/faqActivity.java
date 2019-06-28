@@ -2,12 +2,16 @@ package com.example.iseeproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.WebView;
 
-public class preferences extends AppCompatActivity {
+public class faqActivity extends AppCompatActivity {
+    WebView webView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preferences);
+        setContentView(R.layout.activity_faq);
     }
 }
