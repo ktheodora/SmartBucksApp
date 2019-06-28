@@ -239,36 +239,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
 
-
-                <ImageView
-                    android:id="@+id/caticon"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/drop" />
 
                 <EditText
                     android:id="@+id/entCat"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:ems="10"
                     android:hint="Category Name"
                     android:inputType="textPersonName"
                     android:textSize="15sp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_gravity="center"
                     />
                 <EditText
                     android:id="@+id/entThres"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:ems="10"
                     android:hint="Category Threshold"
+                    android:layout_gravity="center"
                     android:inputType="numberDecimal"
                     android:textSize="15sp"
                     />
@@ -303,7 +297,7 @@
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="8dp"
                     android:background="#00000000"
@@ -346,9 +340,10 @@
                 android:id="@+id/finButton"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
                 android:text="OK"
+                android:background="#90A4AE"
+                android:textColor="#ffffff"
                 android:textSize="15sp"/>
 
 
@@ -356,9 +351,11 @@
                 android:id="@+id/backButton"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"
                 android:text="BACK"
+                android:background="#90A4AE"
+                android:textColor="#ffffff"
                 android:textSize="15sp"/>
 
         </LinearLayout>
