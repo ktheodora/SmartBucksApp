@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.iseeproject.updateDetail">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -73,7 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:background="#EEEEEE">
 
             <ImageView
                 android:id="@+id/monthlyinc"
@@ -102,6 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp"
             >
 
             <ImageView
@@ -131,7 +134,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/billicn"
@@ -160,7 +164,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -188,7 +193,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/insicon"
@@ -212,98 +218,129 @@
                 />
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/newExpCatLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center"
-            android:text="Create new expense category:"
-            android:textSize="20sp"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp">
 
-
-            <ImageView
-                android:id="@+id/caticon"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
+            <TextView
+                android:id="@+id/newExpCatLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/drop" />
+                android:text="Create New Expense Category:"
+                android:textSize="20sp"
+                />
 
-            <EditText
-                android:id="@+id/entCat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Category Name"
-                android:inputType="textPersonName"
-                android:textSize="15sp"
-                />
-            <EditText
-                android:id="@+id/entThres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Category Threshold"
-                android:inputType="numberDecimal"
-                android:textSize="15sp"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+
+                <ImageView
+                    android:id="@+id/caticon"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@drawable/drop" />
+
+                <EditText
+                    android:id="@+id/entCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:ems="10"
+                    android:hint="Category Name"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    />
+                <EditText
+                    android:id="@+id/entThres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:ems="10"
+                    android:hint="Category Threshold"
+                    android:inputType="numberDecimal"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/newCatThresLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center"
-            android:text="Change threshold for category"
-            android:textSize="20sp"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-
-            <Spinner
-                android:id="@+id/spinner"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#EEEEEE"
+            android:layout_marginTop="8dp"
+            >
+            <TextView
+                android:id="@+id/newCatThresLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:text="Change threshold for category"
+                android:textSize="20sp"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/newThres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="New Threshold Amount"
-                android:inputType="numberDecimal"
-                android:textSize="15sp"
-                />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:background="#00000000"
+                    app:srcCompat="@drawable/dropdownicn" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    />
+
+                <EditText
+                    android:id="@+id/newThres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:ems="10"
+                    android:hint="New Threshold Amount"
+                    android:inputType="numberDecimal"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity = "center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/finButton"

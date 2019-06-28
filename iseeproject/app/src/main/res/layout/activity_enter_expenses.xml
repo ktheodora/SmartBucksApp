@@ -73,7 +73,9 @@
           android:layout_width="match_parent"
           android:layout_height="50dp"
           android:layout_marginTop="30dp"
-          android:orientation="horizontal">
+          android:orientation="horizontal"
+            android:background="#EEEEEE"
+            >
 
 
             <ImageButton
@@ -106,7 +108,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="#EEEEEE">
 
             <ImageView
                 android:id="@+id/catIcon"
@@ -135,7 +138,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="#EEEEEE">
 
             <ImageView
                 android:id="@+id/amountIcon"
@@ -165,7 +169,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="#EEEEEE">
 
             <ImageView
                 android:id="@+id/paymentIcon"
