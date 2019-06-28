@@ -207,19 +207,6 @@ public class homePage extends AppCompatActivity {
             }
         });
 
-
-        allexpense = (Button)findViewById(R.id.showall);
-        allexpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(homePage.this, AllExpenses.class);
-                Bundle b = new Bundle();
-                b.putString("username",usr);
-                myIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(myIntent);
-            }
-        });
-
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {

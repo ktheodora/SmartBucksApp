@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AllExpenses"></activity>
         <activity android:name=".addIncome" />
         <activity android:name=".faqActivity" />
         <activity android:name=".listActivity" />

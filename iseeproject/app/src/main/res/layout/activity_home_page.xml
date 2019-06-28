@@ -247,6 +247,7 @@
                 android:text="Add Income"
                 android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -296,13 +297,8 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"
-            android:background="#EEEEEE">
+
+
             <TextView
                 android:id="@+id/graphlabel"
                 android:layout_width="wrap_content"
@@ -339,10 +335,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp" />
         </LinearLayout>
+        
 
-
-
-    </LinearLayout>
     </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>
