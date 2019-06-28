@@ -70,7 +70,8 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="#F5F5F5">
 
         <ImageView
             android:id="@+id/catIcon"
@@ -115,6 +116,7 @@
                 android:id="@+id/expenseLV"
                 android:layout_gravity="center"
                 android:layout_width="400dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="match_parent" />
 
 
