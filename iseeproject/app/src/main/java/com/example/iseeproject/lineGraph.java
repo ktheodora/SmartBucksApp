@@ -72,7 +72,6 @@ public class lineGraph {
             lineChart.setScaleXEnabled(true);
             lineChart.setScaleYEnabled(true);
             lineChart.setBackgroundColor(Color.parseColor("#EFEBE9"));
-
             lineDataSets.add(lineDataSet);
             //removes xaxes
             lineChart.setData(new LineData(lineDataSets));
@@ -84,11 +83,19 @@ public class lineGraph {
 
             lineChart.setTouchEnabled(true);
             lineChart.setDragEnabled(true);
-            /*Description d = new Description();
-            d.setText("Tuesday");
-            d.setPosition(1,10);
-            d.setTextAlign(Paint.Align.CENTER);
-            lineChart.setDescription(d);*/
+
+            String[] week = {"Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"};
+
+            for (int i = 0; i < week.length ; i++) {
+                Description d = new Description();
+                d.setText(week[i]);
+                Entry xy = xyCoord.get(i);
+                d.setPosition(xy.getX(), xy.getY());
+                d.setTextAlign(Paint.Align.CENTER);
+                d.setTextColor(Color.BLACK);
+                d.setTextSize(10);
+                lineChart.setDescription(d);
+             }
         }
 
     }
@@ -102,8 +109,6 @@ public class lineGraph {
             lineDataSet.setColor(Color.BLACK);
             lineDataSet.setLineWidth(2);
 
-
-
             lineDataSets.add(lineDataSet);
             //removes xaxes
             lineChart.setData(new LineData(lineDataSets));
@@ -116,7 +121,7 @@ public class lineGraph {
             //lineChart.setVisibleYRangeMaximum(100F, YAxis.AxisDependency.LEFT);
             lineChart.setDrawBorders(true);
             lineChart.setTouchEnabled(true);
-            lineChart.setDragEnabled(true);
+            lineChart.setDragEnabled(false);
             lineChart.setPinchZoom(true);
             lineChart.resetZoom();
             lineChart.setScaleXEnabled(true);
@@ -277,6 +282,6 @@ public class lineGraph {
                 maxY =xy.getY();
             }
         }
-        return (maxY + 10);
+        return (maxY + (maxY*20)/100);
     }
 }
