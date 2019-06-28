@@ -63,7 +63,7 @@
     <string name="enlighten">Enlighten</string>
     <string name="pocket">Pocket</string>
     <string name="your">Your</string>
-<<<<<<< HEAD
+
     <string-array name="paymentMethod">
         <item>Cash</item>
         <item>Online</item>
