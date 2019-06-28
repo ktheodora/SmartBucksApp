@@ -62,7 +62,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
 //
 //
 //
-//        //sv=(SearchView) findViewById(R.id.search_view);
+//        //sv=(SearchView) findViewById(R.ied.search_view);
 //
 //
 //
