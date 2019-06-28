@@ -266,13 +266,7 @@
                 android:textSize="15sp"
                 android:background="#90A4AE"/>
 
-
-
-
-
         </LinearLayout>
-
-
 
             <TextView
                 android:id="@+id/graphlabel"
@@ -310,7 +304,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp" />
         </LinearLayout>
-
 
     </ScrollView>
 
