@@ -285,10 +285,12 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
             String updatedCat = splitter[0];
             double sum = 0;
             Map<String, Double> map = peopleDB.getThresholds(username);
+            double oldThres = map.get(updatedCat);
             for (Map.Entry<String, Double> entry : map.entrySet()) {
                 sum += entry.getValue();
+
             }
-            if((sum + upThres) > usr.getBudget()) {
+            if(((sum - oldThres) +upThres) > usr.getBudget()) {
                 Toast t = Toast.makeText(updateDetail.this,
                         "Total of thresholds with " + updatedCat +" are more than budget." +
                                 "Please increase budget or decrease another threshold" , Toast.LENGTH_LONG);

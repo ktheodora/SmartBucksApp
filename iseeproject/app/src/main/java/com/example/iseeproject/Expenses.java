@@ -10,13 +10,13 @@ public class Expenses {
     private double price;
     private String PaymentMethod;
 
-    public Expenses(String ExpenseTime, String Username, Double Price, String Category, String PaymentMethods) {
-        this.expenseTime = ExpenseTime;
-        this.username = Username;
-        this.category = Category;
-        this.price = Price;
-        this.PaymentMethod = PaymentMethods;
-    }
+//    public Expenses(String ExpenseTime, String Username, Double Price, String Category, String PaymentMethods) {
+//        this.expenseTime = ExpenseTime;
+//        this.username = Username;
+//        this.category = Category;
+//        this.price = Price;
+//        this.PaymentMethod = PaymentMethods;
+//    }
 
     public String getExpenseTime() {
         return expenseTime;

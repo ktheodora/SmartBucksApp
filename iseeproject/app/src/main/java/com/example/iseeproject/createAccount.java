@@ -75,7 +75,6 @@ public class createAccount extends AppCompatActivity {
 
     }
 
-
     public void addData(){
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +96,8 @@ public class createAccount extends AppCompatActivity {
                             homePage.class);
                     Bundle b = new Bundle();
                     b.putString("username", username);
+                    //for displaying welcome alert on the screen
+                    b.putBoolean("createAccount", true);
                     myIntent.putExtras(b); //Put your id to your next Intent
                     startActivity(myIntent);
                     finish();
@@ -110,7 +111,7 @@ public class createAccount extends AppCompatActivity {
 
         private boolean validate() {
         Boolean result = false;
-        String usnReg = "^[a-zA-Z0-9_]*$";
+        String usnReg = "^[a-zA-Z]+[a-zA-Z0-9_]*$";
         //String emailReg = "^(.+)@(.+)$";
         final Pattern VALID_EMAIL_ADDRESS_REGEX =
                     Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -131,7 +132,7 @@ public class createAccount extends AppCompatActivity {
             else if(!(UserName.getText().toString().matches(usnReg))) {
                 //checking if username has a valid form
                 Toast t = Toast.makeText(createAccount.this,
-                        "Username must contain only alphanumeric or underscore characters", Toast.LENGTH_LONG);
+                        "Username must contain only alphanumeric or underscore characters and begin with a letter", Toast.LENGTH_LONG);
                 t.show();
                 //to overcome database problems
             }

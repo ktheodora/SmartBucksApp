@@ -5,8 +5,7 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- Add Permission -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -16,23 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".addIncome" />
-        <activity android:name=".faqActivity" />
-        <activity android:name=".listActivity" />
+        <activity android:name=".lineGraph" />
         <activity android:name=".preferencesActivity" />
-        <activity android:name=".welcomeUser" />
-        <activity android:name=".loginActivity" />
-        <activity android:name=".enterExpenses" />
-        <activity android:name=".updateDetail" />
-        <activity android:name=".createAccount" />
-        <activity android:name=".homePage" />
-        <activity android:name=".mainActivity">
+        <activity android:name=".welcomeUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".loginActivity" />
+        <activity android:name=".enterExpenses" />
+        <activity android:name=".updateDetail" />
+        <activity android:name=".createAccount" />
+        <activity android:name=".homePage" />
+        <activity android:name=".mainActivity" />
     </application>
 
 </manifest>

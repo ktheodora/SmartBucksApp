@@ -292,9 +292,14 @@ public class dbHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                Expenses exp = new Expenses( cursor.getString(0),
-                        cursor.getString(1), Double.parseDouble(cursor.getString(2)),
-                        cursor.getString(3),  cursor.getString(4));
+//                Expenses exp = new Expenses( cursor.getString(0),
+//                        cursor.getString(1), Double.parseDouble(cursor.getString(2)),
+//                        cursor.getString(3),  cursor.getString(4));
+                Expenses exp = new Expenses();
+                exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
+                exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
+                exp.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
+                exp.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CAT)));
                 exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
                 //exp.setUsername(cursor.getString(0));
                 expList.add(exp);
@@ -302,6 +307,38 @@ public class dbHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return expList;
+    }
+
+
+    public ArrayList<Expenses> getSortedCategory(User user, String cate){
+        ArrayList<Expenses> categoryList = new ArrayList<Expenses>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String cateQuery = " SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN +
+                " = '" + user.getUsername() + "'" +" AND " + KEY_CAT + " = '" + cate + "'"  ;
+        Cursor cursor = db.rawQuery(cateQuery,null);
+
+//        while (cursor.moveToNext()){
+//            Expenses expenses = new Expenses(cursor.getString(0),
+//                    cursor.getString(1), Double.parseDouble(cursor.getString(2)),
+//                    cursor.getString(3),  cursor.getString(4));
+//            categoryList.add(expenses);
+//        }
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
+                Expenses expenses = new Expenses();
+                expenses.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
+                expenses.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
+                expenses.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
+                expenses.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CAT)));
+                expenses.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
+                //exp.setUsername(cursor.getString(0));
+                categoryList.add(expenses);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return categoryList;
     }
 
 }

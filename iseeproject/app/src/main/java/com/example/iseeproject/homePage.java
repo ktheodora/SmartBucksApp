@@ -11,20 +11,27 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -61,7 +68,7 @@ import java.util.Map;
 
 public class homePage extends AppCompatActivity {
       //  private Button edit;
-    private Button enterExpbtn, weekbtn, catbtn, monbtn;
+    private Button enterExpbtn, weekbtn, catbtn, monbtn,allexpense;
     private ImageButton menuBtn;
     dbHandler peopleDB;
     String usr = "";
@@ -77,6 +84,13 @@ public class homePage extends AppCompatActivity {
     int choice;
 
 
+    public static final String PREFS_NAME =
+
+            "Test";
+    public CheckBox check;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +101,33 @@ public class homePage extends AppCompatActivity {
         peopleDB = new dbHandler(this);
         Bundle b = getIntent().getExtras();
 
+
+
+
         if (b != null) {
             usr = b.getString("username");
+            if (b.containsKey("createAccount")) {
+                //Show dialog box with app rules
+                AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
+                bx1.setTitle("Welcome to the SmartBucks App!");
+                bx1.setMessage("\n To enter new expense/income source" +
+                        ", click on the 'Add Expenses/Income' buttons located on the homepage." +
+                        "\n To update your details/expenses categories," +
+                        "+ navigate to Menu-> Update Details.");
+                bx1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+
+                    }
+                });
+
+                AlertDialog alertDialog = bx1.create();
+                alertDialog.show();
+            }
         }
+
 
         userr = peopleDB.getUser(usr);
 
@@ -123,18 +161,32 @@ public class homePage extends AppCompatActivity {
 
         if(sum>userr.getBudget()){
 
+            showDialog();
+
+
            // final TextView budget = (TextView) findViewById(R.id.budgetview);
-            final Animation anim = new AlphaAnimation(0.0f,1.0f);
+          /*  final Animation anim = new AlphaAnimation(0.0f,1.0f);
             anim.setDuration(5);
             anim.setStartOffset(20);
             anim.setRepeatMode(Animation.REVERSE);
             anim.setRepeatCount(Animation.INFINITE);
 
-            budgetView.startAnimation(anim);
+            budgetView.startAnimation(anim);*/
 
-            AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
-            bx1.setCancelable(true);
+           /* SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            boolean ifShowDialog = preferences.getBoolean("showDialog",true);
+            if(ifShowDialog){
+               // anim.cancel();
+                showDialog();
+
+            }*/
+
+
+
+           /* AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
+
             bx1.setTitle("Alert!Spendings getting more than Budget");
+            bx1.setCancelable(true);
 
             bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
@@ -147,7 +199,7 @@ public class homePage extends AppCompatActivity {
             });
 
             AlertDialog alertDialog = bx1.create();
-            alertDialog.show();
+            alertDialog.show();*/
         }
 
 
@@ -197,6 +249,8 @@ public class homePage extends AppCompatActivity {
                                 return true;
 
                             case R.id.Preferences:
+
+
                                 showToast("Preferences under construction");
                                 return true;
 
@@ -209,9 +263,16 @@ public class homePage extends AppCompatActivity {
                                 return true;
 
                             case  R.id.item12:
-                                showToast("FAQ under construction");
+
+
+                                String url = "https://example.net/privacy_policy";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(url));
+                                startActivity(i);
+                                //showToast("FAQ under construction");
                                 return true;
-                            case R.id.report:
+
+                                case R.id.report:
                                 //smartBucksReport();
                                 Permission();
 
@@ -243,6 +304,123 @@ public class homePage extends AppCompatActivity {
         lg.setCatGraphStyle(pieChartView);
 
     }
+
+
+
+
+    private void showDialog(){
+        AlertDialog.Builder adb= new AlertDialog.Builder(this);
+        LayoutInflater adbInflater = LayoutInflater.from(this);
+        View eulaLayout = adbInflater.inflate(R.layout.dialog_content, null);
+        check = (CheckBox) eulaLayout.findViewById(R.id.check_box1);
+        adb.setView(eulaLayout);
+        adb.setTitle("Alert");
+        adb.setMessage(Html.fromHtml("Alert!Spendings getting more than Budget "));
+        adb.setPositiveButton("Ok", new
+
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String checkBoxResult = "NOT checked";
+                        if (check.isChecked())
+
+                            checkBoxResult = "checked";
+                        SharedPreferences settings =
+
+                                getSharedPreferences(PREFS_NAME, 0);
+                        SharedPreferences.Editor
+
+                                editor = settings.edit();
+                        editor.putString("noshow", checkBoxResult);
+                        // Commit the edits!
+
+                        //  sunnovalthesis();
+
+                        editor.commit();
+                        return;
+                    } });
+
+        adb.setNegativeButton("Cancel", new
+
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface
+
+                                                dialog, int which) {
+                        String checkBoxResult = "NOT checked";
+                        if (check.isChecked())
+
+                            checkBoxResult = "checked";
+                        SharedPreferences settings =
+
+                                getSharedPreferences(PREFS_NAME, 0);
+                        SharedPreferences.Editor editor =
+
+                                settings.edit();
+                        editor.putString("noshow",
+
+                                checkBoxResult);
+                        // Commit the edits!
+
+                        //  sunnovalthesis();
+
+                        editor.commit();
+                        return;
+                    } });
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String noshow = settings.getString("noshow", "NOT checked");
+        if (noshow != "checked" ) adb.show();
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+      /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(homePage.this);
+        TextView budgetView = (TextView) findViewById(R.id.budgetview);
+        final Animation anim = new AlphaAnimation(0.0f,1.0f);
+        anim.setDuration(5);
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+
+        budgetView.startAnimation(anim);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setMessage("Alert!Spendings getting more than Budget")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        anim.cancel();
+                    }
+                })
+            .setNeutralButton("Never Show", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    SharedPreferences preferences = getSharedPreferences("PREFS",0);
+                    SharedPreferences.Editor editor =  preferences.edit();
+                    editor.putBoolean("showDialog",false);
+                    editor.apply();
+                    anim.cancel();
+                }
+            });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
+    }*/
+
 
     private void smartBucksReport() {
 
@@ -339,6 +517,9 @@ public class homePage extends AppCompatActivity {
         myIntent.putExtras(b); //Put your id to your next Intent
         startActivity(myIntent);
     }
+
+
+
 
 
     public void showToast(String text) {

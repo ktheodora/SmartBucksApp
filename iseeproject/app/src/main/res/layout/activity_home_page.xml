@@ -14,315 +14,337 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/wallnew"
-            android:orientation="horizontal">
-
-            <ImageButton
-
-                android:id="@+id/menuLines"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                android:padding="1dp"
-                android:background="#00000000"
-                android:layout_marginLeft="2dp"
-                app:srcCompat="@drawable/menu7"
-                android:layout_gravity="start"
-                />
-
-            <TextView
-                android:id="@+id/editText"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:layout_marginLeft="20dp"
-                android:text="@string/officialname"
-                android:textColor="#ffffff"
-                android:textSize="50sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_gravity="center"
-                android:background="#00000000"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/ourlogo" />
-
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/HomePage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="25sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/budgeticon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
-
-            <TextView
-                android:id="@+id/budget"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:text="Budget"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/budgetview"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="0.00"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/addInc"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/coin" />
-
-            <TextView
-                android:id="@+id/totalIncLabel"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Total Income"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/totalInc"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:textSize="20sp" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/expenseicon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/expenseicon" />
-
-            <TextView
-                android:id="@+id/TotalExpensesView"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Total Expenses"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/TotalExpenses"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:textSize="20sp"/>
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/Savings"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/budgeticon" />
-
-            <TextView
-                android:id="@+id/savings"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Total Savings"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/SavingsView"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:inputType="textPersonName"
-                android:hint="0.00"
-                android:textSize="20sp"/>
-
-
-        </LinearLayout>
-        <LinearLayout
-<<<<<<< HEAD
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/extraIncomeIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/budgeticon" />
-
-            <TextView
-                android:id="@+id/extraIncomeText"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Extra Income"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/extraIncomeView"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:inputType=""
-                android:hint="0.00"
-                android:textSize="20sp"/>
-
-
-        </LinearLayout>
-
-        <fragment
-            android:id="@+id/lineGraph"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="250dp"
-            android:background="#ffffff" />
-
-=======
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity = "center"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/addExpenses"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Add Expenses"
-                android:textSize="15sp" />
-            <Button
-                android:id="@+id/addIncome"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Add Income"
-                android:textSize="15sp" />
-        </LinearLayout>
->>>>>>> devel/theo
-        <Button
-            android:id="@+id/showExpenses"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-<<<<<<< HEAD
-            android:text="Add Expenses"
-=======
-            android:text="Show All Expenses"
->>>>>>> devel/theo
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/graphlabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Expenses Summary Graphs"
-            android:textSize="20sp" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChartWeek"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="250dp"
-            android:background="#ffffff"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
-        </com.github.mikephil.charting.charts.LineChart>
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChartMon"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="250dp"
-            android:background="#ffffff"
-            >
-        </com.github.mikephil.charting.charts.LineChart>
-        <lecho.lib.hellocharts.view.PieChartView
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
-    </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/wallnew"
+                android:orientation="horizontal"
+                >
+
+                <ImageButton
+
+                    android:id="@+id/menuLines"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:background="#00000000"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/menu7"
+                    />
+
+                <TextView
+                    android:id="@+id/editText"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/officialname"
+                    android:textColor="#ffffff"
+                    android:textSize="50sp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    android:scaleType="fitStart"
+                    android:layout_marginRight="8dp"
+                    app:srcCompat="@drawable/ourlogo" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/HomePage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/budgeticon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/coin" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:text="Budget, €"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/budgetview"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="0.00"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/addInc"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/coin" />
+
+                <TextView
+                    android:id="@+id/totalIncLabel"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Total Income,€"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/totalInc"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:hint="0.00"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/stableExpenseicon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/expenseicon" />
+
+                <TextView
+                    android:id="@+id/StableExpensesView"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Stable Expenses,€"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/StableExpenses"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="0.00"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/expenseicon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/expenseicon" />
+
+                <TextView
+                    android:id="@+id/TotalExpensesView"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Personal Expenses,€"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/TotalExpenses"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="0.00"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/Savings"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/budgeticon" />
+
+                <TextView
+                    android:id="@+id/savings"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Total Savings,€"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/SavingsView"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center"
+                    android:inputType="textPersonName"
+                    android:hint="0.00"
+                    android:textSize="20sp"/>
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity = "center"
+                android:layout_marginTop="10dp"
+                android:background="#F5F5F5"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/addExpenses"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="Add Expenses"
+                    android:background="#90A4AE"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+                <Button
+                    android:id="@+id/addIncome"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="#90A4AE"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="8dp"
+                    android:text="Add Income"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:background="#F5F5F5">
+
+                <Button
+                    android:id="@+id/showExpenses"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="Show Expenses"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp"
+                    android:background="#90A4AE"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/graphlabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Expenses Summary Graphs"
+                android:textSize="20sp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChartWeek"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="250dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#ffffff"
+                >
+            </com.github.mikephil.charting.charts.LineChart>
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChartMon"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="250dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#ffffff"
+                >
+            </com.github.mikephil.charting.charts.LineChart>
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+        </LinearLayout>
+
     </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>

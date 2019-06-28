@@ -132,6 +132,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="@string/action_sign_in"
+        android:background="#90A4AE"
+        android:textColor="#ffffff"
         android:textSize="15sp"
 />
 
@@ -142,6 +144,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:text="@string/backtomain"
+        android:background="#90A4AE"
+        android:textColor="#ffffff"
         android:textSize="15sp"
  />
     </LinearLayout>

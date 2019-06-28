@@ -314,6 +314,8 @@
         android:layout_gravity="center"
         android:text="@string/finish"
         android:textSize="15sp"
+        android:background="#90A4AE"
+        android:textColor="#ffffff"
         android:layout_marginTop="15dp"/>
 
 </LinearLayout>
