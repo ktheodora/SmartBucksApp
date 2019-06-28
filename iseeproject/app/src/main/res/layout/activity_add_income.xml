@@ -106,6 +106,8 @@
             android:text="Add"
             android:layout_gravity="center"
             android:textSize="15sp"
+            android:background="#90A4AE"
+            android:textColor="#ffffff"
             android:layout_marginTop="100dp"
             />
         <Button
@@ -115,6 +117,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="BACK"
+            android:background="#90A4AE"
+            android:textColor="#ffffff"
             android:textSize="15sp"/>
 
     </LinearLayout>
