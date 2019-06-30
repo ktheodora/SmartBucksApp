@@ -291,10 +291,6 @@ public class dbHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-//                Expenses exp = new Expenses( cursor.getString(0),
-//                        cursor.getString(1), Double.parseDouble(cursor.getString(2)),
-//                        cursor.getString(3),  cursor.getString(4));
                 Expenses exp = new Expenses();
                 exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
                 exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
@@ -317,12 +313,6 @@ public class dbHandler extends SQLiteOpenHelper {
                 " = '" + user.getUsername() + "'" +" AND " + KEY_CAT + " = '" + cate + "'"  ;
         Cursor cursor = db.rawQuery(cateQuery,null);
 
-//        while (cursor.moveToNext()){
-//            Expenses expenses = new Expenses(cursor.getString(0),
-//                    cursor.getString(1), Double.parseDouble(cursor.getString(2)),
-//                    cursor.getString(3),  cursor.getString(4));
-//            categoryList.add(expenses);
-//        }
 
         if (cursor.moveToFirst()) {
             do {

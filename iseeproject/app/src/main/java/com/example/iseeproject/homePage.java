@@ -110,10 +110,10 @@ public class homePage extends AppCompatActivity {
                 //Show dialog box with app rules
                 AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
                 bx1.setTitle("Welcome to the SmartBucks App!");
-                bx1.setMessage("\n To enter new expense/income source" +
+                bx1.setMessage("\n-To enter new expense/income source" +
                         ", click on the 'Add Expenses/Income' buttons located on the homepage." +
-                        "\n To update your details/expenses categories," +
-                        "+ navigate to Menu-> Update Details.");
+                        "\n-To update your details/expenses categories," +
+                        " navigate to Menu -> Update Details.");
                 bx1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -144,6 +144,10 @@ public class homePage extends AppCompatActivity {
         TextView incomeView = (TextView) findViewById(R.id.totalInc);
         incomeView.setText(String.valueOf(userr.getIncome()));
 
+        TextView stableExpenses =(TextView) findViewById(R.id.StableExpenses);
+        Double stableSum = userr.getBills() + userr.getRent() + userr.getInsurance();
+        stableExpenses.setText(String.valueOf(stableSum));
+
         TextView expensesView = (TextView) findViewById(R.id.TotalExpenses);
 
         //get sum of money spent in expenses
@@ -163,43 +167,6 @@ public class homePage extends AppCompatActivity {
 
             showDialog();
 
-
-           // final TextView budget = (TextView) findViewById(R.id.budgetview);
-          /*  final Animation anim = new AlphaAnimation(0.0f,1.0f);
-            anim.setDuration(5);
-            anim.setStartOffset(20);
-            anim.setRepeatMode(Animation.REVERSE);
-            anim.setRepeatCount(Animation.INFINITE);
-
-            budgetView.startAnimation(anim);*/
-
-           /* SharedPreferences preferences = getSharedPreferences("PREFS",0);
-            boolean ifShowDialog = preferences.getBoolean("showDialog",true);
-            if(ifShowDialog){
-               // anim.cancel();
-                showDialog();
-
-            }*/
-
-
-
-           /* AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
-
-            bx1.setTitle("Alert!Spendings getting more than Budget");
-            bx1.setCancelable(true);
-
-            bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    dialog.cancel();
-                    anim.cancel();
-
-                }
-            });
-
-            AlertDialog alertDialog = bx1.create();
-            alertDialog.show();*/
         }
 
 

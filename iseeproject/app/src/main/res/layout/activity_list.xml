@@ -18,16 +18,11 @@
             android:orientation="vertical">
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/wallnew"
                 android:orientation="horizontal">
-
-
-
 
                 <ImageButton
 
@@ -68,6 +63,37 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="#F5F5F5">
+
+                <!--TODO add payment method dropdown list-->
+
+                <TextView
+                    android:id="@+id/catLabel"
+                    android:layout_height="wrap_content"
+                    android:text="Select Category"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:id="@+id/selectDateLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Select Date"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,21 +103,11 @@
                 android:layout_marginTop="10dp"
                 android:background="#F5F5F5">
 
-                <ImageView
-                    android:id="@+id/catIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/misc" />
-
                 <!--TODO add payment method dropdown list-->
 
                 <Spinner
                     android:id="@+id/spinner123"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -113,7 +129,7 @@
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:focusable="false"
-                    android:hint="To Date"
+                    android:hint=" To Date "
                     android:layout_marginLeft="8dp"
                     android:textSize="20sp" />
 

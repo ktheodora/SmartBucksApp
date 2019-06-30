@@ -125,22 +125,16 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
         datepick.setOnClickListener(new View.OnClickListener() {
 
-                                        @Override
-                                        public void onClick(View v) {
-                                            // TODO Auto-generated method stub
-                                            DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
-                                                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                                    myCalendar.get(Calendar.DAY_OF_MONTH));
-                                            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-                                            mDatePicker.show();
-                                        }
+              @Override
+               public void onClick(View v) {
+                   // TODO Auto-generated method stub
+                  DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
+                          .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                  mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                  mDatePicker.show();
+              }
 
-
-
-
-
-
-                                    }
+          }
 
         );
 

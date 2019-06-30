@@ -282,6 +282,7 @@ public class lineGraph {
                 maxY =xy.getY();
             }
         }
+        //we set a 20% extra of the maximum y coord so that we make sure the graph is always visible
         return (maxY + (maxY*20)/100);
     }
 }
