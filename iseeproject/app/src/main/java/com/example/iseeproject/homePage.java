@@ -248,12 +248,6 @@ public class homePage extends AppCompatActivity {
                                 goToHomepage();
                                 return true;
 
-                            case R.id.Preferences:
-
-
-                                showToast("Preferences under construction");
-                                return true;
-
                             case  R.id.item2:
                                 goToDetails();
                                 return true;
@@ -263,7 +257,6 @@ public class homePage extends AppCompatActivity {
                                 return true;
 
                             case  R.id.item12:
-
 
                                 String url = "https://example.net/privacy_policy";
                                 Intent i = new Intent(Intent.ACTION_VIEW);

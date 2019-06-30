@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,12 +29,13 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
     double Income = 0, Budget = 0,Rent =0,Bills =0,Insurance =0;
     String username, newTreshold ;
     dbHandler peopleDB;
-    static String USERPREF = "USER"; // or other values
-    private ImageButton menuBtn;
+    static String USERPREF = "USER"; // or other value
     Spinner spinner;
     User usr;
     Map<String, Double> cats;
     List<String> categories = new ArrayList<>();
+    private ImageButton menuBtn;
+    menuHandler MenuHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +76,11 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToHomepage();
+                MenuHandler.goToHomePage();
             }
         });
-
+        MenuHandler = new menuHandler(updateDetail.this, username);
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -85,33 +88,7 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-
-                            case R.id.HomePage:
-                                goToHomepage();
-                                return true;
-
-                            case R.id.Preferences:
-                                showToast("Preferences under construction");
-                                return true;
-
-                            case  R.id.item2:
-                                goToDetails();
-                                return true;
-
-                            case  R.id.logoutBtn:
-                                logout();
-                                return true;
-
-                            case  R.id.item12:
-                                showToast("FAQ under construction");
-                                return true;
-                            case R.id.report:
-                                showToast("Report under construction");
-                                return true;
-                            default:
-                                return false;
-                        }
+                        return MenuHandler.onMenuItemClick(item);
                     }
                 });
                 popup.inflate(R.menu.drawermenu);
@@ -119,40 +96,6 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-    }
-
-    public void goToHomepage() {
-        Intent myIntent = new Intent(updateDetail.this, homePage.class);
-        Bundle b = new Bundle();
-        b.putString("username",username);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-        finish();
-    }
-
-    public void goToDetails() {
-        Intent myIntent = new Intent(updateDetail.this, updateDetail.class);
-        Bundle b = new Bundle();
-        b.putString("username",username);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-    }
-
-    public void showToast(String text) {
-        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
-        t.show();
-    }
-
-    public void logout() {
-        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
-        editor.apply();
-        //then redirect to initial activity
-        Intent myIntent = new Intent(updateDetail.this, mainActivity.class);
-        startActivity(myIntent);
     }
 
     private void updated(double Income, double budget, double Rent, double Bills, double Insurance)
@@ -272,7 +215,7 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
                 Toast t = Toast.makeText(updateDetail.this,
                         "Succesful addition of category " + newCat, Toast.LENGTH_LONG);
                 t.show();
-                goToDetails();
+                MenuHandler.goToDetails();
             }
         }
 
@@ -302,7 +245,7 @@ public class updateDetail extends AppCompatActivity implements AdapterView.OnIte
                 Toast t = Toast.makeText(updateDetail.this,
                         "Successful update of " + updatedCat + " threshold", Toast.LENGTH_LONG);
                 t.show();
-                goToDetails();
+                MenuHandler.goToDetails();
             }
         }
         db.close();

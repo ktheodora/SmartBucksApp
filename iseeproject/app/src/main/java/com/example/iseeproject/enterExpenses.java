@@ -46,7 +46,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     DatePickerDialog.OnDateSetListener date;
     String expenseTime,username,category,payment_method;
     double expAmount;
-
+    menuHandler MenuHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         if (b != null)
             username = b.getString("username");
 
+        MenuHandler = new menuHandler(enterExpenses.this, username);
         peopleDB = new dbHandler(this);
         User usr = peopleDB.getUser(username);
         //getting expenses categories names from database and avoiding hardcoded values
@@ -94,33 +95,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-
-                            case R.id.HomePage:
-                                goToHomepage();
-                                return true;
-
-                            case R.id.Preferences:
-                                showToast("Preferences under construction");
-                                return true;
-
-                            case  R.id.item2:
-                                goToDetails();
-                                return true;
-
-                            case  R.id.logoutBtn:
-                                logout();
-                                return true;
-
-                            case  R.id.item12:
-                                showToast("FAQ under construction");
-                                return true;
-                            case R.id.report:
-                                showToast("Report under construction");
-                                return true;
-                            default:
-                                return false;
-                        }
+                        return MenuHandler.onMenuItemClick(item);
                     }
                 });
                 popup.inflate(R.menu.drawermenu);
@@ -150,22 +125,22 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
         datepick.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-                mDatePicker.show();
-            }
+                                        @Override
+                                        public void onClick(View v) {
+                                            // TODO Auto-generated method stub
+                                            DatePickerDialog mDatePicker = new DatePickerDialog(enterExpenses.this, date, myCalendar
+                                                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                                                    myCalendar.get(Calendar.DAY_OF_MONTH));
+                                            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                                            mDatePicker.show();
+                                        }
 
 
 
 
 
 
-        }
+                                    }
 
         );
 
@@ -181,11 +156,11 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                 //TODO Ensure that only one button is checked at a time
 
                 amount = (EditText) findViewById(R.id.amountText);
-                    //TODO check if payment method is also selected
-                    if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText())  ){
-                        Toast t = Toast.makeText(enterExpenses.this,
-                                "All fields must be given", Toast.LENGTH_LONG);
-                        t.show();
+                //TODO check if payment method is also selected
+                if (TextUtils.isEmpty(datepick.getText())  || TextUtils.isEmpty(amount.getText())  ){
+                    Toast t = Toast.makeText(enterExpenses.this,
+                            "All fields must be given", Toast.LENGTH_LONG);
+                    t.show();
                 }
                 else {
                     checkInput();
@@ -195,7 +170,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                goToHomepage();
+                MenuHandler.goToHomePage();
             }
         });
 
@@ -219,12 +194,12 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             double sum = 0;
             Map<String, Double> cat = peopleDB.getThresholds(username);
             if (peopleDB.expensesExist(user)) {
-            List<Expenses> exp = peopleDB.getAllExpenses(user);
-            for (Expenses expense : exp) {
-                if (expense.getCategory().equals(category)){
-                    sum += expense.getPrice();
-                }
-            }}
+                List<Expenses> exp = peopleDB.getAllExpenses(user);
+                for (Expenses expense : exp) {
+                    if (expense.getCategory().equals(category)){
+                        sum += expense.getPrice();
+                    }
+                }}
             if ((sum + expAmount) > cat.get(category)) {
                 AlertDialog.Builder bx1 = new AlertDialog.Builder(enterExpenses.this);
                 bx1.setCancelable(true);
@@ -246,7 +221,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.cancel();
-                        goToDetails();
+                        MenuHandler.goToDetails();
 
                     }
                 });
@@ -277,38 +252,6 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         t.show();
     }
 
-    public void goToHomepage() {
-        Intent myIntent = new Intent(enterExpenses.this, homePage.class);
-        Bundle b = new Bundle();
-        b.putString("username",username);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-    }
-
-    public void goToDetails() {
-        Intent myIntent = new Intent(enterExpenses.this, updateDetail.class);
-        Bundle b = new Bundle();
-        b.putString("username",username);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-    }
-
-    public void showToast(String text) {
-        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
-        t.show();
-    }
-
-    public void logout() {
-        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
-        editor.apply();
-        //then redirect to initial activity
-        Intent myIntent = new Intent(enterExpenses.this, mainActivity.class);
-        startActivity(myIntent);
-    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -335,20 +278,18 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-       if (parent.getId() == R.id.spinner) {
-           // On selecting a spinner item
-           String item = parent.getItemAtPosition(position).toString();
-           // Showing selected spinner item
-           Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-       }
-       else if(parent.getId() == R.id.spinnerCategory){
-           // On selecting a spinner item
-           String item1 = parent.getItemAtPosition(position).toString();
-           // Showing selected spinner item
-           Toast.makeText(parent.getContext(), "Selected: " + item1, Toast.LENGTH_LONG).show();
-       }
-
-
+        if (parent.getId() == R.id.spinner) {
+            // On selecting a spinner item
+            String item = parent.getItemAtPosition(position).toString();
+            // Showing selected spinner item
+            Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        }
+        else if(parent.getId() == R.id.spinnerCategory){
+            // On selecting a spinner item
+            String item1 = parent.getItemAtPosition(position).toString();
+            // Showing selected spinner item
+            Toast.makeText(parent.getContext(), "Selected: " + item1, Toast.LENGTH_LONG).show();
+        }
 
     }
 

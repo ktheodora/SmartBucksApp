@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -31,6 +34,8 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
     String username;
     SearchView sv;
     String selectedCategory;
+    private ImageButton menuBtn;
+    menuHandler MenuHandler;
 
     Spinner spinner12;
     @Override
@@ -47,56 +52,27 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             userr = dbhandler.getUser(usr);
 
 
+        MenuHandler = new menuHandler(listActivity.this, username);
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(listActivity.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        return MenuHandler.onMenuItemClick(item);
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
 
         expenselistview = findViewById(R.id.expenseLV);
         dbhandler = new dbHandler(this);
         ArrayList<Expenses>  explist = dbhandler.getAllExpenses(userr);
         filteredExpenses(explist);
-
-
-
-//        ArrayList<HashMap<String,String>> myMapList = new ArrayList<>();
-//
-//
-//
-//
-//
-//
-//        //sv=(SearchView) findViewById(R.ied.search_view);
-//
-//
-//
-//
-//        for(int i=0; i<explist.size();i++){
-//            HashMap<String,String> myMap = new HashMap<>();
-//            myMap.put("Date",explist.get(i).getExpenseTime());
-//            myMap.put("Amount",Double.toString(explist.get(i).getPrice()));
-//            myMap.put("Category",explist.get(i).getCategory());
-//            myMap.put("Payment_Method",explist.get(i).getPaymentMethod());
-//
-//            myMapList.add(myMap);
-//        }
-//
-//        final ListAdapter adapter = new SimpleAdapter(listActivity.this,myMapList,R.layout.row,
-//                new String[]{"Date","Amount","Category","Payment_Method"},
-//                new int[]{R.id.textviewdate,R.id.textviewamount,R.id.textviewcategory,R.id.textviewpaymenttype});
-//        expenselistview.setAdapter(adapter);
-
-
-     /*   sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                ((SimpleAdapter) adapter).getFilter().filter(newText);
-                 return false;
-            }
-        });*/
-
 
 
         Button back = (Button) findViewById(R.id.backBtn);
