@@ -58,6 +58,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
@@ -150,16 +151,25 @@ public class homePage extends AppCompatActivity {
 
         TextView expensesView = (TextView) findViewById(R.id.TotalExpenses);
 
-        //get sum of money spent in expenses
+        //get sum of money spent in expenses this month
         double sum=0;
         if (peopleDB.expensesExist(userr)) {
-            //if user has entered at least one expense
+        LocalDate now = LocalDate.now();
+        //creating a year month object containing information
+        YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
+        LocalDate firstMonthDate = yearMonthObject.atDay(1);
 
-            ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
-            for (Expenses expense : exp) {
-                sum += expense.getPrice();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        ArrayList<Expenses> allExpenses = peopleDB.getAllExpenses(userr);
+        for (Expenses exp : allExpenses) {
+            LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+            //if it is in the current month
+            if (expdate.isAfter(firstMonthDate) || expdate.isEqual(firstMonthDate)) {
+                sum += exp.getPrice();
             }
+        }
+            //if user has entered at least one expense
         }
         expensesView.setText(String.valueOf(sum));
 
@@ -168,7 +178,6 @@ public class homePage extends AppCompatActivity {
             showDialog();
 
         }
-
 
         TextView savingsView = (TextView) findViewById(R.id.SavingsView);
         //savings = budget - sum of expenses
