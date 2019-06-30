@@ -307,7 +307,7 @@ public class homePage extends AppCompatActivity {
 
 
 
-
+    @SuppressWarnings("deprecation")
     private void showDialog(){
         AlertDialog.Builder adb= new AlertDialog.Builder(this);
         LayoutInflater adbInflater = LayoutInflater.from(this);
