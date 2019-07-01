@@ -27,6 +27,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
 
 public class menuHandler {
@@ -185,11 +186,12 @@ public class menuHandler {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            for (Expenses exp : allExpenses) {
+            for(Iterator<Expenses> it = allExpenses.iterator(); it.hasNext();) {
+                Expenses exp = it.next();
                 LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
                 //if it is earlier than the current month
                 if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
-                    allExpenses.remove(exp);
+                    it.remove();
                 }
             }
             //afterwards, sort by comparing with every day of the month

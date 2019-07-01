@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -267,13 +268,15 @@ public class lineGraph {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            for (Expenses exp : expenses) {
+            for(Iterator<Expenses> it = expenses.iterator(); it.hasNext();) {
+                Expenses exp = it.next();
                 LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
                 //if it is earlier than the current month
                 if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
-                    expenses.remove(exp);
+                    it.remove();
                 }
             }
+
             //and then we calculate the sums for the remaining expenses
             double catsum = 0;
             for (Map.Entry<String,Double> entry : map.entrySet()) {
