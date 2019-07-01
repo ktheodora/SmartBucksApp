@@ -22,12 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/wallnew"
-<<<<<<< HEAD
                 android:orientation="horizontal"
                 android:textAlignment="center">
-=======
-                android:orientation="horizontal">
->>>>>>> 8f039e02be3efd096009891752b2dac0058bd68a
 
                 <ImageButton
 
@@ -74,7 +70,6 @@
                 android:layout_marginTop="10dp"
                 android:background="#F5F5F5">
 
-<<<<<<< HEAD
                 <ImageView
                     android:id="@+id/catIcon"
                     android:layout_width="35dp"
@@ -84,7 +79,6 @@
                     android:layout_weight="1"
                     android:scaleType="fitStart"
                     app:srcCompat="@drawable/cale" />
-=======
                 <!--TODO add payment method dropdown list-->
 
                 <TextView
@@ -116,7 +110,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="#F5F5F5">
->>>>>>> 8f039e02be3efd096009891752b2dac0058bd68a
 
                 <!--TODO add payment method dropdown list-->
 
