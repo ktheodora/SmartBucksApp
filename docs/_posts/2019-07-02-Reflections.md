@@ -10,23 +10,28 @@ This blog is mostly to share our insights on the developmental journey of our ap
 ## Technical Challenges 
 
 ### Android Studio
+
 - This is a software development project in which we had to develop an android application. So basically the first and foremost problem was to work with the Android studio workspace since not all members of the group were familiar with it. 
 - So this problem was tackled by going through a lot of tutorials on understanding the basics and nuances of the android studio which will increase our productivity in our app development. 
 - It took a lot of time to get familiarised with the Android project structure, the working of the emulator which most of the time kept crashing and to resolve the API issues. 
 - Due to low computational speeds in most of the laptops due to the less availability of memory, there were often problems in the debugging process. 
 
 ### Design 
+
 - One of the biggest problems in UI/UX design was migrating the basic prototype frontend to the advanced prototype frontend. The goal was to change from the default constraint layout to the linear layout for better screen fittings with the aim to make the application make more intuitive and satisfy the user. Therefore there was a lot of time consumed as all of the XML activities need to created again from scratch. 
 
 ### Integrating with Java Language 
--  Ideas can be crafted but bringing them into life is a whole new venture. Here the struggle of making the application was an implementation of the code. This took significantly a long amount of time because of a lot of bugs that were handled at every process and removed accordingly. 
+
+- Ideas can be crafted but bringing them into life is a whole new venture. Here the struggle of making the application was an implementation of the code. This took significantly a long amount of time because of a lot of bugs that were handled at every process and removed accordingly. 
   
-### Design patterns 
+### Design patterns
+
 - The idea of using a design pattern to develop an application was new to us and had to understand each of the patterns so that these solutions can be implemented in our software development.Selecting the appropriate attributes for the classes and funtions that has to be created and implemented. 
 - Structural and behavioral design patterns were understood and implemented accordingly which took a particularly long time. 
 - Understanding of using the different design components to design better user experience and the interface was one of the major challenges in designing. 
 
 ### Database Design 
+
 ![use_case1]({{site.baseurl}}/images/Database.jpeg){:height="70%" width="70%"}
 - The creation of a menu handler and an ample of activities included in it to handle the data, as well as determining how the expenses will store the thresholds and their categories turned out to be harder than we thought.
 - We finally concluded in a simple structure that might not have the most efficient design but serves the user's needs.
@@ -56,14 +61,15 @@ This blog is mostly to share our insights on the developmental journey of our ap
 
 There are a lot of benefits involved in working as a team project. 
 
-1. As a team, we have to convey the ideas necessary for product development which in turn needs the necessary skill of communication. This is one of the most important skills that we gained by working as a team. 
-2. Needless to say, there was a huge benefit of an understanding of the version control system Github which is of industry grade to maintain and work on the code base. 
+1.As a team, we have to convey the ideas necessary for product development which in turn needs the necessary skill of communication. This is one of the most important skills that we gained by working as a team. 
+2.Needless to say, there was a huge benefit of an understanding of the version control system Github which is of industry grade to maintain and work on the code base. 
 If this project wasn't for a team, then there wouldn't be a need to learn the team management tools that let us handle everything related to the project from coding to documentation. 
-3. At each sprint, we were able to develop our presentation skills, which helps us convey the message to the public. 
+3.At each sprint, we were able to develop our presentation skills, which helps us convey the message to the public. 
 
 ## Course Expectations: Our opinion 
 
 The course "Introduction to Software Engineering" did really meet our expectations.
+
 - The course introduced us to the Android development platform, which helped us to enhance the android related programming skills. Such as Java and XML. 
 - We expected the course to help us develop a working application at the end of the day and we were successfully able to develop a functioning application that can be published to the public. 
 - It was always a mystery how the software that we use in our day to day lives are being created. But as the name of the course suggests we were able to demystify the processes under the hood of software development. 
