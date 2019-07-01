@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class mainActivity extends AppCompatActivity {
 
@@ -63,8 +64,16 @@ public class mainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onBackPressed() {
+        Toast t = Toast.makeText(mainActivity.this,"Exiting app. See ya!",Toast.LENGTH_SHORT);
+        t.show();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+        finish();
 
-
+    }
 
 
 

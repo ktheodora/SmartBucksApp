@@ -129,9 +129,10 @@ public class menuHandler {
                 peopleDB = new dbHandler(ctx);
                 User userr = peopleDB.getUser(usr);
                 expensesList = peopleDB.getAllExpenses(userr);
-                myPdfDocument.addAuthor("Pawan Kumar");
+                myPdfDocument.addAuthor("SmartBucks App");
                 Paragraph p3 = new Paragraph();
-                p3.add("SmartBucks Report\n");
+                p3.add("SmartBucks Monthly Report\n");
+                p3.setExtraParagraphSpace(1);
                 try {
                     myPdfDocument.add(p3);
                 } catch (DocumentException e) {
@@ -172,8 +173,9 @@ public class menuHandler {
 
     //we need to sort by date the expenses and
     //show only the ones of the last month
-    public ArrayList<Expenses> sortMonthExpenses() {
-        User user = peopleDB.getUser(usr);
+    public ArrayList<Expenses> sortMonthExpenses(String username) {
+        peopleDB = new dbHandler(ctx);
+        User user = peopleDB.getUser(username);
         ArrayList<Expenses> allExpenses = new ArrayList<>();
         if (peopleDB.expensesExist(user)) {
             allExpenses = peopleDB.getAllExpenses(user);
@@ -226,7 +228,7 @@ public class menuHandler {
 
             } else {
                 //permission already granted
-                smartBucksReport(sortMonthExpenses());
+                smartBucksReport(sortMonthExpenses(usr));
             }
 
         }

@@ -83,6 +83,7 @@ public class homePage extends AppCompatActivity {
     lineGraph lg;
     PieChartView pieChartView;
     int choice;
+    menuHandler MenuHandler;
 
 
     public static final String PREFS_NAME =
@@ -208,6 +209,8 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+        MenuHandler = new menuHandler(homePage.this, usr);
+
         menuBtn  = (ImageButton) findViewById(R.id.menuLines);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -215,37 +218,7 @@ public class homePage extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-
-                            case R.id.HomePage:
-                                goToHomepage();
-                                return true;
-
-                            case  R.id.item2:
-                                goToDetails();
-                                return true;
-
-                            case  R.id.logoutBtn:
-                                logout();
-                                return true;
-
-                            case  R.id.item12:
-
-                                String url = "https://example.net/privacy_policy";
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                startActivity(i);
-                                //showToast("FAQ under construction");
-                                return true;
-
-                                case R.id.report:
-                                //smartBucksReport();
-                                Permission();
-
-                                return true;
-                            default:
-                                return false;
-                        }
+                        return MenuHandler.onMenuItemClick(item);
                     }
                 });
                 popup.inflate(R.menu.drawermenu);
@@ -256,7 +229,11 @@ public class homePage extends AppCompatActivity {
         enterExpbtn =(Button)findViewById(R.id.addExpenses);
         enterExpbtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                goToExpenses();
+                Intent myIntent = new Intent(homePage.this, enterExpenses.class);
+                Bundle b = new Bundle();
+                b.putString("username",usr);
+                myIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(myIntent);
             }
         });
 
@@ -335,180 +312,6 @@ public class homePage extends AppCompatActivity {
         String noshow = settings.getString("noshow", "NOT checked");
         if (noshow != "checked" ) adb.show();
 
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-      /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(homePage.this);
-        TextView budgetView = (TextView) findViewById(R.id.budgetview);
-        final Animation anim = new AlphaAnimation(0.0f,1.0f);
-        anim.setDuration(5);
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-
-        budgetView.startAnimation(anim);
-
-        alertDialogBuilder
-                .setCancelable(false)
-                .setMessage("Alert!Spendings getting more than Budget")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        anim.cancel();
-                    }
-                })
-            .setNeutralButton("Never Show", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    SharedPreferences preferences = getSharedPreferences("PREFS",0);
-                    SharedPreferences.Editor editor =  preferences.edit();
-                    editor.putBoolean("showDialog",false);
-                    editor.apply();
-                    anim.cancel();
-                }
-            });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.show();
-    }*/
-
-
-    private void smartBucksReport() {
-
-        Document myPdfDocument = new Document();
-        //pdf filename
-        String myFilename = "SmartBucks" + new SimpleDateFormat("ddMMYYYY",
-                Locale.getDefault()).format(System.currentTimeMillis());
-        //pdf path
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + myFilename + ".pdf";
-
-        try {
-            //Create instance of PdfWriter class and open pdf
-            PdfWriter.getInstance(myPdfDocument, new FileOutputStream(myFilePath));
-            myPdfDocument.open();
-            //get transactions from databaase
-            peopleDB = new dbHandler(this);
-
-            ArrayList<Expenses> expensesList = peopleDB.getAllExpenses(userr);
-            myPdfDocument.addAuthor("Pawan Kumar");
-            Paragraph p3 = new Paragraph();
-            p3.add("SmartBucks Report\n");
-            try {
-                myPdfDocument.add(p3);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-            PdfPTable table = new PdfPTable(4);
-
-            table.addCell("Date");
-            table.addCell("Amount");
-            table.addCell("Category");
-            table.addCell("Payment_Method");
-
-
-            for (int i = 0; i < expensesList.size(); i++) {
-
-                table.addCell(expensesList.get(i).getExpenseTime());
-                table.addCell(Double.toString(expensesList.get(i).getPrice()));
-                table.addCell(expensesList.get(i).getCategory());
-                table.addCell(expensesList.get(i).getPaymentMethod());
-
-            }
-
-            try {
-                myPdfDocument.add(table);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-            myPdfDocument.addCreationDate();
-            myPdfDocument.close();
-            Toast.makeText(this, myFilename + ".pdf\nis saved to\n" + myFilePath, Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-
-            //if anything goes wrong ,get and show up exception
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void Permission() {
-        int STORAGE_CODE = 1000;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            //System OS >= Marshmellow (6.0), check if permission enabled
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-
-                //Permission not granted request it now
-                String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permission, STORAGE_CODE);
-
-            } else {
-                //permission already granted
-                smartBucksReport();
-            }
-
-        }
-    }
-
-    //methods for redirecting
-
-    public void goToHomepage() {
-        Intent myIntent = new Intent(homePage.this, homePage.class);
-        Bundle b = new Bundle();
-        b.putString("username",usr);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-    }
-
-    public void goToDetails() {
-        Intent myIntent = new Intent(homePage.this, updateDetail.class);
-        Bundle b = new Bundle();
-        b.putString("username",usr);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
-    }
-
-
-
-
-
-    public void showToast(String text) {
-        Toast t = Toast.makeText(this,text,Toast.LENGTH_SHORT);
-        t.show();
-    }
-
-    public void logout() {
-        SharedPreferences sharedpreferences = getSharedPreferences(USERPREF, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
-        editor.apply();
-        //then redirect to initial activity
-        Intent myIntent = new Intent(homePage.this, mainActivity.class);
-        startActivity(myIntent);
-    }
-
-    public void goToExpenses() {
-        Intent myIntent = new Intent(homePage.this, enterExpenses.class);
-        Bundle b = new Bundle();
-        b.putString("username",usr);
-
-        myIntent.putExtras(b); //Put your id to your next Intent
-        startActivity(myIntent);
     }
 
 
@@ -521,7 +324,5 @@ public class homePage extends AppCompatActivity {
 
         editor.apply();
     }
-
-
 
 }
