@@ -26,29 +26,30 @@
             android:layout_height="80dp"
             android:background="@drawable/wallnew"
             android:orientation="horizontal"
-            >
+            android:textAlignment="center">
 
             <ImageButton
 
                 android:id="@+id/menuLines"
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
                 android:background="#00000000"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/menu7"
-                />
+                android:layout_marginLeft="8dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu7" />
 
             <TextView
                 android:id="@+id/editText"
-                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:ems="10"
-                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
                 android:text="@string/officialname"
+                android:scaleType="center"
+                android:layout_width="wrap_content"
                 android:textColor="#ffffff"
+                android:textAlignment="center"
                 android:textSize="50sp" />
 
             <ImageButton
@@ -56,9 +57,9 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="8dp"
                 android:background="#00000000"
                 android:scaleType="fitStart"
-                android:layout_marginRight="8dp"
                 app:srcCompat="@drawable/ourlogo" />
 
 
@@ -91,7 +92,6 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:text="Budget, €"
                 android:textSize="20sp"
                 />
@@ -317,16 +317,14 @@
                 android:text="Expenses Summary Graphs"
                 android:textSize="20sp" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChartWeek"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="250dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="#ffffff"
-                >
-            </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChartWeek"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:background="#ffffff"></com.github.mikephil.charting.charts.LineChart>
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lineChartMon"
                 android:layout_width="match_parent"

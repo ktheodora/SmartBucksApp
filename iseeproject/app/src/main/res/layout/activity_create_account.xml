@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Password(Minimum 6-digit)"
             android:inputType="textPassword"
             android:textSize="20sp"
             />
@@ -189,7 +189,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Income"
+            android:hint="Monthly Income, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -245,7 +245,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Rent"
+            android:hint="Monthly Rent, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -273,7 +273,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Bills"
+            android:hint="Monthly Bills, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -301,7 +301,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Insurance"
+            android:hint="Monthly Insurance, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />

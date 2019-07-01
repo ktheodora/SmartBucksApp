@@ -21,31 +21,31 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/wallnew"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:textAlignment="center">
 
             <ImageButton
 
                 android:id="@+id/menuLines"
-                android:layout_width="71dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:background="#00000000"
-                android:padding="1dp"
+                android:layout_marginLeft="8dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/menu7" />
 
             <TextView
                 android:id="@+id/editText"
-                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:ems="10"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:text="@string/officialname"
+                android:scaleType="center"
+                android:layout_width="wrap_content"
                 android:textColor="#ffffff"
+                android:textAlignment="center"
                 android:textSize="50sp" />
 
             <ImageButton
@@ -53,6 +53,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="8dp"
                 android:background="#00000000"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/ourlogo" />
@@ -157,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Enter Amount"
+                android:hint="Enter Amount, €"
                 android:inputType="numberDecimal"
                 android:textSize="20sp"
                 />
@@ -202,6 +203,8 @@
         android:layout_marginTop="20dp"
         android:text="Confirm"
         android:layout_gravity="center"
+        android:background="#90A4AE"
+        android:textColor="#ffffff"
         android:textSize="15sp"/>
 
     <Button
@@ -211,6 +214,8 @@
         android:layout_marginTop="20dp"
         android:text="Back"
         android:layout_gravity="center"
+        android:background="#90A4AE"
+        android:textColor="#ffffff"
         android:textSize="15sp"/>
 
 </LinearLayout>
