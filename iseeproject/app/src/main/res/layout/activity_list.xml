@@ -70,15 +70,6 @@
                 android:layout_marginTop="10dp"
                 android:background="#F5F5F5">
 
-                <ImageView
-                    android:id="@+id/catIcon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/cale" />
                 <!--TODO add payment method dropdown list-->
 
                 <TextView
