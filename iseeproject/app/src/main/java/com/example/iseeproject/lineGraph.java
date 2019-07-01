@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -256,7 +257,27 @@ public class lineGraph {
         //getting the expenses and their dates
         if (peopleDB.expensesExist(userr)) {
             Map<String, Double> map = peopleDB.getThresholds(userr.getUsername());
+            //we have to get only the current month's expenses,
+            //therefore we will call the menuHandler method sortMonthExpenses
             List<Expenses> expenses = peopleDB.getAllExpenses(userr);
+
+            LocalDate now = LocalDate.now();
+            //creating a year month object containing information
+            YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
+            LocalDate firstMonthDate = yearMonthObject.atDay(1);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            for(Iterator<Expenses> it = expenses.iterator(); it.hasNext();) {
+                Expenses exp = it.next();
+                LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                //if it is earlier than the current month
+                if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
+                    it.remove();
+                }
+            }
+
+            //and then we calculate the sums for the remaining expenses
             double catsum = 0;
             for (Map.Entry<String,Double> entry : map.entrySet()) {
                 for (Expenses exp : expenses) {
@@ -282,6 +303,7 @@ public class lineGraph {
                 maxY =xy.getY();
             }
         }
+        //we set a 20% extra of the maximum y coord so that we make sure the graph is always visible
         return (maxY + (maxY*20)/100);
     }
 }

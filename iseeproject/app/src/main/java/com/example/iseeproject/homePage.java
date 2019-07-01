@@ -58,6 +58,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
@@ -110,10 +111,10 @@ public class homePage extends AppCompatActivity {
                 //Show dialog box with app rules
                 AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
                 bx1.setTitle("Welcome to the SmartBucks App!");
-                bx1.setMessage("\n To enter new expense/income source" +
+                bx1.setMessage("\n-To enter new expense/income source" +
                         ", click on the 'Add Expenses/Income' buttons located on the homepage." +
-                        "\n To update your details/expenses categories," +
-                        "+ navigate to Menu-> Update Details.");
+                        "\n-To update your details/expenses categories," +
+                        " navigate to Menu -> Update Details.");
                 bx1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -144,18 +145,31 @@ public class homePage extends AppCompatActivity {
         TextView incomeView = (TextView) findViewById(R.id.totalInc);
         incomeView.setText(String.valueOf(userr.getIncome()));
 
+        TextView stableExpenses =(TextView) findViewById(R.id.StableExpenses);
+        Double stableSum = userr.getBills() + userr.getRent() + userr.getInsurance();
+        stableExpenses.setText(String.valueOf(stableSum));
+
         TextView expensesView = (TextView) findViewById(R.id.TotalExpenses);
 
-        //get sum of money spent in expenses
+        //get sum of money spent in expenses this month
         double sum=0;
         if (peopleDB.expensesExist(userr)) {
-            //if user has entered at least one expense
+        LocalDate now = LocalDate.now();
+        //creating a year month object containing information
+        YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
+        LocalDate firstMonthDate = yearMonthObject.atDay(1);
 
-            ArrayList<Expenses> exp = peopleDB.getAllExpenses(userr);
-            for (Expenses expense : exp) {
-                sum += expense.getPrice();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        ArrayList<Expenses> allExpenses = peopleDB.getAllExpenses(userr);
+        for (Expenses exp : allExpenses) {
+            LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+            //if it is in the current month
+            if (expdate.isAfter(firstMonthDate) || expdate.isEqual(firstMonthDate)) {
+                sum += exp.getPrice();
             }
+        }
+            //if user has entered at least one expense
         }
         expensesView.setText(String.valueOf(sum));
 
@@ -163,45 +177,7 @@ public class homePage extends AppCompatActivity {
 
             showDialog();
 
-
-           // final TextView budget = (TextView) findViewById(R.id.budgetview);
-          /*  final Animation anim = new AlphaAnimation(0.0f,1.0f);
-            anim.setDuration(5);
-            anim.setStartOffset(20);
-            anim.setRepeatMode(Animation.REVERSE);
-            anim.setRepeatCount(Animation.INFINITE);
-
-            budgetView.startAnimation(anim);*/
-
-           /* SharedPreferences preferences = getSharedPreferences("PREFS",0);
-            boolean ifShowDialog = preferences.getBoolean("showDialog",true);
-            if(ifShowDialog){
-               // anim.cancel();
-                showDialog();
-
-            }*/
-
-
-
-           /* AlertDialog.Builder bx1 = new AlertDialog.Builder(homePage.this);
-
-            bx1.setTitle("Alert!Spendings getting more than Budget");
-            bx1.setCancelable(true);
-
-            bx1.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    dialog.cancel();
-                    anim.cancel();
-
-                }
-            });
-
-            AlertDialog alertDialog = bx1.create();
-            alertDialog.show();*/
         }
-
 
         TextView savingsView = (TextView) findViewById(R.id.SavingsView);
         //savings = budget - sum of expenses

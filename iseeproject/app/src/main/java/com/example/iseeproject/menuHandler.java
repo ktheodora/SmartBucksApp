@@ -23,7 +23,11 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
 
 public class menuHandler {
@@ -102,62 +106,112 @@ public class menuHandler {
         ctx.startActivity(myIntent);
     }
 
-    private void smartBucksReport() {
+    private void smartBucksReport(ArrayList<Expenses> expensesList) {
 
-        Document myPdfDocument = new Document();
-        //pdf filename
-        String myFilename = "SmartBucks" + new SimpleDateFormat("ddMMYYYY",
-                Locale.getDefault()).format(System.currentTimeMillis());
-        //pdf path
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + myFilename + ".pdf";
-
-        try {
-            //Create instance of PdfWriter class and open pdf
-            PdfWriter.getInstance(myPdfDocument, new FileOutputStream(myFilePath));
-            myPdfDocument.open();
-            //get transactions from databaase
-            peopleDB = new dbHandler(ctx);
-            User userr = peopleDB.getUser(usr);
-            ArrayList<Expenses> expensesList = peopleDB.getAllExpenses(userr);
-            myPdfDocument.addAuthor("Pawan Kumar");
-            Paragraph p3 = new Paragraph();
-            p3.add("SmartBucks Report\n");
-            try {
-                myPdfDocument.add(p3);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-            PdfPTable table = new PdfPTable(4);
-
-            table.addCell("Date");
-            table.addCell("Amount");
-            table.addCell("Category");
-            table.addCell("Payment_Method");
-
-
-            for (int i = 0; i < expensesList.size(); i++) {
-
-                table.addCell(expensesList.get(i).getExpenseTime());
-                table.addCell(Double.toString(expensesList.get(i).getPrice()));
-                table.addCell(expensesList.get(i).getCategory());
-                table.addCell(expensesList.get(i).getPaymentMethod());
-
-            }
-
-            try {
-                myPdfDocument.add(table);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-            myPdfDocument.addCreationDate();
-            myPdfDocument.close();
-            showToast(myFilename + ".pdf\nis saved to\n" + myFilePath);
-
-        } catch (Exception e) {
-
-            //if anything goes wrong ,get and show up exception
-            showToast(e.getMessage());
+        if(expensesList.isEmpty()) {
+            showToast("No expenses entered for this month. " +
+                    "Smartbucks monthly report cannot be generated." +
+                    "\nTo view all your expenses, click the Show Expenses button in the Homepage.");
         }
+        else {
+            Document myPdfDocument = new Document();
+            //pdf filename
+            String myFilename = "SmartBucks" + new SimpleDateFormat("ddMMYYYY",
+                    Locale.getDefault()).format(System.currentTimeMillis());
+            //pdf path
+            String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + myFilename + ".pdf";
+
+            try {
+                //Create instance of PdfWriter class and open pdf
+                PdfWriter.getInstance(myPdfDocument, new FileOutputStream(myFilePath));
+                myPdfDocument.open();
+                //get transactions from databaase
+                peopleDB = new dbHandler(ctx);
+                User userr = peopleDB.getUser(usr);
+                expensesList = peopleDB.getAllExpenses(userr);
+                myPdfDocument.addAuthor("Pawan Kumar");
+                Paragraph p3 = new Paragraph();
+                p3.add("SmartBucks Report\n");
+                try {
+                    myPdfDocument.add(p3);
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
+                PdfPTable table = new PdfPTable(4);
+
+                table.addCell("Date");
+                table.addCell("Amount");
+                table.addCell("Category");
+                table.addCell("Payment_Method");
+
+
+                for (int i = 0; i < expensesList.size(); i++) {
+
+                    table.addCell(expensesList.get(i).getExpenseTime());
+                    table.addCell(Double.toString(expensesList.get(i).getPrice()));
+                    table.addCell(expensesList.get(i).getCategory());
+                    table.addCell(expensesList.get(i).getPaymentMethod());
+
+                }
+
+                try {
+                    myPdfDocument.add(table);
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
+                myPdfDocument.addCreationDate();
+                myPdfDocument.close();
+                showToast(myFilename + ".pdf\nis saved to\n" + myFilePath);
+
+            } catch (Exception e) {
+
+                //if anything goes wrong ,get and show up exception
+                showToast(e.getMessage());
+            }
+        }
+    }
+
+    //we need to sort by date the expenses and
+    //show only the ones of the last month
+    public ArrayList<Expenses> sortMonthExpenses() {
+        User user = peopleDB.getUser(usr);
+        ArrayList<Expenses> monthlyExpenses = new ArrayList<>();
+        if (peopleDB.expensesExist(user)) {
+            ArrayList<Expenses> allExpenses = peopleDB.getAllExpenses(user);
+            //setting up the calendar dates of this week
+            LocalDate now = LocalDate.now();
+            //creating a year month object containing information
+            YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
+            LocalDate firstMonthDate = yearMonthObject.atDay(1);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            for(Iterator<Expenses> it = allExpenses.iterator(); it.hasNext();) {
+                Expenses exp = it.next();
+                LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                //if it is earlier than the current month
+                if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
+                    it.remove();
+                }
+            }
+            //afterwards, sort by comparing with every day of the month
+            //slow implementation but trustworthy
+            LocalDate d;
+            for (int i = 1; i <= yearMonthObject.lengthOfMonth(); i++) {
+                //i presents monday for 1, tuesday for 2 etc
+                for (Expenses exp : allExpenses) {
+                    //search all expenses and add to the one of this day of the month
+                    d = yearMonthObject.atDay(i);//get week date
+                    d.format(formatter);
+                    LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                    if (d.isEqual(expdate)) {
+                        monthlyExpenses.add(exp);
+                    }
+                }
+            }
+        }
+        return monthlyExpenses;
+
     }
 
     private void Permission() {
@@ -172,8 +226,7 @@ public class menuHandler {
 
             } else {
                 //permission already granted
-                smartBucksReport();
-
+                smartBucksReport(sortMonthExpenses());
             }
 
         }
