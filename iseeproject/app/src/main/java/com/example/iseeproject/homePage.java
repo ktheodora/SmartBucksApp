@@ -86,7 +86,6 @@ public class homePage extends AppCompatActivity {
 
 
     public static final String PREFS_NAME =
-
             "Test";
     public CheckBox check;
 
@@ -101,8 +100,6 @@ public class homePage extends AppCompatActivity {
 
         peopleDB = new dbHandler(this);
         Bundle b = getIntent().getExtras();
-
-
 
 
         if (b != null) {
@@ -461,7 +458,6 @@ public class homePage extends AppCompatActivity {
             } else {
                 //permission already granted
                 smartBucksReport();
-
             }
 
         }

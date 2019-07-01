@@ -200,11 +200,11 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                 for(Expenses exp : cateList) {
                     LocalDate expDate = LocalDate.parse(exp.getExpenseTime(), formatter);
                     //if it is before the earliest date the user chooses
-                    if (dFrom != null && (expDate.isBefore(dFrom) || expDate.isEqual(dFrom)) ) {
+                    if (dFrom != null && (expDate.isBefore(dFrom)) ) {
                         cateList.remove(exp);
                     }
                     //if it is after the latest day the user chooses
-                    if (dTo != null && (expDate.isAfter(dTo)|| expDate.isEqual(dTo))) {
+                    if (dTo != null && (expDate.isAfter(dTo))) {
                         cateList.remove(exp);
                     }
                     //if it is inside the date boundaries, keep it in the list
