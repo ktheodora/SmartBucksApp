@@ -61,10 +61,10 @@ This blog is mostly to share our insights on the developmental journey of our ap
 
 There are a lot of benefits involved in working as a team project. 
 
-1.As a team, we have to convey the ideas necessary for product development which in turn needs the necessary skill of communication. This is one of the most important skills that we gained by working as a team. 
-2.Needless to say, there was a huge benefit of an understanding of the version control system Github which is of industry grade to maintain and work on the code base. 
+1. As a team, we have to convey the ideas necessary for product development which in turn needs the necessary skill of communication. This is one of the most important skills that we gained by working as a team. 
+2. Needless to say, there was a huge benefit of an understanding of the version control system Github which is of industry grade to maintain and work on the code base. 
 If this project wasn't for a team, then there wouldn't be a need to learn the team management tools that let us handle everything related to the project from coding to documentation. 
-3.At each sprint, we were able to develop our presentation skills, which helps us convey the message to the public. 
+3. At each sprint, we were able to develop our presentation skills, which helps us convey the message to the public. 
 
 ## Course Expectations: Our opinion 
 
