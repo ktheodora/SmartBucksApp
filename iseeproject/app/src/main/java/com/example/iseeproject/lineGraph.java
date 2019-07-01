@@ -256,7 +256,25 @@ public class lineGraph {
         //getting the expenses and their dates
         if (peopleDB.expensesExist(userr)) {
             Map<String, Double> map = peopleDB.getThresholds(userr.getUsername());
+            //we have to get only the current month's expenses,
+            //therefore we will call the menuHandler method sortMonthExpenses
             List<Expenses> expenses = peopleDB.getAllExpenses(userr);
+
+            LocalDate now = LocalDate.now();
+            //creating a year month object containing information
+            YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
+            LocalDate firstMonthDate = yearMonthObject.atDay(1);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            for (Expenses exp : expenses) {
+                LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                //if it is earlier than the current month
+                if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
+                    expenses.remove(exp);
+                }
+            }
+            //and then we calculate the sums for the remaining expenses
             double catsum = 0;
             for (Map.Entry<String,Double> entry : map.entrySet()) {
                 for (Expenses exp : expenses) {

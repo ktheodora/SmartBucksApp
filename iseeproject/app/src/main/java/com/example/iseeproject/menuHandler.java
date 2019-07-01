@@ -172,7 +172,7 @@ public class menuHandler {
 
     //we need to sort by date the expenses and
     //show only the ones of the last month
-    public ArrayList<Expenses> sortExpenses() {
+    public ArrayList<Expenses> sortMonthExpenses() {
         User user = peopleDB.getUser(usr);
         ArrayList<Expenses> monthlyExpenses = new ArrayList<>();
         if (peopleDB.expensesExist(user)) {
@@ -224,7 +224,7 @@ public class menuHandler {
 
             } else {
                 //permission already granted
-                smartBucksReport(sortExpenses());
+                smartBucksReport(sortMonthExpenses());
             }
 
         }
