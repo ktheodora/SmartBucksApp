@@ -70,7 +70,7 @@ If this project wasn't for a team, then there wouldn't be a need to learn the te
 
 The course "Introduction to Software Engineering" did really meet our expectations.
 
-- The course introduced us to the Android development platform, which helped us to enhance the android related programming skills. Such as Java and XML. 
-- We expected the course to help us develop a working application at the end of the day and we were successfully able to develop a functioning application that can be published to the public. 
+- The course introduced us to the Android development platform, which helped us to enhance the android related programming skills, such as Java and XML. 
+- We expected the course to help us develop a working application at the end of the day and we were successfully able to develop a functioning application that can be published.
 - It was always a mystery how the software that we use in our day to day lives are being created. But as the name of the course suggests we were able to demystify the processes under the hood of software development. 
 - On the whole, the course met our expectations from implementing the code to the documentation of the implementation helping us understand the whole process altogether. 
