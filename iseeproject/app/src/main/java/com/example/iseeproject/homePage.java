@@ -159,7 +159,7 @@ public class homePage extends AppCompatActivity {
         YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
         LocalDate firstMonthDate = yearMonthObject.atDay(1);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
         ArrayList<Expenses> allExpenses = peopleDB.getAllExpenses(userr);
         for (Expenses exp : allExpenses) {

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -186,7 +187,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                 //now we check the date and filter the list
                 String dateFrom = datepickFrom.getText().toString();
                 String dateTo = datepickTo.getText().toString();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
                 LocalDate dFrom = null , dTo = null;
                 String strDateRegEx = "\\d{2}-\\d{2}-\\d{4}";
                 //we check if user has selected a date from the calendar
@@ -213,6 +214,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                     MenuHandler.showToast("No results for the selected criteria");
                 }
                 else {
+                    //ArrayList<Expenses> sorted = sortedExpenses(cateList);
                     filteredExpenses(cateList);
                 }
             }
@@ -221,10 +223,36 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void updateLabel(EditText datepick) {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "MM-dd-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
 
         datepick.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    //Not working :( Solution: Changed date format to MM-dd-yyyy so that's sorted from the db
+    public ArrayList<Expenses> sortedExpenses(ArrayList<Expenses> explist) {
+        ArrayList<Expenses> sorted = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        LocalDate oldestDate = LocalDate.now();
+        Expenses oldestExp = explist.get(0);
+        //O(n^2) comparison complexity
+        for (Iterator<Expenses> it = explist.iterator(); it.hasNext(); ) {
+            for(Expenses exp : explist) {
+                LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
+                //if it is earlier than the current month
+                if (expdate.isBefore(oldestDate)) {
+                    oldestDate =expdate;
+                    oldestExp = exp;
+                }
+            }
+            sorted.add(oldestExp);
+            explist.remove(oldestExp);
+        }
+        //now append the ones who are equal to today(most recent ones)(if they exist)
+        if (!explist.isEmpty()) {
+            sorted.addAll(explist);
+        }
+        return sorted;
     }
 
     public void filteredExpenses(final ArrayList<Expenses> explist){

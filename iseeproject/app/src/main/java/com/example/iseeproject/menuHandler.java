@@ -151,7 +151,6 @@ public class menuHandler {
                     table.addCell(Double.toString(expensesList.get(i).getPrice()));
                     table.addCell(expensesList.get(i).getCategory());
                     table.addCell(expensesList.get(i).getPaymentMethod());
-
                 }
 
                 try {
@@ -175,16 +174,16 @@ public class menuHandler {
     //show only the ones of the last month
     public ArrayList<Expenses> sortMonthExpenses() {
         User user = peopleDB.getUser(usr);
-        ArrayList<Expenses> monthlyExpenses = new ArrayList<>();
+        ArrayList<Expenses> allExpenses = new ArrayList<>();
         if (peopleDB.expensesExist(user)) {
-            ArrayList<Expenses> allExpenses = peopleDB.getAllExpenses(user);
+            allExpenses = peopleDB.getAllExpenses(user);
             //setting up the calendar dates of this week
             LocalDate now = LocalDate.now();
             //creating a year month object containing information
             YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
             LocalDate firstMonthDate = yearMonthObject.atDay(1);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
             for(Iterator<Expenses> it = allExpenses.iterator(); it.hasNext();) {
                 Expenses exp = it.next();
@@ -196,7 +195,7 @@ public class menuHandler {
             }
             //afterwards, sort by comparing with every day of the month
             //slow implementation but trustworthy
-            LocalDate d;
+            /*LocalDate d;
             for (int i = 1; i <= yearMonthObject.lengthOfMonth(); i++) {
                 //i presents monday for 1, tuesday for 2 etc
                 for (Expenses exp : allExpenses) {
@@ -208,9 +207,10 @@ public class menuHandler {
                         monthlyExpenses.add(exp);
                     }
                 }
-            }
+            }*/
+            //we don't need to sort like this because we sort from database
         }
-        return monthlyExpenses;
+        return allExpenses;
 
     }
 

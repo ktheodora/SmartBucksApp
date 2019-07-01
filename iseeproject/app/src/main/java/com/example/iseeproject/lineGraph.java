@@ -188,7 +188,7 @@ public class lineGraph {
         if (peopleDB.expensesExist(userr)) {
             List<Expenses> expenses = peopleDB.getAllExpenses(userr);
             double daysum = 0;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
             formatter = formatter.withLocale(Locale.GERMANY);
             LocalDate expdate;
 
@@ -225,7 +225,7 @@ public class lineGraph {
         if (peopleDB.expensesExist(userr)) {
             List<Expenses> expenses = peopleDB.getAllExpenses(userr);
             double daysum = 0;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
             formatter = formatter.withLocale(Locale.GERMANY);
             LocalDate expdate, d;
 
@@ -266,7 +266,7 @@ public class lineGraph {
             YearMonth yearMonthObject = YearMonth.of(2019, now.getMonth().getValue());
             LocalDate firstMonthDate = yearMonthObject.atDay(1);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
             for(Iterator<Expenses> it = expenses.iterator(); it.hasNext();) {
                 Expenses exp = it.next();

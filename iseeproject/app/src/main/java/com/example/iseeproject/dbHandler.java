@@ -283,11 +283,11 @@ public class dbHandler extends SQLiteOpenHelper {
         ArrayList<Expenses> expList = new ArrayList<Expenses>();
         // Select All Query
         SQLiteDatabase db = this.getWritableDatabase();
-        //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
-        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CAT,KEY_PAYMENT}, KEY_USN + "=?",
-                new String[] { user.getUsername() }, null, null, KEY_REALTIME, null);
-
-        //Cursor cursor = db.rawQuery(selectQuery, null);
+        //Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CAT,KEY_PAYMENT}, KEY_USN + "=?",
+         //       new String[] { user.getUsername() }, null, null, KEY_REALTIME);
+        String cateQuery = " SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN +
+                " = '" + user.getUsername() + "'" +" ORDER BY " + KEY_REALTIME + " DESC "  ;
+        Cursor cursor = db.rawQuery(cateQuery,null);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -310,7 +310,8 @@ public class dbHandler extends SQLiteOpenHelper {
         ArrayList<Expenses> categoryList = new ArrayList<Expenses>();
         SQLiteDatabase db = this.getWritableDatabase();
         String cateQuery = " SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN +
-                " = '" + user.getUsername() + "'" +" AND " + KEY_CAT + " = '" + cate + "'"  ;
+                " = '" + user.getUsername() + "'" +" AND " + KEY_CAT + " = '"
+                + cate + "' ORDER BY " + KEY_REALTIME + " DESC "   ;
         Cursor cursor = db.rawQuery(cateQuery,null);
 
 

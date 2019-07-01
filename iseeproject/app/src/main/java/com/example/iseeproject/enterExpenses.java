@@ -263,7 +263,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "MM-dd-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
 
         datepick.setText(sdf.format(myCalendar.getTime()));
