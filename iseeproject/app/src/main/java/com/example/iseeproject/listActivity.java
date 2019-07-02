@@ -99,13 +99,6 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         dbhandler = new dbHandler(this);
 
         expenselistview = findViewById(R.id.expenseLV);
-        expenselistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                showDeleteDialog(position);
-                return true;
-            }
-        });
 
 
         Set<String> cats1 = dbhandler.getThresholds(usr).keySet();
@@ -224,12 +217,24 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (cateList.isEmpty()) {
                     MenuHandler.showToast("No results for the selected criteria");
                 }
-                else {
-                    //ArrayList<Expenses> sorted = sortedExpenses(cateList);
-                    filteredExpenses(cateList);
-                }
+                //if it's not empty will show results orelse delete current expenses results
+                filteredExpenses(cateList);
             }
         });
+
+        expenselistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                showDeleteDialog(position);
+                return true;
+            }
+        });
+        expenselistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showDeleteDialog(position);
+            }
+        } );
 
     }
 
@@ -310,6 +315,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         t.show();
     }
 
+    @SuppressWarnings("deprecation")
     public void showDeleteDialog(final int pos) {
             AlertDialog.Builder adb= new AlertDialog.Builder(this);
             LayoutInflater adbInflater = LayoutInflater.from(this);
@@ -323,8 +329,12 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                         public void onClick(DialogInterface dialog, int which) {
                  //choosing from the current category list
                  Expenses exp = cateList.get(pos);
-                 dbhandler.removeExpense(exp);
-                 MenuHandler.showToast("Succesful removal of expense");
+                 if(dbhandler.removeExpense(exp)) {
+                     MenuHandler.showToast("Succesful removal of expense");
+                 }
+                 else {
+                     MenuHandler.showToast("Database issue, unable to remove expense");
+                 }
                  Intent myIntent = new Intent(listActivity.this, listActivity.class);
                  Bundle b = new Bundle();
                  b.putString("username",usr);
@@ -339,7 +349,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
                         public void onClick(DialogInterface
 
                                                     dialog, int which) {
-
+                 moveTaskToBack(true);
                  return;
              } });
 

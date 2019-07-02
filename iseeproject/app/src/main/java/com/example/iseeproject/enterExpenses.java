@@ -232,13 +232,8 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
     public void addNewExp() {
         //Expenses newExpense = new Expenses(expenseTime,username,expAmount,category,payment_method);
-
-        Expenses newExpense = new Expenses();
-        newExpense.setExpenseTime(expenseTime);
-        newExpense.setUsername(username);
-        newExpense.setPrice(expAmount);
-        newExpense.setCategory(category);
-        newExpense.setPaymentMethod(payment_method);
+        //the id is auto incremented from the database, therefore we don't care about the value we insert here
+        Expenses newExpense = new Expenses(expenseTime,0,username,expAmount,category,payment_method);
 
         peopleDB.addExpenses(newExpense);
         Toast t = Toast.makeText(enterExpenses.this,

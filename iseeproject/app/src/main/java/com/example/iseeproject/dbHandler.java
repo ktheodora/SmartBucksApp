@@ -66,7 +66,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_ID + "INT PRIMARY KEY, " +KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
                 + KEY_CAT + " TEXT," + KEY_PAYMENT + " TEXT )";
         db.execSQL(CREATE_EXPENSES_TABLE);
 
@@ -131,11 +131,31 @@ public class dbHandler extends SQLiteOpenHelper {
         return (!(result == -1));
     }
 
+    public int findNextAvailableExpID(User user) {
+        int nextId = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_ID, KEY_USN ,KEY_PRICE ,KEY_CAT ,KEY_PAYMENT}, KEY_USN + "=?",
+                new String[] { user.getUsername() }, null, null, null, null);
+        //We count the results of the query and return the next possible id
+        if (cursor.moveToFirst()) {
+            while(cursor.moveToFirst()) {
+                nextId++;
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.close();
+        //if it is the first element, the next id will be 0.
+        return nextId ;
+    }
+
     public void addExpenses(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //why comment addtime and username?
         values.put(KEY_REALTIME ,exp.getExpenseTime());
+        //values.put(KEY_ID, exp.getExpensesID());
         values.put(KEY_USN, exp.getUsername());
         values.put(KEY_PRICE, exp.getPrice());
         values.put(KEY_CAT, exp.getCategory());
@@ -148,18 +168,18 @@ public class dbHandler extends SQLiteOpenHelper {
     public boolean removeExpense(Expenses exp) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_ID, KEY_USN ,KEY_PRICE ,KEY_CAT ,KEY_PAYMENT}, KEY_ID + "=?",
-                new String[] {  }, null, null, null, null);
+                new String[] { String.valueOf(exp.getExpensesID()) }, null, null, null, null);
         //Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor!=null && cursor.getCount()>0) {
-            db.delete(TABLE_EXPENSES,KEY_ID + "=?",new String[] {  });
+            db.delete(TABLE_EXPENSES,KEY_ID + "=?",new String[] { String.valueOf(exp.getExpensesID()) });
             cursor.close();
             db.close();
             return true;
         }
         else{
+            //expense not found, deletion not possible
             return false;
         }
-
     }
 
     public void addCatThresholds(String username, double Budget) {
@@ -285,7 +305,7 @@ public class dbHandler extends SQLiteOpenHelper {
     public boolean expensesExist(User user) {
         //String selectQuery = "SELECT * FROM " + TABLE_EXPENSES + " WHERE " + KEY_USN + " = " + user.getUsername();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_USN ,KEY_PRICE ,KEY_CAT ,KEY_PAYMENT}, KEY_USN + "=?",
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_ID, KEY_USN ,KEY_PRICE ,KEY_CAT ,KEY_PAYMENT}, KEY_USN + "=?",
                 new String[] { user.getUsername() }, null, null, null, null);
         //Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor!=null && cursor.getCount()>0) {
@@ -309,13 +329,12 @@ public class dbHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Expenses exp = new Expenses();
-                exp.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
-                exp.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
-                exp.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
-                exp.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CAT)));
-                exp.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
-                //exp.setUsername(cursor.getString(0));
+                Expenses exp = new Expenses(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)),
+                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_CAT)),
+                        cursor.getString(cursor.getColumnIndex(KEY_USN)));
                 expList.add(exp);
             } while (cursor.moveToNext());
         }
@@ -336,14 +355,13 @@ public class dbHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                Expenses expenses = new Expenses();
-                expenses.setExpenseTime(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)));
-                expenses.setPaymentMethod(cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)));
-                expenses.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)));
-                expenses.setCategory(cursor.getString(cursor.getColumnIndex(KEY_CAT)));
-                expenses.setUsername(cursor.getString(cursor.getColumnIndex(KEY_USN)));
-                //exp.setUsername(cursor.getString(0));
-                categoryList.add(expenses);
+                Expenses exp = new Expenses(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)),
+                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_CAT)),
+                        cursor.getString(cursor.getColumnIndex(KEY_USN)));
+                categoryList.add(exp);
             } while (cursor.moveToNext());
         }
         cursor.close();
