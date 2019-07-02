@@ -56,10 +56,6 @@
         android:title="Update Details"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/Preferences"
-        android:title="Preferences"
-        android:icon="@drawable/preficn"/>
-
     <item android:id="@+id/report"
         android:icon="@drawable/pdf"
         android:title="Download Report"

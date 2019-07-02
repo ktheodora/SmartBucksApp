@@ -25,25 +25,24 @@
 
             <TextView
                 android:id="@+id/editText"
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:ems="10"
-                android:layout_marginLeft="10dp"
                 android:text="SmartBucks"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:textAlignment="gravity"
                 android:textColor="#ffffff"
                 android:textSize="50sp" />
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="45dp"
                 android:background="#00000000"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/ourlogo" />
-
 
         </LinearLayout>
 
@@ -52,25 +51,25 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="120dp">
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/usrnameicon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_weight="1"
-                android:scaleType="fitStart"
                 android:background="#00000000"
+                android:scaleType="fitStart"
                 app:srcCompat="@drawable/usrname" />
 
             <EditText
                 android:id="@+id/etName"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ems="10"
+                android:layout_marginRight="40dp"
                 android:hint="Username"
                 android:textColor="#000000"
                 android:inputType="textPersonName"
@@ -89,7 +88,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_weight="1"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/passkey" />
@@ -98,7 +97,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="40dp"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
@@ -117,7 +116,7 @@
 
     <TextView
         android:id="@+id/tvinfo"
-        android:layout_width="228dp"
+        android:layout_width="wrap_content"
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
         android:textSize="15sp"

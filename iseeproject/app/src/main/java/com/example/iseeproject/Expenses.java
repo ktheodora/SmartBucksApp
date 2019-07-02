@@ -6,17 +6,20 @@ public class Expenses {
     private String username, category;
     //timestamp of expense creation will be converted later to a real date type on the homepage
     //when we will want to make comparison of the days that the expenses were created
+    //we add unique id for deletion
     private String expenseTime;
     private double price;
     private String PaymentMethod;
+    private int ID;
 
-//    public Expenses(String ExpenseTime, String Username, Double Price, String Category, String PaymentMethods) {
-//        this.expenseTime = ExpenseTime;
-//        this.username = Username;
-//        this.category = Category;
-//        this.price = Price;
-//        this.PaymentMethod = PaymentMethods;
-//    }
+    public Expenses(String ExpenseTime, int id, String Username, Double Price, String Category, String PaymentMethods) {
+        this.expenseTime = ExpenseTime;
+        this.ID = id;
+        this.username = Username;
+        this.category = Category;
+        this.price = Price;
+        this.PaymentMethod = PaymentMethods;
+    }
 
     public String getExpenseTime() {
         return expenseTime;
@@ -24,6 +27,12 @@ public class Expenses {
     public void setExpenseTime(String ExpenseTime) {
         this.expenseTime= ExpenseTime;
     }
+
+    public int getExpensesID() { return ID;}
+    public void setExpensesID(int id) {
+        this.ID = id;
+    }
+
 
     public String getUsername() {
         return username;

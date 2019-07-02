@@ -26,21 +26,21 @@
 
         <TextView
             android:id="@+id/editText"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:ems="10"
-            android:layout_marginLeft="10dp"
-            android:text="@string/officialname"
+            android:text="SmartBucks"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:textAlignment="gravity"
             android:textColor="#ffffff"
             android:textSize="50sp" />
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
             android:background="#00000000"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/ourlogo" />
@@ -59,24 +59,24 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/nameicon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/nameicon" />
 
         <EditText
             android:id="@+id/entfullname"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:ems="10"
             android:hint="Full Name"
             android:inputType="textPersonName"
             android:textSize="20sp"
@@ -94,14 +94,14 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="30dp"
         android:layout_weight="1"
         android:scaleType="fitStart"
         app:srcCompat="@drawable/usrname" />
 
     <EditText
         android:id="@+id/etUsname"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:ems="10"
@@ -122,14 +122,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/mailicon" />
 
         <EditText
             android:id="@+id/entEmail"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
@@ -150,18 +150,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/passkey" />
 
         <EditText
             android:id="@+id/etPassword"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Password(Minimum 6-digit)"
             android:inputType="textPassword"
             android:textSize="20sp"
             />
@@ -178,18 +178,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/coin" />
 
         <EditText
             android:id="@+id/entInc"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Income"
+            android:hint="Monthly Income, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -206,14 +206,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/budget" />
 
         <EditText
             android:id="@+id/entbudget"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
@@ -234,18 +234,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/home" />
 
         <EditText
             android:id="@+id/entRen"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Rent"
+            android:hint="Monthly Rent, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -262,18 +262,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/bill" />
 
         <EditText
             android:id="@+id/entBills"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Bills"
+            android:hint="Monthly Bills, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />
@@ -290,18 +290,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/insicon" />
 
         <EditText
             android:id="@+id/entIns"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="Monthly Insurance"
+            android:hint="Monthly Insurance, €"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             />

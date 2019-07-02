@@ -9,10 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class mainActivity extends AppCompatActivity {
 
-    boolean loginstate;
+    Boolean loginstate;
+    int attempts;
+    int backCount = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -23,6 +26,7 @@ public class mainActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null) {
             loginstate = b.getBoolean("state");
+            attempts = b.getInt("attempts");
         }
 
         Button login = (Button)findViewById(R.id.btnLogin);
@@ -51,9 +55,12 @@ public class mainActivity extends AppCompatActivity {
     private void routelogin()
     {
         Intent intent = new Intent(mainActivity.this, loginActivity.class);
-        Bundle b = new Bundle();
-        b.putBoolean("state",loginstate);
-        intent.putExtras(b); //Put your id to your next Intent
+        if (loginstate != null) {
+            Bundle b = new Bundle();
+            b.putBoolean("state",loginstate);
+            b.putInt("attempts",attempts);
+            intent.putExtras(b); //Put your id to your next Intent
+        }
         startActivity(intent);
     }
 
@@ -63,10 +70,23 @@ public class mainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onBackPressed() {
+        backCount ++;
+        if (backCount == 1) {
+            Toast t = Toast.makeText(mainActivity.this,"Press again to exit",Toast.LENGTH_SHORT);
+            t.show();
+        }
+        else if (backCount > 1) {
+            Toast t = Toast.makeText(mainActivity.this,"Exiting app. See ya!",Toast.LENGTH_SHORT);
+            t.show();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+            finish();
+        }
 
-
-
-
+    }
 
 }
 

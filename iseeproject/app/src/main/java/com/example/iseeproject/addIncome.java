@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class addIncome extends AppCompatActivity {
@@ -16,6 +19,8 @@ public class addIncome extends AppCompatActivity {
     dbHandler peopleDB;
     String username;
     User usr;
+    private ImageButton menuBtn;
+    menuHandler MenuHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,23 @@ public class addIncome extends AppCompatActivity {
             username = b.getString("username");
 
         usr = peopleDB.getUser(username);
+
+        MenuHandler = new menuHandler(addIncome.this, username);
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn  = (ImageButton) findViewById(R.id.menuLines);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(addIncome.this, v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        return MenuHandler.onMenuItemClick(item);
+                    }
+                });
+                popup.inflate(R.menu.drawermenu);
+                popup.show();
+            }
+        });
 
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +103,11 @@ public class addIncome extends AppCompatActivity {
         Toast t = Toast.makeText(addIncome.this,
                 "Additional income successfully added", Toast.LENGTH_LONG);
         t.show();
+        Intent myIntent = new Intent(addIncome.this, addIncome.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
 
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
     }
 }

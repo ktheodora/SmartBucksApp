@@ -16,34 +16,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/wallnew"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/wallnew"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/editText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:layout_marginLeft="10dp"
-            android:inputType="textPersonName"
-            android:text="SmartBucks"
-            android:textColor="#ffffff"
-            android:textSize="50sp" />
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="SmartBucks"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:textAlignment="gravity"
+                android:textColor="#ffffff"
+                android:textSize="50sp" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
-            android:background="#00000000"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/ourlogo" />
-
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/ourlogo" />
 
         </LinearLayout>
 
