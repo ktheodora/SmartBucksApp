@@ -4,8 +4,8 @@
 ### The final App!
 
 ***All about SmartBucks***
-
-Saving money and keeping track of the spending is a very hectic task, It’s always necessary for each one of us to track the money flow for efficient financial management. Our App “SmartBucks” will not only keep the track of money flow, but will also give a statistical analysis.
+![App_Logo](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/master/iseeproject/app/src/main/res/drawable-xxhdpi/smartpng.png)
+Saving money and keeping track of the spending is a very hectic task, It’s always necessary for each one of us to track the money flow for efficient financial management. Our App “SmartBucks” will not only keep the track of money flow, but will also give a statistical analysis. Moreover, "SmartBucks" is a ledger that easily fits into our devices and "Enlightens our Pocket"
 
 ## Features
 
@@ -34,7 +34,7 @@ Following are the features achieved in the app based on requirement given by the
 
 - Threshold limits for category
 
-## Additional features added:
+### Additional features added:
 
 
 ## Additinal Information
