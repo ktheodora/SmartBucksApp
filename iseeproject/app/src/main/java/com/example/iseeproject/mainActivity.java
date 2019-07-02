@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 public class mainActivity extends AppCompatActivity {
 
-    boolean loginstate;
+    Boolean loginstate;
+    int attempts;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -24,6 +25,7 @@ public class mainActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null) {
             loginstate = b.getBoolean("state");
+            attempts = b.getInt("attempts");
         }
 
         Button login = (Button)findViewById(R.id.btnLogin);
@@ -52,9 +54,12 @@ public class mainActivity extends AppCompatActivity {
     private void routelogin()
     {
         Intent intent = new Intent(mainActivity.this, loginActivity.class);
-        Bundle b = new Bundle();
-        b.putBoolean("state",loginstate);
-        intent.putExtras(b); //Put your id to your next Intent
+        if (loginstate != null) {
+            Bundle b = new Bundle();
+            b.putBoolean("state",loginstate);
+            b.putInt("attempts",attempts);
+            intent.putExtras(b); //Put your id to your next Intent
+        }
         startActivity(intent);
     }
 
@@ -74,8 +79,6 @@ public class mainActivity extends AppCompatActivity {
         finish();
 
     }
-
-
 
 }
 

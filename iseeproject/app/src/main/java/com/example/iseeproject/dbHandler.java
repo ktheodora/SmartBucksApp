@@ -48,6 +48,7 @@ public class dbHandler extends SQLiteOpenHelper {
     private static final String KEY_PRICE = "price";
     private static final String KEY_CAT = "category";
     private static final String KEY_PAYMENT = "payment_method";
+    private static final String KEY_ID = "expense_id";
 
     private static final String KEY_THRES = "threshold";
 
@@ -65,7 +66,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_EXPENSES_TABLE = "CREATE TABLE " + TABLE_EXPENSES + "("
-                + KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
+                + KEY_ID + "INT PRIMARY KEY, " +KEY_REALTIME + " TEXT," + KEY_USN + " TEXT REFERENCES " + TABLE_USER +" (" + KEY_USN + ") , " + KEY_PRICE + " REAL,"
                 + KEY_CAT + " TEXT," + KEY_PAYMENT + " TEXT )";
         db.execSQL(CREATE_EXPENSES_TABLE);
 
@@ -128,7 +129,6 @@ public class dbHandler extends SQLiteOpenHelper {
         long result = db.insert(TABLE_USER,null,values);
 
         return (!(result == -1));
-
     }
 
     public void addExpenses(Expenses exp) {
@@ -143,6 +143,23 @@ public class dbHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_EXPENSES, null, values);
         db.close(); // Closing database connection
+    }
+
+    public boolean removeExpense(Expenses exp) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_EXPENSES, new String[] {KEY_REALTIME,KEY_ID, KEY_USN ,KEY_PRICE ,KEY_CAT ,KEY_PAYMENT}, KEY_ID + "=?",
+                new String[] {  }, null, null, null, null);
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor!=null && cursor.getCount()>0) {
+            db.delete(TABLE_EXPENSES,KEY_ID + "=?",new String[] {  });
+            cursor.close();
+            db.close();
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     public void addCatThresholds(String username, double Budget) {
@@ -212,6 +229,7 @@ public class dbHandler extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
+
 
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();

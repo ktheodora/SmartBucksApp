@@ -2,6 +2,7 @@ package com.example.iseeproject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -34,14 +35,12 @@ public class loginActivity extends AppCompatActivity {
 
         db = new dbHandler(this);
 
-        Name = (EditText)findViewById(R.id.etName);
-        Password = (EditText)findViewById(R.id.etPassword);
+        Name = (EditText) findViewById(R.id.etName);
+        Password = (EditText) findViewById(R.id.etPassword);
         infoView = (TextView) findViewById(R.id.tvinfo);
-        login = (Button)findViewById(R.id.login);
-        back = (Button)findViewById(R.id.backbtn);
+        login = (Button) findViewById(R.id.login);
+        back = (Button) findViewById(R.id.backbtn);
 
-        info = "No of attempts left: " + attempts;
-        infoView.setText(info);
 
         //method will  be working when button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -49,44 +48,34 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //SINCE NAME IS EDIT TEXT USER WILL  get whatever is entered through getText and
                 // then it is converted to String same done for password
-                if(TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(Name.getText())) {
+                if (TextUtils.isEmpty(Password.getText()) || TextUtils.isEmpty(Name.getText())) {
                     Toast t = Toast.makeText(loginActivity.this,
                             "Please provide all fields", Toast.LENGTH_LONG);
                     t.show();
-                }
-                else {
+                } else {
                     String password = Password.getText().toString();
                     String username = Name.getText().toString();
 
-                    if (!(db.isUser(username))) {
-                        Toast t = Toast.makeText(loginActivity.this,
-                                "User doesn't exist", Toast.LENGTH_LONG);
-                        t.show();
+                    if (!(db.isUser(username) && checkPwd(username, password))) {
+                        //reduce number of attempts
                         checkAttempts();
-                    }
-                    else if (checkPwd(username,password)){
+                    } else {
                         //if username is correct then go to homepage
-                        Intent myIntent  = new Intent(loginActivity.this, homePage.class);
+                        Intent myIntent = new Intent(loginActivity.this, homePage.class);
                         Bundle b = new Bundle();
-                        b.putString("username",username);
+                        b.putString("username", username);
                         myIntent.putExtras(b); //Put your id to your next Intent
                         startActivity(myIntent);
                     }
-                    else {//reduce number of attempts
-                        Toast t = Toast.makeText(loginActivity.this,
-                                "Incorrect username/password combination", Toast.LENGTH_LONG);
-                        t.show();
-                        checkAttempts();
-                    }
-
                 }
             }
         });
         //in case we have tried to login and locked the attempts previously
         Bundle b = getIntent().getExtras();
         if (b != null) {
-          boolean state = b.getBoolean("state");
-          login.setEnabled(state);
+            boolean state = b.getBoolean("state");
+            attempts = b.getInt("attempts");
+            login.setEnabled(state);
         }
         //reeenable after 5 mins
         if (!login.isEnabled()) {
@@ -94,8 +83,18 @@ public class loginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     login.setEnabled(true);
+                    attempts = 3;
+                    Intent myIntent = new Intent(loginActivity.this, loginActivity.class);
+                    startActivity(myIntent);
                 }
-            }, 5000);
+            }, 1000);
+        }
+
+        info = "No of attempts left: " + attempts;
+        infoView.setText(info);
+
+        if (!login.isEnabled()) {
+            login.setBackgroundColor(Color.RED);
         }
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -126,17 +125,30 @@ public class loginActivity extends AppCompatActivity {
         }
         else {
             login.setEnabled(false);
+            Toast t = Toast.makeText(loginActivity.this,
+                    "Login Locked. Login enabled again in 60s", Toast.LENGTH_LONG);
+            t.show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    login.setEnabled(true);
+                    login.setEnabled(false);
+                    attempts = 3;
                 }
-            }, 5000);
+            }, 1000);
         }
     }
 
     private void routeback()
     {
+        Intent intent = new Intent(loginActivity.this, mainActivity.class);
+        Bundle b = new Bundle();
+        b.putBoolean("state",login.isEnabled());
+        b.putInt("attempts",attempts);
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+    }
+
+    public void onBackPressed() {
         Intent intent = new Intent(loginActivity.this, mainActivity.class);
         Bundle b = new Bundle();
         b.putBoolean("state",login.isEnabled());
