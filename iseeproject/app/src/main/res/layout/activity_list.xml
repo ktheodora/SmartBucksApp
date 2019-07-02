@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.iseeproject.listActivity">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -61,56 +61,85 @@
 
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/Expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="Expenses"
+                android:textSize="25sp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="#F5F5F5">
+                android:textAlignment="center"
+                android:background="#F5F5F5"
+                >
 
-                <!--TODO add payment method dropdown list-->
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/imageView5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    app:srcCompat="@drawable/option" />
 
                 <TextView
                     android:id="@+id/catLabel"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
                     android:text="Select Category"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:textSize="20sp"
-                    />
-                <TextView
-                    android:id="@+id/selectDateLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="Select Date"
-                    android:gravity="center_horizontal"
                     android:textSize="20sp" />
+                <Spinner
+                    android:id="@+id/spinner123"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="#F5F5F5">
+                android:layout_marginTop="8dp"
+                android:textAlignment="center"
+                android:background="#F5F5F5"
 
-                <!--TODO add payment method dropdown list-->
+                >
 
-                <Spinner
-                    android:id="@+id/spinner123"
-                    android:layout_width="0dp"
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    app:srcCompat="@drawable/cale" />
+
+                <TextView
+                    android:id="@+id/selectDateLabel"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    />
+                    android:text="Select Date"
+
+                    android:textSize="20sp" />
+
                 <EditText
                     android:id="@+id/selectDate1"
                     android:layout_width="wrap_content"
@@ -119,28 +148,34 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:hint="From Date"
-                    android:layout_marginLeft="8dp"
+
                     android:textSize="20sp" />
+
                 <EditText
                     android:id="@+id/selectDate2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:clickable="true"
                     android:focusable="false"
                     android:hint=" To Date "
-                    android:layout_marginLeft="8dp"
                     android:textSize="20sp" />
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/goBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:text="Show Expenses"
                 android:layout_gravity="center"
-                android:textSize="15sp"/>
+                android:layout_marginTop="20dp"
+                android:background="#90A4AE"
+                android:text="Show Expenses"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,20 +195,22 @@
                     android:id="@+id/expenseLV"
                     android:layout_gravity="center"
                     android:layout_width="400dp"
-
                     android:layout_marginTop="10dp"
-                    android:layout_height="500dp" />
+                    android:layout_height="380dp" />
 
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/backBtn"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="Back"
-                android:layout_gravity="center"
-                android:textSize="15sp"/>
+                android:background="#90A4AE"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

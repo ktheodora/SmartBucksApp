@@ -108,7 +108,7 @@ public class lineGraph {
             LineDataSet lineDataSet = new LineDataSet(xyCoord, "Monthly Expenses");
             lineDataSet.setDrawCircles(true);
             lineDataSet.setColor(Color.BLACK);
-            lineDataSet.setLineWidth(2);
+            lineDataSet.setLineWidth(1);
 
             lineDataSets.add(lineDataSet);
             //removes xaxes
