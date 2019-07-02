@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ourlogo"
+        android:icon="@drawable/smartpng"
         android:label="SmartBucks"
-        android:roundIcon="@drawable/ourlogo"
+        android:roundIcon="@drawable/smartpng"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
