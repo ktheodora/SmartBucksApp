@@ -226,15 +226,11 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 showDeleteDialog(position);
+                //MenuHandler.showToast("You clicked an expense of position" + String.valueOf(position));
                 return true;
             }
         });
-        expenselistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showDeleteDialog(position);
-            }
-        } );
+
 
     }
 
@@ -315,43 +311,34 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         t.show();
     }
 
-    @SuppressWarnings("deprecation")
     public void showDeleteDialog(final int pos) {
-            AlertDialog.Builder adb= new AlertDialog.Builder(this);
-            LayoutInflater adbInflater = LayoutInflater.from(this);
-            View eulaLayout = adbInflater.inflate(R.layout.dialog_content, null);
-            adb.setView(eulaLayout);
-            adb.setTitle("Remove Expense");
-            adb.setMessage(Html.fromHtml("Do you wish to remove this expense?"));
-            adb.setPositiveButton("YES", new
+        AlertDialog deleteAlert = new AlertDialog.Builder(this)
+                .setTitle("Remove Expense")
+                .setMessage("Are you sure you want to delete this expense?")
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        //choosing from the current category list
+                        Expenses exp = cateList.get(pos);
+                        if(dbhandler.removeExpense(exp)) {
+                            MenuHandler.showToast("Succesful removal of expense");
+                        }
+                        else {
+                            MenuHandler.showToast("Database issue, unable to remove expense");
+                        }
+                        Intent myIntent = new Intent(listActivity.this, listActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("username",usr);
+                        myIntent.putExtras(b); //Put your id to your next Intent
+                        startActivity(myIntent);
+                    }
+                })
 
-                    DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                 //choosing from the current category list
-                 Expenses exp = cateList.get(pos);
-                 if(dbhandler.removeExpense(exp)) {
-                     MenuHandler.showToast("Succesful removal of expense");
-                 }
-                 else {
-                     MenuHandler.showToast("Database issue, unable to remove expense");
-                 }
-                 Intent myIntent = new Intent(listActivity.this, listActivity.class);
-                 Bundle b = new Bundle();
-                 b.putString("username",usr);
-                 myIntent.putExtras(b); //Put your id to your next Intent
-                 startActivity(myIntent);
-                 return;
-             } });
-
-            adb.setNegativeButton("CANCEL", new
-
-                    DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface
-
-                                                    dialog, int which) {
-                 moveTaskToBack(true);
-                 return;
-             } });
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .show();
 
     }
 }
