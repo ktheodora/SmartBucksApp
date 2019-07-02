@@ -10,6 +10,10 @@
 
 Saving money and keeping track of the spending is a very hectic task, It’s always necessary for each one of us to track the money flow for efficient financial management. Our App “SmartBucks” will not only keep the track of money flow, but will also give a statistical analysis."SmartBucks" is a ledger that easily fits into our devices and "Enlightens our Pocket"
 
+##App Preview
+
+[![Little red ridning hood](http://i.imgur.com/7YTMFQp.png)](https://vimeo.com/3514904 "Little red riding hood - Click to Watch!")
+
 ## Features
 
 We were able to implement all the essential requirements requested by our client, also added few desirable features to make the app intuitive and user friendly. 
@@ -76,13 +80,13 @@ Following are the features achieved in the app based on requirement given by the
 
 Version: 1.0
 
-Updated: 1st July 2019
+Updated: 2st July 2019
 
-Category of App: Finance
+Category of App: Finance, Efficiency
 
-Android Version: Android 7.0 Nougat(API 26)
+Android Version: Android 9.0 Pie (API 28)
 
-Download size:  MB
+Download size: 4.1 MB
 
 Targeted age group 12+ years
 
@@ -90,6 +94,6 @@ Content Rating: USK: All ages
 
 ## Working Prototype
 
-Please find the downloadable application link here: Downlaod
+Please find the downloadable application link here: Download [here](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk)
 
-Feel free to check out the code in our repository: Repository
+Feel free to check out the code in our [repository](https://github.com/DBSE-teaching/isee2019-SmartBucks)
