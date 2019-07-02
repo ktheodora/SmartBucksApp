@@ -17,50 +17,62 @@ Following are the features achieved in the app based on requirement given by the
 
 ### Essential Requirements:
 
-- Parameters of a transaction:
+- Assign income.
 
-	- Assign monthly income.
-
-	- Assign Stable(Fixed) Expenses like Rent, Insurance, telephone bills.
+- Assign Stable(Fixed) Expenses like Rent, Insurance, telephone bills.
 	
-	- Assign monthly budget.
+- Assign budget.
 	
-	- Add additional income.
+- Update budget
 	
-	- Enter Expenses category wise.
+- Add additional income.
 	
-	- Add time stamp to all the expenses.
+- Enter Expenses category wise.
 	
-	- Add Payment method like cash, card, etc.
+- Add time stamp to all the expenses.
 	
-	- View Monthly Expenses in a Graph.
+- Add Payment method like cash, card, etc.
 	
-	- View graphical representation of category wise expenses.
+- Alert when monthly expense crosses the assigned limit.
+
+- The application should work offline.
+
+- Statistical representations of all the transaction with two charts for visualisation.
+
+- Summarize monthly expenses in downloadable document.
+
+- The expenses should be filtered based on date and category.
+
+- Assign Threshold limits for category
 	
-	- Alert when monthly expense crosses the assigned limit.
-
-	- Download the monthly expenses in a readable form.
+- Create new category
 	
-	- 
+- Delete an uneccesary expense.
 	
+- Provide "Back" button in every activity.
 	
 
-- The application should work offline
+### Additional features:
 
-- Statistical representations of all the transaction with two charts for visualisation
+- Allows multiple user accounts in a device.
 
-- Summarize monthly expenses in document
+- Login with username and Password combination for entering the app provides enhaced safety.
 
-- Recurring transactions (daily, weekly, monthly)
+- Basic application guide on first login.
 
-- The records needs to be filtered based on time, type of payment and category
+- User Name display on homescreen provides more intuitive look.
 
-- Threshold limits for category
+- FAQ in the help option in menu provides detailed idea about the usability of the application.
 
-### Additional features added:
+- User can update his/her income, budget, fixed expenses at any time by going into "Update Detail" option in menu button.
+
+- Incase of Exceeded budget situation, Alert comes whenever user goes to Homescreen.
+
+- User can turn off alert message incase of exceeded budget situation.
 
 
-## Additinal Information
+
+## Non-Functional Information
 
 Version: 1.0
 
