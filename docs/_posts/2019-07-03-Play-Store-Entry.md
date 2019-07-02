@@ -12,18 +12,38 @@ Saving money and keeping track of the spending is a very hectic task, It’s alw
 
 ## Features
 
-We were able to implement all the essential requirements requested by our client, also added few desirable features to make the app more appealing and user friendly. 
+We were able to implement all the essential requirements requested by our client, also added few desirable features to make the app intuitive and user friendly. 
 Following are the features achieved in the app based on requirement given by the client:
 
 ### Essential Requirements:
 
 - Parameters of a transaction:
 
-	- Customizable category
+	- Assign monthly income.
 
-	- Payment method like cash, debit/credit cards,online
+	- Assign Stable(Fixed) Expenses like Rent, Insurance, telephone bills.
+	
+	- Assign monthly budget.
+	
+	- Add additional income.
+	
+	- Enter Expenses category wise.
+	
+	- Add time stamp to all the expenses.
+	
+	- Add Payment method like cash, card, etc.
+	
+	- View Monthly Expenses in a Graph.
+	
+	- View graphical representation of category wise expenses.
+	
+	- Alert when monthly expense crosses the assigned limit.
 
-	- Date and Time
+	- Download the monthly expenses in a readable form.
+	
+	- 
+	
+	
 
 - The application should work offline
 
