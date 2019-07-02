@@ -3,6 +3,7 @@ package com.example.iseeproject;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ public class menuHandler {
     public menuHandler(Context Ctx, String username) {
         usr = username;
         ctx = Ctx;
+        peopleDB = new dbHandler(ctx);
     }
 
     public boolean onMenuItemClick(MenuItem item) {
@@ -61,7 +64,13 @@ public class menuHandler {
                 goToFAQ();
                 return true;
             case R.id.report:
-                Permission();
+                User user = peopleDB.getUser(usr);
+                if(peopleDB.expensesExist(user)) {
+                    Permission();
+                }
+                else {
+                    DownloadProblemDialog();
+                }
                 return true;
             default:
                 return false;
@@ -108,12 +117,6 @@ public class menuHandler {
 
     private void smartBucksReport(ArrayList<Expenses> expensesList) {
 
-        if(expensesList.isEmpty()) {
-            showToast("No expenses entered for this month. " +
-                    "Smartbucks monthly report cannot be generated." +
-                    "\nTo view all your expenses, click the Show Expenses button in the Homepage.");
-        }
-        else {
             Document myPdfDocument = new Document();
             //pdf filename
             String myFilename = "SmartBucks" + new SimpleDateFormat("ddMMYYYY",
@@ -168,7 +171,7 @@ public class menuHandler {
                 //if anything goes wrong ,get and show up exception
                 showToast(e.getMessage());
             }
-        }
+
     }
 
     //we need to sort by date the expenses and
@@ -195,22 +198,8 @@ public class menuHandler {
                     it.remove();
                 }
             }
-            //afterwards, sort by comparing with every day of the month
-            //slow implementation but trustworthy
-            /*LocalDate d;
-            for (int i = 1; i <= yearMonthObject.lengthOfMonth(); i++) {
-                //i presents monday for 1, tuesday for 2 etc
-                for (Expenses exp : allExpenses) {
-                    //search all expenses and add to the one of this day of the month
-                    d = yearMonthObject.atDay(i);//get week date
-                    d.format(formatter);
-                    LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
-                    if (d.isEqual(expdate)) {
-                        monthlyExpenses.add(exp);
-                    }
-                }
-            }*/
-            //we don't need to sort like this because we sort from database
+
+            //we don't need to sort further because we sort from database
         }
         return allExpenses;
 
@@ -232,5 +221,27 @@ public class menuHandler {
             }
 
         }
+    }
+
+    public void DownloadProblemDialog() {
+        AlertDialog deleteAlert = new AlertDialog.Builder(ctx)
+                .setTitle("Unable to download SmartBucks Monthly Report")
+                .setMessage("No expenses entered for this month, download of monthly report not possible.")
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("Show me all expenses", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent myIntent = new Intent(ctx, listActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("username", usr);
+                        myIntent.putExtras(b); //Put your id to your next Intent
+                        ctx.startActivity(myIntent);
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("Dismiss", null)
+                .show();
+
     }
 }

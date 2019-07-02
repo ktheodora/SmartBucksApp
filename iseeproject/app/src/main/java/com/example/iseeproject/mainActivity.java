@@ -15,6 +15,7 @@ public class mainActivity extends AppCompatActivity {
 
     Boolean loginstate;
     int attempts;
+    int backCount = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -70,13 +71,20 @@ public class mainActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Toast t = Toast.makeText(mainActivity.this,"Exiting app. See ya!",Toast.LENGTH_SHORT);
-        t.show();
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
-        finish();
+        backCount ++;
+        if (backCount == 1) {
+            Toast t = Toast.makeText(mainActivity.this,"Press again to exit",Toast.LENGTH_SHORT);
+            t.show();
+        }
+        else if (backCount > 1) {
+            Toast t = Toast.makeText(mainActivity.this,"Exiting app. See ya!",Toast.LENGTH_SHORT);
+            t.show();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+            finish();
+        }
 
     }
 
