@@ -103,6 +103,11 @@ public class addIncome extends AppCompatActivity {
         Toast t = Toast.makeText(addIncome.this,
                 "Additional income successfully added", Toast.LENGTH_LONG);
         t.show();
+        Intent myIntent = new Intent(addIncome.this, addIncome.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
 
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
     }
 }

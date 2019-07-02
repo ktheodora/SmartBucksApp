@@ -244,6 +244,13 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
         Toast t = Toast.makeText(enterExpenses.this,
                 "Successful addition of new expense", Toast.LENGTH_LONG);
         t.show();
+        //and then refreshing
+        Intent myIntent = new Intent(enterExpenses.this, enterExpenses.class);
+        Bundle b = new Bundle();
+        b.putString("username",username);
+
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
     }
 
 

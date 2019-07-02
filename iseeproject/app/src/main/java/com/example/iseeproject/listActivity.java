@@ -1,15 +1,21 @@
 package com.example.iseeproject;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import static com.example.iseeproject.homePage.PREFS_NAME;
+
 
 public class listActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -48,6 +56,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText datepickFrom, datepickTo;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date1,date2;
+    ArrayList<Expenses>  cateList;
 
     Spinner spinner12;
     @Override
@@ -78,24 +87,27 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        expenselistview = findViewById(R.id.expenseLV);
-        dbhandler = new dbHandler(this);
-
         Button back = (Button) findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(listActivity.this, homePage.class);
-                Bundle b = new Bundle();
-                b.putString("username",usr);
-
-                myIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(myIntent);
+                MenuHandler.goToHomePage();
             }
 
         });
 
         dbhandler = new dbHandler(this);
+
+        expenselistview = findViewById(R.id.expenseLV);
+        expenselistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                showDeleteDialog(position);
+                return true;
+            }
+        });
+
+
         Set<String> cats1 = dbhandler.getThresholds(usr).keySet();
         //we add all of the categories but first the option to choose to view every expense
         final List<String> categories1= new ArrayList<String>();
@@ -177,7 +189,6 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 selectedCategory = spinner12.getSelectedItem().toString();
                 dbhandler = new dbHandler(getApplicationContext());
-                ArrayList<Expenses>  cateList;
                 if (selectedCategory.equals("All")) {
                     cateList = dbhandler.getAllExpenses(userr);
                 }
@@ -272,6 +283,7 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         final ListAdapter adapter = new SimpleAdapter(listActivity.this,myMapList,R.layout.row,
                 new String[]{"Date","Amount","Category","Payment_Method"},
                 new int[]{R.id.textviewdate,R.id.textviewamount,R.id.textviewcategory,R.id.textviewpaymenttype});
+
         expenselistview.setAdapter(adapter);
     }
 
@@ -296,5 +308,40 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
         Toast t = Toast.makeText(listActivity.this,
                 "Select one Category", Toast.LENGTH_LONG);
         t.show();
+    }
+
+    public void showDeleteDialog(final int pos) {
+            AlertDialog.Builder adb= new AlertDialog.Builder(this);
+            LayoutInflater adbInflater = LayoutInflater.from(this);
+            View eulaLayout = adbInflater.inflate(R.layout.dialog_content, null);
+            adb.setView(eulaLayout);
+            adb.setTitle("Remove Expense");
+            adb.setMessage(Html.fromHtml("Do you wish to remove this expense?"));
+            adb.setPositiveButton("YES", new
+
+                    DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                 //choosing from the current category list
+                 Expenses exp = cateList.get(pos);
+                 dbhandler.removeExpense(exp);
+                 MenuHandler.showToast("Succesful removal of expense");
+                 Intent myIntent = new Intent(listActivity.this, listActivity.class);
+                 Bundle b = new Bundle();
+                 b.putString("username",usr);
+                 myIntent.putExtras(b); //Put your id to your next Intent
+                 startActivity(myIntent);
+                 return;
+             } });
+
+            adb.setNegativeButton("CANCEL", new
+
+                    DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface
+
+                                                    dialog, int which) {
+
+                 return;
+             } });
+
     }
 }

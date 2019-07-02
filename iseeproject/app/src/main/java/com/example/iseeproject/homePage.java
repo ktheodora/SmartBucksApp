@@ -126,10 +126,7 @@ public class homePage extends AppCompatActivity {
                 alertDialog.show();
             }
         }
-
-
         userr = peopleDB.getUser(usr);
-
 
         //Set values of Text Views in homePage
 
