@@ -64,12 +64,12 @@ public class menuHandler {
                 goToFAQ();
                 return true;
             case R.id.report:
-                User user = peopleDB.getUser(usr);
-                if(peopleDB.expensesExist(user)) {
-                    Permission();
+                ArrayList<Expenses> explist = sortMonthExpenses(usr);
+                if(explist.isEmpty()) {
+                    DownloadProblemDialog();
                 }
                 else {
-                    DownloadProblemDialog();
+                    Permission();
                 }
                 return true;
             default:

@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import static com.example.iseeproject.homePage.PREFS_NAME;
 
@@ -296,12 +297,12 @@ public class listActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.spinner123) {
+        /*if (parent.getId() == R.id.spinner123) {
             // On selecting a spinner item
             String item = parent.getItemAtPosition(position).toString();
             // Showing selected spinner item
             Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     @Override

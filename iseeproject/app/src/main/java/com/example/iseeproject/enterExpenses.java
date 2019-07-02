@@ -273,7 +273,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        /*
         if (parent.getId() == R.id.spinner) {
             // On selecting a spinner item
             String item = parent.getItemAtPosition(position).toString();
@@ -285,7 +285,7 @@ public class enterExpenses extends AppCompatActivity  implements AdapterView.OnI
             String item1 = parent.getItemAtPosition(position).toString();
             // Showing selected spinner item
             Toast.makeText(parent.getContext(), "Selected: " + item1, Toast.LENGTH_LONG).show();
-        }
+        }*/
 
     }
 

@@ -329,12 +329,12 @@ public class dbHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Expenses exp = new Expenses(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)),
-                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
-                        cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)),
-                        cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)),
-                        cursor.getString(cursor.getColumnIndex(KEY_CAT)),
-                        cursor.getString(cursor.getColumnIndex(KEY_USN)));
+                Expenses exp = new Expenses(cursor.getString(1),
+                        cursor.getInt(0),
+                        cursor.getString(2),
+                        cursor.getDouble(3),
+                        cursor.getString(4),
+                        cursor.getString(5));
                 expList.add(exp);
             } while (cursor.moveToNext());
         }
@@ -355,12 +355,12 @@ public class dbHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Expenses exp = new Expenses(cursor.getString(0),cursor.getString(1),cursor.getString(2),Double.parseDouble(cursor.getString(3)), cursor.getString(4),cursor.getString(5));
-                Expenses exp = new Expenses(cursor.getString(cursor.getColumnIndex(KEY_REALTIME)),
-                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
-                        cursor.getString(cursor.getColumnIndex(KEY_PAYMENT)),
-                        cursor.getDouble(cursor.getColumnIndex(KEY_PRICE)),
-                        cursor.getString(cursor.getColumnIndex(KEY_CAT)),
-                        cursor.getString(cursor.getColumnIndex(KEY_USN)));
+                Expenses exp = new Expenses(cursor.getString(1),
+                        cursor.getInt(0),
+                        cursor.getString(2),
+                        cursor.getDouble(3),
+                        cursor.getString(4),
+                        cursor.getString(5));
                 categoryList.add(exp);
             } while (cursor.moveToNext());
         }

@@ -272,7 +272,7 @@ public class lineGraph {
                 Expenses exp = it.next();
                 LocalDate expdate = LocalDate.parse(exp.getExpenseTime(), formatter);
                 //if it is earlier than the current month
-                if (expdate.isBefore(firstMonthDate) || !expdate.isEqual(firstMonthDate)) {
+                if (expdate.isBefore(firstMonthDate)) {
                     it.remove();
                 }
             }
