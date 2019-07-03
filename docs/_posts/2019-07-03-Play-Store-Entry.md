@@ -12,7 +12,7 @@ Saving money and keeping track of the spending is a very hectic task, It’s alw
 
 ## App Preview
 
-[![SmartBucks Video Preview](http://i.imgur.com/7YTMFQp.png)](https://vimeo.com/3514904 "SmartBucks Video Preview - Click to Watch!")
+[![SmartBucks Video Preview]({{site.baseurl}}/images/smartlogo.png "smartlogo UML")](https://drive.google.com/open?id=10kwka7OL5eHDZXvMKICZ0VPODMF1fslq "SmartBucks Video Preview - Click to Watch!")
 
 ## Features
 
@@ -94,6 +94,6 @@ Content Rating: USK: All ages
 
 ## Working Prototype
 
-Please find the downloadable application link here: Download [here](https://github.com/DBSE-teaching/isee2019-SmartBucks/blob/devel/theo/iseeproject/app/release/app-release.apk)
+Please find the downloadable application link here: Download [here](https://drive.google.com/open?id=1geO5qblaaKy4UHL3vYVffOUafZN5qed4)
 
-Feel free to check out the code in our [repository](https://github.com/DBSE-teaching/isee2019-SmartBucks)
+Feel free to check out the code in our [GitHub Repository](https://github.com/DBSE-teaching/isee2019-SmartBucks)
