@@ -12,7 +12,7 @@ Saving money and keeping track of the spending is a very hectic task, It’s alw
 
 ## App Preview
 
-[![SmartBucks Video Preview]({{site.baseurl}}/images/smartlogo.png "smartlogo UML")](https://drive.google.com/open?id=10kwka7OL5eHDZXvMKICZ0VPODMF1fslq "SmartBucks Video Preview - Click to Watch!")
+[![SmartBucks Video Preview]({{site.baseurl}}/images/videoscreenshot.png "SmartBucks Video Screen")](https://drive.google.com/open?id=10kwka7OL5eHDZXvMKICZ0VPODMF1fslq "SmartBucks Video Preview - Click to Watch!")
 
 ## Features
 
